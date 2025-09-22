@@ -21,6 +21,6 @@ To add new LIFs to an existing SVM, refer to the ONTAP documentation: link:https
 include::../_include/create-svm-lifs.adoc[]
 
 == What's next?
-After you create the SVM and LIFs, link:vmw-vcf-viwld-supp-iscsi-vvols-network.html[configure networking for iSCSI on ESXi hosts].
+After you create the SVM and LIFs, you link:vmw-vcf-viwld-supp-iscsi-vvols-network.html[configure networking for iSCSI on ESXi hosts].
 
 

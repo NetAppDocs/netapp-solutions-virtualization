@@ -12,7 +12,7 @@ summary: "Create a Storage Virtual Machine (SVM) with multiple Logical Interface
 :imagesdir: ../media/
 
 [.lead]
-Create a Storage Virtual Machine (SVM) with multiple Logical Interfaces (LIFs) to provide iSCSI connectivity for VMware Cloud Foundation management domains. You'll configure the SVM with NVMe protocol support and set up multiple LIFs across separate Ethernet networks to enable multipathing and failover for optimal performance and availability.
+Create a Storage Virtual Machine (SVM) with multiple Logical Interfaces (LIFs) to provide NVMe connectivity for VMware Cloud Foundation workload domains. This procedure summarizes setting up an NVMe/TCP-enabled SVM and LIFs and creating the NVMe namespaces.
 
 == Step 1: Create the SVMs and LIFs
 Complete the following steps to create an SVM with multiple LIFs for NVMe/TCP traffic.
@@ -20,23 +20,20 @@ Complete the following steps to create an SVM with multiple LIFs for NVMe/TCP tr
 To add new LIFs to an existing SVM, refer to the ONTAP documentation: link:https://docs.netapp.com/us-en/ontap/networking/create_a_lif.html[Create ONTAP LIFs].
 
 .Steps
-. From ONTAP System Manager, navigate to *Storage VMs* in the left-hand menu and click *+ Add* to start. 
+. From ONTAP System Manager, navigate to *Storage VMs* in the left-hand menu and click *+ Add*. 
 +
 image:vmware-vcf-asa-001.png[Click +Add to start creating SVM]
 +
 {nbsp}
-. In the *Add Storage VM* wizard, provide a *Name* for the SVM, select the *IP Space* and then, under *Access Protocol*, click the *NVMe* tab and check the box to *Enable NVMe/TCP*.
+. In the *Add Storage VM* wizard, enter a *Name* for the SVM, select the *IP Space* and then, under *Access Protocol*, click the *NVMe* tab and check the box to *Enable NVMe/TCP*.
 +
 image:vmware-vcf-asa-075.png[Add storage VM wizard - enable NVMe/TCP]
 +
 {nbsp}
-. In the *Network Interface* section, fill in the *IP address*, *Subnet Mask*, and *Broadcast Domain and Port* for the first LIF. For subsequent LIFs, you can either use individual settings or enable the checkbox to use common settings across all remaining LIFs.
+. In the *Network Interface* section, enter the *IP address*, *Subnet Mask*, and *Broadcast Domain and Port* for the first LIF. For subsequent LIFs, you can either use individual settings or enable the checkbox to use common settings across all remaining LIFs.
 +
 NOTE: For multipathing and failover across multiple paths, create a minimum of two LIFs per storage node in separate Ethernet networks for all SVMs in NVMe/TCP configurations.
 +
-image:vmware-vcf-asa-076.png[Fill out network info for LIFs]
-+
-{nbsp}
 . Choose whether to enable the Storage VM Administration account (for multi-tenancy environments) and click *Save* to create the SVM.
 +
 image:vmware-vcf-asa-004.png[Enable SVM account and Finish]

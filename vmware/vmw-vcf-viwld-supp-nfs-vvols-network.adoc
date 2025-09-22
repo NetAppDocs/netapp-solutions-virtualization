@@ -79,4 +79,4 @@ image:vmware-vcf-aff-040.png[VMkernel IPv4 settings]
 image:vmware-vcf-aff-041.png[Review VMkernel selections]
 
 == What's next?
-After you configure networking for NFS on all ESXi hosts in the workload domain, link:vmw-vcf-viwld-supp-nfs-vvols-storage.html[configure storage for NFS vVols].
+After you configure networking for NFS on all ESXi hosts in the workload domain, you link:vmw-vcf-viwld-supp-nfs-vvols-storage.html[configure storage for NFS vVols].
