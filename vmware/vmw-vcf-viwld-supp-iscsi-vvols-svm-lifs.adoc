@@ -1,0 +1,26 @@
+---
+sidebar: sidebar
+permalink: vmware/vmw-vcf-viwld-supp-iscsi-vvols-svm-lifs.html
+keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi
+summary: "Create a Storage Virtual Machine (SVM) and multiple logical interfaces (LIFs) on an ONTAP system to support iSCSI traffic for vVols datastores in a VMware Cloud Foundation VI workload domain. You'll add a new SVM, enable iSCSI, configure LIFs, and optionally enable the Storage VM Administration account."
+---
+
+= Create SVM and LIFs for iSCSI vVols datastores in a VCF VI workload domain
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Create a Storage Virtual Machine (SVM) and multiple logical interfaces (LIFs) on an ONTAP system to support iSCSI traffic for vVols datastores in a VMware Cloud Foundation VI workload domain. You'll add a new SVM, enable iSCSI, configure LIFs, and optionally enable the Storage VM Administration account.
+
+To add new LIFs to an existing SVM, refer to the ONTAP documentation: link:https://docs.netapp.com/us-en/ontap/networking/create_a_lif.html[Create ONTAP LIFs].
+
+.Steps  
+include::../_include/create-svm-lifs.adoc[]
+
+== What's next?
+After you create the SVM and LIFs, link:vmw-vcf-viwld-supp-iscsi-vvols-network.html[configure networking for iSCSI on ESXi hosts].
+
+

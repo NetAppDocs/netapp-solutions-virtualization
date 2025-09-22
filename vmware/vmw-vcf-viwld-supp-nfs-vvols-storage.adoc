@@ -1,0 +1,160 @@
+---
+sidebar: sidebar
+permalink: vmware/vmw-vcf-viwld-supp-nfs-vvols-storage.html
+keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc
+summary: "Configure NFS vVols storage in a VI workload domain. After you deploy ONTAP tools for VMware vSphere, you'll use the vSphere client interface to add the storage system, create a storage capability profile, and provision a vVols datastore."
+---
+
+= Configure NFS vVols storage in a VCF VI workload domain using ONTAP tools
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Configure NFS vVols storage in a VI workload domain. After you deploy ONTAP tools for VMware vSphere, you'll use the vSphere client interface to add the storage system, create a storage capability profile, and provision a vVols datastore.
+
+== Step 1: Deploy ONTAP tools for VMware vSphere
+For VI workload domains, ONTAP tools for VMware is installed to the VCF Management Cluster but registered with the vCenter associated with the VI workload domain. 
+
+.Steps
+. Obtain the ONTAP tools OVA image from the link:https://mysupport.netapp.com/site/products/all/details/otv/downloads-tab[NetApp Support site] and download it to a local folder.
+
+. Log in to the vCenter appliance for the VCF management domain.
+
+. From the vCenter appliance interface, right-click the management cluster and select *Deploy OVF Template…*.
++
+image:vmware-vcf-aff-021.png[Deploy OVF Template...]
++
+{nbsp}
+. In the *Deploy OVF Template* wizard, click the *Local file* radio button and select the ONTAP tools OVA file you downloaded in the previous step.
++
+image:vmware-vcf-aff-022.png[Select OVA file]
++
+{nbsp}
+. For steps 2 through 5 of the wizard, select a name and folder for the VM, select the compute resource, review the details, and accept the license agreement.
+
+. For the storage location of the configuration and disk files, select the vSAN datastore of the VCF management domain cluster.
++
+image:vmware-vcf-aff-023.png[Select OVA file]
++
+{nbsp}
+. On the Select network page, select the network used for management traffic.
++
+image:vmware-vcf-aff-024.png[Select network]
++
+{nbsp}
+. On the Customize template page, fill out all required information:
+* Password to be used for administrative access to OTV.
+* NTP server IP address.
+* OTV maintenance account password.
+* OTV Derby DB password.
+* Do not check the box to *Enable VMware Cloud Foundation (VCF)*. VCF mode is not required for deploying supplemental storage.
+* FQDN or IP address of the vCenter appliance for the *VI Workload Domain*
+* Credentials for the vCenter appliance of the *VI Workload Domain*
+* Provide the required network properties fields.
++
+Click *Next* to continue.
++
+image:vmware-vcf-aff-025.png[Customize OTV template 1]
++
+image:vmware-vcf-asa-035.png[Customize OTV template 2]
++
+{nbsp}
+. Review all information on the Ready to complete page, and the click Finish to begin deploying the OTV appliance.
+
+== Step 2: Add a storage system
+Perform the following steps on the VCF management domain cluster using the vSphere client.
+
+.Steps
+. From the main menu in the vSphere client, select *NetApp ONTAP tools*.
++
+image:vmware-asa-006.png[NetApp ONTAP tools]
++
+{nbsp}
+. From the *INSTANCE* drop-down menu in the ONTAP Tool interface, select the OTV instance associated with the workload domain to be managed.
++
+image:vmware-vcf-asa-036.png[Choose OTV instance]
++
+{nbsp}
+. In ONTAP tools, select *Storage Systems* from the left hand menu and then press *Add*.
++
+image:vmware-vcf-asa-037.png[Add storage system]
++
+{nbsp}
+. Fill out the IP Address, credentials of the storage system, and the port number. Click *Add* to start the discovery process.
+//vVol requires ONTAP Cluster credential rather than SVM credential. Better to link to product documentation
++
+image:vmware-vcf-asa-038.png[Provide storage system credentials]
+
+== Step 3: Create an NFS datastore in ONTAP tools
+Complete the following steps to deploy an ONTAP datastore running on NFS. Use ONTAP tools.
+
+.Steps
+. In ONTAP tools select *Overview* and from the *Getting Started* tab click on *Provision* to start the wizard.
++
+image:vmware-vcf-asa-041.png[Provision datastore]
++
+{nbsp}
+. On the *General* page of the New Datastore wizard, select the vSphere datacenter or cluster destination. 
+. Select *NFS* as the datastore type, enter a name for the datastore, and select the protocol.  
+
+. Choose whether to use FlexGroup volumes and whether to use a storage capability file for provisioning. 
+
+. Click *Next* to continue.
++
+NOTE: Selecting to *Distribute datastore data across the cluster* will create the underlying volume as a FlexGroup volume, which precludes the use of Storage Capability Profiles. Refer to https://docs.netapp.com/us-en/ontap/flexgroup/supported-unsupported-config-concept.html[Supported and unsupported configurations for FlexGroup volumes] for more information on using FlexGroup Volumes.
++
+image:vmware-vcf-aff-042.png[General page]
++
+{nbsp}
+. On the *Storage system* page, select the select a storage capability profile, the storage system, and the SVM. Click *Next* to continue.
++
+image:vmware-vcf-aff-043.png[Storage system]
++
+{nbsp}
+. On the *Storage attributes* page, select the aggregate to use and then click *Next* to continue.
++
+image:vmware-vcf-aff-044.png[Storage attributes]
++
+{nbsp}
+
+. Review the *Summary* and click Finish to begin creating the NFS datastore.
++
+image:vmware-vcf-aff-045.png[Review summary and finish]
+
+== Step 4: Create a vVols datastore in ONTAP tools
+To create a vVols datastore in ONTAP tools, complete the following steps.
+
+.Steps
+. In ONTAP tools, select *Overview* and from the *Getting Started* tab click on *Provision* to start the wizard.
++
+image:vmware-vcf-asa-041.png[Provision datastore]
+
+. On the *General* page of the New Datastore wizard, select the vSphere datacenter or cluster destination. Select *vVols* as the datastore type, fill out a name for the datastore, and select *NFS* as the protocol. Click *Next* to continue.
++
+image:vmware-vcf-aff-046.png[General page]
+
+. On the *Storage system* page, select the select a storage capability profile, the storage system, and the SVM. Click *Next* to continue.
++
+image:vmware-vcf-aff-043.png[Storage system]
+
+. On the *Storage attributes* page, select to create a new volume for the datastore and fill out the storage attributes of the volume to be created. Click *Add* to create the volume and then *Next* to continue.
++
+image:vmware-vcf-aff-047.png[Storage attributes]
++
+image:vmware-vcf-aff-048.png[Storage attributes - Next]
+
+. Finally, review the *Summary* and click *Finish* to start the vVol datastore creation process.
++
+image:vmware-vcf-aff-049.png[Summary page]
+
+== Additional information
+* For information on configuring ONTAP storage systems, refer to the link:https://docs.netapp.com/us-en/ontap[ONTAP 9 documentation].
+
+* For information on configuring VCF, refer to the link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf.html[VMware Cloud Foundation documentation].
+
+* For information on deploying and using ONTAP tools in multiple vCenter environments, refer to the link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere/configure/concept_requirements_for_registering_vsc_in_multiple_vcenter_servers_environment.html[Requirements for registering ONTAP tools in multiple vCenter Servers environment].
+
+// NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-vcf-viwld-supplemental-nfs-vvols.adoc

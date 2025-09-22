@@ -1,0 +1,37 @@
+---
+sidebar: sidebar
+permalink: vmware/vmw-vcf-viwld-supp-nvme-requirements.html
+keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi
+summary: "To deploy NVMe vVols in a VMware Cloud Foundation VI workload domain, you need a fully configured ONTAP AFF or ASA storage system, a completed VCF management domain, and an existing VI workload domain. Review the recommended network design and infrastructure requirements to ensure reliable, high-performance storage integration."
+---
+= Deployment requirements for NVMe vVols in a VI workload domain
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+To deploy NVMe vVols in a VMware Cloud Foundation VI workload domain, you need a fully configured ONTAP AFF or ASA storage system, a completed VCF management domain, and an existing VI workload domain. Review the recommended network design and infrastructure requirements to ensure reliable, high-performance storage integration.
+
+== Infrastructure requirements
+* An ONTAP AFF or ASA storage system with physical data ports on ethernet switches dedicated to storage traffic.
+* VCF management domain deployment is complete and the vSphere client is accessible.
+* A VI workload domain has been previously deployed.
+
+== Recommended NVMe/TCP network design
+NetApp recommends fully redundant network designs for NVMe/TCP. The following diagram illustrates an example of a redundant configuration, providing fault tolerance for storage systems, switches, networks adapters and host systems. 
+
+image:vmware-vcf-asa-074.png[NVMe-tcp network design]
+
+For multipathing and failover across multiple paths, configure a minimum of two LIFs per storage node in separate ethernet networks for all SVMs in NVMe/TCP configurations.
+
+== Additional information
+* For more information on configuring SAN for redundancy, refer to the link:https://docs.netapp.com/us-en/ontap/san-config/index.html[NetApp SAN configuration reference]. 
+
+* For additional information on NVMe design considerations for ONTAP storage systems, refer to link:https://docs.netapp.com/us-en/ontap/nvme/support-limitations.html[NVMe configuration, support and limitations]. 
+
+== What's next?
+After reviewing the deployment requirements, link:vmw-vcf-viwld-supp-nvme-svm-lifs.html[create the SVM and LIFs].
+
+// NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-vcf-viwld-supplemental-nvme.adoc

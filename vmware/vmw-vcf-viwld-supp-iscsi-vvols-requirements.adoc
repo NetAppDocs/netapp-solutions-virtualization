@@ -1,0 +1,46 @@
+---
+sidebar: sidebar
+permalink: vmware/vmw-vcf-viwld-supp-iscsi-vvols-requirements.html
+keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi
+summary: "To deploy iSCSI vVols in a VMware Cloud Foundation VI workload domain, you need a fully configured ONTAP AFF or ASA storage system, a completed VCF management domain, and an existing VI workload domain. Review the recommended network design and infrastructure requirements to ensure reliable, high-performance storage integration."
+---
+= Deployment requirements for iSCSI vVols in a VI workload domain
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+To deploy iSCSI vVols in a VMware Cloud Foundation VI workload domain, you need a fully configured ONTAP AFF or ASA storage system, a completed VCF management domain, and an existing VI workload domain. Review the recommended network design and infrastructure requirements to ensure reliable, high-performance storage integration.
+
+== Infrastructure requirements
+Make sure the following components and configurations are in place.
+
+* An ONTAP AFF or ASA storage system with physical data ports on Ethernet switches dedicated to storage traffic.
+* The VCF management domain deployment is complete and the vSphere client is accessible.
+* A VI workload domain has been previously deployed.
+
+== Recommended iSCSI network design
+You should configure fully redundant network designs for iSCSI. The following diagram illustrates an example of a redundant configuration. It provides fault tolerance for storage systems, switches, networks adapters, and host systems. For additional information, refer to the NetApp link:https://docs.netapp.com/us-en/ontap/san-config/index.html[SAN configuration reference].
+
+image:vmware-vcf-asa-074.png[NVMe-tcp network design]
+
+{nbsp}
+
+For multipathing and failover across multiple paths, create a minimum of two LIFs per storage node in separate Ethernet networks for all SVMs in iSCSI configurations.
+
+NOTE: In situations where multiple VMkernel adapters are configured on the same IP network, use software iSCSI port binding on the ESXi hosts to ensure that load balancing across the adapters occurs. Refer to KB article link:https://knowledge.broadcom.com/external/article?legacyId=2038869[Considerations for using software iSCSI port binding in ESX/ESXi (2038869)].
+
+== Additional information
+
+* For information about configuring ONTAP storage systems refer to the link:https://docs.netapp.com/us-en/ontap[ONTAP 9 documentation].
+
+* For information about configuring VCF refer to link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf.html[VMware Cloud Foundation documentation].
+
+* For information about using VMFS iSCSI datastores with VMware refer to link:vmw-vmfs-iscsi.html[vSphere VMFS Datastore - iSCSI Storage backend with ONTAP].
+
+== What's next?
+After reviewing the deployment requirements, link:vmware/vmw-vcf-viwld-supp-iscsi-vvols-svm-lifs.html[create the SVM and LIFs].
+
+// NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-vcf-viwld-supplemental-vvols.adoc

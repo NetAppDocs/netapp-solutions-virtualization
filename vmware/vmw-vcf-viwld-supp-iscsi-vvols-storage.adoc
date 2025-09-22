@@ -1,0 +1,103 @@
+---
+sidebar: sidebar
+permalink: vmware/vmw-vcf-viwld-supp-iscsi-vvols-storage.html
+keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi
+summary: "Configure iSCSI vVols storage in a VI workload domain using ONTAP tools. You'll deploy ONTAP tools for VMware vSphere, register a storage system, create a storage capability profile, and provision a vVols datastore in the vSphere client."
+---
+
+= Configure iSCSI vVols storage in a VCF VI workload domain using ONTAP tools
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Configure iSCSI vVols storage in a VI workload domain using ONTAP tools. You'll deploy ONTAP tools for VMware vSphere, register a storage system, create a storage capability profile, and provision a vVols datastore in the vSphere client.
+
+== Step 1: Deploy ONTAP tools for VMware vSphere
+For VI workload domains, ONTAP tools is installed to the VCF Management Cluster but registered with the vCenter associated with the VI workload domain. 
+
+ONTAP tools for VMware vSphere is deployed as a VM appliance and provides an integrated vCenter UI for managing ONTAP storage. 
+
+.Steps
+include::../_include/deploy-ontap-tools.adoc[]
+
+== Step 2: Add a storage system
+Perform the following steps to add a storage system using ONTAP tools.
+
+NOTE: vVol requires ONTAP cluster credentials rather than SVM credentials. For more information, refer to the ONTAP tools for VMware vSphere documentation: https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere/configure/task_add_storage_systems.html[Add storage systems].
+
+
+.Steps
+include::../_include/add-storage-ontap-tools.adoc[]
+
+== Step 3: Create a storage capability profile in ONTAP tools
+Storage capability profiles describe the features provided by a storage array or storage system. They include quality of service definitions and are used to select storage systems that meet the parameters defined in the profile. One of the provided profiles can be used or new ones can be created.
+
+.Steps
+
+. In ONTAP tools select *Storage capability profile* from the left-hand menu and then press *Create*.
++
+image:vmware-vcf-asa-039.png[Storage capability profile]
+
+. In the *Create Storage Capability profile* wizard, provide a name and description of the profile and click *Next*.
++
+image:vmware-asa-010.png[Add name for SCP]
+
+. Select the platform type and to specify the storage system is to be an All-Flash SAN Array set *Asymmetric* to false.
++
+image:vmware-asa-011.png[Platorm for SCP]
+
+. Select your choice of protocol or select *Any* to allow all possible protocols. 
+
+. Click *Next* to continue.
++
+image:vmware-asa-012.png[Protocol for SCP]
+
+. The *performance* page allows setting of quality of service in form of minimum and maximum IOPs allowed.
++
+image:vmware-asa-013.png[QoS for SCP]
+
+. Complete the *storage attributes* page by selecting storage efficiency, space reservation, encryption and any tiering policy as needed.
++
+image:vmware-asa-014.png[Attributes for SCP]
+
+. Review the summary and click *Finish* to create the profile.
++
+image:vmware-vcf-asa-040.png[Summary for SCP]
+
+== Step 4: Create a vVols datastore in ONTAP tools
+To create a vVols datastore in ONTAP tools complete the following steps.
+
+.Steps
+. In ONTAP tools, select *Overview* and from the *Getting Started* tab click *Provision* to start the wizard.
++
+image:vmware-vcf-asa-041.png[Provision datastore]
+
+. On the *General* page of the New Datastore wizard, select the vSphere datacenter or cluster destination. 
+
+. Select *vVols* as the datastore type, enter a name for the datastore, and select *iSCSI* as the protocol. 
+
+. Click *Next* to continue.
++
+image:vmware-vcf-asa-042.png[General page]
+
+. On the *Storage system* page, select a storage capability profile, the storage system, and the VM. 
+
+. Click *Next* to continue.
++
+image:vmware-vcf-asa-043.png[Storage system]
+
+. On the *Storage attributes* page, select to create a new volume for the datastore and enter the storage attributes of the volume you want to create.
+
+. Click *Add* to create the volume and then *Next* to continue.
++
+image:vmware-vcf-asa-044.png[Storage attributes]
+
+. Review the summary and click *Finish* to start the vVol datastore creation process.
++
+image:vmware-vcf-asa-045.png[Summary page]
+
+
+// NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-vcf-viwld-supplemental-vvols.adoc
