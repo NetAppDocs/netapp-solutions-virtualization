@@ -126,13 +126,7 @@ image:vmware-vcf-asa-103.png[NVMe namespace listed under devices]
 {nbsp}
 . Repeat this procedure to create an NVMe/TCP adapter for the second network established for NVMe/TCP traffic.
 
-== Additional information
-
-* For information on configuring ONTAP storage systems, refer to the link:https://docs.netapp.com/us-en/ontap[ONTAP 9 Documentation] center.
-
-* For information on configuring VCF, refer to link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf.html[VMware Cloud Foundation Documentation].
-
 == What's next?
-After configuring networking, link:vmw-vcf-viwld-supp-nvme-storage.html[configure storage for NVMe vVols].
+After configuring networking, you link:vmw-vcf-viwld-supp-nvme-storage.html[configure storage for NVMe vVols].
 
 // NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-vcf-viwld-supplemental-nvme.adoc
