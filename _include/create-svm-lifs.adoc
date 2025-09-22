@@ -1,0 +1,20 @@
+. From ONTAP System Manager navigate to *Storage VMs* in the left-hand menu and click *+ Add* to start. 
++
+image:vmware-vcf-asa-001.png[Click +Add to start creating SVM]
++
+{nbsp}
+. In the *Add Storage VM* wizard, provide a *Name* for the SVM, select the *IP Space* and then, under *Access Protocol*, click the *iSCSI* tab and check the box to *Enable iSCSI*.
++
+image:vmware-vcf-asa-002.png[Add storage VM wizard - enable iSCSI]
++
+{nbsp}
+. In the *Network Interface* section fill in the *IP address*, *Subnet Mask*, and *Broadcast Domain and Port* for the first LIF. For subsequent LIFs, you can either use individual settings or enable the checkbox to use common settings across all remaining LIFs.
++
+NOTE: For multipathing and failover across multiple paths, create a minimum of two LIFs per storage node in separate Ethernet networks for all SVMs in iSCSI configurations.
++
+image:vmware-vcf-asa-003.png[Fill out network info for LIFs]
++
+{nbsp}
+. Choose whether to enable the Storage VM Administration account (for multi-tenancy environments) and then click *Save* to create the SVM.
++
+image:vmware-vcf-asa-004.png[Enable SVM account and Finish]
