@@ -14,10 +14,6 @@ summary: "VMware Cloud Foundation (VCF) supports a wide range of supplemental st
 [.lead]
 VMware Cloud Foundation (VCF) supports a wide range of supplemental storage options to expand storage on VCF management domains and Virtual Infrastructure (VI) workload domains.
 
-NetApp's ONTAP tools for VMware vSphere provide an efficient solution for this expansion by integrating NetApp storage seamlessly into the VCF environment. 
-
-ONTAP tools simplifies  the setup and management of datastores, allowing administrators to provision and manage storage directly from the vSphere Client. ONTAP's advanced features such as snapshots, cloning, and data protection, enhance storage performance, efficiency, and scalability within the VCF environment.
-
 == Supported protocols for expanding storage
 
 VCF environments can be expanded using several storage protocols, each offering unique benefits and use cases. 
@@ -74,6 +70,11 @@ Modern protocol that delivers high performance and low latency over standard Eth
 * *Cost Effective:* Runs over standard ethernet switches and is encapsulated inside TCP datagrams. No special equipment required to implement.
 
 For more information on the benefits of NVMe, refer to https://www.netapp.com/data-storage/nvme/what-is-nvme/[What is NVME?].
+
+== ONTAP tools for VMware
+NetApp's ONTAP tools for VMware vSphere provide an efficient solution for this expansion by integrating NetApp storage seamlessly into the VCF environment. 
+
+ONTAP tools simplifies  the setup and management of datastores, allowing administrators to provision and manage storage directly from the vSphere Client. ONTAP's advanced features such as snapshots, cloning, and data protection, enhance storage performance, efficiency, and scalability within the VCF environment.
 
 == Supported solutions for adding supplemental storage 
 Refer to the following solutions for the technical details to add supplemental storage on VCF management domains and Virtual Infrastructure (VI) workload domains.
