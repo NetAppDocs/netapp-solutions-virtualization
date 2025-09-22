@@ -1,0 +1,122 @@
+---
+sidebar: sidebar
+permalink: vmware/vmw-vcf-mgmt-supplemental-iscsi-storage.html
+keywords: netapp, vmware, cloud, foundation, vcf, iscsi, create, svm, lif
+summary: "Set up supplemental iSCSI storage to expand VMware Cloud Foundation management domains. This procedure includes deploying ONTAP tools, configuring an iSCSI datastore on the management domain, and migrating management VMs to the new datastore."
+---
+= Configure iSCSI storage in a VCF management domain using ONTAP tools
+:icons: font
+:imagesdir: ../media/
+
+[.lead]
+Set up supplemental iSCSI storage to expand VMware Cloud Foundation management domains. This procedure includes deploying ONTAP tools, configuring an iSCSI datastore on the management domain, and migrating management VMs to the new datastore.
+
+Perform the following steps on the VCF management domain cluster using the vSphere client.
+
+== Step 1: Deploy ONTAP tools for VMware vSphere
+
+ONTAP tools for VMware vSphere (OTV) is deployed as a VM appliance and provides an integrated vCenter UI for managing ONTAP storage.  
+
+.Steps
+. Obtain the ONTAP tools OVA image from the link:https://mysupport.netapp.com/site/products/all/details/otv/downloads-tab[NetApp Support site] and download to a local folder.
+
+. Log into the vCenter appliance for the VCF management domain.
+
+. From the vCenter appliance interface right-click the management cluster and select *Deploy OVF Template…*
++
+image:vmware-vcf-aff-021.png[Deploy OVF Template...]
++
+{nbsp}
+. In the *Deploy OVF Template* wizard, click the *Local file* radio button and select the ONTAP tools OVA file downloaded in the previous step.
++
+image:vmware-vcf-aff-022.png[Select OVA file]
++
+{nbsp}
+. For steps 2 through 5 of the wizard, select a name and folder for the VM, select the compute resource, review the details, and accept the license agreement.
+
+. For the storage location of the configuration and disk files, select the vSAN datastore of the VCF management domain cluster.
++
+image:vmware-vcf-aff-023.png[Select OVA file]
++
+{nbsp}
+. On the Select network page, select the network used for management traffic.
++
+image:vmware-vcf-aff-024.png[Select network]
++
+{nbsp}
+. On the Customize template page, fill out all required information:
+* Password to be used for administrative access to OTV.
+* NTP server IP address.
+* OTV maintenance account password.
+* OTV Derby DB password.
+* Do not check the box to enable VMware Cloud Foundation (VCF). VCF mode is not required for deploying supplemental storage.
+* FQDN or IP address of the vCenter appliance and provide credentials for vCenter.
+* Provide the required network properties fields.
++
+Click *Next* to continue.
++
+image:vmware-vcf-aff-025.png[Customize OTV template 1]
++
+image:vmware-vcf-asa-013.png[Customize OTV template 2]
++
+{nbsp}
+. Review all information on the Ready to complete page and click *Finish* to begin deploying the OTV appliance.
+
+== Step 2: Configure an iSCSI datastore on the management domain
+
+Complete the following steps to configure a VMFS iSCSI datastore as supplemental storage on the management domain.
+
+.Steps
+. In the vSphere client navigate to the main menu and select *NetApp ONTAP tools*.
++
+image:vmware-vcf-asa-014.png[Navigate to ONTAP tools]
+
+. Once in *ONTAP tools*, from the Getting Started page (or from *Storage Systems*), click *Add* to add a new storage system.
++
+image:vmware-vcf-asa-015.png[Add storage system]
++
+{nbsp}
+. Provide the IP address and credentials of the ONTAP storage system and click *Add*.
++
+image:vmware-vcf-asa-016.png[Provide IP and credentials of ONTAP system]
++
+{nbsp}
+. Click *Yes* to authorize the cluster certificate and add the storage system.
++
+image:vmware-vcf-asa-017.png[Authorize cluster certificate]
+
+== Step 3: Migrate management VMs to the iSCSI datastore
+
+In cases where you prefer to use ONTAP storage to protect the VCF management VMs, use vMotion to migrate the VMs to the newly created iSCSI datastore.
+
+.Steps
+. From the vSphere Client navigate to the management domain cluster and click the *VMs* tab.
+
+. Select the VMs to be migrated to the iSCSI datastore, right click and select *Migrate..*.
++
+image:vmware-vcf-asa-018.png[Select VMs to migrate]
++
+{nbsp}
+. In the *Virtual Machines - Migrate* wizard, select *Change storage only* as the migration type and click *Next* to continue.
++
+image:vmware-vcf-asa-019.png[Select migration type]
++
+{nbsp}
+. On the *Select storage* page, select the iSCSi datastore and select *Next* to continue.
++
+image:vmware-vcf-asa-020.png[Select destination datastore]
++
+{nbsp}
+. Review the selections and click *Finish* to start the migration.
+
+. The relocation status can be viewed from the *Recent Tasks* pane.
++ 
+image:vmware-vcf-asa-021.png[vSphere client recent tasks pane]
+
+== Additional information
+
+* For information on configuring ONTAP storage systems, refer to link:https://docs.netapp.com/us-en/ontap[ONTAP 9 documentation].
+
+* For information on configuring VCF, refer to link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf.html[VMware Cloud Foundation documentation].
+
+* For a  video demo of this solution, refer to link:..videos/vmware-videos.html#vmware-datastore-provisioning-with-ontap[VMware datastore provisioning].
