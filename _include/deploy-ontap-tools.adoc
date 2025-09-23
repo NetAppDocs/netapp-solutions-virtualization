@@ -19,12 +19,12 @@ image:vmware-vcf-aff-022.png[Select OVA file]
 image:vmware-vcf-aff-023.png[Select OVA file]
 +
 {nbsp}
-. On the Select network page, select the network used for management traffic.
+. On the *Select network* page, select the network used for management traffic.
 +
 image:vmware-vcf-aff-024.png[Select network]
 +
 {nbsp}
-. On the Customize template page, enter all required information:
+. On the *Customize template* page, enter all required information:
 * Password to be used for administrative access to ONTAP tools.
 * NTP server IP address.
 * ONTAP tools maintenance account password.
