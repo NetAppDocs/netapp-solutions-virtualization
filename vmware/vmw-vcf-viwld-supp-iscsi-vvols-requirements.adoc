@@ -41,6 +41,6 @@ NOTE: In situations where multiple VMkernel adapters are configured on the same 
 * For information about using VMFS iSCSI datastores with VMware refer to link:vmw-vmfs-iscsi.html[vSphere VMFS Datastore - iSCSI Storage backend with ONTAP].
 
 == What's next?
-After reviewing the deployment requirements, link:vmware/vmw-vcf-viwld-supp-iscsi-vvols-svm-lifs.html[create the SVM and LIFs].
+After reviewing the deployment requirements, link:vmw-vcf-viwld-supp-iscsi-vvols-svm-lifs.html[create the SVM and LIFs].
 
 // NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-vcf-viwld-supplemental-vvols.adoc
