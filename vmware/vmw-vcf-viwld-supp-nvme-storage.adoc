@@ -45,8 +45,12 @@ image:vmware-vcf-asa-107.png[Hosts connected to datastore]
 
 == Additional information
 
-* For information on configuring ONTAP storage systems, refer to the link:https://docs.netapp.com/us-en/ontap[ONTAP 9 documentation].
+* For more information on configuring SAN for redundancy, refer to the link:https://docs.netapp.com/us-en/ontap/san-config/index.html[NetApp SAN configuration reference^]. 
 
-* For information on configuring VCF, refer to link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf.html[VMware Cloud Foundation documentation].
+* For additional information on NVMe design considerations for ONTAP storage systems, refer to link:https://docs.netapp.com/us-en/ontap/nvme/support-limitations.html[NVMe configuration, support and limitations^]. 
+
+* For information on configuring ONTAP storage systems, refer to the link:https://docs.netapp.com/us-en/ontap[ONTAP 9 documentation^].
+
+* For information on configuring VCF, refer to link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf.html[VMware Cloud Foundation documentation^].
 
 // NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-vcf-viwld-supplemental-nvme.adoc

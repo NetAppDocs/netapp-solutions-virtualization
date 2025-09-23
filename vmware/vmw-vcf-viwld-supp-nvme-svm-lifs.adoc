@@ -17,7 +17,7 @@ Create a Storage Virtual Machine (SVM) with multiple Logical Interfaces (LIFs) t
 == Step 1: Create the SVMs and LIFs
 Complete the following steps to create an SVM with multiple LIFs for NVMe/TCP traffic.
 
-To add new LIFs to an existing SVM, refer to the ONTAP documentation: link:https://docs.netapp.com/us-en/ontap/networking/create_a_lif.html[Create ONTAP LIFs].
+To add new LIFs to an existing SVM, refer to the ONTAP documentation: link:https://docs.netapp.com/us-en/ontap/networking/create_a_lif.html[Create ONTAP LIFs^].
 
 .Steps
 . From ONTAP System Manager, navigate to *Storage VMs* in the left-hand menu and click *+ Add*. 

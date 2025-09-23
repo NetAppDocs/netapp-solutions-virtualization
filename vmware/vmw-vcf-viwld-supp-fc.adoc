@@ -42,11 +42,11 @@ Adding a storage backend enables you to onboard an ONTAP cluster.
 
 == Additional information
 
-* For information on configuring ONTAP storage systems, refer to the  link:https://docs.netapp.com/us-en/ontap[ONTAP 9 documentation].
+* For information on configuring ONTAP storage systems, refer to the  link:https://docs.netapp.com/us-en/ontap[ONTAP 9 documentation^].
 
-* For information on configuring VCF, refer to the link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2.html[VMware Cloud Foundation documentation].
+* For information on configuring VCF, refer to the link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2.html[VMware Cloud Foundation documentation^].
 
-* For more information on configuring fibre channel on ONTAP storage systems, refer to the https://docs.netapp.com/us-en/ontap/san-management/index.html[SAN storage management] in the ONTAP 9 documentation.
+* For information on configuring fibre channel on ONTAP storage systems, refer to the https://docs.netapp.com/us-en/ontap/san-management/index.html[SAN storage management^] in the ONTAP 9 documentation.
 
 * For information on using VMFS with ONTAP storage systems, refer to the link:vmw-vmfs-deploy.html[Deployment guide for VMFS].
 

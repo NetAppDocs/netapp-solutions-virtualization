@@ -11,10 +11,10 @@ summary: "Create a Storage Virtual Machine (SVM) with multiple Logical Interface
 [.lead]
 Create a Storage Virtual Machine (SVM) with multiple Logical Interfaces (LIFs) to provide iSCSI connectivity for VMware Cloud Foundation management domains. This procedure involves configuring the SVM with iSCSI protocol support and setting up multiple LIFs across separate Ethernet networks to enable multipathing and failover for optimal performance and availability.
 
-To add new LIFs to an existing SVM, refer to the ONTAP documentation: link:https://docs.netapp.com/us-en/ontap/networking/create_a_lif.html[Create ONTAP LIFs].
+To add new LIFs to an existing SVM, refer to the ONTAP documentation: link:https://docs.netapp.com/us-en/ontap/networking/create_a_lif.html[Create ONTAP LIFs^].
 
 .Steps
-include::../_include/create-svm-lifs.adoc[]
+include::../_include/create-svm-lifs-isci.adoc[]
 
 == What's next?
 After you create the SVM and LIFs, you link:vmw-vcf-mgmt-supplemental-iscsi-network.html[configure networking for iSCSI on ESXi hosts].

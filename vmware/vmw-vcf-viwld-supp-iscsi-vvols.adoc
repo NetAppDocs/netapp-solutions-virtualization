@@ -5,12 +5,12 @@ keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvo
 summary: "Get started with configuring a vVols datastore with iSCSI for supplemental storage in a VMware Cloud Foundation (VCF) Virtual Infrastructure (VI) workload domain. You'll create the SVM and LIFs, set up iSCSI networking, deploy ONTAP tools for VMware vSphere, and provision the vVols datastore."
 ---
 
-= Deployment workflow for adding an iSCSI datastore as supplemental storage in a VI workload domain
+= Deployment workflow for adding an iSCSI vVols  datastore as supplemental storage in a VI workload domain
 :icons: font
 :imagesdir: ../media/
 
 [.lead]
-Get started with configuring a vVols datastore using the iSCSI protocol as supplemental storage in a VMware Cloud Foundation (VCF) Virtual Infrastructure (VI) workload domain. You'll create the SVM and LIFs, set up iSCSI networking, deploy ONTAP tools for VMware vSphere, and provision the vVols datastore.
+Get started with configuring a iSCI vVols datastore as supplemental storage in a VMware Cloud Foundation (VCF) Virtual Infrastructure (VI) workload domain. You'll create the SVM and LIFs, set up iSCSI networking, deploy ONTAP tools for VMware vSphere, and configure storage.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One]link:vmw-vcf-viwld-supp-iscsi-vvols-requirements.html[Review the deployment requirements]
 [role="quick-margin-para"]

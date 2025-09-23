@@ -28,7 +28,7 @@ include::../_include/deploy-ontap-tools.adoc[]
 Perform the following steps to add a storage system using ONTAP tools.
 
 
-NOTE: vVol requires ONTAP cluster credentials rather than SVM credentials. For more information, refer to the ONTAP tools for VMware vSphere documentation: https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere/configure/task_add_storage_systems.html[Add storage systems].
+NOTE: vVol requires ONTAP cluster credentials rather than SVM credentials. For more information, refer to the ONTAP tools for VMware vSphere documentation: https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere/configure/task_add_storage_systems.html[Add storage systems^].
 
 
 .Steps

@@ -92,7 +92,9 @@ Each ESXi host in the workload domain cluster must have an NVMe/TCP software ada
 
 To install NVMe/TCP adapters and discover the NVMe controllers, complete the following steps:
 
-. In the vSphere client, navigate to one of the ESXi hosts in the workload domain cluster. From the *Configure* tab, click *Storage Adapters* in the menu. From the *Add Software Adapter* drop-down menu, select *Add NVMe over TCP adapter*.
+. In the vSphere client, navigate to one of the ESXi hosts in the workload domain cluster. From the *Configure* tab, click *Storage Adapters* in the menu. 
+
+. From the *Add Software Adapter* drop-down menu, select *Add NVMe over TCP adapter*.
 + 
 image:vmware-vcf-asa-099.png[Add NVMe/TCP adapter]
 +
@@ -110,7 +112,7 @@ image:vmware-vcf-asa-101.png[Add Controller]
 +
 {nbsp}
 . In the *Add controller* window, select the *Automatically* tab and complete the following steps. 
-* Fill in an IP address for one of the SVM logical interfaces on the same network as the physical adapter assigned to this NVMe/TCP adapter. 
+* Enter an IP address for one of the SVM logical interfaces on the same network as the physical adapter assigned to this NVMe/TCP adapter. 
 * Click the *Discover Controllers* button.
 * From the list of discovered controllers, click the checkbox for the two controllers with network addresses aligned with this NVMe/TCP adapter.
 
