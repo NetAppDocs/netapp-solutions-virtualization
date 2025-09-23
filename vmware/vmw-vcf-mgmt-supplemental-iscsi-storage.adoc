@@ -62,4 +62,4 @@ image:vmware-vcf-asa-021.png[vSphere client recent tasks pane]
 
 * For information on using VMFS iSCSI datastores with VMware, refer to link:vmw-vmfs-iscsi.html[vSphere VMFS datastore - iSCSI storage backend with ONTAP].
 
-* For video demos of this solution, refer to link:/videos/vmware-videos.html#vmware-datastore-provisioning-with-ontap[VMware datastore provisioning].
+* For video demos of this solution, refer to link:../videos/vmware-videos.html#vmware-datastore-provisioning-with-ontap[VMware datastore provisioning].
