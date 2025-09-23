@@ -12,7 +12,7 @@ summary: "Review the requirements for adding an iSCSI datastore as supplemental 
 :imagesdir: ../media/
 
 [.lead]
-Review the requirements for adding iSCSI datastores as supplemental storage to a VMware Cloud Foundation (VCF) management domain.
+Review the requirements for adding iSCSI datastores as supplemental storage to a VMware Cloud Foundation (VCF) management domain. To deploy iSCSI vVols in a VMware Cloud Foundation management domain, you need a fully configured ONTAP AFF or ASA storage system and a deployed VCF management domain.
 
 == Infrastructure requirements
 Make sure the following components and configurations are in place.

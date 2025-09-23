@@ -12,7 +12,7 @@ summary: "To deploy iSCSI vVols in a VMware Cloud Foundation VI workload domain,
 :imagesdir: ../media/
 
 [.lead]
-To deploy iSCSI vVols in a VMware Cloud Foundation VI workload domain, you need a fully configured ONTAP AFF or ASA storage system, a completed VCF management domain, and an existing VI workload domain. Review the recommended network design and infrastructure requirements to ensure reliable, high-performance storage integration.
+Review the recommended network design and infrastructure requirements to ensure reliable, high-performance storage integration. To deploy iSCSI vVols in a VMware Cloud Foundation VI workload domain, you need a fully configured ONTAP AFF or ASA storage system, a completed VCF management domain, and an existing VI workload domain.
 
 == Infrastructure requirements
 Make sure the following components and configurations are in place.

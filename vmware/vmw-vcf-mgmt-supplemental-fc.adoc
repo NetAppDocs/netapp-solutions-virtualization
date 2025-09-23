@@ -12,7 +12,7 @@ summary: "Configure a VMFS datastore over Fibre Channel (FC) as supplemental sto
 :imagesdir: ../media/
 
 [.lead]
-Configure a VMFS datastore over Fibre Channel (FC) as supplemental storage for the VMware Cloud Foundation (VCF) management domain. You'll deploy ONTAP tools on the management domain, add a storage backend, and provision the datastore.
+Configure a VMFS datastore over Fibre Channel (FC) as supplemental storage for the VMware Cloud Foundation (VCF) management domain. This procedure summarizes the steps to deploy ONTAP tools on the management domain, add a storage backend, and provision the datastore.
 
 .Before you begin
 
