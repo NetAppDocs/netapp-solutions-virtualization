@@ -50,6 +50,7 @@ Adding a storage backend enables you to onboard an ONTAP cluster.
 
 * For information on using VMFS with ONTAP storage systems, refer to the link:vmw-vmfs-deploy.html[Deployment guide for VMFS].
 
+* For video demos of this solution, refer to link:../videos/vmware-videos.html#vmware-datastore-provisioning-with-ontap[VMware datastore provisioning].
 
 
 // NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-vcf-viwld-supplemental-fc.adoc

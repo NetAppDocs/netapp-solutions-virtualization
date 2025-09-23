@@ -49,3 +49,5 @@ Adding a storage backend enables you to onboard an ONTAP cluster.
 * For information about configuring fibre channel on ONTAP storage systems, refer to the ONTAP 9 documentation https://docs.netapp.com/us-en/ontap/san-management/index.html[SAN storage management].
 
 * For more information about using VMFS with ONTAP storage systems, refer to the link:vmw-vmfs-deploy.html[Deployment guide for VMFS].
+
+* For video demos of this solution, refer to link:../videos/vmware-videos.html#vmware-datastore-provisioning-with-ontap[VMware datastore provisioning].
