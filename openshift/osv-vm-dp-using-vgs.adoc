@@ -12,25 +12,28 @@ summary: Red Hat OpenShift Virtualization Data Protection with NetApp ONTAP
 :imagesdir: ../media/
 
 [.lead]
-Volume Group Snapshots is a Kubernetes feature that addresses consistency  issues when taking snapshots of multiple PVCs of containers or VMs. This feature allows you to create crash-consistent snapshots of multiple PersistentVolumeClaims (PVCs) simultaneously. This feature is Beta in Kubernetes version v1.32. Trident supports this Beta Feature from Trident version 25.06 onwards. 
+Volume Group Snapshots is a Kubernetes feature that addresses consistency  issues when taking snapshots of multiple PVCs of containers or VMs. This feature allows you to create crash-consistent snapshots of multiple PersistentVolumeClaims (PVCs) simultaneously. This feature is Beta in Kubernetes version v1.32. Trident supports this Beta Feature from Trident version 25.06 onwards (for iSCSI protocol only at this time).
 
 To support Volume Group Snapshots feature, Kubernetes introduces three new API objects:
 
-VolumeGroupSnapshotClass: Created by cluster administrators to describe how volume group snapshots should be created.
-VolumeGroupSnapshot: Requested by Kubernetes users to create a volume group snapshot for multiple PVCs.
-VolumeGroupSnapshotContent: Created by the snapshot controller for dynamically created VolumeGroupSnapshots.
+*VolumeGroupSnapshotClass:* Created by cluster administrators to describe how volume group snapshots should be created.
+
+*VolumeGroupSnapshot:* Requested by Kubernetes users to create a volume group snapshot for multiple PVCs.
+
+*VolumeGroupSnapshotContent:* Created by the snapshot controller for dynamically created VolumeGroupSnapshots.
 
 Trident 25.06 automatically detects new CRDs (specified for the Volume Group Snapshot feature) to enable the relevant feature gates in the Trident CSI sidecars. 
+
 NOTE: Trident supports Volume Group Snapshots only for the iSCSI protocol in the 25.06 version.  
 
-Outline of steps to demonstrate the use of VolumeGroupSnapshotclass to create snapshots of a group of volumes/disks of a VM and then restore each disk from the snapshots. 
+= Steps to demonstrate the use of VolumeGroupSnapshotClass to create snapshots of a group of volumes/disks of a VM and then restore each disk from the snapshots 
 
-== Install OpenShift Cluster version: 4.19
+== Install OpenShift Cluster version 4.19
 
 * OpenShift version 4.19 uses Kubernetes v1.32 where the Volume Group Snapshot feature is elevated to Beta Status.
 * Turn the FeatureGate on for VolumeGroupSnapshots.
 
-.Install OpenShift Cluster
+.Verify the Kubernetes version in OpenShift Cluster
 [%collapsible%closed]
 
 ====
@@ -48,7 +51,7 @@ image:redhat-openshift-ocpv-vgs-002.png[Enable VolumeGroupSnapshot FeatureGate]
 
 ====
 
-== Install Trident version 25.06.1 or later.
+== Install Trident version 25.06.1 or later
 * Turn the Feature Gate on for VolumeGroupSnapshots.
 * Use node-prep for installing iSCSI tools.
 
@@ -63,7 +66,7 @@ Ensure that the required CRDs for VolumeGroupSnapshots are installed
 image:redhat-openshift-ocpv-vgs-004.png[required CRDs available]
 ====
 
-== Create a Trident iscsi backend, iscsi storage Class and Volume Snapshot class.
+== Create a Trident iscsi backend, iscsi storage Class and Volume Snapshot class
 * The Volume Group Snapshot feature is supported by Trident only for iscsi protocol in Trident 25.06.
 * Make the Storage class and the Volume Snapshot class defaults in the cluster.
 * Create the VolumeGroupSnapshotClass
@@ -161,7 +164,7 @@ image:redhat-openshift-ocpv-vgs-006.png[Volume Group Snapshot class]
 
 == Install OpenShift Virtualization Operator
 
-* This needs to be done after step 4 so that the golden images are made available as VolumeSnapshots in the cluster using Trident CSI.
+* This needs to be done after setting up the default storage class and Snapshot class using trident so that the golden images are made available as VolumeSnapshots in the cluster using Trident CSI.
 
 .Verify golden images are in volume snapshots
 [%collapsible%closed]
@@ -169,10 +172,10 @@ image:redhat-openshift-ocpv-vgs-006.png[Volume Group Snapshot class]
 image:redhat-openshift-ocpv-vgs-007.png[Golden images in volume snapshots]
 ====
 
-== Create a VM with 3 disks. (root disk and 2 additional disks)
+== Create a VM with 3 disks. (a root disk and 2 additional disks)
 * Add some data into each of the disks
 
-.Create a VM using the default template. Create 2 additional disks using the default storage class for this VM.
+.Create a VM using the default template. Create 2 additional disks using the default storage class for this VM
 [%collapsible%closed]
 ====
 image:redhat-openshift-ocpv-vgs-008.png[VM with 3 PVCs]
@@ -186,8 +189,8 @@ image:redhat-openshift-ocpv-vgs-009.png[VM disks]
 
 ====
 
-== Label the PVC(s).
-.Label the PVCs using the same key/value and Verify
+== Label the PVC(s)
+.Label the PVCs using the same key/value and verify
 [%collapsible%closed]
 ====
 [source,cli]
@@ -201,6 +204,7 @@ persistentvolumeclaim/dv-fedora-vm1-disk2-86oq76 labeled
 
 Check the labels of the PVCs
 
+[source, cli]
 # oc get pvc fedora-vm1 -o jsonpath='{.metadata.labels.consistencygroup'}
 group1
 # oc get pvc dv-fedora-vm1-disk1-ulsgg2 -o jsonpath='{.metadata.labels.consistencygroup'}
@@ -209,7 +213,7 @@ group1
 group1
 ====
 
-9. Create VolumeGroupSnapshots
+== Create VolumeGroupSnapshots
 
 * Use a label selector to match the labels set on the PVCs.
 
@@ -229,6 +233,7 @@ spec:
       matchLabels:
         consistencygroup: group1 
 
+[source, cli]
 # oc create -f vgs1.yaml
 volumegroupsnapshot.groupsnapshot.storage.k8s.io/vgs1 created
 
@@ -253,7 +258,7 @@ image:redhat-openshift-ocpv-vgs-012.png[files lost]
 
 NOTE: Although we created a snapshot of a group of volumes as a single unit, we can only restore from individual snapshot.
 
-Trident provides rapid, in-place volume restoration from a snapshot using the TridentActionSnapshotRestore (TASR) CR. This CR functions as an imperative Kubernetes action and does not persist after the operation completes.
+Trident provides rapid, in-place volume restoration from a snapshot using the *TridentActionSnapshotRestore (TASR) CR*. This CR functions as an imperative Kubernetes action and does not persist after the operation completes.
 
 First, stop the VM.
 
@@ -270,6 +275,7 @@ spec:
   pvcName: dv-fedora-vm1-disk1-ulsgg2
   volumeSnapshotName: snapshot-4d47c9f45423bfca625a0f1b6c5a5ec456ac59d3e583157be919bb7237317c65
 
+[source, cli]
 # oc create -f tasr1.yaml
 tridentactionsnapshotrestore.trident.netapp.io/trident-snap created
 
@@ -286,13 +292,14 @@ spec:
   pvcName: dv-fedora-vm1-disk2-86oq76
   volumeSnapshotName: snapshot-afb4c4833460e233c4e86f1108c921b86a6f4d0eb182e99e579081ff6f743f56
 
+[source,cli]
 # oc create -f tasr2.yaml
 
-Let us make sure that the restore operation is showing succeeded state.
+Verify that the restore operation is showing succeeded state.
 
 image:redhat-openshift-ocpv-vgs-013.png[TASR succeeded]
 
-Now start the VM, login to it and ensure that the sample.txt file is back on the disks.
+Now start the VM, login to it and verify that the sample.txt file is back on the disks.
 image:redhat-openshift-ocpv-vgs-014.png[snapshots restored]
 
 ====
