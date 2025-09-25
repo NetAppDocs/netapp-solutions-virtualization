@@ -2,14 +2,14 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-mgmt-supplemental-iscsi-network.html
 keywords: netapp, vmware, cloud, foundation, vcf, iscsi, network, esxi
-summary: "Configure iSCSI networking on ESXi hosts in VMware Cloud Foundation management domains to enable connectivity to ONTAP storage systems. This procedure involves creating distributed port groups with VLAN separation, configuring uplink teaming for redundancy, and setting up VMkernel adapters on each ESXi host to establish dedicated iSCSI paths for failover capabilities."
+summary: "Configure iSCSI networking on ESXi hosts in VMware Cloud Foundation management domains to enable connectivity to ONTAP storage systems. You'll create distributed port groups with VLAN separation, configure uplink teaming for redundancy, and set up VMkernel adapters on each ESXi host to establish dedicated iSCSI paths for failover capabilities."
 ---
 = Configure networking for iSCSI on ESXi hosts in a VCF management domain
 :icons: font
 :imagesdir: ../media/
 
 [.lead]
-Configure iSCSI networking on ESXi hosts in VMware Cloud Foundation management domains to enable connectivity to ONTAP storage systems. This procedure involves creating distributed port groups with VLAN separation, configuring uplink teaming for redundancy, and setting up VMkernel adapters on each ESXi host to establish dedicated iSCSI paths for failover capabilities.
+Configure iSCSI networking on ESXi hosts in VMware Cloud Foundation management domains to enable connectivity to ONTAP storage systems. You'll create distributed port groups with VLAN separation, configure uplink teaming for redundancy, and set up VMkernel adapters on each ESXi host to establish dedicated iSCSI paths for failover capabilities.
 
 Perform these steps on the VCF management domain cluster using the vSphere client.
 
@@ -28,4 +28,4 @@ Create VMkernel adapters on each ESXi host in the management domain.
 include::../_include/create-kernel-adapters.adoc[]
 
 == What's next?
-After you configure networking for iSCSI on all ESXi hosts in the workload domain, you link:vmw-vcf-mgmt-supplemental-iscsi-storage.html[configure storage for iSCSI on ESXi hosts].
+After you configure networking for iSCSI on all ESXi hosts in the workload domain, link:vmw-vcf-mgmt-supplemental-iscsi-storage.html[configure storage for iSCSI on ESXi hosts].

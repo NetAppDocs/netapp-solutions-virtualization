@@ -2,14 +2,14 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-mgmt-supplemental-iscsi-storage.html
 keywords: netapp, vmware, cloud, foundation, vcf, iscsi, create, svm, lif
-summary: "Set up supplemental iSCSI storage to expand VMware Cloud Foundation management domains. This procedure includes deploying ONTAP tools, configuring an iSCSI datastore on the management domain, and migrating management VMs to the new datastore."
+summary: "Set up supplemental iSCSI storage to expand VMware Cloud Foundation management domains. You'll deploy ONTAP tools, configure an iSCSI datastore on the management domain, and migrate management VMs to the new datastore."
 ---
 = Configure iSCSI storage in a VCF management domain using ONTAP tools
 :icons: font
 :imagesdir: ../media/
 
 [.lead]
-Set up supplemental iSCSI storage to expand VMware Cloud Foundation management domains. This procedure includes deploying ONTAP tools, adding a storage system to the VCF management domain, and migrating management VMs to the new datastore.
+Set up supplemental iSCSI storage to expand VMware Cloud Foundation management domains. You'll deploy ONTAP tools, configure an iSCSI datastore on the management domain, and migrate management VMs to the new datastore.
 
 Perform the following steps on the VCF management domain cluster using the vSphere client.
 

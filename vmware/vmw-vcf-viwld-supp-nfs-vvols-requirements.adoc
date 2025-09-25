@@ -18,7 +18,7 @@ Review the recommended network design and infrastructure requirements to deploy 
 == Infrastructure requirements
 Make sure the following components and configurations are in place.
 
-* An ONTAP AFF or FAS storage system with physical data ports on ethernet switches dedicated to storage traffic.
+* An ONTAP AFF or FAS storage system with physical data ports on Ethernet switches dedicated to storage traffic.
 * VCF management domain deployment is complete and the vSphere client is accessible.
 * A VI workload domain has been previously deployed.
 
@@ -39,5 +39,5 @@ This documentation demonstrates the process of creating a new SVM and specifying
 * For complete information on using NFS with vSphere clusters, refer to the link:vmw-vvf-overview.html[NFS v3 Reference Guide for vSphere 8].
 
 == What's next?
-After reviewing the requirements, you link:vmw-vcf-viwld-supp-nfs-vvols-svm-lifs.html[create the SVM and LIFs].
+After reviewing the requirements, link:vmw-vcf-viwld-supp-nfs-vvols-svm-lifs.html[create the SVM and LIFs].
 

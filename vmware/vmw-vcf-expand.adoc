@@ -22,12 +22,12 @@ ONTAP tools simplifies the setup and management of datastores, allowing administ
 
 VCF environments can be expanded using several storage protocols, each offering unique benefits and use cases. 
 
-You can use the following protocols to expand storage in VCF management domains and VI workload domains. Choose the best option for your environment and seamlessly integrate supplemental storage into your VCF deployment.
+You can use the following protocols to expand storage in VCF management domains and VI workload domains. Choose the best option for your environment to seamlessly integrate supplemental storage into your VCF deployment.
 
 .iSCSI 
 Block-based protocol that uses standard Ethernet networks. Ideal for environments that require high performance, flexibility, and cost-effective scaling. 
 
-iSCSI is widely used for VMFS datastores and supports advanced ONTAP features such as snapshots and cloning.
+iSCSI is widely used for VMFS datastores and supports advanced ONTAP features, such as snapshots and cloning.
 
 * *High Performance:* Offers high performance to deliver fast, efficient data transfer rates and low latency. Ideal for demanding enterprise applications and virtualized environments.
 
@@ -39,7 +39,6 @@ For more information on using iSCSI with NetApp storage systems, refer to https:
 
 .Fibre Channel (FC)
 High-speed, low-latency protocol that uses dedicated FC networks. FC is preferred for mission-critical workloads that demand reliability, dedicated bandwidth, and robust error correction. It is commonly used for VMFS datastores in enterprise environments.
-
 
 * *High Performance:* FC provides high-speed data transfer rates, making it ideal for applications requiring fast and reliable access to large amounts of data.
 
@@ -71,7 +70,7 @@ Modern protocol that delivers high performance and low latency over standard Eth
 
 * *Scalability:* Supports scalable configurations, allowing IT administrators to expand their infrastructure seamlessly as data requirements grow.
 
-* *Cost Effective:* Runs over standard ethernet switches and is encapsulated inside TCP datagrams. No special equipment required to implement.
+* *Cost Effective:* Runs over standard Ethernet switches and is encapsulated inside TCP datagrams. No special equipment required to implement.
 
 For more information on the benefits of NVMe, refer to https://www.netapp.com/data-storage/nvme/what-is-nvme/[What is NVME?].
 

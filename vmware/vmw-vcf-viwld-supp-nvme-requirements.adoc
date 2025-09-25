@@ -15,7 +15,7 @@ summary: "To deploy NVMe vVols in a VMware Cloud Foundation VI workload domain, 
 Review the recommended network design and infrastructure requirements to deploy NVMe vVols in a VMware Cloud Foundation VI workload domain. You need a fully configured ONTAP AFF or ASA storage system, a deployed VCF management domain, and an existing VI workload domain.
 
 == Infrastructure requirements
-* An ONTAP AFF or ASA storage system with physical data ports on ethernet switches dedicated to storage traffic.
+* An ONTAP AFF or ASA storage system with physical data ports on Ethernet switches dedicated to storage traffic.
 * VCF management domain deployment is complete and the vSphere client is accessible.
 * A VI workload domain has been previously deployed.
 
@@ -24,7 +24,7 @@ NetApp recommends fully redundant network designs for NVMe/TCP. The following di
 
 image:vmware-vcf-asa-074.png[NVMe-tcp network design]
 
-For multipathing and failover across multiple paths, configure a minimum of two LIFs per storage node in separate ethernet networks for all SVMs in NVMe/TCP configurations.
+For multipathing and failover across multiple paths, configure a minimum of two LIFs per storage node in separate Ethernet networks for all SVMs in NVMe/TCP configurations.
 
 == What's next?
 After reviewing the deployment requirements, link:vmw-vcf-viwld-supp-nvme-svm-lifs.html[create the SVM and LIFs].

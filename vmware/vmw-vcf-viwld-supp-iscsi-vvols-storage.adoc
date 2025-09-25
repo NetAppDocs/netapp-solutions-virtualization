@@ -37,7 +37,7 @@ Storage capability profiles describe the features provided by a storage array or
 
 .Steps
 
-. In ONTAP tools select *Storage capability profile* from the left-hand menu and then press *Create*.
+. In ONTAP tools, select *Storage capability profile* from the left-hand menu and then press *Create*.
 +
 image:vmware-vcf-asa-039.png[Storage capability profile]
 

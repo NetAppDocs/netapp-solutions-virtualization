@@ -12,7 +12,7 @@ summary: "Get started with adding an iSCSI datastore as supplemental storage for
 :imagesdir: ../media/
 
 [.lead]
-Get started with adding iSCSI datastores as supplemental storage to the VMware Cloud Foundation management domain. This process includes reviewing deployment requirements, creating Storage Virtual Machines with logical interfaces, configuring ESXi host networking and deploying ONTAP tools for seamless VMFS datastore integration with ONTAP storage systems.
+Get started with adding an iSCSI datastore as supplemental storage for a VMware Cloud Foundation (VCF) management domain. You'll set up a Storage Virtual Machine (SVM) with logical interfaces (LIFs) for iSCSI, configure iSCSI networking on ESXi hosts, deploy ONTAP tools for VMware vSphere, and create a VMFS datastore.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One]link:vmw-vcf-mgmt-supplemental-iscsi-requirements.html[Review the deployment requirements]
 [role="quick-margin-para"]

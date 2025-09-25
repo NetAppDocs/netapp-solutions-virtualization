@@ -29,4 +29,4 @@ Perform the following steps on each ESXi host in the workload domain using the v
 include::../_include/create-kernel-adapters.adoc[]
 
 == What's next?
-After you configure networking for iSCSI on all ESXi hosts in the workload domain, you link:vmw-vcf-viwld-supp-iscsi-vvols-storage.html[configure storage for iSCSI vVols].
+After you configure networking for iSCSI on all ESXi hosts in the workload domain, link:vmw-vcf-viwld-supp-iscsi-vvols-storage.html[configure storage for iSCSI vVols].
