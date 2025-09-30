@@ -14,12 +14,13 @@ summary: "Protect VMs in Red Hat OpenShift Virtualization using Trident Volume G
 
 [.lead]
 
-Configure Volume Group Snapshots to protect VMs in Red Hat OpenShift Virtualization using Trident 25.06 and NetApp ONTAP storage. This procedure includes installing Trident with iSCSI support, configuring ONTAP backends and storage classes, creating a VM with multiple persistent disks, and implementing volume group snapshot that ensures snapshots all VM disks are captured simultaneously for reliable recovery operations.
+Configure Volume Group Snapshots to protect VMs in Red Hat OpenShift Virtualization using Trident 25.06 and NetApp ONTAP storage. This procedure includes installing Trident with iSCSI support, configuring ONTAP backends and storage classes, creating a VM with multiple persistent disks, and implementing volume group snapshot that ensures snapshots of all VM disks are captured simultaneously for reliable recovery operations.
 
 Volume Group Snapshots is a Kubernetes feature that addresses consistency  issues when taking snapshots of multiple PersistentVolumeClaims (PVCs) of containers or VMs.
 
 This feature allows you to create crash-consistent snapshots of multiple PVCs 
-simultaneously. This feature is Beta in Kubernetes version v1.32. Trident supports this Beta Feature from Trident version 25.06 onwards (for iSCSI protocol only at this time. You must install Trident version 25.06.1 or later for using iscsi protocol on OpenShift Container Platform 4.19).
+simultaneously. This feature is Beta in Kubernetes version v1.32. Trident supports this Beta feature from Trident version 25.06 onwards (for iSCSI protocol only at this time). 
+
 
 To support Volume Group Snapshots feature, Kubernetes introduces three new API objects:
 
@@ -33,7 +34,7 @@ Trident 25.06 automatically detects new CRDs (specified for the Volume Group Sna
 
 NOTE: Trident supports Volume Group Snapshots only for the iSCSI protocol in the 25.06 version.
 
-== Step 1: Install OpenShift 4.19 and enable FeatureGate
+== Step 1: Install OpenShift 4.19 and enable FeatureGate for Volume Group Snapshots
 Install OpenShift 4.19 cluster with Kubernetes version 1.32. This version elevates the Volume Group Snapshot feature to Beta status. Later releases of OpenShift may include Kubernetes versions beyond v1.32, which also support this feature.
 
 .Steps
@@ -58,9 +59,10 @@ image:redhat-openshift-ocpv-vgs-002.png[Enable VolumeGroupSnapshot FeatureGate]
 
 == Step 2: Install and configure Trident 25.06 for Volume Group Snapshots
 
-The Volume Group Snapshot feature is supported by Trident only for the iSCSI protocol in Trident 25.06. You need to install Trident version 25.06.1 to enable iSCSI protocol on OpenShift Cluster 4.19.
+The Volume Group Snapshot feature is supported by Trident only for the iSCSI protocol in Trident 25.06. 
+NOTE: You need to install Trident version 25.06.1 to enable iSCSI protocol on OpenShift Cluster 4.19.
 
-Install Trident version 25.06.1 and configure the necessary storage infrastructure to enable volume group snapshots for your VMs. This includes setting up an iSCSI backend connection to ONTAP, defining storage classes for VM persistent volumes, and configuring both individual and group snapshot classes.
+Install Trident and configure the necessary storage infrastructure to enable volume group snapshots for your VMs. This includes setting up an iSCSI backend connection to ONTAP, defining storage classes for VM persistent volumes, and configuring both individual and group snapshot classes.
 
 
 
@@ -109,7 +111,7 @@ spec:
   credentials:
     name: tbc-iscsi-secret
 +
-. Create the iSCSI storage classes using the following YAML definition.
+. Create the iSCSI storage class using the following YAML definition.
 +
 [source,yaml]
 # sc-iscsi.yaml
