@@ -2,17 +2,18 @@
 sidebar: sidebar
 permalink: openshift/osv-vm-dp-using-vgs.html
 keywords: OpenShift, OCP, Trident, Trident protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, CNV, Container Native Virtualization, Red Hat OpenShift Virtualization,Data Protection, Data Management for VMs, VM protection, Volume Group Snapshots
-summary: Red Hat OpenShift Virtualization Data Protection with NetApp ONTAP
+summary: "Protect VMs in Red Hat OpenShift Virtualization using Trident Volume Group Snapshots to ensure crash-consistent backups and rapid recovery. This procedure demonstrates how to configure, snapshot, and restore multiple VM disks using Kubernetes and NetApp ONTAP."
 ---
-= Protect VMs in Red Hat OpenShift Virtualization using Trident Volume Group Snapshots 
+= Protect VMs in Red Hat OpenShift Virtualization with Trident Volume Group Snapshots
 :hardbreaks:
 :nofooter:
 :icons: font
 :linkattrs:
 :imagesdir: ../media/
 
+
 [.lead]
-Volume Group Snapshots is a Kubernetes feature that addresses consistency  issues when taking snapshots of multiple PVCs of containers or VMs. This feature allows you to create crash-consistent snapshots of multiple PersistentVolumeClaims (PVCs) simultaneously. This feature is Beta in Kubernetes version v1.32. Trident supports this Beta Feature from Trident version 25.06 onwards (for iSCSI protocol only at this time).
+Protect virtual machines in Red Hat OpenShift Virtualization by creating crash-consistent snapshots of multiple VM disks using Trident Volume Group Snapshots and NetApp ONTAP. This procedure guides you through configuring the environment, enabling the Volume Group Snapshot feature, taking group snapshots of VM disks, and restoring data to ensure rapid recovery and data integrity for critical workloads.
 
 To support Volume Group Snapshots feature, Kubernetes introduces three new API objects:
 
@@ -28,7 +29,7 @@ NOTE: Trident supports Volume Group Snapshots only for the iSCSI protocol in the
 
 = Steps to demonstrate the use of VolumeGroupSnapshotClass to create snapshots of a group of volumes/disks of a VM and then restore each disk from the snapshots 
 
-== Install OpenShift Cluster version 4.19
+== Install OpenShift Cluster version 4.19 or later 
 
 * OpenShift version 4.19 uses Kubernetes v1.32 where the Volume Group Snapshot feature is elevated to Beta Status.
 * Turn the FeatureGate on for VolumeGroupSnapshots.
