@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-mgmt-nfs.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, array, ontap tools, otv, sddc, sddc manager, ontap tools, ontap tools 10
-summary: Convert an existing vSphere 8 cluster with NetApp ONTAP NFS datastores into a VMware Cloud Foundation management domain.
+summary: Convert an existing vSphere 8 cluster with NetApp ONTAP NFS datastores to a VMware Cloud Foundation management domain. You'll review configuration requirements, deploy ONTAP tools and provision NFS datastores, and use the VCF Import Tool to validate and convert the cluster.
 ---
 = Deployment workflow for converting vCenter server instances to VCF management domains with NFS datastores
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: Convert an existing vSphere 8 cluster with NetApp ONTAP NFS datastores 
 :imagesdir: ../media/
 
 [.lead]
-Convert an existing vSphere 8 cluster with NetApp ONTAP NFS datastores to a VMware Cloud Foundation management domain. This workflow includes reviewing configuration requirements, deploying ONTAP tools and provisioning NFS datastores, and using the VCF Import Tool to validate and convert the cluster.
+Convert an existing vSphere 8 cluster with NetApp ONTAP NFS datastores to a VMware Cloud Foundation management domain. You'll review configuration requirements, deploy ONTAP tools and provision NFS datastores, and use the VCF Import Tool to validate and convert the cluster.
 
 For an overview of the conversion process, refer to the VMware documentation: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/map-for-administering-vcf-5-2/importing-existing-vsphere-environments-admin/convert-or-import-a-vsphere-environment-into-vmware-cloud-foundation-admin.html[Convert a vSphere environment to a management domain or Import a vSphere environment as a VI workload domain in VMware Cloud Foundation].
 
@@ -26,4 +26,4 @@ Deploy ONTAP tools for VMware vSphere and provision an NFS datastore.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three]link:vmw-vcf-mgmt-nfs-conversion.html[Convert vSphere cluster to VCF management domain]
 [role="quick-margin-para"]
-Use the VCF Import Tool to validate and convert the vSphere 8 cluster to the VCF management domain.
+Use the VCF Import Tool to validate and convert the vSphere 8 to the VCF management domain.

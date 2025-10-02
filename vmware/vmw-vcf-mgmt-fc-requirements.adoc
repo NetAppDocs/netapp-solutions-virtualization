@@ -2,20 +2,20 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-mgmt-fc-requirements.html
 keywords: netapp, vmware, cloud, foundation, vcf, asa, aff, all-flash, fc, array, ontap tools, otv, sddc, sddc manager, ontap tools, ontap tools 10
-summary: Requirements for converting vCenter server instances to VCF management domains using Fibre Channel datastores.
+summary: Review the requirements for converting a vSphere 8 cluster with NetApp ONTAP FC datastores to a VMware Cloud Foundation management domain.
 ---
 = Deployment requirements for converting vCenter server instances to VCF management domains with Fibre Channel datastores
 :icons: font
 :imagesdir: ../media/
 
 [.lead]
-Review the requirements for converting a vSphere 8 cluster with NetApp ONTAP FC datastores to a VMware Cloud Foundation management domain. The conversion process requires an AFF or ASA storage system, properly configured SVMs and LIFs for FC traffic, FC zoning on switches, a vSphere 8 cluster with ESXi hosts and vCenter, and dedicated network segments for vMotion.
+Review the requirements for converting a vSphere 8 cluster with NetApp ONTAP FC datastores to a VMware Cloud Foundation management domain.
 
 == Infrastructure requirements
 Make sure the following components and configurations are in place.
 
 * NetApp ASA R2/ASA/AFF storage system with a storage virtual machine (SVM) configured to allow Fibre Channel (FC) traffic.
-* Logical interface (LIF) created to carry FC traffic and is associated with the SVM.
+* Logical interface (LIF) created to carry FC traffic and associated with the SVM.
 * FC zoning configured on the switches designated to carry FC traffic.
 * A vSphere 8 cluster with 4 x ESXi hosts and a vCenter appliance colocated on the cluster.
 * Distributed port group configured for vMotion on the VLANs or network segments established for this purpose.

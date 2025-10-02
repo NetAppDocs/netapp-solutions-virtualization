@@ -2,22 +2,22 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-mgmt-nfs-deploy.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, array, ontap tools, otv, sddc, sddc manager, ontap tools, ontap tools 10
-summary: Deploy ONTAP tools and provision NFS datastore for VCF management domain conversion.
+summary: Deploy ONTAP tools for VMware vSphere 10 and provision an NFS datastore to enable seamless integration with VMware Cloud Foundation. You'll deploy ONTAP tools, configure storage backends, and create an NFS datastore to support the conversion of a vSphere 8cluster to a VCF management domain.
 ---
 = Deploy ONTAP tools and provision NFS datastore for VCF management domain conversion
 :icons: font
 :imagesdir: ../media/
 
 [.lead]
-Deploy ONTAP tools for VMware vSphere 10 and provision an NFS datastore to enable seamless integration with VMware Cloud Foundation. This procedure guides you through deploying ONTAP tools, configuring storage backends, and creating an NFS datastore to support the conversion of a vSphere 8 cluster to a VCF management domain.
+Deploy ONTAP tools for VMware vSphere 10 and provision an NFS datastore to enable seamless integration with VMware Cloud Foundation. You'll deploy ONTAP tools, configure storage backends, and create an NFS datastore to support the conversion of a vSphere 8 cluster to a VCF management domain.
 
 == Step 1: Deploy ONTAP tools for VMware vSphere
 
-In this step ONTAP tools 10 is deployed in a non-HA configuration. For additional deployment details on HA and non-HA configurations refer to https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/deploy/ontap-tools-deployment.html[Deploy ONTAP tools for VMware vSphere].
+In this step, ONTAP tools are deployed in a non-HA configuration. For additional deployment details on HA and non-HA configurations refer to https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/deploy/ontap-tools-deployment.html[Deploy ONTAP tools for VMware vSphere].
 
 .Steps
-. Download the ONTAP tools 10 OVA template from the https://mysupport.netapp.com/site/[NetApp support site].
-. In the vSphere client, right click the cluster and click *Deploy OVF Template*.
+. Download the ONTAP tools OVA template from the https://mysupport.netapp.com/site/[NetApp support site].
+. In the vSphere client, right-click the cluster and click *Deploy OVF Template*.
 +
 image::vmware-vcf-import-nfs-001.png[Deploy OVF template]
 
@@ -28,7 +28,7 @@ image::vmware-vcf-import-nfs-001.png[Deploy OVF template]
 * Review Details.
 * Agree to the license agreement.
 
-. On the *Configuration* page of the template, select the deployment type including whether to deploy ONTAP tools in an HA configuration. Click *Next* to continue.
+. On the *Configuration* page of the template, select the deployment type, including whether to deploy ONTAP tools in an HA configuration. Click *Next* to continue.
 +
 image::vmware-vcf-import-nfs-002.png[configuration - deployment type]
 
@@ -36,19 +36,19 @@ image::vmware-vcf-import-nfs-002.png[configuration - deployment type]
 . Select the network that the ONTAP tools VM will communicate on. Click *Next* to continue.
 . On the **Customize template* window, complete all required information.
 * Application username and password
-* Choose whether to enable ASUP (auto support) including a proxy URL.
+* Choose whether to enable ASUP (AutoSupport). Include a proxy URL.
 * Administrator username and password.
 * NTP servers.
-* Maintenance username and password (maint account used at the console).
+* Maintenance username and password ("maint" account used at the console).
 * Provide the required IP addresses for the deployment configuration.
 * Provide all networking information for the node configuration.
 +
 image::vmware-vcf-import-nfs-003.png[Customize template]
 
-. Click *Next* to continue and then click *Finish* to begin the deployment.
+. Click *Next* to continue, and then click *Finish* to begin the deployment.
 
 == Step 2: Configure ONTAP tools
-After the ONTAP tools VM is installed and powered up, you need to add the vCenter servers and the ONTAP storage systems you want to manage. 
+After the ONTAP tools VM is installed and powered up, add the vCenter servers and the ONTAP storage systems you want to manage. 
 
 .Steps
 . Add vCenter instances by following the instructions in the ONTAP tools for VMware vSphere documentation: https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-vcenter.html[Add vCenter instances].
@@ -62,10 +62,10 @@ image::vmware-vcf-import-nfs-004.png[open ONTAP tools]
 +
 image::vmware-vcf-import-nfs-005.png[Add storage backend]
 
-NOTE: Here, the storage backend is added in the vSphere client UI using the cluster IP address. This allows full management over all SVMs in the storage system. Alternately, the storage backend can be added and associated with a vCenter instance using ONTAP tools Manager at `https://loadBalanceIP:8443/virtualization/ui/`. With this method only SVM credentials can be added at the vSphere client UI, providing more granular control over storage access.
+TIP: To allow full management over all SVMs in the storage system, add the storage backend in the vSphere client UI using the cluster IP address. Alternatively, use ONTAP tools Manager at `https://loadBalanceIP:8443/virtualization/ui/` to add and associate the storage backend with a vCenter instance. This alternate method allows you to add only SVM credentials at the vSphere client UI, which provides more granular control over storage access.
 
 == Step 3: Provision the NFS datastore
-ONTAP tools integrates functionality throughout the vSphere client UI. In this step an NFS datastore is provisioned from the storage inventory page.
+ONTAP tools integrates functionality throughout the vSphere client UI. In this step, an NFS datastore is provisioned from the storage inventory page.
 
 . In the vSphere client, navigate to the storage inventory.
 . Navigate to *ACTIONS > NetApp ONTAP tools > Create datastore*.
@@ -73,7 +73,7 @@ ONTAP tools integrates functionality throughout the vSphere client UI. In this s
 image::vmware-vcf-import-nfs-006.png[Create datastore]
 
 . In the *Create Datastore* wizard, select the type of datastore to create. Options are NFS or VMFS.
-. On the *Name and Protocol* page, fill in a name for the datastore, the size, and the NFS protocol to be used.
+. On the *Name and Protocol* page, enter a name for the datastore, the size, and the NFS protocol to be used.
 +
 image::vmware-vcf-import-nfs-007.png[Name and protocol]
 
@@ -82,11 +82,11 @@ image::vmware-vcf-import-nfs-007.png[Name and protocol]
 image::vmware-vcf-import-nfs-008.png[Storage page]
 
 . On the *Storage Attributes* page, select the storage aggregate to be used. Click on *Next* to continue.
-. On the *Summary* page, review the information and click *Finish* to begin the provisioning process. 
-+
-ONTAP tools will create a volume on the ONTAP storage system and mount it as an NFS datastore to all ESXi hosts in the cluster.
-+
+. On the *Summary* page, review the information and click *Finish* to begin the provisioning process.
+
+ONTAP tools creates a volume on the ONTAP storage system and mounts it as an NFS datastore to all ESXi hosts in the cluster.
+
 image::vmware-vcf-import-nfs-009.png[Summary page]
 
 == What's next?
-After you deployed ONTAP tools and provisioned the NFS datastore, link:vmw-vcf-mgmt-nfs-conversion.html[convert the vSphere cluster to VCF management domain].
+After you've deployed ONTAP tools and provisioned the NFS datastore, link:vmw-vcf-mgmt-nfs-conversion.html[convert the vSphere cluster to VCF management domain].
