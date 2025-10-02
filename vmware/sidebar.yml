@@ -51,12 +51,28 @@ entries:
         url: /vmware/vmw-vcf-dr-bxp-nfs.html
       - title: "Convert existing vSphere clusters to VCF"
         entries:
-          - title: "About converting existing vSphere clusters to VCF"
+          - title: "Learn about converting vSphere clusters"
             url: /vmware/vmw-vcf-migrate.html
-          - title: "Convert existing vSphere cluster with NFS datastores"
-            url: /vmware/vmw-vcf-mgmt-nfs.html
-          - title: "Convert existing vSphere cluster with FC datastores"
-            url: /vmware/vmw-vcf-mgmt-fc.html
+          - title: "Convert vSphere cluster with NFS datastores"
+            entries:
+              - title: "Deployment workflow"
+                url: /vmware/vmw-vcf-mgmt-nfs.html
+              - title: "Review requirements"
+                url: /vmware/vmw-vcf-mgmt-nfs-requirements.html
+              - title: "Deploy ONTAP tools and provision NFS datastore"
+                url: /vmware/vmw-vcf-mgmt-nfs-deploy.html
+              - title: Convert vSphere cluster to VCF 
+                url: /vmware/vmw-vcf-mgmt-nfs-conversion.html
+          - title: "Convert vSphere cluster with FC datastores"
+            entries:
+              - title: "Deployment workflow"
+                url: /vmware/vmw-vcf-mgmt-fc.html
+              - title: "Review requirements"
+                url: /vmware/vmw-vcf-mgmt-fc-requirements.html
+              - title: "Deploy ONTAP tools and provision FC datastore"
+                url: /vmware/vmw-vcf-mgmt-fc-deploy.html
+              - title: "Convert vSphere cluster to VCF"
+                url: /vmware/vmw-vcf-mgmt-fc-conversion.html
 #
       - title: "Provision VCF with principal storage"
         entries:
