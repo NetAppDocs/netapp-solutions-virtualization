@@ -2,14 +2,14 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-mgmt-fc-deploy.html
 keywords: netapp, vmware, cloud, foundation, vcf, asa, aff, all-flash, fc, array, ontap tools, otv, sddc, sddc manager, ontap tools, ontap tools 10
-summary: Deploy ONTAP tools and provision Fibre Channel datastore for VCF management domain conversion.
+summary: "Deploy ONTAP tools for VMware vSphere 10 and provision a Fibre Channel (FC) datastore to enable seamless integration with VMware Cloud Foundation. You'll deploy ONTAP tools, configure storage backends, and create a FC datastore to support the conversion of a vSphere 8 cluster to a VCF management domain."
 ---
 = Deploy ONTAP tools and provision the Fibre Channel datastore for VCF management domain conversion
 :icons: font
 :imagesdir: ../media/
 
 [.lead]
-Deploy ONTAP tools for VMware vSphere 10 and provision a Fibre Channel datastore to enable seamless integration with VMware Cloud Foundation. This procedure guides you through deploying ONTAP tools, configuring storage backends, and creating a FC datastore to support the conversion of a vSphere 8 cluster to a VCF management domain.
+Deploy ONTAP tools for VMware vSphere 10 and provision a Fibre Channel (FC) datastore to enable seamless integration with VMware Cloud Foundation. You'll deploy ONTAP tools, configure storage backends, and create a FC datastore to support the conversion of a vSphere 8 cluster to a VCF management domain.
 
 == Step 1: Deploy ONTAP tools for VMware vSphere
 
@@ -17,7 +17,7 @@ In this step ONTAP tools 10 is deployed in a non-HA configuration. For additiona
 
 .Steps
 . Download the ONTAP tools 10 OVA template from the https://mysupport.netapp.com/site/[NetApp support site].
-. In the vSphere client, right click the cluster and click *Deploy OVF Template*.
+. In the vSphere client, right-click the cluster and click *Deploy OVF Template*.
 +
 image::vmware-vcf-import-nfs-001.png[Deploy OVF template]
 

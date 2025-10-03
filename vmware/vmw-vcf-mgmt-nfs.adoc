@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-mgmt-nfs.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, array, ontap tools, otv, sddc, sddc manager, ontap tools, ontap tools 10
-summary: Convert an existing vSphere 8 cluster with NetApp ONTAP NFS datastores to a VMware Cloud Foundation management domain. You'll review configuration requirements, deploy ONTAP tools and provision NFS datastores, and use the VCF Import Tool to validate and convert the cluster.
+summary: "Convert an existing vSphere 8 cluster with NetApp ONTAP NFS datastores to a VMware Cloud Foundation management domain. You'll review configuration requirements, deploy ONTAP tools and provision NFS datastores, and use the VCF Import Tool to validate and convert the cluster."
 ---
 = Deployment workflow for converting vCenter server instances to VCF management domains with NFS datastores
 :hardbreaks:

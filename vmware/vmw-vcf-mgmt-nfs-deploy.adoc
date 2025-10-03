@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-mgmt-nfs-deploy.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, array, ontap tools, otv, sddc, sddc manager, ontap tools, ontap tools 10
-summary: Deploy ONTAP tools for VMware vSphere 10 and provision an NFS datastore to enable seamless integration with VMware Cloud Foundation. You'll deploy ONTAP tools, configure storage backends, and create an NFS datastore to support the conversion of a vSphere 8cluster to a VCF management domain.
+summary: "Deploy ONTAP tools for VMware vSphere 10 and provision an NFS datastore to enable seamless integration with VMware Cloud Foundation. You'll deploy ONTAP tools, configure storage backends, and create an NFS datastore to support the conversion of a vSphere 8cluster to a VCF management domain."
 ---
 = Deploy ONTAP tools and provision NFS datastore for VCF management domain conversion
 :icons: font

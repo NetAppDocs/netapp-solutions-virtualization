@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-mgmt-fc.html
 keywords: netapp, vmware, cloud, foundation, vcf, asa, aff, all-flash, fc, array, ontap tools, otv, sddc, sddc manager, ontap tools, ontap tools 10
-summary:
+summary: "Convert an existing vSphere 8 cluster with NetApp ONTAP Fibre Channel (FC) datastores to a VMware Cloud Foundation management domain. You'll review configuration requirements, deploy ONTAP tools and provision FC datastores, and use the VCF Import Tool to validate and convert the cluster."
 ---
 = Deployment workflow for converting vCenter server instances to VCF management domains with Fibre Channel datastores
 :hardbreaks:
@@ -12,17 +12,17 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-Convert an existing vSphere 8 cluster with NetApp ONTAP Fibre Channel datastores to a VMware Cloud Foundation management domain. This workflow includes reviewing configuration requirements, deploying ONTAP tools and provisioning FC datastores, and using the VCF Import Tool to validate and convert the cluster.
+Convert an existing vSphere 8 cluster with NetApp ONTAP Fibre Channel (FC) datastores to a VMware Cloud Foundation management domain. You'll review configuration requirements, deploy ONTAP tools and provision FC datastores, and use the VCF Import Tool to validate and convert the cluster.
 
-For an overview of the conversion process, see the VMware documentation: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/map-for-administering-vcf-5-2/importing-existing-vsphere-environments-admin/convert-or-import-a-vsphere-environment-into-vmware-cloud-foundation-admin.html[Convert a vSphere environment to a management domain or Import a vSphere environment as a VI workload domain in VMware Cloud Foundation].
+For an overview of the conversion process, refer to the VMware documentation: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/map-for-administering-vcf-5-2/importing-existing-vsphere-environments-admin/convert-or-import-a-vsphere-environment-into-vmware-cloud-foundation-admin.html[Convert a vSphere environment to a management domain or Import a vSphere environment as a VI workload domain in VMware Cloud Foundation].
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One]link:vmw-vcf-mgmt-fc-requirements.html[Review the configuration requirements]
 [role="quick-margin-para"]
-Review the key requirements for converting vCenter server instances to VCF management domains using Fibre Channel datastores.
+Review the key requirements for converting vCenter server instances to VCF management domains using FC datastores.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two]link:vmw-vcf-mgmt-fc-deploy.html[Deploy ONTAP tools and provision a FC datastore]
 [role="quick-margin-para"]
-Deploy ONTAP tools for VMware vSphere and provision a Fibre Channel datastore.
+Deploy ONTAP tools for VMware vSphere and provision a FC datastore.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three]link:vmw-vcf-mgmt-fc-conversion.html[Convert vSphere cluster to VCF management domain]
 [role="quick-margin-para"]

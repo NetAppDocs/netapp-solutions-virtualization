@@ -2,14 +2,14 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-mgmt-fc-conversion.html
 keywords: netapp, vmware, cloud, foundation, vcf, asa, aff, all-flash, fc, array, ontap tools, otv, sddc, sddc manager, ontap tools, ontap tools 10
-summary: Convert vSphere cluster to VCF management domain using the VCF Import Tool.
+summary: "Convert an existing vSphere 8 cluster to a VCF 5.2 management domain using the VCF Import Tool. You'll validate the vCenter appliance, deploy the SDDC manager, create NSX deployment specifications, and perform the conversion."
 ---
 = Convert vSphere cluster to VCF management domain using the VCF Import Tool
 :icons: font
 :imagesdir: ../media/
 
 [.lead]
-Convert an existing vSphere 8 cluster to a VCF 5.2 management domain using the VCF Import Tool. This procedure includes validating the vCenter appliance, deploying the SDDC manager, creating NSX deployment specifications, and performing the conversion.
+Convert an existing vSphere 8 cluster to a VCF 5.2 management domain using the VCF Import Tool. You'll validate the vCenter appliance, deploy the SDDC manager, create NSX deployment specifications, and perform the conversion.
 
 The VCF Import Tool from VMware by Broadcom is a utility that is used on both the vCenter appliance and SDDC manager to validate configurations and provide conversion and import services for vSphere and VCF environments. For more information, refer to link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/map-for-administering-vcf-5-2/importing-existing-vsphere-environments-admin/vcf-import-tool-options-and-parameters-admin.html[VCF Import Tool Options and Parameters].
 
