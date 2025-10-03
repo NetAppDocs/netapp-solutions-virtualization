@@ -1,0 +1,28 @@
+. From the vSphere client , navigate to *Inventory > Networking* for the workload domain. Navigate to the existing Distributed Switch and choose the action to create *New Distributed Port Group...*.
++
+image:vmware-vcf-asa-022.png[Choose to create new port group]
++
+{nbsp}
+. In the *New Distributed Port Group* wizard, fill in a name for the new port group and click *Next* to continue.
+
+. On the *Configure settings* page, fill out all settings. If VLANs are being used be sure to provide the correct VLAN ID. Click *Next* to continue.
++
+image:vmware-vcf-asa-023.png[Fill out VLAN ID]
++
+{nbsp}
+. On the *Ready to complete* page, review the changes and click *Finish* to create the new distributed port group.
+
+. Repeat this process to create a distributed port group for the second iSCSI network being used and ensure you have input the correct *VLAN ID*.
+
+. Once both port groups have been created, navigate to the first port group and select the action to *Edit settings...*.
++
+image:vmware-vcf-asa-024.png[DPG - edit settings]
++
+{nbsp}
+. On *Distributed Port Group - Edit Settings* page, navigate to *Teaming and failover* in the left-hand menu and click *uplink2* to move it down to *Unused uplinks*.
++
+image:vmware-vcf-asa-025.png[move uplink2 to unused]
+
+. Repeat this step for the second iSCSI port group. However, this time move *uplink1* down to *Unused uplinks*.
++
+image:vmware-vcf-asa-026.png[move uplink1 to unused]

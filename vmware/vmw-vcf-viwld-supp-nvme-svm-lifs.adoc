@@ -1,0 +1,75 @@
+---
+sidebar: sidebar
+permalink: vmware/vmw-vcf-viwld-supp-nvme-svm-lifs.html
+keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi
+summary: "Create a Storage Virtual Machine (SVM) with multiple Logical Interfaces (LIFs) to provide iSCSI connectivity for VMware Cloud Foundation management domains. You'll configure the SVM with NVMe protocol support and set up multiple LIFs across separate Ethernet networks to enable multipathing and failover for optimal performance and availability."
+---
+= Create SVM and LIFs and the NVMe namespace for NVMe/TCP vVols datastores in a VCF VI workload domain
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Create a Storage Virtual Machine (SVM) with multiple Logical Interfaces (LIFs) to provide NVMe connectivity for VMware Cloud Foundation workload domains. This procedure summarizes setting up an NVMe/TCP-enabled SVM and LIFs and creating the NVMe namespaces.
+
+== Step 1: Create the SVMs and LIFs
+Complete the following steps to create an SVM with multiple LIFs for NVMe/TCP traffic.
+
+To add new LIFs to an existing SVM, refer to the ONTAP documentation: link:https://docs.netapp.com/us-en/ontap/networking/create_a_lif.html[Create ONTAP LIFs^].
+
+.Steps
+. From ONTAP System Manager, navigate to *Storage VMs* in the left-hand menu and click *+ Add*. 
++
+image:vmware-vcf-asa-001.png[Click +Add to start creating SVM]
++
+{nbsp}
+. In the *Add Storage VM* wizard, enter a *Name* for the SVM, select the *IP Space* and then, under *Access Protocol*, click the *NVMe* tab and check the box to *Enable NVMe/TCP*.
++
+image:vmware-vcf-asa-075.png[Add storage VM wizard - enable NVMe/TCP]
++
+{nbsp}
+. In the *Network Interface* section, enter the *IP address*, *Subnet Mask*, and *Broadcast Domain and Port* for the first LIF. For subsequent LIFs, you can either use individual settings or enable the checkbox to use common settings across all remaining LIFs.
++
+NOTE: For multipathing and failover across multiple paths, create a minimum of two LIFs per storage node in separate Ethernet networks for all SVMs in NVMe/TCP configurations.
++
+. Choose whether to enable the Storage VM Administration account (for multi-tenancy environments) and click *Save* to create the SVM.
++
+image:vmware-vcf-asa-004.png[Enable SVM account and Finish]
+
+== Step 2: Create the NVMe Namespace
+NVMe namespaces are analogous to LUNs for iSCSi or FC. You must create the NVMe Namespace before a VMFS datastore can be deployed from the vSphere Client. To create the NVMe namespace, get the NVMe Qualified Name (NQN) from each ESXi host in the cluster. ONTAP uses the NQN to provide access control for the namespace. 
+
+.Steps
+. Open an SSH session with an ESXi host in the cluster to obtain its NQN. Use the following command from the CLI:
++
+[source, cli]
+esxcli nvme info get
++
+An output similar to the following example should be displayed:
++
+[source, cli]
+Host NQN: nqn.2014-08.com.netapp.sddc:nvme:vcf-wkld-esx01
+
+. Record the NQN for each ESXi host in the cluster.
+
+. From ONTAP System Manager, navigate to *NVMe Namespaces* in the left-hand menu and click *+ Add* to start. 
++
+image:vmware-vcf-asa-093.png[Click +Add to create NVMe Namespace]
++
+{nbsp}
+. On the *Add NVMe Namespace* page, fill in a name prefix, the number of namespaces to create, the size of the namespace, and the host operating system that will be accessing the namespace. 
+
+. In the *Host NQN* section, create a comma separated list of the NQN's previously collected from the ESXi hosts that will be accessing the namespaces. 
+
+. Click *More Options* to configure additional items, such as the snapshot protection policy.
+
+. Finally, click *Save* to create the NVMe Namespace.
++
+image:vmware-vcf-asa-093.png[Click +Add to create NVMe Namespace]
+
+== What's next?
+After creating the SVM and LIFs, link:vmw-vcf-viwld-supp-nvme-network.html[configure networking for NVMe/TCP (NVMe/TCP) vVols].
+
+// NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-vcf-viwld-supplemental-nvme.adoc

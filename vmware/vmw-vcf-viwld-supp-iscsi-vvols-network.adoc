@@ -1,0 +1,32 @@
+---
+sidebar: sidebar
+permalink: vmware/vmw-vcf-viwld-supp-iscsi-vvols-network.html
+keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi
+summary: "Configure networking for iSCSI storage on ESXi hosts in a VI workload domain. You'll  create distributed port groups for iSCSI traffic and set up VMkernel adapters using the vSphere client to enable reliable connectivity and multipathing."
+---
+= Configure networking for iSCSI on ESXi hosts in a VCF VI workload domain
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Configure networking for iSCSI storage on ESXi hosts in a VI workload domain. You'll  create distributed port groups for iSCSI traffic and set up VMkernel adapters using the vSphere client to enable reliable connectivity and multipathing.
+
+Use the vSphere client with vCenter Single Sign-On to perform these steps on the VI Workload Domain cluster. The same vSphere client manages both the management and workload domains.
+
+== Step 1: Create distributed port groups for iSCSI traffic
+Complete the following steps to create a new distributed port group for each iSCSI network.
+
+.Steps
+include::../_include/create-distr-port-groups.adoc[]
+
+== Step 2: Create VMkernel adapters on each ESXi host
+Perform the following steps on each ESXi host in the workload domain using the vSphere client.
+
+.Steps
+include::../_include/create-kernel-adapters.adoc[]
+
+== What's next?
+After you configure networking for iSCSI on all ESXi hosts in the workload domain, link:vmw-vcf-viwld-supp-iscsi-vvols-storage.html[configure storage for iSCSI vVols].

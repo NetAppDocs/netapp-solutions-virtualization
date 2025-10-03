@@ -1,0 +1,56 @@
+---
+sidebar: sidebar
+permalink: vmware/vmw-vcf-viwld-supp-nvme-storage.html
+keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi
+summary: "Configure NVMe over TCP (NVMe/TCP) vVols storage in a VI workload domain. You'll deploy ONTAP tools, register a storage system, create a storage capability profile, and provision a vVols datastore in the vSphere client."
+---
+= Configure NVMe/TCP vVols storage in a VCF VI workload domain
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Configure NVMe/TCP vVols storage in a VMware Cloud Foundation VI workload domain. You'll deploy ONTAP tools, register a storage system, create a storage capability profile, and provision a vVols datastore in the vSphere client.
+
+.Steps
+
+. In the vSphere client, navigate to one of the ESXi hosts in the workload domain cluster. From the *Actions* menu select *Storage > New Datastore...*.
++ 
+image:vmware-vcf-asa-104.png[Add NVMe/TCP adapter]
++
+{nbsp}
+. In the *New Datastore* wizard, select *VMFS* as the type. Click *Next* to continue.
+
+. On the *Name and device selection* page, provide a name for the datastore and select the NVMe namespace from the list of available devices.
++ 
+image:vmware-vcf-asa-105.png[Name and device selection]
++
+{nbsp}
+. On the *VMFS version* page, select the version of VMFS for the datastore.
+
+. On the *Partition configuration* page, make any desired changes to the default partition scheme. Click *Next* to continue.
++ 
+image:vmware-vcf-asa-106.png[NVMe partition configuration]
++
+{nbsp}
+. On the *Ready to complete* page, review the summary and click *Finish* to create the datastore.
+
+. Navigate to the new datastore in inventory and click the *Hosts* tab. If configured correctly, all ESXi hosts in the cluster should be listed and have access to the new datastore.
++ 
+image:vmware-vcf-asa-107.png[Hosts connected to datastore]
++
+{nbsp}
+
+== Additional information
+
+* For more information on configuring SAN for redundancy, refer to the link:https://docs.netapp.com/us-en/ontap/san-config/index.html[NetApp SAN configuration reference^]. 
+
+* For additional information on NVMe design considerations for ONTAP storage systems, refer to link:https://docs.netapp.com/us-en/ontap/nvme/support-limitations.html[NVMe configuration, support and limitations^]. 
+
+* For information on configuring ONTAP storage systems, refer to the link:https://docs.netapp.com/us-en/ontap[ONTAP 9 documentation^].
+
+* For information on configuring VCF, refer to the link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf.html[VMware Cloud Foundation documentation^].
+
+// NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-vcf-viwld-supplemental-nvme.adoc
