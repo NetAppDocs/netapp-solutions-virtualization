@@ -22,12 +22,18 @@ To add new LIFs to an existing SVM, refer to the ONTAP documentation: link:https
 .Steps
 . From ONTAP System Manager, navigate to *Storage VMs* in the left-hand menu and click *+ Add*. 
 +
+[%collapsible]
+===
 image:vmware-vcf-asa-001.png[Click +Add to start creating SVM]
+====
 +
 {nbsp}
 . In the *Add Storage VM* wizard, enter a *Name* for the SVM, select the *IP Space* and then, under *Access Protocol*, click the *NVMe* tab and check the box to *Enable NVMe/TCP*.
 +
+[%collapsible]
+===
 image:vmware-vcf-asa-075.png[Add storage VM wizard - enable NVMe/TCP]
+====
 +
 {nbsp}
 . In the *Network Interface* section, enter the *IP address*, *Subnet Mask*, and *Broadcast Domain and Port* for the first LIF. For subsequent LIFs, you can either use individual settings or enable the checkbox to use common settings across all remaining LIFs.
@@ -36,7 +42,10 @@ NOTE: For multipathing and failover across multiple paths, create a minimum of t
 +
 . Choose whether to enable the Storage VM Administration account (for multi-tenancy environments) and click *Save* to create the SVM.
 +
+[%collapsible]
+===
 image:vmware-vcf-asa-004.png[Enable SVM account and Finish]
+====
 
 == Step 2: Create the NVMe Namespace
 NVMe namespaces are analogous to LUNs for iSCSi or FC. You must create the NVMe Namespace before a VMFS datastore can be deployed from the vSphere Client. To create the NVMe namespace, get the NVMe Qualified Name (NQN) from each ESXi host in the cluster. ONTAP uses the NQN to provide access control for the namespace. 
@@ -56,7 +65,10 @@ Host NQN: nqn.2014-08.com.netapp.sddc:nvme:vcf-wkld-esx01
 
 . From ONTAP System Manager, navigate to *NVMe Namespaces* in the left-hand menu and click *+ Add* to start. 
 +
+[%collapsible]
+===
 image:vmware-vcf-asa-093.png[Click +Add to create NVMe Namespace]
+====
 +
 {nbsp}
 . On the *Add NVMe Namespace* page, fill in a name prefix, the number of namespaces to create, the size of the namespace, and the host operating system that will be accessing the namespace. 
@@ -67,7 +79,10 @@ image:vmware-vcf-asa-093.png[Click +Add to create NVMe Namespace]
 
 . Finally, click *Save* to create the NVMe Namespace.
 +
+[%collapsible]
+===
 image:vmware-vcf-asa-093.png[Click +Add to create NVMe Namespace]
+====
 
 == What's next?
 After creating the SVM and LIFs, link:vmw-vcf-viwld-supp-nvme-network.html[configure networking for NVMe/TCP (NVMe/TCP) vVols].

@@ -17,31 +17,38 @@ Configure NVMe/TCP vVols storage in a VMware Cloud Foundation VI workload domain
 .Steps
 
 . In the vSphere client, navigate to one of the ESXi hosts in the workload domain cluster. From the *Actions* menu select *Storage > New Datastore...*.
-+ 
+
+[%collapsible]
+===
 image:vmware-vcf-asa-104.png[Add NVMe/TCP adapter]
-+
-{nbsp}
+====
+
 . In the *New Datastore* wizard, select *VMFS* as the type. Click *Next* to continue.
 
 . On the *Name and device selection* page, provide a name for the datastore and select the NVMe namespace from the list of available devices.
-+ 
+
+[%collapsible]
+===
 image:vmware-vcf-asa-105.png[Name and device selection]
-+
-{nbsp}
+====
+
 . On the *VMFS version* page, select the version of VMFS for the datastore.
 
 . On the *Partition configuration* page, make any desired changes to the default partition scheme. Click *Next* to continue.
-+ 
+
+[%collapsible]
+===
 image:vmware-vcf-asa-106.png[NVMe partition configuration]
-+
-{nbsp}
+====
+
 . On the *Ready to complete* page, review the summary and click *Finish* to create the datastore.
 
 . Navigate to the new datastore in inventory and click the *Hosts* tab. If configured correctly, all ESXi hosts in the cluster should be listed and have access to the new datastore.
-+ 
+
+[%collapsible]
+===
 image:vmware-vcf-asa-107.png[Hosts connected to datastore]
-+
-{nbsp}
+====
 
 == Additional information
 
