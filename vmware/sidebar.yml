@@ -89,18 +89,58 @@ entries:
 #
       - title: "Expand VCF with supplemental storage"
         entries:
-          - title: "About expanding storage"
+          - title: "Learn about expanding storage"
             url: /vmware/vmw-vcf-expand.html
           - title: "Expand management domains with iSCSI"
-            url: /vmware/vmw-vcf-mgmt-supplemental-iscsi.html
+            entries:
+            - title: Deployment workflow
+              url: /vmware/vmw-vcf-mgmt-supplemental-iscsi.html
+            - title: Review requirements
+              url: /vmware/vmw-vcf-mgmt-supplemental-iscsi-requirements.html
+            - title: Create SVM and LIFs
+              url: /vmware/vmw-vcf-mgmt-supplemental-iscsi-svm-lifs.html
+            - title: Configure networking
+              url: /vmware/vmw-vcf-mgmt-supplemental-iscsi-network.html
+            - title: Configure storage
+              url: /vmware/vmw-vcf-mgmt-supplemental-iscsi-storage.html
           - title: "Expand management domains with FC"
             url: /vmware/vmw-vcf-mgmt-supplemental-fc.html
           - title: "Expand VI workload domains with vVols iSCSI"
-            url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols.html
+            entries:
+            - title: Deployment workflow
+              url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols.html
+            - title: Review requirements
+              url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols-requirements.html
+            - title: Create SVM and LIFs 
+              url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols-svm-lifs.html
+            - title: Configure networking
+              url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols-network.html
+            - title: Configure storage
+              url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols-storage.html
           - title: "Expand VI workload domains with vVols NFS"
-            url: /vmware/vmw-vcf-viwld-supp-nfs-vvols.html
+            entries:
+            - title: Deployment workflow
+              url: /vmware/vmw-vcf-viwld-supp-nfs-vvols.html
+            - title: Review requirements
+              url: /vmware/vmw-vcf-viwld-supp-nfs-vvols-requirements.html
+            - title: Create SVM and LIFs
+              url: /vmware/vmw-vcf-viwld-supp-nfs-vvols-svm-lifs.html
+            - title: Configure networking
+              url: /vmware/vmw-vcf-viwld-supp-nfs-vvols-network.html
+            - title: Configure storage
+              url: /vmware/vmw-vcf-viwld-supp-nfs-vvols-storage.html
           - title: "Expand VI workload domains with NVMe/TCP"
-            url: /vmware/vmw-vcf-viwld-supp-nvme.html
+            entries:
+            - title: Deployment workflow
+              url: /vmware/vmw-vcf-viwld-supp-nvme.html
+            - title: Review requirements
+              url: /vmware/vmw-vcf-viwld-supp-nvme-requirements.html
+            - title: Create SVM and LIFs
+              url: /vmware/vmw-vcf-viwld-supp-nvme-svm-lifs.html
+            - title: Configure networking
+              url: /vmware/vmw-vcf-viwld-supp-nvme-network.html
+            - title: Configure storage 
+              url: /vmware/vmw-vcf-viwld-supp-nvme-storage.html
           - title: "Expand VI workload domains with FC"
             url: /vmware/vmw-vcf-viwld-supp-fc.html
 #      

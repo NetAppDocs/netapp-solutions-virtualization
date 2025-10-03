@@ -1,0 +1,65 @@
+---
+sidebar: sidebar
+permalink: vmware/vmw-vcf-mgmt-supplemental-iscsi-storage.html
+keywords: netapp, vmware, cloud, foundation, vcf, iscsi, create, svm, lif
+summary: "Set up supplemental iSCSI storage to expand VMware Cloud Foundation management domains. You'll deploy ONTAP tools, configure an iSCSI datastore on the management domain, and migrate management VMs to the new datastore."
+---
+= Configure iSCSI storage in a VCF management domain using ONTAP tools
+:icons: font
+:imagesdir: ../media/
+
+[.lead]
+Set up supplemental iSCSI storage to expand VMware Cloud Foundation management domains. You'll deploy ONTAP tools, configure an iSCSI datastore on the management domain, and migrate management VMs to the new datastore.
+
+Perform the following steps on the VCF management domain cluster using the vSphere client.
+
+== Step 1: Deploy ONTAP tools for VMware vSphere
+
+ONTAP tools for VMware vSphere (OTV) is deployed as a VM appliance and provides an integrated vCenter UI for managing ONTAP storage.  
+
+.Steps
+include::../_include/deploy-ontap-tools.adoc[]
+
+== Step 2: Add a storage system
+Perform the following steps to add a storage system using ONTAP tools.
+
+.Steps
+include::../_include/add-storage-ontap-tools.adoc[]
+
+== Optional: Migrate management VMs to the iSCSI datastore
+
+In cases where you prefer to use ONTAP storage to protect the VCF management VMs, use vMotion to migrate the VMs to the newly created iSCSI datastore.
+
+.Steps
+. From the vSphere Client navigate to the management domain cluster and click the *VMs* tab.
+
+. Select the VMs to be migrated to the iSCSI datastore, right click and select *Migrate..*.
++
+image:vmware-vcf-asa-018.png[Select VMs to migrate]
++
+{nbsp}
+. In the *Virtual Machines - Migrate* wizard, select *Change storage only* as the migration type and click *Next* to continue.
++
+image:vmware-vcf-asa-019.png[Select migration type]
++
+{nbsp}
+. On the *Select storage* page, select the iSCSi datastore and select *Next* to continue.
++
+image:vmware-vcf-asa-020.png[Select destination datastore]
++
+{nbsp}
+. Review the selections and click *Finish* to start the migration.
+
+. The relocation status can be viewed from the *Recent Tasks* pane.
++ 
+image:vmware-vcf-asa-021.png[vSphere client recent tasks pane]
+
+== Additional information
+
+* For information on configuring ONTAP storage systems, refer to link:https://docs.netapp.com/us-en/ontap[ONTAP 9 documentation^].
+
+* For information on configuring VCF, refer to link:https://techdocs.broadcom.com/us-en/vmware-cis/vcf.html[VMware Cloud Foundation documentation^].
+
+* For information on using VMFS iSCSI datastores with VMware, refer to link:vmw-vmfs-iscsi.html[vSphere VMFS datastore - iSCSI storage backend with ONTAP].
+
+* For video demos of this solution, refer to link:../videos/vmware-videos.html#vmware-datastore-provisioning-with-ontap[VMware datastore provisioning].

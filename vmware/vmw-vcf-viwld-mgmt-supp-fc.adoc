@@ -50,7 +50,7 @@ Use SVM FC logical interface in zone configuration rather than physical FC ports
 
 NetApp recommends multipath for FC LUNs. 
 
-For complete information on configuring fibre channel on ONTAP storage systems, refer to https://docs.netapp.com/us-en/ontap/san-management/index.html[SAN storage management] in the ONTAP 9 documentation.
+For complete information on configuring Fibre Channel on ONTAP storage systems, refer to https://docs.netapp.com/us-en/ontap/san-management/index.html[SAN storage management] in the ONTAP 9 documentation.
 
 For more information on using VMFS with ONTAP storage systems, refer to the link:vmw-vmfs-deploy.html[Deployment Guide for VMFS].
 
