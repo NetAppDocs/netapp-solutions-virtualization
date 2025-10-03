@@ -1,0 +1,35 @@
+---
+sidebar: sidebar
+permalink: vmware/vmw-vcf-mgmt-supplemental-iscsi-requirements.html
+keywords: netapp, vmware, cloud, foundation, vcf, iscsi, requirements
+summary: "Review the requirements for adding an iSCSI datastore as supplemental storage to a VCF management domain."
+---
+= Deployment requirements for adding an iSCSI datastore to a VCF management domain
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Review the requirements for adding iSCSI datastores as supplemental storage to a VMware Cloud Foundation (VCF) management domain. To deploy iSCSI vVols in a VMware Cloud Foundation management domain, you need a fully configured ONTAP AFF or ASA storage system and a deployed VCF management domain.
+
+== Infrastructure requirements
+Make sure the following components and configurations are in place.
+
+* An ONTAP AFF or ASA storage system with physical data ports on Ethernet switches dedicated to storage traffic.
+
+* VCF management domain deployment is complete and the vSphere client is accessible.
+
+== Recommended iSCSI network design
+You should configure fully redundant network designs for iSCSI. The following diagram shows an example of a redundant configuration, providing fault tolerance for storage systems, switches, networks adapters and host systems. Refer to the NetApp link:https://docs.netapp.com/us-en/ontap/san-config/index.html[SAN configuration reference] for additional information.
+
+image:vmware-vcf-asa-074.png[iSCSI network design]
+{nbsp}
+
+For multipathing and failover across multiple paths, create a minimum of two LIFs per storage node in separate Ethernet networks for all SVMs in iSCSI configurations.
+
+TIP: In situations where multiple VMkernel adapters are configured on the same IP network, it is recommended to use software iSCSI port binding on the ESXi hosts to ensure that load balancing across the adapters occurs. Refer to KB article link:https://knowledge.broadcom.com/external/article?legacyId=2038869[Considerations for using software iSCSI port binding in ESX/ESXi^].
+
+== What's next?
+After reviewing the deployment requirements, link:vmw-vcf-mgmt-supplemental-iscsi-svm-lifs.html[create the SVM and LIFs].

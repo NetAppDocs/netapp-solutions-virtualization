@@ -20,6 +20,8 @@ video::e8071955-f6f1-45a0-a868-b12a010bba44[panopto, title="ONTAP Tools for VMwa
 
 video::5c047271-aecc-437c-a444-b01200f9671a[panopto, title="VMware iSCSI datastore provisioning with ONTAP"]
 
+video::3135c36f-3a13-4c95-aac9-b2a0001816dc[panopto, title="VMFS(FC) Datastore as Supplemental Storage for VCF Management Domain", width=360]
+
 video::a34bcd1c-3aaa-4917-9a5d-b01200f97f08[panopto, title="VMware NFS datastore provisioning with ONTAP"]
 
 == SnapCenter Plug-in for VMware vSphere

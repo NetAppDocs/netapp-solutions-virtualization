@@ -1,0 +1,43 @@
+. Obtain the ONTAP tools OVA image from the link:https://mysupport.netapp.com/site/products/all/details/otv/downloads-tab[NetApp Support site] and download to a local folder.
+
+. Log into the vCenter appliance for the VCF management domain.
+
+. From the vCenter appliance interface right-click the management cluster and select *Deploy OVF Template…*
++
+image:vmware-vcf-aff-021.png[Deploy OVF Template...]
++
+{nbsp}
+. In the *Deploy OVF Template* wizard, click the *Local file* radio button and select the ONTAP tools OVA file downloaded in the previous step.
++
+image:vmware-vcf-aff-022.png[Select OVA file]
++
+{nbsp}
+. For steps 2 through 5 of the wizard, select a name and folder for the VM, select the compute resource, review the details, and accept the license agreement.
+
+. For the storage location of the configuration and disk files, select the vSAN datastore of the VCF management domain cluster.
++
+image:vmware-vcf-aff-023.png[Select OVA file]
++
+{nbsp}
+. On the *Select network* page, select the network used for management traffic.
++
+image:vmware-vcf-aff-024.png[Select network]
++
+{nbsp}
+. On the *Customize template* page, enter all required information:
+* Password to be used for administrative access to ONTAP tools.
+* NTP server IP address.
+* ONTAP tools maintenance account password.
+* ONTAP tools Derby DB password.
+* Do not check the box to *Enable VMware Cloud Foundation (VCF)*. VCF mode is not required for deploying supplemental storage.
+* FQDN or IP address of the vCenter appliance for the *VI Workload Domain*
+* Credentials for the vCenter appliance of the *VI Workload Domain*
+* Required network properties.
++
+. Click *Next* to continue.
++
+image:vmware-vcf-aff-025.png[Customize OTV template 1]
++
+image:vmware-vcf-asa-035.png[Customize OTV template 2]
++
+. Review all information on the *Ready to complete* page and click *Finish* to begin deploying the ONTAP tools appliance.

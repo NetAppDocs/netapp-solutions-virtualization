@@ -38,17 +38,18 @@ indexpage:
         - title: "Migrate VMs between two cluster nodes"
           url: osv-workflow-vm-live-migration.html
 #
-    - title: "Protect data using Trident Protect"
+    - title: "Protect VMs using Trident and Trident Protect"
       links:
         - title: "Install Trident"
           url: osv-trident-install.html
+        - title: "Protect VMs using Volume Group Snapshots"
+          url: osv-vm-dp-using-vgs.html
         - title: "Protect VMs with snapshots and backups"
           url: osv-vm-dp-using-tp.html
         - title: "Set up failover and failback"
           url: osv-vm-dr-using-tp.html
-
 #
-    - title: "Protect data using third-party tools"
+    - title: "Protect VMs using third-party tools"
       links:
         - title: "Protect VMs using OADP and Velero"
           url: osv-vm-dp-using-velero-overview.html
