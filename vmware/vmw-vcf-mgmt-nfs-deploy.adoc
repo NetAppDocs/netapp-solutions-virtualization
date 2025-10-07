@@ -45,7 +45,7 @@ image::vmware-vcf-import-nfs-002.png[configuration - deployment type]
 +
 . Select the network that the ONTAP tools VM will communicate on. Click *Next* to continue.
 +
-. On the **Customize template* window, complete all required information.
+. On the *Customize template* window, complete all required information.
 * Application username and password
 * Choose whether to enable ASUP (AutoSupport). Include a proxy URL.
 * Administrator username and password.
