@@ -87,7 +87,7 @@ image::vmware-vcf-import-nfs-004.png[open ONTAP tools]
 image::vmware-vcf-import-nfs-005.png[Add storage backend]
 ====
 +
-TIP: To allow full management over all SVMs in the storage system, add the storage backend in the vSphere client UI using the cluster IP address. Alternatively, use link:https://loadBalanceIP:8443/virtualization/ui/[ONTAP tools Manager] to add and associate the storage backend with a vCenter instance. This alternate method allows you to add only SVM credentials at the vSphere client UI, which provides more granular control over storage access.
+TIP: To allow full management over all SVMs in the storage system, add the storage backend in the vSphere client UI using the cluster IP address. Alternately, the storage backend can be added and associated with a vCenter instance using ONTAP tools Manager at `https://loadBalanceIP:8443/virtualization/ui/`. This alternate method allows you to add only SVM credentials at the vSphere client UI, which provides more granular control over storage access.
 
 == Step 3: Provision the NFS datastore
 ONTAP tools integrates functionality throughout the vSphere client UI. In this step, an NFS datastore is provisioned from the storage inventory page.
