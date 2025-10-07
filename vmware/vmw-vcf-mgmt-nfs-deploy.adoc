@@ -59,15 +59,16 @@ image::vmware-vcf-import-nfs-002.png[configuration - deployment type]
 ====
 image::vmware-vcf-import-nfs-003.png[Customize template]
 ====
-
++
 . Click *Next* to continue, and then click *Finish* to begin the deployment.
 
 == Step 2: Configure ONTAP tools
 After the ONTAP tools VM is installed and powered up, add the vCenter servers and the ONTAP storage systems you want to manage. 
 
 .Steps
-. Add vCenter instances by following the instructions in the ONTAP tools for VMware vSphere documentation: https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-vcenter.html[Add vCenter instances].
 
+. Add vCenter instances by following the instructions in the ONTAP tools for VMware vSphere documentation: https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-vcenter.html[Add vCenter instances].
++
 . To add an ONTAP storage system, log into the vSphere client and navigate to the main menu on the left. Click *NetApp ONTAP tools* to launch the user interface.
 +
 .Show example
@@ -75,8 +76,9 @@ After the ONTAP tools VM is installed and powered up, add the vCenter servers an
 ====
 image::vmware-vcf-import-nfs-004.png[open ONTAP tools]
 ====
-
++
 . Navigate to *Storage Backends* in the left hand menu and click *Add* to access the *Add Storage Backend* window.
++
 . Enter the IP address and credentials for the ONTAP storage system to be managed. Click *Add* to finish.
 +
 .Show example
@@ -84,13 +86,14 @@ image::vmware-vcf-import-nfs-004.png[open ONTAP tools]
 ====
 image::vmware-vcf-import-nfs-005.png[Add storage backend]
 ====
-
++
 TIP: To allow full management over all SVMs in the storage system, add the storage backend in the vSphere client UI using the cluster IP address. Alternatively, use link:https://loadBalanceIP:8443/virtualization/ui/[ONTAP tools Manager] to add and associate the storage backend with a vCenter instance. This alternate method allows you to add only SVM credentials at the vSphere client UI, which provides more granular control over storage access.
 
 == Step 3: Provision the NFS datastore
 ONTAP tools integrates functionality throughout the vSphere client UI. In this step, an NFS datastore is provisioned from the storage inventory page.
 
 .Steps
+
 . In the vSphere client, navigate to the storage inventory.
 +
 . Navigate to *ACTIONS > NetApp ONTAP tools > Create datastore*.

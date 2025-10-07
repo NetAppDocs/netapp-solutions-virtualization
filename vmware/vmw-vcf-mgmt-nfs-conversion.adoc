@@ -83,7 +83,7 @@ Upload the VCF Import Tool bundle and the NSX deployment bundle to the SDDC Mana
 Make sure you copy the VCF Import Tool and the NSX deployment bundle to the following directory on the SDDC Manager: `/home/vcf/vcfimport` . 
 
 == Step 4: Convert the vSphere cluster to the VCF management domain
-Convert the vSphere cluster  to the VCF management domain by following the instructions in the VMware documentation: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/import-workload-domain-into-sddc-manager-inventory.html[Convert or Import the vSphere Environment into the SDDC Manager Inventory].
+Convert the vSphere cluster to the VCF management domain by following the instructions in the VMware documentation: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/import-workload-domain-into-sddc-manager-inventory.html[Convert or Import the vSphere Environment into the SDDC Manager Inventory].
 
 Use the following command to convert the vSphere cluster to a VCF management domain and deploy the NSX cluster:
 
@@ -91,11 +91,14 @@ Use the following command to convert the vSphere cluster to a VCF management dom
 python3 vcf_brownfield.py convert --vcenter '<vcenter-fqdn>' --sso-user '<sso-user>' --domain-name '<wld-domain-name>' --nsx-deployment-spec-path '<nsx-deployment-json-spec-path>'
 ----
 
-Review a printout of VCF import tool functions by running the following command from the `/home/vcf/vcf-import-package/vcf-brownfield-import-<version>/vcf-brownfield-toolset` directory.
+Where:
 
-----
-python3 vcf_brownfield.py --help
-----
+* `<vcenter-fqdn>` is the fully qualified domain name of your vCenter server
+* `<sso-user>` is the Single Sign-On user account  
+* `<wld-domain-name>` is the desired name for your workload domain
+* `<nsx-deployment-json-spec-path>` is the path to the NSX deployment JSON file created in Step 2
+
+TIP: You can review all available VCF import tool functions by running `python3 vcf_brownfield.py --help` from the `/home/vcf/vcf-import-package/vcf-brownfield-import-<version>/vcf-brownfield-toolset` directory.
 
 
 == Step 5: Add licensing to VCF

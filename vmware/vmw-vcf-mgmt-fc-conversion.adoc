@@ -20,15 +20,22 @@ The VCF Import Tool is used on the vCenter appliance to validate that the vSpher
 
 .Steps
 . Copy the VCF Import Tool to the target vCenter appliance by following the instructions in the VMware documentation: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/copy-the-vcf-import-tool-to-the-target-vcenter-appliance.html[Copy the VCF Import Tool to the Target vCenter Appliance].
++
 . Extract the bundle using the following command:
 +
 ....
 tar -xvf vcf-brownfield-import-<buildnumber>.tar.gz
 ....
-. Run the validation precheck by following the instructions in the VMware documentation: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/run-a-precheck-on-the-target-vcenter-before-conversion.html[Run a Precheck on the Target vCenter Before Conversion].
-. The following output shows that the vCenter appliance has passed the precheck.
 +
+. Run the validation precheck by following the instructions in the VMware documentation: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/run-a-precheck-on-the-target-vcenter-before-conversion.html[Run a Precheck on the Target vCenter Before Conversion].
++
+The following output example shows that the vCenter appliance has passed the precheck.
++
+.Show example
+[%collapsible]
+====
 image::vmware-vcf-import-nfs-011.png[vcf import tool precheck]
+====
 
 == Step 2: Deploy the SDDC Manager and create NSX deployment specification
 
@@ -38,8 +45,11 @@ Deploy the SDDC Manager appliance on the same vSphere cluster that you plan to c
 . Deploy the SDDC Manager appliance by following the instructions in the VMware documentation: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/deploy-the-sddc-manager-appliance-on-the-target-vcenter.html[Deploy the SDDC Manager Appliance on the Target vCenter].
 . Add hosts to the SDDC Manager inventory by following the instructions in the VMware documentation: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-1/commission-hosts.html[Commission Hosts].
 +
-The following is an example of a JSON file for NSX deployment:
+The following is an example of a JSON file for NSX deployment.
 +
+.Show example
+[%collapsible]
+====
 ....
 {
   "license_key": "xxxxx-xxxxx-xxxxx-xxxxx-xxxxx",
@@ -71,8 +81,10 @@ The following is an example of a JSON file for NSX deployment:
   }]
 }
 ....
+====
++
 . Copy the JSON file to a directory on the SDDC Manager.
-
++
 NOTE: When deploying an NSX Manager cluster in a convert or import operation, NSX-VLAN networking is utilized. For information about NSX-VLAN networking limitations, refer to https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/considerations-before-converting-or-importing-existing-vsphere-environments-into-vcf-admin.html[Considerations Before Converting or Importing Existing vSphere Environments into VMware Cloud Foundation].
 
 == Step 3: Upload software to SDDC Manager
@@ -82,19 +94,23 @@ Make sure you copy the VCF Import Tool and the NSX deployment bundle to the foll
 
 == Step 4: Convert the vSphere cluster to the VCF management domain
 
-Convert the vSphere cluster  to the VCF management domain by following the instructions in the VMware documentation: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/import-workload-domain-into-sddc-manager-inventory.html[Convert or Import the vSphere Environment into the SDDC Manager Inventory].
+Convert the vSphere cluster to the VCF management domain by following the instructions in the VMware documentation: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/import-workload-domain-into-sddc-manager-inventory.html[Convert or Import the vSphere Environment into the SDDC Manager Inventory].
 
-You can use the following command to convert the vSphere cluster to a VCF management domain and deploy the NSX cluster:
+Use the following command to convert the vSphere cluster to a VCF management domain and deploy the NSX cluster:
 
 ....
 python3 vcf_brownfield.py convert --vcenter '<vcenter-fqdn>' --sso-user '<sso-user>' --domain-name '<wld-domain-name>' --nsx-deployment-spec-path '<nsx-deployment-json-spec-path>'
 ....
 
-You can review a printout of VCF import tool functions by running the following command from the `/home/vcf/vcf-import-package/vcf-brownfield-import-<version>/vcf-brownfield-toolset` directory.
+Where:
 
-....
-python3 vcf_brownfield.py --help
-....
+* `<vcenter-fqdn>` is the fully qualified domain name of your vCenter server
+* `<sso-user>` is the Single Sign-On user account  
+* `<wld-domain-name>` is the desired name for your workload domain
+* `<nsx-deployment-json-spec-path>` is the path to the NSX deployment JSON file created in Step 2
+
+TIP: You can review all available VCF import tool functions by running `python3 vcf_brownfield.py --help` from the `/home/vcf/vcf-import-package/vcf-brownfield-import-<version>/vcf-brownfield-toolset` directory.
+
 
 == Step 5: Add licensing to VCF
 

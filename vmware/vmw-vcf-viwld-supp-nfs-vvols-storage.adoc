@@ -35,35 +35,54 @@ include::../_include/add-storage-ontap-tools.adoc[]
 Complete the following steps to deploy an ONTAP datastore running on NFS. Use ONTAP tools.
 
 .Steps
+
 . In ONTAP tools select *Overview* and from the *Getting Started* tab click on *Provision* to start the wizard.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-041.png[Provision datastore]
+====
 +
-{nbsp}
 . On the *General* page of the New Datastore wizard, select the vSphere datacenter or cluster destination. 
++
 . Select *NFS* as the datastore type, enter a name for the datastore, and select the protocol.  
++
 . Choose whether to use FlexGroup volumes and whether to use a storage capability file for provisioning. 
++
 . Click *Next* to continue.
 +
 NOTE: Selecting to *Distribute datastore data across the cluster* will create the underlying volume as a FlexGroup volume, which precludes the use of Storage Capability Profiles. Refer to https://docs.netapp.com/us-en/ontap/flexgroup/supported-unsupported-config-concept.html[Supported and unsupported configurations for FlexGroup volumes^] for more information on using FlexGroup Volumes.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-aff-042.png[General page]
+====
 +
-{nbsp}
 . On the *Storage system* page, select the select a storage capability profile, the storage system, and the SVM. Click *Next* to continue.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-aff-043.png[Storage system]
+====
 +
-{nbsp}
 . On the *Storage attributes* page, select the aggregate to use and then click *Next* to continue.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-aff-044.png[Storage attributes]
+====
 +
-{nbsp}
-
 . Review the *Summary* and click *Finish* to begin creating the NFS datastore.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-aff-045.png[Review summary and finish]
+====
 
 == Step 4: Create a vVols datastore in ONTAP tools
 To create a vVols datastore in ONTAP tools, complete the following steps.
@@ -71,7 +90,11 @@ To create a vVols datastore in ONTAP tools, complete the following steps.
 .Steps
 . In ONTAP tools, select *Overview* and from the *Getting Started* tab, click *Provision* to start the wizard.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-041.png[Provision datastore]
+====
 
 . On the *General* page of the New Datastore wizard, select the vSphere datacenter or cluster destination. 
 
@@ -79,25 +102,45 @@ image:vmware-vcf-asa-041.png[Provision datastore]
 
 . Click *Next* to continue.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-aff-046.png[General page]
+====
 
 . On the *Storage system* page, select a storage capability profile, the storage system, and the SVM. 
 
 . Click *Next* to continue.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-aff-043.png[Storage system]
+====
 
 . On the *Storage attributes* page, select *Create a new volumes* and enter the storage attributes of the volume to be created. 
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-aff-047.png[Storage attributes]
+====
 +
 . Click *Add* to create the volume and then *Next* to continue.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-aff-048.png[Storage attributes - Next]
+====
 +
 . Review the *Summary* page and click *Finish* to start the vVol datastore creation process.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-aff-049.png[Summary page]
+====
 
 == Additional information
 * For information on configuring ONTAP storage systems, refer to the link:https://docs.netapp.com/us-en/ontap[ONTAP 9 documentation^].

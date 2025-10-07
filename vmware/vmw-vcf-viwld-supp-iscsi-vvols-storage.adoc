@@ -39,22 +39,25 @@ Storage capability profiles describe the features provided by a storage array or
 
 . In ONTAP tools, select *Storage capability profile* from the left-hand menu and then press *Create*.
 +
+.Show example
 [%collapsible]
-===
+====
 image:vmware-vcf-asa-039.png[Storage capability profile]
 ====
 
 . In the *Create Storage Capability profile* wizard, provide a name and description of the profile and click *Next*.
 +
+.Show example
 [%collapsible]
-===
+====
 image:vmware-asa-010.png[Add name for SCP]
 ====
 
 . Select the platform type and to specify the storage system is to be an All-Flash SAN Array set *Asymmetric* to false.
 +
+.Show example
 [%collapsible]
-===
+====
 image:vmware-asa-011.png[Platorm for SCP]
 ====
 
@@ -62,29 +65,33 @@ image:vmware-asa-011.png[Platorm for SCP]
 
 . Click *Next* to continue.
 +
+.Show example
 [%collapsible]
-===
+====
 image:vmware-asa-012.png[Protocol for SCP]
 ====
 
 . The *performance* page allows setting of quality of service in form of minimum and maximum IOPs allowed.
 +
+.Show example
 [%collapsible]
-===
+====
 image:vmware-asa-013.png[QoS for SCP]
 ====
 
 . Complete the *storage attributes* page by selecting storage efficiency, space reservation, encryption and any tiering policy as needed.
 +
+.Show example
 [%collapsible]
-===
+====
 image:vmware-asa-014.png[Attributes for SCP]
 ====
 
 . Review the summary and click *Finish* to create the profile.
 +
+.Show example
 [%collapsible]
-===
+====
 image:vmware-vcf-asa-040.png[Summary for SCP]
 ====
 
@@ -94,44 +101,49 @@ To create a vVols datastore in ONTAP tools complete the following steps.
 .Steps
 . In ONTAP tools, select *Overview* and from the *Getting Started* tab click *Provision* to start the wizard.
 +
+.Show example
 [%collapsible]
-===
+====
 image:vmware-vcf-asa-041.png[Provision datastore]
 ====
-
++
 . On the *General* page of the New Datastore wizard, select the vSphere datacenter or cluster destination. 
-
++
 . Select *vVols* as the datastore type, enter a name for the datastore, and select *iSCSI* as the protocol. 
-
++
 . Click *Next* to continue.
 +
+.Show example
 [%collapsible]
-===
+====
 image:vmware-vcf-asa-042.png[General page]
 ====
-
++
 . On the *Storage system* page, select a storage capability profile, the storage system, and the VM. 
-
++
 . Click *Next* to continue.
 +
+.Show example
 [%collapsible]
-===
+====
 image:vmware-vcf-asa-043.png[Storage system]
 ====
-
++
 . On the *Storage attributes* page, select to create a new volume for the datastore and enter the storage attributes of the volume you want to create.
-
++
 . Click *Add* to create the volume and then *Next* to continue.
 +
+.Show example
 [%collapsible]
-===
+====
 image:vmware-vcf-asa-044.png[Storage attributes]
 ====
-
++
 . Review the summary and click *Finish* to start the vVol datastore creation process.
 +
+.Show example
 [%collapsible]
-===
+====
 image:vmware-vcf-asa-045.png[Summary page]
 ====
 
