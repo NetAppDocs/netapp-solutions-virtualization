@@ -22,14 +22,22 @@ Complete the following steps to create a new distributed port group for each NVM
 .Steps
 . From the vSphere client , navigate to *Inventory > Networking* for the workload domain. Navigate to the existing Distributed Switch and choose the action to create *New Distributed Port Group...*.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-022.png[Choose to create new port group]
+====
 +
 {nbsp}
 . In the *New Distributed Port Group* wizard, fill in a name for the new port group and click *Next* to continue.
 
 . On the *Configure settings* page, fill out all settings. If VLANs are being used be sure to provide the correct VLAN ID. Click *Next* to continue.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-023.png[Fill out VLAN ID]
+====
 +
 {nbsp}
 . On the *Ready to complete* page, review the changes and click *Finish* to create the new distributed port group.
@@ -38,17 +46,29 @@ image:vmware-vcf-asa-023.png[Fill out VLAN ID]
 
 . When both port groups have been created, navigate to the first port group and select the action to *Edit settings...*.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-077.png[DPG - edit settings]
+====
 +
 {nbsp}
 . On the *Distributed Port Group - Edit Settings* page, navigate to *Teaming and failover* in the left-hand menu and click *uplink2* to move it down to *Unused uplinks*.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-078.png[move uplink2 to unused]
+====
 
 . Repeat this step for the second NVMe/TCP port group. This time, move *uplink1* down to *Unused uplinks*. 
 
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-079.png[move uplink 1 to unused]
+====
 
 == Step 2: Create the VMkernel adapters on each ESXi host
 Create the VMkernel adapters on each ESXi host in the workload domain.
@@ -57,60 +77,87 @@ Create the VMkernel adapters on each ESXi host in the workload domain.
 
 . From the vSphere client, navigate to one of the ESXi hosts in the workload domain inventory. From the *Configure* tab select *VMkernel adapters* and click *Add Networking...* to start.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-030.png[Start add networking wizard]
+====
 +
-{nbsp}
 . On the *Select connection type* window, choose *VMkernel Network Adapter* and click *Next* to continue.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-008.png[Choose VMkernel Network Adapter]
+====
 +
-{nbsp}
 . On the *Select target device* page, choose one of the distributed port groups for iSCSI that was created previously.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-095.png[Choose target port group]
+====
 +
-{nbsp}
 . On the *Port properties* page, click the box for *NVMe/TCP* and click *Next* to continue.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-096.png[VMkernel port properties]
+====
 +
-{nbsp}
 . On the *IPv4 settings* page, fill in the *IP address* and *Subnet mask* and provide a new gateway IP address (only if required). Click *Next* to continue.
 + 
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-097.png[VMkernel IPv4 settings]
+====
 +
-{nbsp}
 . Review your selections on the *Ready to complete* page and click *Finish* to create the VMkernel adapter.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-098.png[Review VMkernel selections]
+====
 +
-{nbsp}
 . Repeat this process to create a VMkernel adapter for the second iSCSI network.
 
 == Step 3: Add NVMe/TCP adapter
 Each ESXi host in the workload domain cluster must have an NVMe/TCP software adapter installed for every established NVMe/TCP network dedicated to storage traffic.
 
-To install NVMe/TCP adapters and discover the NVMe controllers, complete the following steps:
+To install NVMe/TCP adapters and discover the NVMe controllers, complete the following steps.
 
 . In the vSphere client, navigate to one of the ESXi hosts in the workload domain cluster. From the *Configure* tab, click *Storage Adapters* in the menu. 
-
++
 . From the *Add Software Adapter* drop-down menu, select *Add NVMe over TCP adapter*.
 + 
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-099.png[Add NVMe/TCP adapter]
+====
 +
-{nbsp}
 . In the *Add Software NVMe over TCP adapter* window, access the *Physical Network Adapter* drop-down menu and select the correct physical network adapter on which to enable the NVMe adapter.
 + 
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-100.png[Select physical adapter]
+====
 +
-{nbsp}
 . Repeat this process for the second network assigned to NVMe/TCP traffic, assigning the correct physical adapter.
-
++
 . Select one of the newly installed NVMe/TCP adapters. On the *Controllers* tab, select *Add Controller*.
 + 
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-101.png[Add Controller]
+====
 +
-{nbsp}
 . In the *Add controller* window, select the *Automatically* tab and complete the following steps.
 .. Enter an IP address for one of the SVM logical interfaces on the same network as the physical adapter assigned to this NVMe/TCP adapter. 
 .. Click the *Discover Controllers* button.
@@ -118,14 +165,20 @@ image:vmware-vcf-asa-101.png[Add Controller]
 
 . Click *OK* to add the selected controllers. 
 + 
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-102.png[Discover and add controllers]
+====
 +
-{nbsp}
 . After a few seconds you should see the NVMe namespace appear on the Devices tab.
 + 
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-103.png[NVMe namespace listed under devices]
+====
 +
-{nbsp}
 . Repeat this procedure to create an NVMe/TCP adapter for the second network established for NVMe/TCP traffic.
 
 == What's next?

@@ -1,18 +1,32 @@
 .Steps
 . In the vSphere client navigate to the main menu and select *NetApp ONTAP tools*.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-014.png[Navigate to ONTAP tools]
-
+====
++
 . Once in *ONTAP tools*, from the Getting Started page (or from *Storage Systems*), click *Add* to add a new storage system.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-015.png[Add storage system]
+====
 +
-{nbsp}
 . Provide the IP address and credentials of the ONTAP storage system and click *Add*.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-016.png[Provide IP and credentials of ONTAP system]
+====
 +
-{nbsp}
 . Click *Yes* to authorize the cluster certificate and add the storage system.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-017.png[Authorize cluster certificate]
+====
