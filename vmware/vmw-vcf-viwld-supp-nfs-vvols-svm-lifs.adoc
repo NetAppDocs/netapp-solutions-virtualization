@@ -18,25 +18,40 @@ Create a Storage Virtual Machine (SVM) and multiple logical interfaces (LIFs) on
 To add new LIFs to an existing SVM, refer to the ONTAP documentation: link:https://docs.netapp.com/us-en/ontap/networking/create_a_lif.html[Create ONTAP LIFs^].
 
 .Steps
+
 . In ONTAP System Manager, navigate to *Storage VMs* in the left-hand menu and click on *+ Add* to start. 
-//+
-//image:vmware-vcf-asa-001.png[Click +Add to start creating SVM]
-//+
-//{nbsp}
++
+.Show example
+[%collapsible]
+====
+image:vmware-vcf-asa-001.png[Click Add to start creating SVM]
+====
++
 . In the *Add Storage VM* wizard, provide a *Name* for the SVM, select the *IP Space* and then, under *Access Protocol*, click the *SMB/CIFS, NFS, S3* tab and check the box to *Enable NFS*.
-//+
-//image:vmware-vcf-aff-035.png[Add storage VM wizard - enable NFS]
++
+.Show example
+[%collapsible]
+====
+image:vmware-vcf-aff-035.png[Add storage VM wizard - enable NFS]
+====
 +
 TIP: You don't need to check the *Allow NFS client access* checkbox. ONTAP tools for VMware vSphere will be used to automate the datastore deployment process, which includes providing client access for the ESXi hosts.
-//{nbsp}
+
 . In the *Network Interface* section, fill in the *IP address*, *Subnet Mask*, and *Broadcast Domain and Port* for the first LIF. For subsequent LIFs, you can either use individual settings or enable the checkbox to use common settings across all remaining LIFs.
-//+
-//image:vmware-vcf-aff-036.png[Fill out network info for LIFs]
-//+
-//{nbsp}
++
+.Show example
+[%collapsible]
+====
+image:vmware-vcf-aff-036.png[Fill out network info for LIFs]
+====
++
 . Choose whether to enable the Storage VM Administration account (for multi-tenancy environments) and click *Save* to create the SVM.
-//+
-//image:vmware-vcf-asa-004.png[Enable SVM account and Finish]
++
+.Show example
+[%collapsible]
+====
+image:vmware-vcf-asa-004.png[Enable SVM account and Finish]
+====
 
 == What's next?
 After creating the SVM and LIFs, link:vmw-vcf-viwld-supp-nfs-vvols-network.html[configure networking for NFS on ESXi hosts].
