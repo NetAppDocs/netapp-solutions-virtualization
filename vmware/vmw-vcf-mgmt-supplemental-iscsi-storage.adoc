@@ -32,27 +32,40 @@ In cases where you prefer to use ONTAP storage to protect the VCF management VMs
 
 .Steps
 . From the vSphere Client navigate to the management domain cluster and click the *VMs* tab.
-
++
 . Select the VMs to be migrated to the iSCSI datastore, right click and select *Migrate..*.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-018.png[Select VMs to migrate]
+====
 +
-{nbsp}
 . In the *Virtual Machines - Migrate* wizard, select *Change storage only* as the migration type and click *Next* to continue.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-019.png[Select migration type]
+====
 +
-{nbsp}
 . On the *Select storage* page, select the iSCSi datastore and select *Next* to continue.
 +
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-020.png[Select destination datastore]
+====
 +
-{nbsp}
 . Review the selections and click *Finish* to start the migration.
-
++
 . The relocation status can be viewed from the *Recent Tasks* pane.
-+ 
++
+.Show example
+[%collapsible]
+====
 image:vmware-vcf-asa-021.png[vSphere client recent tasks pane]
+====
 
 == Additional information
 
