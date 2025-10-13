@@ -12,8 +12,8 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-The NetApp Shift Toolkit is a standalone product designed to simplify and accelerate VM migrations across hypervisors, such as VMware ESXi and Microsoft Hyper-V.  It also supports disk-level conversions between various virtual disk formats.
-
+TThe NetApp Shift Toolkit is a standalone product designed to simplify and accelerate VM migrations across hypervisors, such as VMware ESXi, Microsoft Hyper-V, Oracle Linux Virtualization Manager, Redhat OpenShift, and others. It also supports disk-level conversions between various virtual disk formats.
+ 
 == Use case
 
 Every organization is now seeing the benefit of having multi-hypervisor environment. With recent changes in the market, every organization is deciding on the best course(s) of action by weighing technical and commercial risks including migrating workload VMs to alternate hypervisors and focus on achieving business-defined objectives, and controlling vendor lock-in. This enables them to operate in an optimized fashion wrt licensing cost and extend IT budget on the right areas than spending for those unused cores on a specific hypervisor. However, the challenge has always been around migration time and the associated downtime. 
@@ -24,15 +24,19 @@ With the NetApp Shift toolkit, migrating virtual machines (VMs) is no longer a c
 
 The NetApp Shift toolkit is an easy-to-use, graphical user interface (GUI) solution that allows to migrate virtual machines (VMs) between different hypervisors and convert virtual disk formats. It utilizes NetApp FlexClone technology to quickly convert VM hard disks. Additionally, the toolkit manages the creation and configuration of destination VMs.
 
-Shift toolkit provides flexibility in a multi-hypervisor environment by supporting bidirectional conversion between the following hypervisors:
+Shift toolkit provides flexibility in a multi-hypervisor environment by supporting bidirectional migration between the following hypervisors:
 
 * VMware ESXi to Microsoft Hyper-V
-* Microsoft Hyper-V to VMware ESXi (Upcoming release)
+* Microsoft Hyper-V to VMware ESXi 
+* VMWare ESXi to Oracle Linux Virtualization Manager (OLVM)
+* VMWare ESXi to Red Hat OpenShift Virtualization
 
 Shift toolkit supports disk-level conversions of virtual disks between hypervisors for the following disk formats:
 
 * VMware ESX to Microsoft Hyper-V (virtual machine disk [VMDK] to virtual hard disk format [VHDX])
 * VMware ESX to KVM compatible hypervisors (VMDK to QCOW2)
+* Microsoft Hyper-V to VMware ESX (VHDX to VMDK)
+* VMware ESX to KVM (VMDK to RAW)
 
 image:shift-toolkit-001.png["Figure showing input/output dialog or representing written content"]
 

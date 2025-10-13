@@ -1,0 +1,19 @@
+---
+sidebar: sidebar
+permalink: migration/shift-toolkit-migrate-hyperv2esxi.html
+keywords: netapp, vmware, esxi, vm, migration, virtualization, hyper-v, microsoft
+summary: 
+---
+
+= Migrate VMs from Microsoft Hyper-V to VMware ESXi using the Shift Toolkit
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Use the Shift Toolkit to migrate VMs between virtualization platforms. The process involves preparing the VMs, converting disk formats, and configuring network settings on the target environment. 
+
+== Migration
+

@@ -12,7 +12,16 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-Use the Shift Toolkit to migrate VMs from VMware ESXi to Microsoft Hyper-V. The process involves preparing the VMs, converting disk formats, and configuring network settings on the target environment. 
+Use the Shift Toolkit to migrate VMs between virtualization platforms. The process involves preparing the VMs, converting disk formats, and configuring network settings on the target environment. 
+
+== Supported Migrations
+
+Shift toolkit provides flexibility in a multi-hypervisor environment by supporting bidirectional migration between the following hypervisors:
+
+* link:shift-toolkit-migrate-esxi2hyperv.html[VMware ESXi to Microsoft Hyper-V]
+* link:shift-toolkit-migrate-hyperv2esxi.html[Microsoft Hyper-V to VMware ESXi]
+* link:shift-toolkit-migrate-esxi2olvm.html[VMWare ESXi to Oracle Linux Virtualization Manager (OLVM)]
+* link:shift-toolkit-migrate-esxi2osv.html[VMWare ESXi to Red Hat OpenShift Virtualization]
 
 == Migration
 

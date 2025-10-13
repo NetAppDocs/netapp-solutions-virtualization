@@ -1,0 +1,18 @@
+---
+sidebar: sidebar
+permalink: migration/shift-toolkit-convert-hyperv2esx.html
+keywords: netapp, vmware, esxi, vm, conversion, virtualization, hyper-v
+summary: 
+---
+
+= Convert VMs from Microsoft Hyper-V to VMware ESX using the Shift Toolkit
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Use the Shift Toolkit to convert VMware ESX virtual machine disks (VMDK) to Microsoft Hyper-V (VHDX) disk format or Red Hat KVM (QCOW2) disk format. This process includes setting up resource groups, creating conversion blueprints, and scheduling conversions.
+
+== Conversion

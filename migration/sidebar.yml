@@ -12,9 +12,29 @@ entries:
       - title: "Configure Shift Toolkit"
         url: /migration/shift-toolkit-ui.html
       - title: "Migrate VMs using Shift Toolkit"
-        url: /migration/shift-toolkit-migration.html
+        entries:
+          - title: "Overview"
+            url: /migration/shift-toolkit-migration.html
+          - title: "Migrate VMs from VMware ESXi to Microsoft Hyper-V"
+            url: /migration/shift-toolkit-migrate-esxi2hyperv.html
+          - title: "Migrate VMs from Microsoft Hyper-V to VMware ESXi"
+            url: /migration/shift-toolkit-migrate-hyperv2esxi.html
+          - title: "Migrate VMs from VMware ESXi to Red Hat OpenShift Virtualization"
+            url: /migration/shift-toolkit-migrate-esxi2osv.html
+          - title: "Migrate VMs from VMware ESXi to Oracle Linux Virtualization Manager (OLVM)"
+            url: /migration/shift-toolkit-migrate-esxi2olvm.html
       - title: "Convert VMs using Shift Toolkit"
-        url: /migration/shift-toolkit-conversion.html
+        entries:
+          - title: "Overview"
+            url: /migration/shift-toolkit-conversion.html
+          - title: "Convert VMs from VMware ESX to Microsoft Hyper-V"
+            url: /migration/shift-toolkit-convert-esx2hyperv.html
+          - title: "Convert VMs from VMware ESX to KVM compatible hypervisors (QCOW2)"
+            url: /migration/shift-toolkit-convert-esx2qcow2.html
+          - title: "Convert VMs from Microsoft Hyper-V to VMware ESX"
+            url: /migration/shift-toolkit-convert-hyperv2esx.html
+          - title: "Convert VMs from VMware ESX to KVM"
+            url: /migration/shift-toolkit-convert-esx2kvm.html
       - title: "Next steps"
         url: /migration/shift-toolkit-summary.html
 #
