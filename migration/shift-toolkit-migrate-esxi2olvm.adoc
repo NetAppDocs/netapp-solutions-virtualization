@@ -239,3 +239,9 @@ Note: VMs are created under “Default” cluster
 Depending on the Virtual Machine OS, and Shift toolkit will auto assign the VM boot option, along with the storage controller interface.  In case of Linux distros, VirtIO or VirtIO scsi is used. And for Windows, the VM is powered ON with SATA interface and then the scheduled script auto installs VirtIO drivers and then change the interface to VirtIO. The networks are assigned accordingly based on the selection.
  
 image::shift-toolkit-212.png["Image showing the migrated VMs in the Oracle user interface"]
+
+== Video demonstration
+
+The following video demonstrates the process outlined in this article.
+
+video::13bb74ad-25b3-49c0-84b5-b3760100ad6f[panopto, title="Zero touch migration from ESX to Oracle Linux Virtualization Manager (OLVM)"]

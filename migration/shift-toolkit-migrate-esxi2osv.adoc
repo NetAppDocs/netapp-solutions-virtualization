@@ -367,3 +367,9 @@ image::shift-toolkit-119.png["Image showing the migration history"]
 Migration completed in 6 mins. This VM has 1.5TB data disk (spread across 3 PVCs). This showcases a streamlined, low-impact approach to re-homing VMs using ONTAP storage. 
 
 Note: Before getting started with this specific integration, please contact your Redhat account team.
+
+== Video demonstration
+
+The following video demonstrates the process outlined in this article.
+
+video::7e2abc5e-2919-43d6-a5c2-b3760100adaf[panopto, title="Zero touch migration from ESX to Oracle Linux Virtualization Manager (OLVM)"]
