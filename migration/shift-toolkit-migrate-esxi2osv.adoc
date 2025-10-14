@@ -82,6 +82,8 @@ Note: The source and destination volume will be the same as the disk format conv
 
 image::shift-toolkit-103.png["Image of the destination OpenShift creation"]
 
+== Resource groups
+
 Next step is to group the required VMs into their migration groups as resource groups. 
 
 For detailed steps, refer to the section link:https://docs.netapp.com/us-en/netapp-solutions-virtualization/migration/shift-toolkit-ui.html#resource-groupings[“Resource groupings”].
