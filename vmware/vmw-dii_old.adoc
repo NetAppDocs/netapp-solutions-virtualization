@@ -43,7 +43,7 @@ This solution uses the following components:
 
 . NetApp All-Flash SAN Array A400 with ONTAP 9.13.
 . VMware vSphere 8.0 cluster.
-. NetApp Console account.
+. NetApp BlueXP account.
 . NetApp Data Infrastructure Insights Acquisition Unit software installed on a local VM with network connectivity to assets for data collection.
 
 == Solution Deployment
@@ -212,8 +212,7 @@ This solution was designed as a primer to learn how to get started with NetApp C
 
 To learn more about the technologies presented in this solution refer to the following additional information.
 
-* https://www.netapp.com/console/[NetApp Console landing page]
-* https://www.netapp.com/data-infrastructure-insights/[NetApp Data Infrastructure Insights landing page]
+* https://bluexp.netapp.com/cloud-insights[NetApp BlueXP and Data Infrastructure Insights landing page]
 * https://docs.netapp.com/us-en/data-infrastructure-insights/index.html/[NetApp Data Infrastructure Insights documentation]
 
 

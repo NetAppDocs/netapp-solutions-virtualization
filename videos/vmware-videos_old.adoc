@@ -38,7 +38,7 @@ video::8df4ad1f-83ad-448b-9405-b01200fb2567[panopto, title="SnapCenter - SQL Res
 
 == 3-2-1 Data protection solutions
 
-video::7c21f3fc-4025-4d8f-b54c-b0e001504c76[panopto, title="3-2-1 Data Protection for VMFS Datastores with SnapCenter Plug-in for VMware vSphere and NetApp Backup and Recovery for Virtual Machines", width=360]
+video::7c21f3fc-4025-4d8f-b54c-b0e001504c76[panopto, title="3-2-1 Data Protection for VMFS Datastores with SnapCenter Plug-in for VMware vSphere and BlueXP backup and recovery for Virtual Machines", width=360]
 
 == VMware Cloud on AWS with AWS FSx ONTAP
 
