@@ -16,7 +16,7 @@ Install the Shift Toolkit on a dedicated VM running a Windows operating system, 
 
 == Preparing for Installation
 
-Shift toolkit can be run on Windows 2019 and 2022 version. 
+Shift toolkit can be run on Windows OS 2019, 2022 and 2025 version. 
 
 * Download the Shift toolkit package from link:https://mysupport.netapp.com/site/tools/tool-eula/netapp-shift-toolkit[NetApp Toolchest]
 * Unzip the package
@@ -133,6 +133,7 @@ The following versions of Linux are supported as guest operating systems for VM 
 * Red Hat Enterprise Linux 7.2 or later
 * Red Hat Enterprise Linux 8.x
 * Red Hat Enterprise Linux 9.x
+* Alma Linux
 * Ubuntu 2018
 * Ubuntu 2022
 * Ubuntu 2024
@@ -155,7 +156,7 @@ Shift toolkit supports platforms that are running ONTAP 9.14.1 or later
 VMware: Shift toolkit is validated against vSphere 7.0.3 and later
 Hyper-V: Shift toolkit is validated against Hyper-V role running on Windows Server 2019, Windows Server 2022 and Windows Server 2025
 
-NOTE: In the current release, end to end virtual machine migration is supported with Hyper-V only. 
+NOTE: In the current release, end to end virtual machine migration is supported with Hyper-V, Openshift, VMware and Oracle Virtualization. 
 
 NOTE: In the current release, for KVM as the destination, VMDK to qcow2 conversion is the only supported workflow. Hence, if KVM is selected from the dropdown, hypervisor details are not required. The qcow2 disk can be used for provisioning virtual machine on KVM variants.
 
