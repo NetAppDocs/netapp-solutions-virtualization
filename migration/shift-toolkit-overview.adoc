@@ -79,7 +79,7 @@ Shift toolkit uses the following protocols during conversion or migration operat
 
 The firewalls must enable traffic over the following ports:
 
-[width=100%,cols="10 10 25 25 30", frame=all, grid=all, options="header"]
+[width=100%,cols="10%, 10%, 25%, 25%, 30%", frame=all, grid=all, options="header"]
 |===
 | Port | Protocol | Source | Destination | Purpose
 | 443 | TCP | Shift toolkit node | VMware vCenter | VMware Inventory

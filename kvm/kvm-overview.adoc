@@ -103,7 +103,7 @@ The VM disks can be dynamically provisioned on storage pool or can be pre-provis
 The popular choice is dir. Then netfs and logical. iscsi and iscsi-direct uses single target and doesn't provide fault tolerance. mpath provides multipath but not dynamically allocated. It is used more like raw device mapping in vSphere. For file protocols (NFS/SMB/CIFS), mount options can be specified in https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/managing_file_systems/mounting-file-systems-on-demand#the-autofs-service[automounter] or fstab and dir pool type is used. In case of block protocols (iSCSI,FC,NVMe-oF), shared filesystem like ocfs2 or gfs2 is used.
 
 
-[width=100%,cols="20% 10% 10% 10% 10% 10% 10% 10%", frame=all, grid=all, options="header"]
+[width=100%,cols="20%, 10%, 10%, 10%, 10%, 10%, 10%, 10%", frame=all, grid=all, options="header"]
 |===
 | Storage Protocol | dir | fs | netfs | logical | disk | iscsi | iscsi-direct | mpath
 | SMB/CIFS | Yes | No | Yes | No | No | No | No | No
@@ -118,7 +118,7 @@ The popular choice is dir. Then netfs and logical. iscsi and iscsi-direct uses s
 
 Based on storage protocol used, additional packages needs to be available on the host. Here is the sample list.
 
-[width=100%,cols="40% 20% 20% 20%", frame=all, grid=all, options="header"]
+[width=100%,cols="40%, 20%, 20%, 20%", frame=all, grid=all, options="header"]
 |===
 | Storage Protocol | Fedora | Debian | pacman
 | SMB/CIFS | samba-client/cifs-utils | smbclient/cifs-utils | smbclient/cifs-utils

@@ -98,7 +98,7 @@ In essence, using Libvirt with ONTAP allows you to combine the flexibility and s
 == File based Storage Pool (with SMB or NFS)
 
 Storage pool of type dir and netfs are applicable for file based storage.
-[width=100%,cols="20% 10% 10% 10% 10% 10% 10% 10%", frame=all, grid=all, options="header"]
+[width=100%,cols="20%, 10%, 10% ,10%, 10%, 10,% 10%, 10%", frame=all, grid=all, options="header"]
 |===
 | Storage Protocol | dir | fs | netfs | logical | disk | iscsi | iscsi-direct | mpath
 | SMB/CIFS | Yes | No | Yes | No | No | No | No | No
@@ -108,7 +108,7 @@ Storage pool of type dir and netfs are applicable for file based storage.
 With netfs, libvirt will mount the filesystem and supported mount options are limited. With dir storage pool, the mounting of filesystem needs to be handled externally on the host. fstab or automounter can be utilized for that purpose. To utilize automounter, autofs package needs to be installed. Autofs is particularly useful for mounting network shares on demand, which can improve system performance and resource utilization compared to static mounts in fstab. It automatically unmounts shares after a period of inactivity.
 
 Based on storage protocol used, validate required packages are installed on the host.
-[width=100%,cols="40% 20% 20% 20%", frame=all, grid=all, options="header"]
+[width=100%,cols="40%, 20,% 20%, 20%", frame=all, grid=all, options="header"]
 |===
 | Storage Protocol | Fedora | Debian | pacman
 | SMB/CIFS | samba-client/cifs-utils | smbclient/cifs-utils | smbclient/cifs-utils
@@ -199,7 +199,7 @@ A dir pool type is often used on top of cluster filesystem like OCFS2 or GFS2 on
 
 Validate the host has necessary packages installed based on storage protocol used.
 
-[width=100%,cols="40% 20% 20% 20%", frame=all, grid=all, options="header"]
+[width=100%,cols="40%, 20%, 20%, 20%", frame=all, grid=all, options="header"]
 |===
 | Storage Protocol | Fedora | Debian | pacman
 | iSCSI | iscsi-initiator-utils,device-mapper-multipath,ocfs2-tools/gfs2-utils | open-iscsi,multipath-tools,ocfs2-tools/gfs2-utils | open-iscsi,multipath-tools,ocfs2-tools/gfs2-utils
