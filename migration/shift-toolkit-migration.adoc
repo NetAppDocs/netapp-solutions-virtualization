@@ -61,7 +61,7 @@ The following network considerations must be considered:
 ** After migration, windows device manager may still display the old network adapter information from pre-migration. While this doesn't affect the new network adapter created post-migration and won't cause IP conflicts, the script doesn't currently delete this old registration, so it remains visible. Upgrade to v4.0 wherein the migration process removes the orphaned network device from registry and device manager.
 
 * *For Linux VMs*
-** The prepare script makes a copy of the network config details (IP address space, routes, DNS servers, network device names) and depending on the Linux distro identify the networking type used and apply the IP settings. The network reassignment script is set a cron job using crontab and triggered on boot. For instance, the cronjob will execute the script (after the migration) on the instance to reapply the network settings, be it a single NIC or multiple NICs based on the blueprint mapping. 
+** The prepare script makes a copy of the network config details (IP address space, routes, DNS servers, network device names) and depending on the Linux distribution identify the networking type used and apply the IP settings. The network reassignment script is set a cron job using crontab and triggered on boot. For instance, the cronjob will execute the script (after the migration) on the instance to reapply the network settings, be it a single NIC or multiple NICs based on the blueprint mapping. 
 
 * In certain scenarios, the converted VMs will have interface names like eth0 or ensp0 instead of ens192 or 33 which was on the source side. In this case, the script will update the network config details to match the new interface names. If predictable names are in use (like modern systems) along with proper udev matching rules and the interface name is retained on the target hypervisor side, the script will skip the network side of it and only remove VMware tools and then reboot the VM.
 +
@@ -87,7 +87,7 @@ Once initiated, the workflow activates, and the conversion process follows the o
 
 image::shift-toolkit-031.png["Dialog showing VM migration process"]
 
-Note: We recommend that no more than ten conversions be triggered parallelly from the same source to the same destination
+Note: We recommend that no more than ten conversions be triggered in parallel from the same source to the same destination
 
 image::shift-toolkit-032.png["Dialog showing VM migration process"]
 

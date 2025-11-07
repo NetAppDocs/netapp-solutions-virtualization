@@ -227,7 +227,7 @@ Note: In case of OpenShift, the PVCs are created using Trident CSI and there is 
 
 . Under VM details, provide service account and valid user credentials for each OS type. This is used to connect to the virtual machine to create and run certain scripts that are necessary for removing VMware tools and backing up IP configuration details.
 .. For Windows based OS, it is recommended to use a user with local administrator privileges. Domain credential can also be used, however ensure there is a user profile existing on the VM before conversion, otherwise domain credentials won’t work as it would look for domain authentication when there is no network connected. 
-.. In case of Linux distro-based guest VMs, provide a user that can execute sudo commands without password meaning the user should be part of the sudoers list or added as a new configuration file to the /etc/sudoers.d/ folder.
+.. In case of Linux distribution-based guest VMs, provide a user that can execute sudo commands without password meaning the user should be part of the sudoers list or added as a new configuration file to the /etc/sudoers.d/ folder.
 +
 image::shift-toolkit-074.png["Dialog of the Create New Blueprints user interface"]
 +
@@ -247,7 +247,7 @@ Make sure the following requirements are met for this functionality to work:
 * For VMware VMs, ensure that VMware Tools are installed.
 * For Hyper-v as the source hypervisor, ensure Integration services is enabled and configured.
 * For OLVM and OpenShift as the target hypervisor, ensure to mount the virtIO ISO file to the Windows VMs.
-* Ensure the preparation script is run on the source VM by an account with administrator privileges on windows OS and with sudo privileges with no password option on Linux based distro OS to create cron jobs.
+* Ensure the preparation script is run on the source VM by an account with administrator privileges on windows OS and with sudo privileges with no password option on Linux based distribution OS to create cron jobs.
 
 . The next step is VM configuration. 
 * Optionally resize the VMs CPU/RAM parameters which can be very helpful for resizing purposes. 

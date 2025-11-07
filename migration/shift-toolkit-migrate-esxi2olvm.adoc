@@ -41,7 +41,7 @@ Note: The virtual machines should be powered OFF before triggering migration
 +
 Note: The VMware tools removal happens on the destination hypervisor once the VMs are powered ON
 
-* For invoke-vmscript for preparing the VM, use local administrator for Windows OS and for Linux distros, use a user who has permissions to execute commands without password prompt.
+* For invoke-vmscript for preparing the VM, use local administrator for Windows OS and for Linux distributions, use a user who has permissions to execute commands without password prompt.
 * In case of Windows VMs, mount the virtIO ISO to the VM, otherwise preparation will fail). The VirtIO ISO driver can be downloaded from here.  The script will use the drive path and copy the files.
 ** Ensure the ISO specified in the link is used as the preparation script use .msi package to install the drivers and qemu-guest-agents.
 Once the pre-requisites are in place, login to Shift toolkit UI and configure the site with OLVM as the destination hypervisor. To add, click on “Add New Site” and select “Destination”.
@@ -236,7 +236,7 @@ Note: VMs are created under “Default” cluster
 
 ==== Booting VM for the first time
 
-Depending on the Virtual Machine OS, and Shift toolkit will auto assign the VM boot option, along with the storage controller interface.  In case of Linux distros, VirtIO or VirtIO scsi is used. And for Windows, the VM is powered ON with SATA interface and then the scheduled script auto installs VirtIO drivers and then change the interface to VirtIO. The networks are assigned accordingly based on the selection.
+Depending on the Virtual Machine OS, and Shift toolkit will auto assign the VM boot option, along with the storage controller interface.  In case of Linux distributions, VirtIO or VirtIO scsi is used. And for Windows, the VM is powered ON with SATA interface and then the scheduled script auto installs VirtIO drivers and then change the interface to VirtIO. The networks are assigned accordingly based on the selection.
  
 image::shift-toolkit-212.png["Image showing the migrated VMs in the Oracle user interface"]
 

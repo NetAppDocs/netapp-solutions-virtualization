@@ -50,7 +50,7 @@ Note: The VMware tools removal happens on the destination hypervisor once the VM
 
 * For invoke-vmscript for preparing the VM, use local administrator for Windows OS and for Linux distros, use a user who has permissions to execute commands without password prompt.
 
-Once the pre-requisites are in place, login to Shift toolkit UI and configure the site with Hyper-V as the destination hypervisor. To add, click on “Add New Site” and select “Destination”.
+Once the pre-requisites are in place, login to Shift toolkit UI and link:https://docs.netapp.com/us-en/netapp-solutions-virtualization/migration/shift-toolkit-ui.html#run-shift-toolkit[configure] the site with Hyper-V as the destination hypervisor. To add, click on “Add New Site” and select “Destination”.
 
 === Destination
 
@@ -238,7 +238,7 @@ image::shift-toolkit-324.png["Dialog showing the step above"]
 
 . Under VM details, provide service account and valid user credentials for each OS type. This is used to connect to the virtual machine to create and run certain scripts that are necessary for removing VMware tools and backing up IP configuration details.
 .. For Windows based OS, it is recommended to use a user with local administrator privileges. Domain credential can also be used, however ensure there is a user profile existing on the VM before conversion, otherwise domain credentials won’t work as it would look for domain authentication when there is no network connected. 
-.. In case of Linux distro-based guest VMs, provide a user that can execute sudo commands without password meaning the user should be part of the sudoers list or added as a new configuration file to the /etc/sudoers.d/ folder.
+.. In case of Linux distribution-based guest VMs, provide a user that can execute sudo commands without password meaning the user should be part of the sudoers list or added as a new configuration file to the /etc/sudoers.d/ folder.
 +
 image::shift-toolkit-325.png["Dialog showing the step above"]
 
@@ -250,7 +250,7 @@ Make sure the following requirements are met for this functionality to work:
 +
 .. Ensure the VMs are powered on during the prepareVM phase and up to the scheduled migration time.
 .. For VMware VMs, ensure that VMware Tools are installed.
-.. Ensure the preparation script is run on the source VM by an account with administrator privileges on windows OS and with sudo privileges with no password option on Linux based distro OS to create cron jobs.
+.. Ensure the preparation script is run on the source VM by an account with administrator privileges on windows OS and with sudo privileges with no password option on Linux based distribution OS to create cron jobs.
 
 . The next step is VM configuration. 
 .. Optionally resize the VMs CPU/RAM parameters which can be very helpful for resizing purposes. 
@@ -288,7 +288,7 @@ image::shift-toolkit-330.png["Dialog showing the step above"]
 +
 Note: For a Linux source VM running CentOS or Red Hat, Shift toolkit is intelligent to automatically install the necessary Hyper-V drivers. These drivers must be present in the source VM before the disk conversion to ensure the VM can boot successfully after the conversion.
 +
-Note: For detailed information, refer System stucked in dracut after the migration of a RHEL VM to hyper-v
+Note: For detailed information, refer to link:https://access.redhat.com/solutions/3465011[System stuck in dracut after the migration of a RHEL VM to hyper-v].
 +
 Once the prepareVM job completes successfully (as shown in the screenshot below), the VMs are ready for migration, and the blueprint status will update to "Active."
 +
@@ -316,14 +316,14 @@ The high-level steps performed are as follows:
 
 === Factors to know
 
-Before initiating the migration, make sure all the pre-requisites are met (which is covered in detail in this section). Here's a quick checklist for a recap:
+Before initiating the migration, make sure all the pre-requisites are met. Here's a quick checklist for a recap:
 
 * Ensure the Shift VM is part of the domain
 * Ensure CIFS share is configured with appropriate permissions
 * The qtree used for migration or conversion have the right security style
 * As a quick test, try creating a VM using Hyper-V manager from any of the Hyper-V host within the cluster and place the VHDX on the CIFS share (referred in bullet – a). Try the same from Shift toolkit VM by adding Hyper-V management tools (either via “Programs and Features” or using “PowerShell” - add-windowsfeature rsat-hyper-v-tools)
 
-Note: If there are failures, enable delegation using any authentication protocol.
+Note: If there are failures, link:https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/manage/remotely-manage-hyper-v-hosts[enable delegation using any authentication protocol].
 
 To trigger Migrate workflow with the configuration specified in the Blueprint, click on Migrate.
 
@@ -333,7 +333,7 @@ Once initiated, the workflow activates, and the conversion process follows the o
 
 image::shift-toolkit-334.png["Dialog showing the step above"]
 
-Note: We recommend that no more than ten conversions be triggered parallelly from the same ESXi source to the same Hyper-V destination.
+Note: We recommend that no more than ten conversions be triggered in parallel from the same ESXi source to the same Hyper-V destination.
 
 image::shift-toolkit-335.png["Dialog showing the step above"]
 
@@ -356,4 +356,4 @@ settings.
 
 Note: After conversion, all the VM disks on Windows OS except for the OS disk will be offline. This is because the NewDiskPolicy parameter is set to offlineALL on VMware VMs by default. The issue is caused by the default Microsoft Windows SAN policy. This policy is designed to prevent the activation of LUNs when booting Windows Server if they are being accessed by multiple servers. This is done to avoid any potential data corruption issues. This can be handled by running a PowerShell command: Set-StorageSetting -NewDiskPolicy OnlineAll
 
-Note: Shift toolkit uses cron job that executes on boot for Linux based distros. There are no ssh connections or equivalent created for Linux based VMs once the VMs are bought on Hyper-V hosts.
+Note: Shift toolkit uses cron job that executes on boot for Linux based distributions. There are no ssh connections or equivalent created for Linux based VMs once the VMs are bought on Hyper-V hosts.

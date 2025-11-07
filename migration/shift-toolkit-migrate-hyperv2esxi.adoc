@@ -37,7 +37,7 @@ Virtual Machine requirements:
 +
 Note: The virtual machines should be powered OFF before triggering migration
 
-* For preparing the VM, use local administrator for Windows OS and for Linux distros, use a user who has permissions to execute commands without password prompt. Shift toolkit uses PowerShell direct for Windows VMs and SSH for Linux based VMs.
+* For preparing the VM, use local administrator for Windows OS and for Linux distributions, use a user who has permissions to execute commands without password prompt. Shift toolkit uses PowerShell direct for Windows VMs and SSH for Linux based VMs.
 
 Once the pre-requisites are in place, login to Shift toolkit UI and configure the site with VMware as the destination hypervisor. To add, click on “Add New Site” and select “Destination”.
 
@@ -220,7 +220,7 @@ image::shift-toolkit-369.png["Screenshot showing the step above"]
 
 . Under VM details, provide service account and valid user credentials for each OS type. This is used to connect to the virtual machine to create and run certain scripts that are necessary for connecting to the guest OS, backing up IP configuration details and copying VMware tools installer files that will be used for installation once the VM is powered ON the VMware side.
 .. For Windows based OS, it is recommended to use a user with local administrator privileges. Domain credential can also be used, however ensure there is a user profile existing on the VM before conversion, otherwise domain credentials won’t work as it would look for domain authentication when there is no network connected. 
-.. In case of Linux distro-based guest VMs, provide a user that can execute sudo commands without password meaning the user should be part of the sudoers list or added as a new configuration file to the /etc/sudoers.d/ folder.
+.. In case of Linux distribution-based guest VMs, provide a user that can execute sudo commands without password meaning the user should be part of the sudoers list or added as a new configuration file to the /etc/sudoers.d/ folder.
 +
 image::shift-toolkit-370.png["Screenshot showing the step above"]
 
@@ -232,7 +232,7 @@ Make sure the following requirements are met for this functionality to work:
 +
 * Ensure the VMs are powered on during the prepareVM phase and up to the scheduled migration time.
 * For Hyper-V VMs, ensure that Hyper-V integration services is enabled and installed.
-* Ensure the preparation script is run on the source VM by an account with administrator privileges on windows OS and with sudo privileges with no password option on Linux based distro OS to create cron jobs.
+* Ensure the preparation script is run on the source VM by an account with administrator privileges on windows OS and with sudo privileges with no password option on Linux based distribution OS to create cron jobs.
 * Ensure SSH is allowed on Linux based guest VMs. For windows VM, PowerShell direct is used.
 
 . The next step is VM configuration. 
@@ -257,7 +257,7 @@ Note: While scheduling, choose a date that is at least 30 minutes ahead of the c
 +
 image::shift-toolkit-373.png["Screenshot showing the step above"]
 +
-This job runs a script using PowerShell Direct (for Windows) or SSH (for Linux distros) method to copy the necessary scripts for removing VMware tools and backing up network configuration details, including IP address, routes, and DNS information, which will be used to maintain the same settings on the target VM. 
+This job runs a script using PowerShell Direct (for Windows) or SSH (for Linux distributions) method to copy the necessary scripts for removing VMware tools and backing up network configuration details, including IP address, routes, and DNS information, which will be used to maintain the same settings on the target VM. 
 
 .. For Windows-based operating systems, the default location where the preparation scripts are stored is the “C:\NetApp”  folder. 
 +

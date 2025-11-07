@@ -43,7 +43,7 @@ Use the Shift Toolkit to migrate VMs between virtualization platforms. The proce
 Note: The virtual machines should be powered OFF before triggering migration
 Note: The VMware tools removal happens on the destination hypervisor once the VMs are powered ON
 
-* For invoke-vmscript for preparing the VM, use local administrator for Windows OS and for Linux distros, use a user who has permissions to execute commands without password prompt.
+* For invoke-vmscript for preparing the VM, use local administrator for Windows OS and for Linux distributions, use a user who has permissions to execute commands without password prompt.
 * In case of Windows VMs, mount the virtIO ISO to the VM, otherwise preparation will fail). The VirtIO ISO driver can be downloaded from link:https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.271-1/virtio-win-0.1.271.iso[here].  The script will use the drive path and copy the files.
 ** Ensure the ISO specified in the link is used as the preparation script use .msi package to install the drivers and qemu-guest-agents.
 
@@ -167,7 +167,7 @@ Make sure the following requirements are met for this functionality to work:
 +
 .. Ensure the VMs are powered on during the prepareVM phase and up to the scheduled migration time.
 .. For VMware VMs, ensure that VMware Tools are installed.
-.. Ensure the preparation script is run on the source VM by an account with administrator privileges on windows OS and with sudo privileges with no password option on Linux based distro OS to create cron jobs.
+.. Ensure the preparation script is run on the source VM by an account with administrator privileges on windows OS and with sudo privileges with no password option on Linux based distribution OS to create cron jobs.
 
 . The next step is VM configuration. 
 .. Optionally resize the VMs CPU/RAM parameters which can be very helpful for resizing purposes. 
@@ -255,7 +255,7 @@ Note: VMs will be created under “Default” namespace.
 
 ==== Booting VM for the first time
 
-Depending on the Virtual Machine OS, and Shift toolkit will auto assign the VM boot option, along with the storage controller interfaces.  In case of Linux distros, VirtIO or VirtIO scsi is used. And for Windows, the VM is powered ON with SATA interface and then the scheduled script auto installs VirtIO drivers and then change the interface to VirtIO. The networks are assigned accordingly based on the selection.
+Depending on the Virtual Machine OS, and Shift toolkit will auto assign the VM boot option, along with the storage controller interfaces.  In case of Linux distributions, VirtIO or VirtIO scsi is used. And for Windows, the VM is powered ON with SATA interface and then the scheduled script auto installs VirtIO drivers and then change the interface to VirtIO. The networks are assigned accordingly based on the selection.
  
 image::shift-toolkit-115.png["Image of the Red Hat OpenShift VM migration user interface"]
 
