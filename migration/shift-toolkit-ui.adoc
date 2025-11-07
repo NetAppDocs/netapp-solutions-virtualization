@@ -272,6 +272,7 @@ Note: While scheduling, choose a date that is at least 30 minutes ahead of the c
 image::shift-toolkit-077.png["Dialog of the Resource Group user interface"]
 +
 This job runs a script using invoke-VMScript method to copy the necessary scripts for removing VMware tools and backing up network configuration details, including IP address, routes, and DNS information, which will be used to maintain the same settings on the target VM. 
++
 .. For Windows-based operating systems, the default location where the preparation scripts are stored is the “C:\NetApp”  folder. 
 +
 image::shift-toolkit-078.png["Dialog of the Resource Group user interface"]
