@@ -232,6 +232,7 @@ Email notification can be configured to send alerts about discovery, conversion 
 The email Notification settings are under the Settings pane (Settings > Platform Settings > Email configuration). 
 
 Procedure to enable notifications:
+
 . Login to Shift toolkit UI 
 . Browse to Settings > Platform settings 
 . Select Email notifications and update SMTP details including SMTP server address, port, username and password
