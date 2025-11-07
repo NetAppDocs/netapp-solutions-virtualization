@@ -24,17 +24,13 @@ entries:
           - title: "Migrate VMs from VMware ESXi to Oracle Linux Virtualization Manager (OLVM)"
             url: /migration/shift-toolkit-migrate-esxi2olvm.html
       - title: "Convert VMs using Shift Toolkit"
-        entries:
-          - title: "Overview"
-            url: /migration/shift-toolkit-conversion.html
-          - title: "Convert VMs from VMware ESX to Microsoft Hyper-V"
-            url: /migration/shift-toolkit-convert-esx2hyperv.html
-          - title: "Convert VMs from VMware ESX to KVM compatible hypervisors (QCOW2)"
-            url: /migration/shift-toolkit-convert-esx2qcow2.html
-          - title: "Convert VMs from Microsoft Hyper-V to VMware ESX"
-            url: /migration/shift-toolkit-convert-hyperv2esx.html
-          - title: "Convert VMs from VMware ESX to KVM"
-            url: /migration/shift-toolkit-convert-esx2kvm.html
+        url: /migration/shift-toolkit-conversion.html
+      - title: "Monitoring and dashboard"
+        url: /migration/shift-toolkit-monitor.html
+      - title: "Advanced Settings"
+        url: /migration/shift-toolkit-settings.html
+      - title: "Migrating from SAN environments"
+        url: /migration/shift-toolkit-san.html
       - title: "Next steps"
         url: /migration/shift-toolkit-summary.html
 #

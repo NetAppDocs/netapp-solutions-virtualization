@@ -1,0 +1,22 @@
+---
+sidebar: sidebar
+permalink: migration/shift-toolkit-monitor.html
+keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox
+summary: 
+---
+
+= Monitoring and dashboard for the Shift Toolkit
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Monitor the status of the jobs using Job Monitoring.
+
+image::shift-toolkit-190.png["Dialog of the jobs running in the Shift Toolkit"]
+
+With the intuitive UI, confidently evaluate the status of migration, conversion and blueprints. This enables administrators to swiftly identify successful, failed, or partially failed plans along with the number of VMs migrated or converted.
+
+image::shift-toolkit-191.png["Dialog of the jobs running in the Shift Toolkit"]

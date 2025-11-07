@@ -1,0 +1,22 @@
+---
+sidebar: sidebar
+permalink: migration/shift-toolkit-san.html
+keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox
+summary: 
+---
+
+= Migrating from SAN environments
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+As a key requirements of Shift toolkit, the VMs to be converted must reside in a NAS environment (NFS for ESX). If the VMs reside in a SAN environment (iSCSI, FC, FCoE, NVMeFC), then they must be migrated to a NAS environment before conversion.
+
+image::shift-toolkit-260.png["Diagram showing the migration from a SAN environment"]
+
+The approach above depicts a typical SAN environment in which VMs are stored in a SAN datastore. The VMs to be converted from ESX to Hyper-V along with their disks are first migrated to an NFS data-store with VMware vSphere Storage vMotion. Shift toolkit uses FlexClone to convert the VMs from ESX to Hyper-V. The converted VMs (along with their disks) reside on a CIFS share. The converted VMs (along with their disks) are migrated back to the SAN enabled CSV with Hyper-V Storage Live Migration.
+
+Note: The live VM migration might fail if nodes have different process capability sets. This can be handled by setting “Migrate to a physical computer with a different processor”. This script is available under script block.
