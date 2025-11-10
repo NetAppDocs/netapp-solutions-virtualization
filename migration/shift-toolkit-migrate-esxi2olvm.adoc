@@ -2,10 +2,10 @@
 sidebar: sidebar
 permalink: migration/shift-toolkit-migrate-esxi2olvm.html
 keywords: netapp, vmware, esxi, vm, migration, virtualization, oracle, linux, olvm
-summary: 
+summary: "Migrate VMs from VMware ESXi to Oracle Linux Virtualization Manager using the Shift Toolkit by preparing VMs, converting disk formats, and configuring the target environment."
 ---
 
-= Migrate VMs from VMware ESXi to Oracle Linux Virtualization Manager (OLVM) using the Shift Toolkit
+= Migrate VMs from VMware ESXi to Oracle Linux Virtualization Manager
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -13,235 +13,306 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-Use the Shift Toolkit to migrate VMs between virtualization platforms. The process involves preparing the VMs, converting disk formats, and configuring network settings on the target environment. 
+Migrate VMs from VMware ESXi to Oracle Linux Virtualization Manager (OLVM) using the Shift Toolkit by preparing VMs, converting disk formats, and configuring the target environment.
 
-== Prerequisites
+The Shift Toolkit enables VM migration between virtualization platforms through disk format conversion and network reconfiguration on the destination environment.
 
-=== Oracle Virtualization 
+== Before you begin
 
-* Oracle Linux Virtualization Manager with Oracle Linux KVM hosts added to the datacenter and ONTAP NFS storage added as storage domain.
-** Administrator level privileges on the cluster 
-** Oracle Linux Virtualization Manager and VDSM releases are >= 4.5
-** Oracle Linux Virtualization Manager (destination) hosts are network reachable
+Verify that the following prerequisites are met before starting the migration.
+
+.Oracle Linux Virtualization Manager requirements
+
+* Oracle Linux Virtualization Manager with Oracle Linux KVM hosts added to the datacenter
+* ONTAP NFS storage added as storage domain
+* Administrator level privileges on the cluster
+* Oracle Linux Virtualization Manager and VDSM releases are >= 4.5
+* Oracle Linux Virtualization Manager (destination) hosts are network reachable
 * NFSv3 Storage domain configured with the appropriate volume and qtree
 ** Ensure read-write access to the vdsm user (UID 36) and kvm group (GID 36) is allowed
-* Networks should be configured with the right vLANs
+* Networks configured with the appropriate VLANs
 
-=== Virtual Machine requirements:
+.VMware requirements
 
-* Ensure the VM VMDKs are placed on NFSv3 volume (all VMDKs for a given VM should be part of the same volume). 
-* VMware tools should be running on guest VMs for successful VM preparation
-* Ensure the VMs that needs to be migrated are in a RUNNING state for preparation
-* Shift toolkit performs VM preparation by injecting scripts to:
-** Add VirtIO drivers
-** Remove VMware tools 
-** Backup IP address, routes and DNS information
+* VM VMDKs are placed on NFSv3 volume (all VMDKs for a given VM should be part of the same volume)
+* VMware tools are running on guest VMs
+* VMs to be migrated are in a RUNNING state for preparation
+* VMs must be powered off before triggering migration
+* VMware tools removal happens on the destination hypervisor once VMs are powered on
+
+.Guest VM requirements
+
+* For Windows VMs: Use local administrator credentials
+* For Linux VMs: Use a user with permissions to execute sudo commands without password prompt
+* For Windows VMs: Mount the VirtIO ISO to the VM (download from link:https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.271-1/virtio-win-0.1.271.iso[here])
 +
-Note: The virtual machines should be powered OFF before triggering migration
+NOTE: The preparation script uses the .msi package to install drivers and qemu-guest-agents.
+
+== Step 1: Add the destination site (OLVM)
+
+Add the destination Oracle Linux Virtualization Manager environment to the Shift Toolkit.
+
+.Steps
+
+. Click *Add New Site* and select *Destination*.
 +
-Note: The VMware tools removal happens on the destination hypervisor once the VMs are powered ON
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-200.png["Select destination"]
+====
 
-* For invoke-vmscript for preparing the VM, use local administrator for Windows OS and for Linux distributions, use a user who has permissions to execute commands without password prompt.
-* In case of Windows VMs, mount the virtIO ISO to the VM, otherwise preparation will fail). The VirtIO ISO driver can be downloaded from here.  The script will use the drive path and copy the files.
-** Ensure the ISO specified in the link is used as the preparation script use .msi package to install the drivers and qemu-guest-agents.
-Once the pre-requisites are in place, login to Shift toolkit UI and configure the site with OLVM as the destination hypervisor. To add, click on “Add New Site” and select “Destination”.
-
-== Set up the destination
-
-image::shift-toolkit-200.png["Image of the select destination user interface"]
-
-* Destination Site Details
-** Site Name - Provide a name for the site
-** Hypervisor – Select OLVM as the target
-** Site Location – Select the default option
-** Connector – Select the default selection
-
-Once filled, click Continue.
-
-image::shift-toolkit-201.png["Image of the destination site details user interface"]
-
-Based on the selection, fill in the necessary details. 
-
-* Destination OLVM details
-** Endpoint - IP address or FQDN of Virtualization Manager
-** Username - username to access (in format: username@profile) 
-*** For instance, admin@internal
-** Password – Password to access Virtualization Manager
-
-Select “Accept Self signed certificate” and click Continue.
-
-image::shift-toolkit-202.png["Image of the destination OLVM details user interface"]
-
-Once done, click “Create Site”
-
-Note: The source and destination volume will be the same as the disk format conversion happens at the volume level and within the same volume.
-
-image::shift-toolkit-203.png["Image showing the destination OLVM details"]
-
-== Create resource groups
-
-Next step is to group the required VMs into their migration groups as resource groups. 
-
-For detailed steps, refer to the section link:https://docs.netapp.com/us-en/netapp-solutions-virtualization/migration/shift-toolkit-ui.html#resource-groupings[Resource groupings].
-
-Note: Ensure the Qtrees are provisioned (as mentioned in the pre-requisite section) before creating the resource groups. 
-
-To start creating resource groups, click on the “Create New Resource Group” menu item.
-
-. Access Resource groups, click on “Create New Resource Group”.
-. On the “New resource group”, select the Source site from the dropdown and click “Create”
-. Provide Resource Group Details and select the workflow. The workflow provides two options 
-.. Clone based Migration – performs end to end migration of the VM from source hypervisor to destination hypervisor. 
-.. Clone based Conversion – Performs conversion of the disk format to the selected hypervisor type. 
-. Click on “Continue”
-. Select appropriate VMs using the search option. The default filter option is “Datastore”.
+. Enter the destination site details:
 +
-Note: Move the VMs to convert or migrate to a designated datastore on a newly created ONTAP SVM before conversion. This helps isolating the production NFS datastore and the designated datastore can be used for staging the virtual machines.
-Note: The datastore dropdown in this context will only show NFSv3 datastores. NFSv4 datastores will not be displayed.
+* *Site Name*: Provide a name for the site
+* *Hypervisor*: Select OLVM
+* *Site Location*: Select the default option
+* *Connector*: Select the default selection
 
-. Update the migration details by selecting “Destination Site”, Destination OLVM entry” and Datastore to Qtree mapping. 
+. Click *Continue*.
 +
-image::shift-toolkit-204.png["Image showing the migration details interface"]
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-201.png["Destination site details"]
+====
+
+. Enter the OLVM details:
 +
-Note: Make sure that the destination path (where the converted VMs are stored) is set to a qtree when converting VMs from ESX to OLVM. Also ensure this qtree is added the storage domain.
+* *Endpoint*: IP address or FQDN of Virtualization Manager
+* *Username*: Username in format username@profile (for example, admin@internal)
+* *Password*: Password to access Virtualization Manager
+
+. Select *Accept Self signed certificate* and click *Continue*.
 +
-Note: Multiple qtrees can be created and used for storing the converted VM disks accordingly.
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-202.png["Destination OLVM details"]
+====
 
-. Select the Boot Order and Boot delay (secs) for all the selected VMs. Set the order of power on sequence by selecting each virtual machine and setting up the priority for it. 3 is the default value for all virtual machines.
-. Click on “Create Resource Group”.
+. Click *Create Site*.
 +
-image::shift-toolkit-205.png["Image showing the resource group details"]
-
-== Blueprints
-
-To migrate or convert virtual machines, a plan is necessary. This involves:
-
-* Selecting the Source and Destination OLVM from the dropdown menus.
-* Choosing Resource Groups to include in the blueprint.
-* Defining Application Power-On Order, such as:
-* Domain Controllers
-* Tier-1 Applications
-* Tier-2 Applications
-
-To create the blueprint, navigate to the “Blueprints” tab and click on “Create New Blueprint”. 
-
-. Access Blueprints, click on “Create New Blueprint”.
-. On the “New Blueprint”, provide a name for plan and add necessary host mappings by selecting Source Site > associated vCenter, Destination Site and the associated OLVM target.  
-. Once mappings are done, select the cluster and host mapping.
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-203.png["Destination OLVM creation"]
+====
 +
-image::shift-toolkit-206.png["Image showing the blueprint details"]
+NOTE: The source and destination volume will be the same as the disk format conversion happens at the volume level within the same volume.
 
-. Select Resource Group Details and click on “Continue”
-. Set Execution Order for Resource Group. This option enables to select the sequence of operations when multiple resource groups exist. 
-. Once done, select Network Mapping to the appropriate logical networks.  The networks should already be provisioned within OLVM with the appropriate VLAN tagging.
+== Step 2: Create resource groups
+
+Organize VMs into resource groups to preserve boot order and boot delay configurations.
+
+.Before you begin
+
+* Ensure qtrees are provisioned as specified in the prerequisites
+* Move VMs to a designated datastore on a newly created ONTAP SVM before conversion to isolate production NFS datastores from the staging area
+
+.Steps
+
+. Navigate to *Resource Groups* and click *Create New Resource Group*.
+. Select the source site from the dropdown and click *Create*.
+. Provide resource group details and select the workflow:
 +
-image::shift-toolkit-207.png["Image showing the network mapping details"]
+* *Clone based Migration*: Performs end-to-end migration from source to destination hypervisor
+* *Clone based Conversion*: Converts disk format to the selected hypervisor type
+
+. Click *Continue*.
+. Select VMs using the search option (default filter is "Datastore").
 +
-Note: For test migration, “Do no configure Network” is the default selection and Shift toolkit does not perform IP address assignment. Once the disk is converted and virtual machine is bought on OLVM side, manually assign the bubble logical network to avoid any colliding with production network.
+NOTE: The datastore dropdown only shows NFSv3 datastores. NFSv4 datastores are not displayed.
 
-. Based on the selection of VMs, storage mappings will be automatically selected.
+. Update migration details:
 +
-Note: Make sure the qtree is provisioned beforehand and the necessary permissions are assigned so the virtual machine can be created and powered ON from NFS volume.
-
-. Under VM details, select configuration details, provide service account and valid user credentials for each OS type. This is used to connect to the virtual machine to create and run certain scripts that are necessary for adding VirtIO drivers, removing VMware tools and backing up IP configuration details.
-.. For Windows based OS, it is recommended to use a user with local administrator privileges. Domain credential can also be used. 
-.. In case of Linux distro-based guest VMs, provide a user that can execute sudo commands without password meaning the user should be part of the sudoers list or added as a new configuration file to the /etc/sudoers.d/ folder.
+* Select *Destination Site*
+* Select *Destination OLVM entry*
+* Configure Datastore to Qtree mapping
 +
-image::shift-toolkit-208.png["Image showing the configuration mapping details"]
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-204.png["Migration details"]
+====
 +
-Note: The Configuration selection allows to select the disk image format and skip override prepareVM. In case of disk image format, the workflow defaults to QCOW2, however if RAW format is required, it can be selected. The override prepareVM allows to skip the preparation of the VM, which allows administrators to run homegrown scripts to make the VM ready for migration. If selected, Shift toolkit will not inject any scripts or add the VirtIO drivers.
+NOTE: Ensure the destination path (where the converted VMs are stored) is set to a qtree when converting VMs from ESXi to OLVM. Also ensure this qtree is added to the storage domain. Multiple qtrees can be created and used for storing converted VM disks.
 
-. Again under VM details, select the relevant IP config option. By default, “Do not configure” is selected. 
-.. To migrate VMs with the same IPs from the source system, select “Retain IP”. 
-.. To migrate VMs using static IPs in the source system and to assign DHCP on the target VMs, then select “DHCP”.
+. Configure boot order and boot delay for all selected VMs:
 +
-Make sure the following requirements are met for this functionality to work:
+* *1*: First VM to power on
+* *3*: Default
+* *5*: Last VM to power on
+
+. Click *Create Resource Group*.
 +
-* Ensure the VMs are powered on during the prepareVM phase and up to the scheduled migration time.
-* For VMware VMs, ensure that VMware Tools are installed.
-* Ensure the preparation script is run on the source VM by an account with administrator privileges on windows OS and with sudo privileges with no password option on Linux based distro OS to create cron jobs.
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-205.png["Resource group details"]
+====
 
-. The next step is VM configuration. 
-* Optionally resize the VMs CPU/RAM parameters which can be very helpful for resizing purposes. 
-* Boot Order override: Also modify the Boot Order and Boot delay (secs) for all the selected VMs across the resource groups. This is an additional option to modify the boot order if any changes required from what was selected during Resource group boot order selection. By default, the boot order selected during resource group selection is used, however any modifications can be done at this stage. 
-* Power ON: Uncheck this option if workflow should not power ON the virtual machine. Default option is ON meaning the VM will be powered ON.
-* Remove VMware tools: Shift toolkit removes VMware tools after the conversion. This option is selected by default. This can be unselected if the plan is to execute customer’s own customized scripts.
-* VM Firmware: Shift toolkit uses the following rule of thumb and defaults to the appropriate one- BIOS > BIOS and EFI > EFI. No selection is possible for this option.
-* Retain MAC: The MAC address of the respective VMs can be retained to overcome licensing challenges for those applications relying on MAC. 
-* Service Account override: This option allows to specify a separate service account if the global one cannot be used.
+.Result
 
-. Click “Continue”.
-. In the next step, schedule the migration by selecting the checkbox to set the date and time. Make sure all the virtual machines (VMs) are prepared and powered off before the scheduled date. Once done, click on “Create Blueprint”.
+The resource group is created and ready for blueprint configuration.
+
+== Step 3: Create a migration blueprint
+
+Create a blueprint to define the migration plan, including platform mappings, network configuration, and VM settings.
+
+.Steps
+
+. Navigate to *Blueprints* and click *Create New Blueprint*.
+. Provide a name for the blueprint and configure host mappings:
 +
-Note: While scheduling, choose a date that is at least 30 minutes ahead of the current Shift VM time. This is to ensure the workflow gets enough time to prepare the VMs within the resource group.
-
-. Once the blueprint is created, a prepareVM job is initiated and it automatically runs scripts on the source VMs to prepare them for migration
+* Select *Source Site* and associated vCenter
+* Select *Destination Site* and associated OLVM target
+* Configure cluster and host mapping
 +
-image::shift-toolkit-209.png["Image showing the OLVM preparation details"]
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-206.png["Blueprint details"]
+====
 
-For detailed information on preparation steps, refer to link:https://docs.netapp.com/us-en/netapp-solutions-virtualization/migration/shift-toolkit-ui.html#blueprints[Blueprints] section.
+. Select resource group details and click *Continue*.
+. Set execution order for resource groups if multiple groups exist.
+. Configure network mapping to appropriate logical networks.
++
+NOTE: Networks should already be provisioned within OLVM with the appropriate VLAN tagging. For test migration, select "Do not configure Network" to avoid production network conflicts; manually assign network settings after conversion.
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-207.png["Network mapping"]
+====
 
-The workflow injects the scripts to update virtIO driver, qemu-agent installation, remove VMware tools, backup IP details and fstab updates. The script utilizes PowerCLI to connect to guest VMs (Linux or Windows) and updates the virtio drivers, ensuring the required drivers are present when the VM boots on the OLVM platform.
+. Review storage mappings (automatically selected based on VM selection).
++
+NOTE: Ensure the qtree is provisioned beforehand and necessary permissions are assigned so the virtual machine can be created and powered on from NFS volume.
 
-* On Windows-based operating systems, the default location for storing preparation scripts is the C:\NetApp folder.
-* On Linux-based virtual machines, the default locations are the /NetApp directory and the /opt directory.
+. Under VM details, select configuration details and provide service account credentials for each OS type:
++
+* *Windows*: Use a user with local administrator privileges (domain credentials can also be used)
+* *Linux*: Use a user that can execute sudo commands without password prompt
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-208.png["Configuration mapping details"]
+====
++
+NOTE: The configuration selection allows you to select the disk image format and skip override prepareVM. The workflow defaults to QCOW2 format, but RAW format can be selected if required. The override prepareVM option allows administrators to skip VM preparation and run custom scripts.
 
-Note: For any supported VM OSes, Shift toolkit is intelligent to automatically install the necessary VirtIO drivers. These drivers must be present in the source VM before the disk conversion to ensure the VM can boot successfully after the conversion.
+. Configure IP settings:
++
+* *Do not configure*: Default option
+* *Retain IP*: Keep same IPs from source system
+* *DHCP*: Assign DHCP on target VMs
++
+Ensure VMs are powered on during prepareVM phase and VMware Tools are installed.
 
-Once the prepareVM job completes successfully (as shown in the screenshot below), the VMs are ready for migration, and the blueprint status will update to "PrepareVM Complete."
+. Configure VM settings:
++
+* Resize CPU/RAM parameters (optional)
+* Modify boot order and boot delay
+* *Power ON*: Select to power on VMs after migration (default: ON)
+* *Remove VMware tools*: Remove VMware Tools after conversion (default: selected)
+* *VM Firmware*: BIOS > BIOS and EFI > EFI (automatic)
+* *Retain MAC*: Keep MAC addresses for licensing requirements
+* *Service Account override*: Specify separate service account if needed
 
-image::shift-toolkit-210.png["Image showing the selection of the migration menu"]
+. Click *Continue*.
+. Schedule the migration by selecting a date and time.
++
+NOTE: Schedule migrations at least 30 minutes ahead to allow time for VM preparation.
 
-Migration will now happen at the set time or can be started manually by clicking on Migrate option.
+. Click *Create Blueprint*.
 
-== Migration
+.Result
 
-Once the blueprint is created, the "Migrate" option can be initiated. During this process, the Shift Toolkit executes a series of operations to convert the disk format and then uses the converted disk to provision virtual machines on the designated OLVM host, as specified in the blueprint.
+The Shift Toolkit initiates a prepareVM job that runs scripts on source VMs to prepare them for migration.
 
-The high-level steps performed are as follows:
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-209.png["OLVM preparation details"]
+====
 
-Pre-requisite – The VMs must be turned OFF gracefully as per the planned maintenance time. 
+The preparation process:
 
-* Delete existing snapshots for all VMs in the blueprint 
-* Trigger VM snapshots for Blueprint – at source
-* Trigger volume snapshot before disk conversion
-* Convert VMDK to QCOW2 or RAW format for all VMs
-* Power ON VMs in protection group – at target
-* Register the networks on each VM
-* Remove VMware tools and assign the IP addresses using trigger script or cron job depending on the OS type
+* Injects scripts to update VirtIO drivers, install qemu-agent, remove VMware tools, backup IP details, and update fstab
+* Uses PowerCLI to connect to guest VMs (Linux or Windows) and update VirtIO drivers
+* For Windows VMs: Stores scripts in `C:\NetApp`
+* For Linux VMs: Stores scripts in `/NetApp` and `/opt`
 
-image::shift-toolkit-211.png["Image showing the migration steps user interface"]
+NOTE: For any supported VM OSes, the Shift Toolkit automatically installs necessary VirtIO drivers before disk conversion to ensure successful boot after conversion.
 
-=== Workflow - deep dive
+When prepareVM completes successfully, the blueprint status updates to "PrepareVM Complete." Migration will now happen at the scheduled time or can be started manually by clicking the *Migrate* option.
 
-Once the pre-reqs are met and the blueprint mappings are created, simply execute migration which will do the orchestration.
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-210.png["Migration menu selection"]
+====
 
-Below sections cover what steps triggered by Shift toolkit to convert the VMDK and create VMs on the OLVM side.
+== Step 4: Execute the migration
 
-==== Convert VMDK
+Trigger the migration workflow to convert VMs from VMware ESXi to Oracle Linux Virtualization Manager.
 
-Shift toolkit will automatically find the VMDKs associated with each VM including the primary boot disk. 
+.Before you begin
 
-Note: If there are multiple VMDK files, each VMDK will be converted. 
+All VMs are gracefully powered off according to the planned maintenance schedule.
 
-==== Upload the QCOW2 or RAW image to OLVM storage domain 
+.Steps
 
-With the virtual machine disk image converted to qcow2 or RAW format, Shift toolkit uploads the file to appropriate storage domain and adds each disk within . 
+. On the blueprint, click *Migrate*.
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-211.png["Migration steps"]
+====
 
-==== Create Virtual Machine
+. The Shift Toolkit takes the following actions:
++
+* Deletes existing snapshots for all VMs in the blueprint
+* Triggers VM snapshots at the source
+* Triggers volume snapshot before disk conversion
+* Converts VMDK to QCOW2 or RAW format for all VMs
++
+The Shift Toolkit automatically finds all VMDKs associated with each VM, including the primary boot disk.
++
+NOTE: If there are multiple VMDK files, each VMDK will be converted.
 
-Shift toolkit makes REST API calls to create each VM depending on the OS. 
+* Uploads the QCOW2 or RAW image to OLVM storage domain
++
+With the virtual machine disk image converted to QCOW2 or RAW format, the Shift Toolkit uploads the file to the appropriate storage domain and adds each disk.
 
-Note: VMs are created under “Default” cluster 
+* Creates virtual machines
++
+The Shift Toolkit makes REST API calls to create each VM depending on the OS.
++
+NOTE: VMs are created under the "Default" cluster.
 
-==== Booting VM for the first time
+* Powers on VMs at the target
++
+Depending on the VM OS, the Shift Toolkit auto-assigns the VM boot option along with storage controller interfaces. For Linux distributions, VirtIO or VirtIO SCSI is used. For Windows, the VM powers on with SATA interface, then the scheduled script auto-installs VirtIO drivers and changes the interface to VirtIO.
 
-Depending on the Virtual Machine OS, and Shift toolkit will auto assign the VM boot option, along with the storage controller interface.  In case of Linux distributions, VirtIO or VirtIO scsi is used. And for Windows, the VM is powered ON with SATA interface and then the scheduled script auto installs VirtIO drivers and then change the interface to VirtIO. The networks are assigned accordingly based on the selection.
- 
-image::shift-toolkit-212.png["Image showing the migrated VMs in the Oracle user interface"]
+* Registers networks on each VM
++
+Networks are assigned based on the blueprint selection.
+
+* Removes VMware tools and assigns IP addresses using trigger scripts or cron jobs
+
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-212.png["Migrated VMs in Oracle"]
+====
 
 == Video demonstration
 
-The following video demonstrates the process outlined in this article.
+The following video demonstrates the process outlined in this solution.
 
 video::13bb74ad-25b3-49c0-84b5-b3760100ad6f[panopto, title="Zero touch migration from ESX to Oracle Linux Virtualization Manager (OLVM)"]

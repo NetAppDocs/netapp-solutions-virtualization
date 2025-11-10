@@ -2,10 +2,10 @@
 sidebar: sidebar
 permalink: migration/shift-toolkit-settings.html
 keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox
-summary: 
+summary: "Configure advanced settings in Shift Toolkit to manage CredSSP authentication, enable logging and debugging, access REST APIs, and set up email notifications for migration jobs."
 ---
 
-= Advanced settings for the Shift Toolkit
+= Configure advanced settings in the Shift Toolkit
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -13,127 +13,152 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-Shift toolkit provides advanced settings that provides which can be accessed by clicking the Settings icon in the top toolbar.
+Configure advanced settings in Shift Toolkit to manage CredSSP authentication, enable logging and debugging, access REST APIs, and set up email notifications for migration jobs.
 
-image::shift-toolkit-250.png["Dialog showing how to access the advanced settings"]
+Access the advanced settings by clicking the *Settings* icon in the top toolbar.
 
-== CredSSP
+image::shift-toolkit-250.png["Settings icon in the Shift Toolkit toolbar"]
 
-Shift leverages Credential Security Service Provider (CredSSP) to manage the credentials transfer. During the conversion process, the Shift server runs a number of scripts on the guest OS of the VM being converted. The credentials to run these scripts are passed via a "double-hop" from the Shift server to the guest OS through the Hyper-V server.
+== Credential Security Service Provider (CredSSP)
 
-image::shift-toolkit-251.png["Dialog showing how to access the specified settings"]
+The Shift Toolkit uses Credential Security Service Provider (CredSSP) to manage credential transfers during the conversion process. The Shift server runs scripts on the guest operating system of the VM being converted, passing credentials through a "double-hop" from the Shift server to the guest OS through the Hyper-V server.
 
-=== Configuring the Shift server as a CredSSP client
+image::shift-toolkit-251.png["CredSSP configuration settings"]
 
-The "Advanced Settings" wizard automatically configures the Shift server as a CredSSP client. Doing so enables the Shift server to delegate credentials to the Hyper-V servers. 
+=== Configure the Shift server as a CredSSP client
 
-==== What happens behind the scenes
+The Advanced Settings wizard automatically configures the Shift server as a CredSSP client, enabling it to delegate credentials to the Hyper-V servers. 
 
-The Shift toolkit executes a series of commands to configure itself as a client, enabling it to manage Hyper-V hosts. This process involves setting up necessary configurations.
+==== Behind the scenes
 
-* Runs these commands:
-** Set-Item WSMan:\localhost\Client\TrustedHosts -Value "fqdn-of-hyper-v-host"
-** Enable-WSManCredSSP -Role client -DelegateComputer "fqdn-of-hyper-v-host"
-* Configures the following group policy:
-** Computer Configuration > Administrative Templates > System > Credentials Delegation > Allow delegating fresh credentials with NTLM-only server authentication 
-Select Enable and add wsman/fqdn-of-hyper-v-host.
+The Shift Toolkit executes the following commands and policy configurations to set itself up as a client:
 
-=== Configuring the Hyper-V server as a CredSSP server
+*Commands executed:*
 
-Use the Enable-WSManCredSSP cmdlet on Hyper-V server to configure the Hyper-V server as a CredSSP server, which enables the Hyper-V server to receive credentials from the Shift server.
+* `Set-Item WSMan:\localhost\Client\TrustedHosts -Value "fqdn-of-hyper-v-host"`
+* `Enable-WSManCredSSP -Role client -DelegateComputer "fqdn-of-hyper-v-host"`
 
-On the Hyper-V host where the virtual machines will be provisioned by Shift toolkit server, open a Windows PowerShell session as Administrator and run the following commands:
+*Group policy configured:*
 
-. Enable-PSRemoting
-. Enable-WSManCredSSP -Role server
+* Computer Configuration > Administrative Templates > System > Credentials Delegation > Allow delegating fresh credentials with NTLM-only server authentication 
++
+Enable this policy and add `wsman/fqdn-of-hyper-v-host`.
 
-== Logging
+=== Configure the Hyper-V server as a CredSSP server
 
-The Shift toolkit includes default logging, with logs retained for 30 days. Logging can be switched to debug mode upon request from support for troubleshooting purposes.
+Use the `Enable-WSManCredSSP` cmdlet on the Hyper-V server to configure it as a CredSSP server, enabling it to receive credentials from the Shift server.
 
-image::shift-toolkit-252.png["Dialog showing how to access the specified settings"]
+.Steps
+
+. On the Hyper-V host where VMs will be provisioned by the Shift Toolkit server, open a Windows PowerShell session as Administrator.
+. Run the following commands:
++
+----
+Enable-PSRemoting
+Enable-WSManCredSSP -Role server
+----
+
+== Logging and debugging
+
+The Shift Toolkit includes default logging with a 30-day retention period. Logging can be switched to debug mode upon request from support for troubleshooting purposes.
+
+image::shift-toolkit-252.png["Logging configuration settings"]
 
 == Swagger
 
-The swagger page in the Advanced setting allows interaction with available APIs. 
+The Swagger page in the advanced settings allows you to interact with the Shift Toolkit REST APIs. 
 
-image::shift-toolkit-253.png["Dialog showing how to access the specified settings"]
+image::shift-toolkit-253.png["Swagger API documentation interface"]
 
-The resources available through the Shift toolkit REST API are organized in categories, as displayed on the swagger API documentation page. A brief description of each of the resources with the base resource paths is presented below, along with additional usage considerations where appropriate.
+The Shift Toolkit REST API provides programmatic access to migration, conversion, and automation capabilities. The APIs are organized by functional workflow to help you quickly find the resources you need for specific tasks.
 
-image::shift-toolkit-254.png["Dialog showing how to access the specified settings"]
+image::shift-toolkit-254.png["API resource categories"]
+
+=== Authentication and setup APIs
+
+Use these APIs to establish connections, manage users, and configure authentication for the Shift Toolkit server.
 
 *Session*
 
-You can use this API to log into the Shift toolkit Server. This API returns a user authorization token that is used to authenticate subsequent requests.
+Manage user authentication and obtain authorization tokens for API requests:
 
 * Start a session
 * Validate a session
-* Get all session ID
+* Get all session IDs
 * End a session
-
-*Connector*
-
-* Add a connector
-* Get details of all connectors
-* Update the connector details by ID
-* Get connector details by ID
-
-*Tenant*
-
-Use APIs to perform Add and Get operations
-
-* Add tenant
-* Get all tenant
 
 *User*
 
-Use APIs to perform Add, get, change and accept operations
+Manage user accounts and permissions:
 
-* Add User
-* Get all user
-* Change password of the user
+* Add a user
+* Get all users
+* Change user password
 * Accept EULA
 
 *CredSSP*
 
-Use APIs to perform enable and get operations
+Configure Credential Security Service Provider for credential delegation:
 
-* Enable credssp
-* Get status of credssp
+* Enable CredSSP
+* Get CredSSP status
+
+*Connector*
+
+Manage connections to infrastructure components:
+
+* Add a connector
+* Get details of all connectors
+* Update connector details by ID
+* Get connector details by ID
+
+*Tenant*
+
+Manage multi-tenant configurations:
+
+* Add a tenant
+* Get all tenants
+
+=== Infrastructure management APIs
+
+Use these APIs to configure and discover your source and target environments.
 
 *Site*
 
-Use APIs to perform get, add, delete and update operations
+Manage migration sites and their associated virtual and storage environments:
 
 * Get count of sites
 * Get all site details
 * Add a site
-* Get site detail by ID
+* Get site details by ID
 * Delete a site by ID
 * Add virtual environment to a site
 * Add storage environment to a site
-* Get virtual environment detail for a site
-* Update virtual environment detail for a site
-* Delete virtual environment detail for a site
-* Get storage environment detail for a site
-* Update storage environment detail for a site
-* Delete storage environment detail for a site
+* Get virtual environment details for a site
+* Update virtual environment details for a site
+* Delete virtual environment details for a site
+* Get storage environment details for a site
+* Update storage environment details for a site
+* Delete storage environment details for a site
 
 *Discovery*
 
-Use APIs to perform discover and get operations
+Discover and inventory VMs and resources in source and target sites:
 
 * Discover source site
 * Get all discovery requests for source site
 * Discover target site
 * Get all discovery requests for target site
-* Get discovery steps for source site by Id
-* Get discovery steps for target site by Id
+* Get discovery steps for source site by ID
+* Get discovery steps for target site by ID
+
+=== VM and resource management APIs
+
+Use these APIs to inventory, organize, and manage VMs and resources for migration.
 
 *VM*
 
-Use APIs to perform get operations
+Query and manage virtual machines:
 
 * Get VMs for a site and virtual environment in source
 * Get unprotected VMs for a site and virtual environment
@@ -142,109 +167,129 @@ Use APIs to perform get operations
 
 *Resource*
 
-Use APIs to perform get operations
+View resource utilization and availability:
 
 * Get resource details for a site and virtual environment
-* Get source site resources count 
-  
+* Get source site resource count
+
 *Resource Group*
 
-Use APIs to perform add, update and get operations
+Organize VMs into protection groups for migration:
 
 * Get protection group count
 * Get all protection group details
 * Add a protection group
-* Get a protection group details by Id
-* Delete a protection group by Id
-* Update protection group details by Id
-* Get VMs of a protection group by Id
-* Get Blueprints containing the protection group
+* Get protection group details by ID
+* Delete a protection group by ID
+* Update protection group details by ID
+* Get VMs of a protection group by ID
+* Get blueprints containing the protection group
+
+=== Migration and recovery APIs
+
+Use these APIs to execute migrations, monitor compliance, and manage recovery operations.
 
 *Blueprint*
 
-Use APIs to perform add, update and get operations
+Define and manage migration blueprints:
 
-* Get Blueprint Count
-* Get all Blueprint details
-* Add a Blueprint
-* Get blueprint details by Id
-* Delete blueprint by Id
-* Update blueprint details for Id
+* Get blueprint count
+* Get all blueprint details
+* Add a blueprint
+* Get blueprint details by ID
+* Delete blueprint by ID
+* Update blueprint details for ID
 * Get VMs of a blueprint
 * Get power status of VMs present in the blueprint
-* Get blueprint Count
-* Get all blueprint details
 
 *Compliance*
 
-Use APIs to perform add and get operations
+Verify readiness and compatibility before migration:
 
 * Get compliance check result for a blueprint
 * Get compliance check final status for a blueprint
-* Add on demand new compliance check for a blueprint
+* Add on-demand compliance check for a blueprint
 
 *Execution*
 
-Use APIs to perform get operations
+Monitor migration and conversion job execution:
 
 * Get all execution details
 * Get details of execution in progress
 * Get execution count
 * Get count of executions in progress
-* Get steps for execution Id
+* Get steps for execution ID
 
 *Recovery*
 
-Use APIs to perform add and get operations
+Execute and manage migration and recovery operations:
 
-* Add new execution request for a Blueprint
-* Add retry request of execution for a Blueprint
-* Get execution statuses of all Blueprints
-* Get execution status for Blueprint ID
+* Add new execution request for a blueprint
+* Add retry request of execution for a blueprint
+* Get execution statuses of all blueprints
+* Get execution status for blueprint ID
+
+=== Automation APIs
+
+Use these APIs to extend and automate Shift Toolkit functionality.
 
 *Script Block*
 
-Use APIs to perform get and update operations
+Access and execute automation scripts:
 
 * Get all scripts metadata
-* Get script metadata by Id
+* Get script metadata by ID
 * Get all refresh metadata
 * Execute script
 
-== Script block
+== Script block and automation
 
-The script block within in Shift toolkit provides sample code that help automate, integrate and develop features via internal and external APIs available. On the Code Samples section in the script block, browse and download samples written by Shift toolkit Automation team and by the community members. Use the samples to get started with automation, management or integration tasks.
+The script block within the Shift Toolkit provides sample code to help you automate, integrate, and develop features using internal and external APIs. Browse and download samples in the Code Samples section, written by the Shift Toolkit automation team and community members. Use these samples to get started with automation, management, or integration tasks.
 
-image::shift-toolkit-255.png["Dialog showing how to access the specified settings"]
+image::shift-toolkit-255.png["Script block interface"]
 
-image::shift-toolkit-256.png["Dialog showing how to access the specified settings"]
+image::shift-toolkit-256.png["Available code samples"]
 
-Here is an example of a sample powershell script which can be used to delete a specific job within Shift UI. The capability is not exposed via workflow, however the same can accomplished via the script block. The same script is also available as a bat script that can executed easily by downloading and calling the same.
+The following example shows a PowerShell script that deletes a specific job within the Shift Toolkit UI. While this capability is not exposed through the standard workflow, it can be accomplished using the script block. The script is also available as a batch script that can be easily downloaded and executed.
 
-image::shift-toolkit-257.png["Dialog showing how to access the specified settings"]
+image::shift-toolkit-257.png["Example PowerShell script for job deletion"]
 
-The objective here is to provide sample scripts to perform day 0 and day N operations for specific hypervisors using the Shift toolkit APIs and the respective hypervisor published APIs. 
+The objective of the script block is to provide sample scripts for day 0 and ongoing operations on specific hypervisors using the Shift Toolkit APIs and the respective hypervisor published APIs. 
 
-== Email Notification & alerts
+The objective of the script block is to provide sample scripts for day 0 and ongoing operations on specific hypervisors using the Shift Toolkit APIs and the respective hypervisor published APIs.
 
-Email notification can be configured to send alerts about discovery, conversion or migration jobs to specified recipients. UI notification (aka alerts within the UI) are also available which is stored for 7 days.
+== Email notifications and alerts
 
-The email Notification settings are under the Settings pane (Settings > Platform Settings > Email configuration). 
+Configure email notifications to send alerts about discovery, conversion, or migration jobs to specified recipients. UI notifications (alerts within the interface) are also available and stored for 7 days.
 
-Procedure to enable notifications:
+Access the email notification settings from Settings > Platform Settings > Email configuration.
 
-. Login to Shift toolkit UI 
-. Browse to Settings > Platform settings 
-. Select Email notifications and update SMTP details including SMTP server address, port, username and password
-. Update the "recipient" field and select the events from the available category.
-. Once done, click Apply.
+.Steps
 
-image::shift-toolkit-258.png["Dialog showing how to access the specified settings"]
+. Log in to the Shift Toolkit UI.
+. Navigate to Settings > Platform Settings.
+. Select Email notifications and update SMTP details:
+* SMTP server address
+* Port
+* Username
+* Password
+. Update the recipient field and select the events from the available categories.
+. Click *Apply*.
 
-The screenshot above covers the breakdown for each notification category events.
+image::shift-toolkit-258.png["Email notification configuration settings"]
 
-Note: The email notification uses basic SMTP auth and Sendgrid in this release. In a future release, it will support modern authentication. 
+The screenshot shows the breakdown for each notification category and event.
 
-== Abort & revert capabilities
+NOTE: The email notification uses basic SMTP authentication and SendGrid in this release. A future release will support modern authentication. 
 
-Shift toolkit now provides an option to cancel a running job (irrespective of the step within the workflow). Once the job is cancelled, the orphaned components are cleaned up. For instance, this includes cleaning up the VM on hypervisor side including power OFF if the VMs were powered ON, removing the disk entries from the appropriate qtree or deleting the PVCs. Since Shift toolkit do not modify the source VM in any way, it is very easy to turn on the VM. There are no other rollback actions apart from simply powering the VM ON.
+NOTE: The email notification uses basic SMTP authentication and SendGrid in this release. A future release will support modern authentication.
+
+== Abort and revert capabilities
+
+The Shift Toolkit provides the option to cancel a running job at any step within the workflow. When a job is cancelled, all orphaned components are automatically cleaned up, including:
+
+* Powering off VMs on the hypervisor if they were powered on
+* Removing disk entries from the appropriate qtree
+* Deleting persistent volume claims (PVCs)
+
+Since the Shift Toolkit does not modify the source VM in any way, rollback is straightforward, simply power on the source VM. No other rollback actions are required.

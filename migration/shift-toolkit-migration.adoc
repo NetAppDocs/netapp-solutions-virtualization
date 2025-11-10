@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: migration/shift-toolkit-migration.html
 keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox
-summary: 
+summary: "Use the Shift Toolkit to migrate VMs between virtualization platforms. The process involves preparing the VMs, converting disk formats, and configuring network settings on the target environment."
 ---
 = Migrate VMs using the Shift Toolkit
 :hardbreaks:
@@ -12,89 +12,118 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-Use the Shift Toolkit to migrate VMs between virtualization platforms. The process involves preparing the VMs, converting disk formats, and configuring network settings on the target environment. 
+Use the Shift Toolkit to migrate VMs between virtualization platforms. The process involves preparing the VMs, converting disk formats, and configuring network settings on the target environment.
 
-== Supported Migrations
+== Supported migrations
 
-Shift toolkit provides flexibility in a multi-hypervisor environment by supporting bidirectional migration between the following hypervisors:
+The Shift Toolkit provides flexibility in multi-hypervisor environments by supporting bidirectional migration between the following hypervisors:
 
 * link:shift-toolkit-migrate-esxi2hyperv.html[VMware ESXi to Microsoft Hyper-V]
 * link:shift-toolkit-migrate-hyperv2esxi.html[Microsoft Hyper-V to VMware ESXi]
-* link:shift-toolkit-migrate-esxi2olvm.html[VMWare ESXi to Oracle Linux Virtualization Manager (OLVM)]
-* link:shift-toolkit-migrate-esxi2osv.html[VMWare ESXi to Red Hat OpenShift Virtualization]
+* link:shift-toolkit-migrate-esxi2olvm.html[VMware ESXi to Oracle Linux Virtualization Manager (OLVM)]
+* link:shift-toolkit-migrate-esxi2osv.html[VMware ESXi to Red Hat OpenShift Virtualization]
 
-== Migration
+* link:shift-toolkit-migrate-esxi2osv.html[VMware ESXi to Red Hat OpenShift Virtualization]
 
-Once the blueprint is created, “Migrate” option can be exercised. During migrate option, shift toolkit performs a series of steps to convert the disk format and use the converted disk to create virtual machines on Hyper-V host as defined in the blueprint. 
+== Migration workflow
 
-The high-level steps performed are as follows:
+After creating a blueprint, you can initiate the migration process. During migration, the Shift Toolkit performs a series of steps to convert disk formats and create virtual machines on the target host as defined in the blueprint.
 
-Pre-requisite: The VMs must be turned OFF gracefully as per the planned maintenance time. downtime Power OFF VMs in the protection group – at source
+The Shift Toolkit performs the following steps during migration:
 
-* Delete existing snapshots for all VMs in the blueprint 
-* Trigger VM snapshots for Blueprint – at source
-* Trigger volume snapshot before disk conversion
-* Clone and convert VMDK to VHDx format for all VMs
-* Power ON VMs in protection group – at target
-* Register the networks on each VM
-* Remove VMware tools and assign the IP addresses using trigger script or cron job depending on the OS type
+. Delete existing snapshots for all VMs in the blueprint
+. Trigger VM snapshots for the blueprint at the source
+. Trigger volume snapshot before disk conversion
+. Clone and convert VMDK to VHDx format for all VMs
+. Power on VMs in the protection group at the target
+. Register the networks on each VM
+. Remove VMware Tools and assign IP addresses using trigger scripts or cron jobs depending on the OS type
 
-=== Factors to know
+== Prerequisites
 
-Before initiating the migration, make sure all the pre-requisites are met. Here's a quick checklist for a recap:
+VMs must be powered off gracefully during the planned maintenance window. Before initiating the migration, verify that all prerequisites are met:
 
-* Ensure the Shift VM is part of the domain
+* Ensure the Shift Toolkit VM is part of the domain
 * Ensure CIFS share is configured with appropriate permissions
-* The qtree used for migration or conversion have the right security style
-* As a quick test, try creating a VM using Hyper-V manager from any of the Hyper-V host within the cluster and place the VHDX on the CIFS share (referred in bullet – a). Try the same from Shift toolkit VM by adding Hyper-V management tools (either via “Programs and Features” or using “PowerShell” - add-windowsfeature rsat-hyper-v-tools)
+* Verify the qtree used for migration or conversion has the correct security style
+* Test VM creation using Hyper-V Manager from any Hyper-V host within the cluster and place the VHDx on the CIFS share
+* Test VM creation from the Shift Toolkit VM by adding Hyper-V management tools using Programs and Features or PowerShell: `add-windowsfeature rsat-hyper-v-tools`
 
-Note: If there are failures, link:https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/manage/remotely-manage-hyper-v-hosts[enable delegation using any authentication protocol].
+NOTE: If there are failures, link:https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/manage/remotely-manage-hyper-v-hosts[enable delegation using any authentication protocol].
 
-=== Network Tips and Considerations
+== Network tips and considerations
 
-The following network considerations must be considered:
+Consider the following network requirements and behaviors when planning your migration. The Shift Toolkit automatically copies network settings from source VMs and reapplies them to migrated VMs, but interface naming and network adapter configurations may vary between Windows and Linux systems.
 
-* Ensure that the static IP addresses are available and not assigned to another VM
+.General requirement
 
-* *For Windows VMs*
-** The prepare script makes a copy of the network config details (IP address space, Gateway address, DNS servers) and trigger script (during the migration) will reapply the network settings, be it a single NIC or multiple NICs based on the blueprint mapping. 
-** After migration, windows device manager may still display the old network adapter information from pre-migration. While this doesn't affect the new network adapter created post-migration and won't cause IP conflicts, the script doesn't currently delete this old registration, so it remains visible. Upgrade to v4.0 wherein the migration process removes the orphaned network device from registry and device manager.
+* Ensure static IP addresses are available and not assigned to another VM
 
-* *For Linux VMs*
-** The prepare script makes a copy of the network config details (IP address space, routes, DNS servers, network device names) and depending on the Linux distribution identify the networking type used and apply the IP settings. The network reassignment script is set a cron job using crontab and triggered on boot. For instance, the cronjob will execute the script (after the migration) on the instance to reapply the network settings, be it a single NIC or multiple NICs based on the blueprint mapping. 
+.Windows VMs
 
-* In certain scenarios, the converted VMs will have interface names like eth0 or ensp0 instead of ens192 or 33 which was on the source side. In this case, the script will update the network config details to match the new interface names. If predictable names are in use (like modern systems) along with proper udev matching rules and the interface name is retained on the target hypervisor side, the script will skip the network side of it and only remove VMware tools and then reboot the VM.
+* The prepare script copies network configuration details (IP address space, gateway address, DNS servers)
+* The trigger script reapplies network settings during migration for single or multiple NICs based on blueprint mapping
+* After migration, Windows Device Manager may display old network adapter information from pre-migration, which doesn't affect the new adapter or cause IP conflicts
+* Upgrade to v4.0 to automatically remove orphaned network devices from the registry and Device Manager
+
+.Linux VMs
+
+* The prepare script copies network configuration details (IP address space, routes, DNS servers, network device names)
+* The script identifies the Linux distribution's networking type and applies IP settings accordingly
+* The network reassignment script is configured as a cron job using crontab and triggered on boot
+* The script reapplies network settings for single or multiple NICs based on blueprint mapping
+
+.Interface naming
+
+* Converted VMs may have interface names like `eth0` or `ensp0` instead of the source interface names (for example, `ens192` or `ens33`)
+* The script updates network configuration details to match new interface names
+* If predictable names are used with proper udev matching rules and the interface name is retained on the target hypervisor, the script skips network configuration, removes VMware Tools, and reboots the VM
+
+NOTE: The Shift Toolkit allows overriding network preparation, enabling administrators to run custom scripts for IP assignment or other configurations.
+
+.Supported networking mechanisms
+
+* NetworkManager
+* Netplan
+* ifconfig
+* wicked
+
+The Shift Toolkit retains IP addresses as specified in the blueprint.
+
+== Migration phases
+
+The following are the migration phases you will follow to migrate VMs using the Shift Toolkit.
+
+. *Prepare VM*: Prepare VMs for migration and verify that all prerequisites are completed.
+
+. *Migrate and validate*: After preparation is complete, migrate VMware VMs to the target hypervisor. 
 +
-Note: Shift toolkit allows overriding network preparation, enabling administrators to run custom scripts for IP assignment or other configurations.
+After migration completes, verify that VMs boot successfully and data has migrated properly.
 
-* Shift toolkit currently supports NetworkManager, Netplan, ifconfig and wicked mechanisms and retains the IP as specified in the blueprint.
+. *Test the migration*: Test migration simulates the migration by converting the VMDK to the appropriate format and creating VMs using the converted virtual disk file on the qtree. 
++
+Test migration does not include network mapping configuration, which should be performed manually to a test network.
 
-=== Phases and Options 
+NOTE: The Shift Toolkit does not alter the source VM except for copying scripts needed for VM preparation. This allows for swift rollback in case of conversion failures.
 
-Here are the key phases and options of the migration process.
+== Execute a migration
 
-. Prepare VM – Prepare the VMs for the migration, ensures that all prerequisites are thoroughly completed.
-. Migrate - Once the preparation is complete, select and migrate VMware VMs to Hyper-V. After the migration is complete, verify that the VMs have booted successfully, and the data has migrated properly.
-. Test Migrate - Test migration simulates the migration by converting the VMDK to appropriate format and creating VMs by using converted virtual disk file residing on the qtree. The test migration does not permit network mapping configuration; this task should typically be performed manually to a bubble network.
-
-Note: The Shift toolkit does not alter the source VM, except for copying the scripts needed for VM preparation. This allows for a swift rollback in case of conversion failures.
-
-To trigger Migrate workflow with the configuration specified in the Blueprint, click on Migrate.
+To trigger the migration workflow with the configuration specified in the blueprint, click *Migrate*.
 
 image::shift-toolkit-030.png["Dialog showing how to trigger a VM migration"]
 
-Once initiated, the workflow activates, and the conversion process follows the outlined steps to register the VM. If the VMs within the blueprint are not powered off, the Shift toolkit will prompt for a graceful shutdown before proceeding.
+Once initiated, the workflow activates and the conversion process follows the outlined steps to register the VM. If VMs within the blueprint are not powered off, the Shift Toolkit prompts for a graceful shutdown before proceeding.
 
-image::shift-toolkit-031.png["Dialog showing VM migration process"]
+image::shift-toolkit-031.png["Migration process confirmation"]
 
-Note: We recommend that no more than ten conversions be triggered in parallel from the same source to the same destination
+NOTE: NetApp recommends triggering no more than ten conversions in parallel from the same source to the same destination.
 
-image::shift-toolkit-032.png["Dialog showing VM migration process"]
+image::shift-toolkit-032.png["Migration progress"]
 
-The conversion of VMDK to any file format happens in seconds which makes this approach the fastest of all the options that are available for an additional cost. This also helps to reduce VM downtime during migration.
+The conversion of VMDK to any file format completes in seconds, making this the fastest option available. This approach helps reduce VM downtime during migration.
 
-image::shift-toolkit-033.png["Dialog showing VM migration process"]
+image::shift-toolkit-033.png["Disk conversion progress"]
 
-Once the job is complete, the status of the blueprint changes to “migration Complete”.
+Once the job completes, the blueprint status changes to "Migration Complete".
 
-image::shift-toolkit-034.png["Dialog showing VM migration process"]
+image::shift-toolkit-034.png["Migration completed status"]

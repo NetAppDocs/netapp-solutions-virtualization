@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: migration/shift-toolkit-migrate-esxi2hyperv.html
 keywords: netapp, vmware, esxi, vm, migration, virtualization, hyper-v, microsoft
-summary: 
+summary: "Migrate VMs from VMware ESXi to Microsoft Hyper-V using the Shift Toolkit by preparing VMs, converting disk formats, and configuring the target environment."
 ---
 
 = Migrate VMs from VMware ESXi to Microsoft Hyper-V using the Shift Toolkit
@@ -13,347 +13,439 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-Shift toolkit allows cross-hypervisor mobility solution to migrate virtual machines (VMs) and its files with minimal downtime and zero data copy
+Migrate VMs from VMware ESXi to Microsoft Hyper-V using the Shift Toolkit by preparing VMs, converting disk formats, and configuring the target environment.
 
-== Prerequisites
+The Shift Toolkit enables VM migration between virtualization platforms through disk format conversion and network reconfiguration on the destination environment.
 
-=== Hyper-V 
+== Before you begin
 
-Hyper-V hosts configured as standalone hosts or failover cluster. 
+Verify that the following prerequisites are met before starting the migration.
 
-Note: In the current release, SCVMM is not a supported endpoint for migration.
+.Hyper-V requirements
 
-* Hyper-V user account must have administrator privileges 
-* Hyper-V hosts are network reachable and DNS entries are up-to-date
-* Virtual switches should be configured with the appropriate trunking
-* On Hyper-V side, the virtual switch type “External” is the only supported option for network selection
-* Make sure that the NFS share (used to store the VMs to be converted) and the destination share (used to store the converted VMs) reside on the same volume.
-* To avoid access denied errors during VMs creation or VMs migrations, configure SMB Constrained Delegation using Enable-SmbDelegation 
-* For SMB share:
-** SMB 3.0 must be enabled; this is enabled by default.
-** Ensure continuously available property is enabled.
-** Export policies for SMB must be disabled on the storage virtual machine (SVM) 
-
-=== Virtual Machine requirements
-
-* Ensure the VM VMDKs are placed on NFSv3 volume (spanned VMDKs for a given VM is also supported). 
-* VMware tools should be running on guest VMs for successful VM preparation
-* Ensure the VMs that needs to be migrated are in a RUNNING state for preparation
-* Shift toolkit performs VM preparation by injecting scripts to:
-** Add drivers to correctly manage devices (specific to RHEL/CentOS, Alma Linux)
-** Remove VMware tools 
-** Backup IP address, routes and DNS information
-
-Note: The virtual machines should be powered OFF before triggering migration
-
-Note: The VMware tools removal happens on the destination hypervisor once the VMs are powered ON
-
-* For invoke-vmscript for preparing the VM, use local administrator for Windows OS and for Linux distros, use a user who has permissions to execute commands without password prompt.
-
-Once the pre-requisites are in place, login to Shift toolkit UI and link:https://docs.netapp.com/us-en/netapp-solutions-virtualization/migration/shift-toolkit-ui.html#run-shift-toolkit[configure] the site with Hyper-V as the destination hypervisor. To add, click on “Add New Site” and select “Destination”.
-
-=== Destination
-
-Once the storage and connectivity to both the source and destination hypervisors have been configured properly, begin configuring Shift toolkit to automate the migration or conversion of the virtual machines to appropriate format, leveraging the FlexClone functionality.
-
-==== Add Sites
-
-The first step is to discover and add the source and then the target Hypervisor details (both hypervisors and storage) to Shift toolkit. Open Shift toolkit in a supported browser and use the default username and the password and click on “Add Sites” from Discover > Add Sites. 
-
-image::shift-toolkit-300.png["Dialog showing the step above"]
-
-Add the following platforms:
-
-*Source*
-
-* Source Site Details
-** Site Name - Provide a name for the site
-** Hypervisor – Select VMware as the source 
-** Site Location – Select the default option
-** Connector – Select the default selection
-
-Once filled, click Continue.
-
-image::shift-toolkit-301.png["Dialog showing the step above"]
-
-* Enter the Source vCenter details.
-** Endpoint - Enter the IP address or FQDN of the vCenter server
-** Username - username to access the vCenter (in UPN format: username@domain.com)
-** vCenter Password – Password to access vCenter for performing inventory of the resources.
-** vCenter SSL Thumbprint (optional) 
-
-Select “Accept Self signed certificate” and click Continue.
-
-image::shift-toolkit-302.png["Dialog showing the step above"]
-
-* ONTAP Storage system credentials
-
-image::shift-toolkit-303.png["Dialog showing the step above"]
-
-Once added, Shift toolkit will perform an automatic discovery and display the VMs along with the relevant metadata information.  Shift toolkit will automatically detect the networks and portgroups used by the VMs and will populate them. 
-
-image::shift-toolkit-304.png["Dialog showing the step above"]
-
-Note: If any modifications are made to the source site, ensure to run the discovery to fetch the latest information. This can be done by clicking on 3 dots against the site name and click on “Discover Site”.
-
-Note: The VM inventory is auto-refreshed every 24 hours.
-
-image::shift-toolkit-305.png["Dialog showing the step above"]
-
-To view the data for a specific vCenter, go to the dashboard, click on “View VM List” against the appropriate site name. The page will display the VM inventory along with the VM attributes.
-
-image::shift-toolkit-306.png["Dialog showing the step above"]
-
-Next step is to add the destination hypervisor. To add, click on “Add New Site” and select “Destination”.
-
-*Destination*
-
-image::shift-toolkit-307.png["Dialog showing the step above"]
-
-* Destination Site Details
-** Site Name - Provide a name for the site
-** Hypervisor – Select Hyper-V as the target
-** Site Location – Select the default option
-** Connector – Select the default selection
-
-Once filled, click Continue.
-
-image::shift-toolkit-308.png["Dialog showing the step above"]
-
-Based on the hypervisor selection, fill in the necessary details. 
-
-* Destination Hyper-V details
-** Hyper-V Standalone or failover cluster manager IP address or FQDN
-** Username - username to access (in UPN format: username@domain.com or domain\administrator)
-Password – Password to access Hyper-V host or FCI instance for performing inventory of the resources.
-
-Select “Accept Self signed certificate” and click Continue.
-
-image::shift-toolkit-309.png["Dialog showing the step above"]
-
-* Once done, Click “Create Site”
-
-Note: Shift toolkit does not communicate with System Center directly in the current release.
-Note: The Hyper-V FCI and host discovery relies on DNS resolution. Ensure the hostnames should be resolvable from Shift toolkit VM. In case resolution fails, update the host file (C:\Windows\System32\drivers\etc\hosts) and retry the discovery operation. 
-
-Note: The source and destination storage system should be the same as the disk format conversion happens at the volume level and within the same volume.
-
-image::shift-toolkit-310.png["Dialog showing the step above"]
-
-Next step is to group the required VMs into their migration groups as resource groups.
-
-==== Resource Groupings
-
-Once the platforms have been added, group the VMs you want to migrate or convert into resource groups.  Shift toolkit resource groups allow you to group set of dependent VMs into logical groups that contain their boot orders and boot delays.
-
-Note: Ensure the Qtrees are provisioned (as mentioned in the pre-requisite section) before creating the resource groups. 
-
-To start creating resource groups, click on the “Create New Resource Group” menu item.
-
-. Access Resource groups, click on “Create New Resource Group”.
+* Hyper-V hosts configured as standalone hosts or failover cluster
+* Hyper-V user account with administrator privileges
+* Hyper-V hosts are network reachable with up-to-date DNS entries
+* Virtual switches configured with appropriate trunking
+* Virtual switch type "External" for network selection
+* NFS share (for VMs to be converted) and destination share (for converted VMs) on the same volume
+* SMB Constrained Delegation configured using `Enable-SmbDelegation` to avoid access denied errors
+* SMB 3.0 enabled (default)
+* Continuously available property enabled for SMB shares
+* Export policies for SMB disabled on the storage virtual machine (SVM)
 +
-image::shift-toolkit-311.png["Dialog showing the step above"]
+NOTE: SCVMM is not a supported endpoint for migration in the current release.
++
+* The Hyper-V FCI and host discovery relies on DNS resolution. Ensure hostnames are resolvable from Shift Toolkit VM. If resolution fails, update the host file (`C:\Windows\System32\drivers\etc\hosts`) and retry the discovery operation.
 
-. On the “New resource group”, select the Source site from the dropdown and click “Create”
-. Provide Resource Group Details and select the workflow. The workflow provides two options 
-.. Clone based Migration – performs end to end migration of the VM from source hypervisor to destination hypervisor. 
-.. Clone based Conversion – Performs conversion of the disk format to the selected hypervisor type. 
-+
-image::shift-toolkit-312.png["Dialog showing the step above"]
+.VMware requirements
 
-. Click on “Continue”
-. Select appropriate VMs using the search option. The default filter option is “Datastore”.
-+
-Note: Move the VMs to convert or migrate to a designated datastore on a newly created ONTAP SVM before conversion. This helps isolating the production NFS datastore and the designated datastore can be used for staging the virtual machines.
-+
-image::shift-toolkit-313.png["Dialog showing the step above"]
-+
-Note: The datastore dropdown in this context will only show NFSv3 datastores. NFSv4 datastores will not be displayed.
-+
-image::shift-toolkit-314.png["Dialog showing the step above"]
+* VM VMDKs are placed on NFSv3 volume (all VMDKs for a given VM should be part of the same volume)
+* VMware tools are running on guest VMs
+* VMs to be migrated are in a RUNNING state for preparation
+* VMs must be powered off before triggering migration
+* VMware tools removal happens on the destination hypervisor once VMs are powered on
 
-. Update the migration details by selecting “Destination Site”, Destination Hyper-V entry” and Datastore to Qtree mapping. 
-+
-image::shift-toolkit-315.png["Dialog showing the step above"]
-+
-image::shift-toolkit-316.png["Dialog showing the step above"]
-+
-Note: Make sure that the destination path (where the converted VMs are stored) is set to a qtree when converting VMs from ESX to Hyper-V. Set the destination path to the appropriate qtree.
-+
-Note: Multiple qtrees can be created and used for storing the converted VM disks accordingly.
+.Guest VM requirements
 
-. Select the Boot Order and Boot delay (secs) for all the selected VMs. Set the order of power on sequence by selecting each virtual machine and setting up the priority for it. 3 is the default value for all virtual machines.
-+
-Options are as follows: 
-1 – The first virtual machine to power on
-3 – Default
-5 – The last virtual machine to power on
-+
-image::shift-toolkit-317.png["Dialog showing the step above"]
+* For Windows VMs: Use local administrator credentials (domain credentials can also be used, however ensure a user profile exists on the VM before conversion)
+* For Linux VMs: Use a user with permissions to execute sudo commands without password prompt (user should be part of the sudoers list or added to `/etc/sudoers.d/` folder)
 
-. Click on “Create Resource Group”.
-+
-image::shift-toolkit-318.png["Dialog showing the step above"]
-+
-Note: In the event of the need to modify the resource group so as to add or remove virtual machines, use this option  against the resource group name and select “Edit Resource Group”.
+== Step 1: Add the destination site (Hyper-V)
 
-==== Blueprints
+Add the destination Hyper-V environment to the Shift Toolkit.
 
-To migrate or convert virtual machines, a plan is necessary. Select the source and destination hypervisor platforms from the drop down and pick the resource groups to be included in this blueprint, along with the grouping of how applications should be powered on (i.e. domain controllers, then tier-1, then tier-2, etc). These are often called as migration plans as well. To define the blueprint, navigate to the “Blueprints” tab and click on “Create New Blueprint”. 
+.Steps
 
-To start creating blueprint, click on the “Create New Blueprint”.
+. Click *Add New Site* and select *Destination*.
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-307.png[Add destination site]
+====
 
-. Access Blueprints, click on “Create New Blueprint”.
+. Enter the destination site details:
 +
-image::shift-toolkit-319.png["Dialog showing the step above"]
+* *Site Name*: Provide a name for the site
+* *Hypervisor*: Select Hyper-V as the target
+* *Site Location*: Select the default option
+* *Connector*: Select the default selection
 
-. On the “New Blueprint”, provide a name for plan and add necessary host mappings by selecting Source Site > associated vCenter, Destination Site and the associated Hyper-V hypervisor.  
+. Click *Continue*.
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-308.png[Destination site details]
+====
 
-. Once mappings are done, select the cluster and host mapping.
+. Enter the destination Hyper-V details:
 +
-image::shift-toolkit-320.png["Dialog showing the step above"]
+* *Hyper-V Standalone or failover cluster manager*: IP address or FQDN
+* *Username*: Username to access (in UPN format: username@domain.com or domain\administrator)
+* *Password*: Password to access Hyper-V host or FCI instance for performing inventory of the resources
 
-. Select Resource Group Details and click on “Continue”
+. Select *Accept Self signed certificate* and click *Continue*.
 +
-image::shift-toolkit-321.png["Dialog showing the step above"]
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-309.png[Hyper-V details]
+====
 
-. Set Execution Order for Resource Group. This option enables to select the sequence of operations when multiple resource groups exist. 
+. Click *Create Site*.
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-310.png[Create Site]
+====
++
+NOTE: The source and destination storage system should be the same as the disk format conversion happens at the volume level and within the same volume.
 
-. Once done, select Network Mapping to the appropriate virtual switch.  The virtual switches should already be provisioned within Hyper-V.
-+
-image::shift-toolkit-322.png["Dialog showing the step above"]
-+
-Note: On Hyper-V side, the virtual switch type “External” is the only supported option for network selection. 
-+
-Note: For test migration, “Do no configure Network” is the default selection and Shift toolkit does not perform IP address assignment. Once the disk is converted and virtual machine is bought on Hyper-V side, manually assign the bubble network switches to avoid any colliding with production network.
-+
-image::shift-toolkit-323.png["Dialog showing the step above"]
+== Step 2: Create resource groups
 
-. Based on the selection of VMs, storage mappings will be automatically selected.
-Note: Make sure the qtree is provisioned beforehand and the necessary permissions are assigned so the virtual machine can be created and powered ON from SMB share.
+Organize VMs into resource groups to preserve boot order and boot delay configurations.
 
-. The override option for prepareVM is particularly useful when you need to skip VM preparation by the Shift toolkit and instead perform those tasks using custom scripts. Additionally, it enables customization of the IP address to meet specific environment requirements. 
-+
-image::shift-toolkit-324.png["Dialog showing the step above"]
+.Before you begin
 
-. Under VM details, provide service account and valid user credentials for each OS type. This is used to connect to the virtual machine to create and run certain scripts that are necessary for removing VMware tools and backing up IP configuration details.
-.. For Windows based OS, it is recommended to use a user with local administrator privileges. Domain credential can also be used, however ensure there is a user profile existing on the VM before conversion, otherwise domain credentials won’t work as it would look for domain authentication when there is no network connected. 
-.. In case of Linux distribution-based guest VMs, provide a user that can execute sudo commands without password meaning the user should be part of the sudoers list or added as a new configuration file to the /etc/sudoers.d/ folder.
-+
-image::shift-toolkit-325.png["Dialog showing the step above"]
+* Ensure qtrees are provisioned as specified in the prerequisites
+* Move VMs to a designated datastore on a newly created ONTAP SVM before conversion to isolate production NFS datastores from the staging area
 
-. Again under VM details, select the relevant IP config option. By default, “Do not configure” is selected. 
-.. To migrate VMs with the same IPs from the source system, select “Retain IP”. 
-.. To migrate VMs using static IPs in the source system and to assign DHCP on the target VMs, then select “DHCP”.
-+
-Make sure the following requirements are met for this functionality to work:
-+
-.. Ensure the VMs are powered on during the prepareVM phase and up to the scheduled migration time.
-.. For VMware VMs, ensure that VMware Tools are installed.
-.. Ensure the preparation script is run on the source VM by an account with administrator privileges on windows OS and with sudo privileges with no password option on Linux based distribution OS to create cron jobs.
+.Steps
 
-. The next step is VM configuration. 
-.. Optionally resize the VMs CPU/RAM parameters which can be very helpful for resizing purposes. 
-.. Boot Order override: Also modify the Boot Order and Boot delay (secs) for all the selected VMs across the resource groups. This is an additional option to modify the boot order if any changes required from what was selected during Resource group boot order selection. By default, the boot order selected during resource group selection is used, however any modifications can be done at this stage. 
-.. Power ON: Uncheck this option if workflow should not power ON the virtual machine. Default option is ON meaning the VM will be powered ON.
-.. Remove VMware tools: Shift toolkit removes VMware tools after the conversion. This option is selected by default. This is an be unselected if the plan is to execute customer’s own customized scripts.
-.. Generation: Shift toolkit uses the following rule of thumb and defaults to the appropriate one- Gen1 > BIOS and Gen2 > EFI. No selection is possible for this option.
-.. Retain MAC: The MAC address of the respective VMs can be retained to overcome licensing challenges for those applications relying on MAC. 
-.. Service Account override: This option allows to specify a separate service account if the global one cannot be used.
-.. VLAN override – VLAN override enables selecting the correct tagged VLAN name when the target hypervisor uses a different vLAN name.
+. Navigate to *Resource Groups* and click *Create New Resource Group*.
 +
-image::shift-toolkit-326.png["Dialog showing the step above"]
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-311.png[Create New Resource Group]
+====
 
-. Click “Continue”.
+. Select the *Source site* from the dropdown and click *Create*.
 
-. In the next step, schedule the migration by selecting the checkbox to set the date and time. Make sure all the virtual machines (VMs) are prepared and powered off before the scheduled date. Once done, click on “Create Blueprint”.
+. Provide resource group details and select the workflow:
 +
-image::shift-toolkit-327.png["Dialog showing the step above"]
+* *Clone based Migration*: Performs end-to-end migration from source to destination hypervisor
+* *Clone based Conversion*: Converts disk format to the selected hypervisor type
 +
-Note: While scheduling, choose a date that is at least 30 minutes ahead of the current Shift VM time. This is to ensure the workflow gets enough time to prepare the VMs within the resource group.
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-312.png[Resource group details]
+====
 
-. Once the blueprint is created, a prepareVM job is initiated and it automatically runs scripts on the source VMs to prepare them for migration
-+
-image::shift-toolkit-328.png["Dialog showing the step above"]
-+
-This job runs a script using invoke-VMScript method to copy the necessary scripts for removing VMware tools and backing up network configuration details, including IP address, routes, and DNS information, which will be used to maintain the same settings on the target VM. 
-+
-.. For Windows-based operating systems, the default location where the preparation scripts are stored is the “C:\NetApp”  folder. 
-+
-image::shift-toolkit-329.png["Dialog showing the step above"]
-+
-.. For Linux-based VMs, the default location where the preparation scripts are stored is /NetApp and the /opt directory
-+
-image::shift-toolkit-330.png["Dialog showing the step above"]
-+
-Note: For a Linux source VM running CentOS or Red Hat, Shift toolkit is intelligent to automatically install the necessary Hyper-V drivers. These drivers must be present in the source VM before the disk conversion to ensure the VM can boot successfully after the conversion.
-+
-Note: For detailed information, refer to link:https://access.redhat.com/solutions/3465011[System stuck in dracut after the migration of a RHEL VM to hyper-v].
-+
-Once the prepareVM job completes successfully (as shown in the screenshot below), the VMs are ready for migration, and the blueprint status will update to "Active."
-+
-image::shift-toolkit-331.png["Dialog showing the step above"]
-+
-image::shift-toolkit-332.png["Dialog showing the step above"]
-+
-Migration will now happen at the set time or can be started manually by clicking on Migrate option.
+. Click *Continue*.
 
-== Migration
+. Select VMs using the search option (default filter is "Datastore").
++
+NOTE: The datastore dropdown only shows NFSv3 datastores. NFSv4 datastores are not displayed.
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-313.png[VM selection]
+====
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-314.png[Datastore filter]
+====
 
-Once the blueprint is created, “Migrate” option can be exercised. During migrate option, shift toolkit performs a series of steps to convert the disk format and use the converted disk to create virtual machines on Hyper-V host as defined in the blueprint. 
+. Update migration details:
++
+* Select *Destination Site*
+* Select *Destination Hyper-V entry*
+* Configure Datastore to Qtree mapping
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-315.png[Migration details]
+====
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-316.png[Qtree mapping]
+====
++
+NOTE: Ensure the destination path (where the converted VMs are stored) is set to a qtree when converting VMs from ESXi to Hyper-V. Multiple qtrees can be created and used for storing converted VM disks.
 
-The high-level steps performed are as follows:
+. Configure boot order and boot delay for all selected VMs:
++
+* *1*: First VM to power on
+* *3*: Default
+* *5*: Last VM to power on
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-317.png[Boot order configuration]
+====
 
-*Prerequisite:* The VMs must be turned OFF gracefully as per the planned maintenance time. downtime Power OFF VMs in the protection group – at source
+. Click *Create Resource Group*.
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-318.png[Create Resource Group]
+====
 
-* Delete existing snapshots for all VMs in the blueprint 
-* Trigger VM snapshots for Blueprint – at source
-* Trigger volume snapshot before disk conversion
-* Clone and convert VMDK to VHDx format for all VMs
-* Power ON VMs in protection group – at target
-* Register the networks on each VM
-* Remove VMware tools and assign the IP addresses using trigger script or cron job depending on the OS type
+.Result
 
-=== Factors to know
+The resource group is created and ready for blueprint configuration.
 
-Before initiating the migration, make sure all the pre-requisites are met. Here's a quick checklist for a recap:
+== Step 3: Create a migration blueprint
 
+Create a blueprint to define the migration plan, including platform mappings, network configuration, and VM settings.
+
+.Steps
+
+. Navigate to *Blueprints* and click *Create New Blueprint*.
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-319.png[Create New Blueprint]
+====
+
+. Provide a name for the blueprint and configure host mappings:
++
+* Select *Source Site* and associated vCenter
+* Select *Destination Site* and associated Hyper-V target
+* Configure cluster and host mapping
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-320.png[Host mappings]
+====
+
+. Select resource group details and click *Continue*.
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-321.png[Resource Group Details]
+====
+
+. Set execution order for resource groups if multiple groups exist.
+
+. Configure network mapping to appropriate virtual switches.
++
+NOTE: Virtual switches should already be provisioned within Hyper-V. On Hyper-V side, the virtual switch type "External" is the only supported option for network selection. For test migration, select "Do not configure Network" to avoid production network conflicts; manually assign network settings after conversion.
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-322.png[Network mapping]
+====
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-323.png[Network configuration options]
+====
+
+. Review storage mappings (automatically selected based on VM selection).
++
+NOTE: Ensure the qtree is provisioned beforehand and necessary permissions are assigned so the virtual machine can be created and powered on from SMB share.
+
+. Configure the prepareVM override option if needed. This option is useful when you need to skip VM preparation by the Shift Toolkit and instead perform those tasks using custom scripts. It also enables customization of the IP address to meet specific environment requirements.
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-324.png[PrepareVM override]
+====
+
+. Under VM details, select configuration details and provide service account credentials for each OS type:
++
+* *Windows*: Use a user with local administrator privileges (domain credentials can also be used, however ensure a user profile exists on the VM before conversion)
+* *Linux*: Use a user that can execute sudo commands without password prompt (user should be part of the sudoers list or added to `/etc/sudoers.d/` folder)
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-325.png[VM credentials]
+====
+
+. Configure IP settings:
++
+* *Do not configure*: Default option
+* *Retain IP*: Keep same IPs from source system
+* *DHCP*: Assign DHCP on target VMs
++
+Ensure VMs are powered on during prepareVM phase, VMware Tools are installed, and preparation scripts run with proper privileges.
+
+. Configure VM settings:
++
+* Resize CPU/RAM parameters (optional)
+* Modify boot order and boot delay
+* *Power ON*: Select to power on VMs after migration (default: ON)
+* *Remove VMware tools*: Remove VMware Tools after conversion (default: selected)
+* *VM Firmware*: Gen1 > BIOS and Gen2 > EFI (automatic)
+* *Retain MAC*: Keep MAC addresses for licensing requirements
+* *Service Account override*: Specify separate service account if needed
+* *VLAN override*: Select correct tagged VLAN name when target hypervisor uses different vLAN name
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-326.png[VM configuration]
+====
+
+. Click *Continue*.
+
+. Schedule the migration by selecting a date and time.
++
+NOTE: Schedule migrations at least 30 minutes ahead to allow time for VM preparation.
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-327.png[Schedule migration]
+====
+
+. Click *Create Blueprint*.
+
+.Result
+
+The Shift Toolkit initiates a prepareVM job that runs scripts on source VMs to prepare them for migration.
+
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-328.png[PrepareVM job]
+====
+
+The preparation process:
+
+* Injects scripts to add drivers (RHEL/CentOS, Alma Linux), remove VMware tools, and backup IP/route/DNS information
+* Uses invoke-VMScript to connect to guest VMs and execute preparation tasks
+* For Windows VMs: Stores scripts in `C:\NetApp`
+* For Linux VMs: Stores scripts in `/NetApp` and `/opt`
+
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-329.png[Windows preparation scripts]
+====
+
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-330.png[Linux preparation scripts]
+====
+
+NOTE: For Linux source VMs running CentOS or Red Hat, Shift Toolkit automatically installs necessary Hyper-V drivers before disk conversion to ensure successful boot after conversion. For detailed information, refer to link:https://access.redhat.com/solutions/3465011[System stuck in dracut after the migration of a RHEL VM to hyper-v].
+
+When prepareVM completes successfully, the blueprint status updates to "Active." Migration will now happen at the scheduled time or can be started manually by clicking the *Migrate* option.
+
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-331.png[PrepareVM complete]
+====
+
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-332.png[Active blueprint]
+====
+
+== Step 4: Execute the migration
+
+Trigger the migration workflow to convert VMs from VMware ESXi to Microsoft Hyper-V.
+
+.Before you begin
+
+* All VMs are gracefully powered off according to the planned maintenance schedule
 * Ensure the Shift VM is part of the domain
 * Ensure CIFS share is configured with appropriate permissions
-* The qtree used for migration or conversion have the right security style
-* As a quick test, try creating a VM using Hyper-V manager from any of the Hyper-V host within the cluster and place the VHDX on the CIFS share (referred in bullet – a). Try the same from Shift toolkit VM by adding Hyper-V management tools (either via “Programs and Features” or using “PowerShell” - add-windowsfeature rsat-hyper-v-tools)
+* The qtree used for migration or conversion has the right security style
+* As a quick test, try creating a VM using Hyper-V Manager from any Hyper-V host within the cluster and place the VHDX on the CIFS share
 
-Note: If there are failures, link:https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/manage/remotely-manage-hyper-v-hosts[enable delegation using any authentication protocol].
+.Steps
 
-To trigger Migrate workflow with the configuration specified in the Blueprint, click on Migrate.
+. On the blueprint, click *Migrate*.
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-333.png[Migrate option]
+====
 
-image::shift-toolkit-333.png["Dialog showing the step above"]
+. If VMs are not powered off, the Shift Toolkit will prompt for a graceful shutdown before proceeding.
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-334.png[Shutdown prompt]
+====
 
-Once initiated, the workflow activates, and the conversion process follows the outlined steps to register the VM. If the VMs within the blueprint are not powered off, the Shift toolkit will prompt for a graceful shutdown before proceeding.
+. The Shift Toolkit takes the following actions:
++
+* Deletes existing snapshots for all VMs in the blueprint
+* Triggers VM snapshots at the source
+* Triggers volume snapshot before disk conversion
+* Converts VMDK to VHDx format for all VMs
++
+The conversion happens in seconds, making this the fastest migration approach and reducing VM downtime.
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-335.png[Migration in progress]
+====
++
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-336.png[Conversion progress]
+====
 
-image::shift-toolkit-334.png["Dialog showing the step above"]
+* Powers on VMs at the target
+* Registers networks on each VM
+* Removes VMware tools and assigns IP addresses using trigger scripts or cron jobs
 
-Note: We recommend that no more than ten conversions be triggered in parallel from the same ESXi source to the same Hyper-V destination.
+.Result
 
-image::shift-toolkit-335.png["Dialog showing the step above"]
+When the job completes, the blueprint status changes to "Migration Complete."
 
-The conversion of VMDK to VHDx happens in seconds which makes this approach the fastest of all the options that are available for an additional cost. This also helps to reduce VM downtime during migration.
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-337.png[Migration complete]
+====
 
-image::shift-toolkit-336.png["Dialog showing the step above"]
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-338.png[VMs in Hyper-V Manager]
+====
 
-Once the job is complete, the status of the blueprint changes to “migration Complete”.
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-339.png[VM details in Hyper-V]
+====
 
-image::shift-toolkit-337.png["Dialog showing the step above"]
+NOTE: No more than ten conversions should be triggered in parallel from the same ESXi source to the same Hyper-V destination.
 
-With migration complete, it’s time to validate the VMs on Hyper-V side. Below screenshot shows the VMs running on the Hyper-V host that was specified during the blueprint creation.
+NOTE: If there are failures, link:https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/manage/remotely-manage-hyper-v-hosts[enable delegation using any authentication protocol].
 
-image::shift-toolkit-338.png["Dialog showing the step above"]
+NOTE: After migration when Windows VMs are powered on, Shift Toolkit uses PowerShell Direct to connect to Windows-based guest VMs regardless of network configuration or remote management settings.
 
-image::shift-toolkit-339.png["Dialog showing the step above"]
+NOTE: After conversion, all VM disks on Windows OS except the OS disk will be offline because the NewDiskPolicy parameter is set to offlineALL on VMware VMs by default. Run this PowerShell command to fix: `Set-StorageSetting -NewDiskPolicy OnlineAll`
 
-Note: After migration and the windows VMs are powered ON, shift toolkit uses PowerShell direct to connect to these windows-based guest VMs. PowerShell direct allows connection to windows-based guest VMs regardless of their network configuration or remote management 
-settings.
+NOTE: Shift Toolkit uses cron jobs that execute on boot for Linux-based distributions. No SSH connections are created for Linux-based VMs once they are brought on Hyper-V hosts.
 
-Note: After conversion, all the VM disks on Windows OS except for the OS disk will be offline. This is because the NewDiskPolicy parameter is set to offlineALL on VMware VMs by default. The issue is caused by the default Microsoft Windows SAN policy. This policy is designed to prevent the activation of LUNs when booting Windows Server if they are being accessed by multiple servers. This is done to avoid any potential data corruption issues. This can be handled by running a PowerShell command: Set-StorageSetting -NewDiskPolicy OnlineAll
+== Video demonstration
 
-Note: Shift toolkit uses cron job that executes on boot for Linux based distributions. There are no ssh connections or equivalent created for Linux based VMs once the VMs are bought on Hyper-V hosts.
+The following video demonstrates the process outlined in this solution.
+
+video::f191dd7d-e4e4-4e5a-9654-b26400f3e9c4[panopto, title="Migrate VMs from ESXi to Hyper-V using Shift Toolkit", width=360]

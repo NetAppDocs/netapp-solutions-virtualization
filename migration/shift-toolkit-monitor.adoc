@@ -2,10 +2,10 @@
 sidebar: sidebar
 permalink: migration/shift-toolkit-monitor.html
 keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox
-summary: 
+summary: "Use the Shift Toolkit Job Monitoring dashboard to track migration, conversion, and blueprint operations in real time, enabling administrators to quickly identify job status and resolve issues."
 ---
 
-= Monitoring and dashboard for the Shift Toolkit
+= Monitor migration jobs with the Shift Toolkit dashboard
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -13,10 +13,33 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-Monitor the status of the jobs using Job Monitoring.
+Use the Shift Toolkit Job Monitoring dashboard to track migration, conversion, and blueprint operations in real time, allowing you to quickly identify job status and resolve issues.
 
-image::shift-toolkit-190.png["Dialog of the jobs running in the Shift Toolkit"]
+== Job monitoring dashboard
 
-With the intuitive UI, confidently evaluate the status of migration, conversion and blueprints. This enables administrators to swiftly identify successful, failed, or partially failed plans along with the number of VMs migrated or converted.
+The Job Monitoring dashboard provides a centralized view of all active and completed operations within the Shift Toolkit. Use this dashboard to monitor the progress of your migration, conversion, and blueprint jobs.
 
-image::shift-toolkit-191.png["Dialog of the jobs running in the Shift Toolkit"]
+image::shift-toolkit-190.png["Job monitoring dashboard showing active jobs in the Shift Toolkit"]
+
+The dashboard displays key information for each job:
+
+* Job type (migration, conversion, or blueprint)
+* Current status (running, successful, failed, or partially failed)
+* Progress indicators and completion percentage
+* Number of VMs processed
+* Start and end times
+
+== Understanding job status
+
+The intuitive interface enables you to quickly evaluate the status of all operations and identify jobs that require attention.
+
+image::shift-toolkit-191.png["Job status details in the Shift Toolkit dashboard"]
+
+Job status indicators help you understand the outcome of each operation:
+
+* *Successful*: All VMs in the job completed without errors
+* *Failed*: The job encountered errors and could not complete
+* *Partially failed*: Some VMs completed successfully while others encountered errors
+* *Running*: The job is currently in progress
+
+Use the status information to prioritize troubleshooting efforts and ensure smooth migration workflows.
