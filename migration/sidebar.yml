@@ -3,7 +3,7 @@ title: "VM migration solutions"
 url: /migration/index.html
 entries:
   - title: "Use Shift Toolkit to migrate or convert VMs"
-    pdf-filename: "Use Shift Toolkit to migrate or convert VMs"
+    pdf-filename: "Shift Toolkit User Guide"
     entries:
       - title: "About Shift Toolkit"
         url: /migration/shift-toolkit-overview.html
