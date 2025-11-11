@@ -12,7 +12,7 @@ summary: "Migrate VMs from SAN-based datastores to NAS before converting them wi
 :imagesdir: ../media/
 
 [.lead]
-Migrate VMs from SAN-based datastores to NAS before converting them with the Shift Toolkit, using VMware Storage vMotion and Hyper-V Storage Live Migration to maintain business continuity.
+Migrate VMs from SAN-based datastores to NAS before converting them with the Shift Toolkit, using VMware Storage vMotion and Storage Live Migration to maintain business continuity.
 
 == Requirements for SAN-based VMs
 
