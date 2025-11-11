@@ -23,8 +23,6 @@ The Shift Toolkit provides flexibility in multi-hypervisor environments by suppo
 * link:shift-toolkit-migrate-esxi2olvm.html[VMware ESXi to Oracle Linux Virtualization Manager (OLVM)]
 * link:shift-toolkit-migrate-esxi2osv.html[VMware ESXi to Red Hat OpenShift Virtualization]
 
-* link:shift-toolkit-migrate-esxi2osv.html[VMware ESXi to Red Hat OpenShift Virtualization]
-
 == Migration workflow
 
 After creating a blueprint, you can initiate the migration process. During migration, the Shift Toolkit performs a series of steps to convert disk formats and create virtual machines on the target host as defined in the blueprint.
