@@ -19,7 +19,7 @@ Configure the Shift Toolkit to automate the migration or conversion of  VMs) Thi
 
 * Using the browser, access Shift toolkit UI by entering the `http://<IP address specified during installation>:3001`
 +
-Note: Use Google chrome or Internet explorer for best experience.
+NOTE: Use Google chrome or Internet explorer for best experience.
 
 * Access the UI using default credentials as below:
 Username: admin
@@ -27,9 +27,9 @@ Password: admin
 +
 image::shift-toolkit-050.png["Diagram of the NetApp Shift Toolkit login screen"]
 +
-Note: Admins are required to change their credentials during the initial login.
+NOTE: Admins are required to change their credentials during the initial login.
 +
-Note: After the mandatory password change, the admin credential can also be changed using “Change Password” option after logging in to the GUI.
+NOTE: After the mandatory password change, the admin credential can also be changed using “Change Password” option after logging in to the GUI.
 +
 image::shift-toolkit-051.png["Diagram of the NetApp Shift Toolkit change password screen"]
 +
@@ -47,7 +47,7 @@ The first step is to discover and add the source and then the target Hypervisor 
 
 image::shift-toolkit-053.png["Dialog of the Shift Toolkit Add Sites dialog"]
 
-Note: Sites can also be added using Discover option.  
+NOTE: Sites can also be added using Discover option.  
 
 Add the following platforms:
 
@@ -82,9 +82,9 @@ image::shift-toolkit-055.png["Dialog of the Shift Toolkit Add New Site dialog"]
 
 Once added, Shift toolkit will perform an automatic discovery and display the VMs along with the relevant metadata information.  Shift toolkit will automatically detect the networks and vLANs used by the VMs and will populate them. 
 
-Note: If any modifications are made to the source site, ensure to run the discovery to fetch the latest information. This can be done by clicking on 3 dots against the site name and click on “Discover Site”.
+NOTE: If any modifications are made to the source site, ensure to run the discovery to fetch the latest information. This can be done by clicking on 3 dots against the site name and click on “Discover Site”.
 
-Note: The VM inventory is auto-refreshed every 24 hours.
+NOTE: The VM inventory is auto-refreshed every 24 hours.
 
 image::shift-toolkit-056.png["Dialog of the Shift Toolkit Add New Site dialog to discover a site"]
 
@@ -124,7 +124,7 @@ Select “Accept Self signed certificate”.
 
 * Once done, click “Create Site”
 
-Note: The source and destination storage system should be the same as the disk format conversion happens at the volume level and within the same volume.
+NOTE: The source and destination storage system should be the same as the disk format conversion happens at the volume level and within the same volume.
 
 image::shift-toolkit-060.png["Dialog of the Shift Toolkit Add Site dialog for the destination details"]
 
@@ -134,7 +134,7 @@ Next step is to group the required VMs into their migration groups as resource g
 
 Once the platforms have been added, group the VMs you want to migrate or convert into resource groups.  Shift toolkit resource groups allow you to group set of dependent VMs into logical groups that contain their boot orders and boot delays.
 
-Note: Ensure the Qtrees are provisioned (as mentioned in the pre-requisite section) before creating the resource groups. 
+NOTE: Ensure the Qtrees are provisioned (as mentioned in the pre-requisite section) before creating the resource groups. 
 
 To start creating resource groups, click on the “Create New Resource Group” menu item.
 
@@ -152,13 +152,13 @@ image::shift-toolkit-062.png["Dialog of the Create New Resource Group user inter
 . Click on “Continue”
 . Select appropriate VMs using the search option. The default filter option is “Datastore”.
 +
-Note: Move the VMs to convert or migrate to a designated datastore on a newly created ONTAP SVM before conversion. This helps isolating the production NFS datastore and the designated datastore can be used for staging the virtual machines.
+NOTE: Move the VMs to convert or migrate to a designated datastore on a newly created ONTAP SVM before conversion. This helps isolating the production NFS datastore and the designated datastore can be used for staging the virtual machines.
 +
-Note: For OpenShift environment, VMDKs should be relocated to their corresponding volumes to replicate the PVC (Persistent Volume Claim) structure using ONTAP NAS storage driver. In future releases, additional enhancements will be incorporated to leverage ONTAP NAS economy driver.
+NOTE: For OpenShift environment, VMDKs should be relocated to their corresponding volumes to replicate the PVC (Persistent Volume Claim) structure using ONTAP NAS storage driver. In future releases, additional enhancements will be incorporated to leverage ONTAP NAS economy driver.
 +
 image::shift-toolkit-063.png["Dialog of the Create New Resource Group user interface"]
 +
-Note: The datastore dropdown in this context will only show NFSv3 datastores. NFSv4 datastores will not be displayed.
+NOTE: The datastore dropdown in this context will only show NFSv3 datastores. NFSv4 datastores will not be displayed.
 +
 image::shift-toolkit-064.png["Dialog of the Create New Resource Group user interface"]
 
@@ -166,11 +166,11 @@ image::shift-toolkit-064.png["Dialog of the Create New Resource Group user inter
 +
 image::shift-toolkit-065.png["Dialog of the Create New Resource Group user interface"]
 +
-Note: Make sure that the destination path (where the converted VMs are stored) is set to a qtree when converting VMs. Set the destination path to the appropriate qtree.
+NOTE: Make sure that the destination path (where the converted VMs are stored) is set to a qtree when converting VMs. Set the destination path to the appropriate qtree.
 +
-Note: Multiple qtrees can be created and used for storing the converted VM disks accordingly.
+NOTE: Multiple qtrees can be created and used for storing the converted VM disks accordingly.
 +
-Note: Virtual machines can be running on spanned datastores, and Shit toolkit will automatically detect them, however a qtree should be mapped for each volume.
+NOTE: Virtual machines can be running on spanned datastores, and Shit toolkit will automatically detect them, however a qtree should be mapped for each volume.
 +
 Ability to migrate VMs with spanned VMDKs across multiple volumes
 The Shift toolkit UI automatically selects all the spanned volumes that is part of a VM or VMs that are selected for that specific RG. This will list all the volumes in the RG page where we do the datastore – qtree mapping.
@@ -189,7 +189,7 @@ image::shift-toolkit-067.png["Dialog of the Create New Resource Group user inter
 +
 image::shift-toolkit-068.png["Dialog of the Create New Resource Group user interface"]
 +
-Note: In the event of the need to modify the resource group so as to add or remove virtual machines, use this option  against the resource group name and select “Edit Resource Group”.
+NOTE: In the event of the need to modify the resource group so as to add or remove virtual machines, use this option  against the resource group name and select “Edit Resource Group”.
 
 === Blueprints
 
@@ -216,14 +216,14 @@ image::shift-toolkit-071.png["Dialog of the Create New Blueprints user interface
 +
 image::shift-toolkit-072.png["Dialog of the Create New Blueprints user interface"]
 +
-Note: For test migration, “Do no configure Network” is the default selection and Shift toolkit does not perform IP address assignment. Once the disk is converted and virtual machine is bought on respective hypervisor side, manually assign the bubble network switches to avoid any colliding with production network.
+NOTE: For test migration, “Do no configure Network” is the default selection and Shift toolkit does not perform IP address assignment. Once the disk is converted and virtual machine is bought on respective hypervisor side, manually assign the bubble network switches to avoid any colliding with production network.
 +
 image::shift-toolkit-073.png["Dialog of the Create New Blueprints user interface"]
 
 . Based on the selection of VMs, storage mappings will be automatically selected.
 +
-Note: Make sure the qtree is provisioned beforehand and the necessary permissions are assigned so the virtual machine can be created and powered ON.
-Note: In case of OpenShift, the PVCs are created using Trident CSI and there is no need to pre-create qtrees.
+NOTE: Make sure the qtree is provisioned beforehand and the necessary permissions are assigned so the virtual machine can be created and powered ON.
+NOTE: In case of OpenShift, the PVCs are created using Trident CSI and there is no need to pre-create qtrees.
 
 . Under VM details, provide service account and valid user credentials for each OS type. This is used to connect to the virtual machine to create and run certain scripts that are necessary for removing VMware tools and backing up IP configuration details.
 .. For Windows based OS, it is recommended to use a user with local administrator privileges. Domain credential can also be used, however ensure there is a user profile existing on the VM before conversion, otherwise domain credentials won’t work as it would look for domain authentication when there is no network connected. 
@@ -265,7 +265,7 @@ image::shift-toolkit-075.png["Dialog of the Resource Group user interface"]
 +
 image::shift-toolkit-076.png["Dialog of the Resource Group user interface"]
 +
-Note: While scheduling, choose a date that is at least 30 minutes ahead of the current Shift VM time. This is to ensure the workflow gets enough time to prepare the VMs within the resource group.
+NOTE: While scheduling, choose a date that is at least 30 minutes ahead of the current Shift VM time. This is to ensure the workflow gets enough time to prepare the VMs within the resource group.
 
 . Once the blueprint is created, a prepareVM job is initiated and it automatically runs scripts on the source VMs to prepare them for migration
 +
@@ -281,9 +281,9 @@ image::shift-toolkit-078.png["Dialog of the Resource Group user interface"]
 +
 image::shift-toolkit-079.png["Dialog of the Resource Group user interface"]
 +
-Note: For a Linux source VM running CentOS or Red Hat, Shift toolkit is intelligent to automatically install the necessary Hyper-V drivers. These drivers must be present in the source VM before the disk conversion to ensure the VM can boot successfully after the conversion.
+NOTE: For a Linux source VM running CentOS or Red Hat, Shift toolkit is intelligent to automatically install the necessary Hyper-V drivers. These drivers must be present in the source VM before the disk conversion to ensure the VM can boot successfully after the conversion.
 +
-Note: For detailed information, refer to link:https://access.redhat.com/solutions/3465011[System stuck in dracut after the migration of a RHEL VM to hyper-v].
+NOTE: For detailed information, refer to link:https://access.redhat.com/solutions/3465011[System stuck in dracut after the migration of a RHEL VM to hyper-v].
 +
 Once the prepareVM job completes successfully (as shown in the screenshot below), the VMs are ready for migration, and the blueprint status will update to "Active."
 +

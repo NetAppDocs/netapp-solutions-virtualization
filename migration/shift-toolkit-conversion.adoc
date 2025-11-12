@@ -34,7 +34,7 @@ To convert the virtual disks to QCOW2 format with NetApp Shift toolkit, follow t
 
 * Create a destination site type specifying KVM (conversion only) as the hypervisor.
 +
-Note: Hypervisor details are not required for KVM.
+NOTE: Hypervisor details are not required for KVM.
 +
 image::shift-toolkit-150.png["Dialog for the create destination site step"]
 
@@ -80,7 +80,7 @@ image::shift-toolkit-161.png["Dialog for the results of the convert VM step"]
 +
 image::shift-toolkit-162.png["Dialog for the convert disk manually step"]
 
-Note: The Shift toolkit supports disk conversions only for the qcow2 format. It doesn't support VM creation or registration. To use the converted disk, manually create the VM and attach the disk. 
+NOTE: The Shift toolkit supports disk conversions only for the qcow2 format. It doesn't support VM creation or registration. To use the converted disk, manually create the VM and attach the disk. 
 
 == Convert to VHDX format
 
@@ -110,7 +110,7 @@ image::shift-toolkit-167.png["Dialog for the convert step"]
 +
 image::shift-toolkit-168.png["Dialog for the convert step"]
 
-Note: To use the converted VHDX disk in a VM, the VM must be created manually via Hyper-V manager or PowerShell commands, and the disk must be attached to it. Along with this, network should also be mapped manually.
+NOTE: To use the converted VHDX disk in a VM, the VM must be created manually via Hyper-V manager or PowerShell commands, and the disk must be attached to it. Along with this, network should also be mapped manually.
 
 == Convert to RAW format
 
@@ -142,11 +142,11 @@ image::shift-toolkit-174.png["Dialog for the convert step"]
 ** For OpenShift, import the volume as PVC using the tridentctl and then create the VM using the imported disks.
 ** For OLVM, head to ovirt engine URL and create a new VM by attaching the Shift toolkit converted RAW file as the OS disk. Ensure to select the appropriate interface.
 +
-Note: For OLVM, qcow2 file format can also be used. This selection can be made during the creation of blueprint.
+NOTE: For OLVM, qcow2 file format can also be used. This selection can be made during the creation of blueprint.
 +
 image::shift-toolkit-175.png["Dialog for the edit conversion plan step"]
 +
-Note: To use the converted RAW disk image in a VM, the VM must be created manually via OpenShift console or OC commands via YAML for OpenShift or using OLVM REST APIs/UI for OLVM, and the disk must be attached to it. Along with this, network should also be mapped 
+NOTE: To use the converted RAW disk image in a VM, the VM must be created manually via OpenShift console or OC commands via YAML for OpenShift or using OLVM REST APIs/UI for OLVM, and the disk must be attached to it. Along with this, network should also be mapped 
 manually.
 +
-Note: Ensure the appropriate Boot type (EFI or BIOS) is specified when manually creating the VM.
+NOTE: Ensure the appropriate Boot type (EFI or BIOS) is specified when manually creating the VM.
