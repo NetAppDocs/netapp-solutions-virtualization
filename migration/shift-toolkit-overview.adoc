@@ -41,7 +41,7 @@ Shift toolkit supports disk-level conversions of virtual disks between hyperviso
 
 image::shift-toolkit-001.png["Overview of the NetApp Shift Toolkit"]
 
-Shift toolkit can be downloaded link:https://mysupport.netapp.com/site/tools/tool-eula/vm-data-collector[here] and is available for Windows Systems only.
+Shift toolkit can be downloaded link:https://mysupport.netapp.com/site/tools/tool-eula/netapp-shift-toolkit[here] and is available for Windows Systems only.
 
 == Benefits of VM portability
 
