@@ -12,7 +12,7 @@ summary: "Migrate VMs from SAN-based datastores to NAS before converting them wi
 :imagesdir: ../media/
 
 [.lead]
-Migrate VMs from SAN-based datastores to NAS before converting them with the Shift Toolkit, using VMware Storage vMotion and Hyper-V Storage Live Migration to maintain business continuity.
+Migrate VMs from SAN-based datastores to NAS before converting them with the Shift Toolkit, using VMware Storage vMotion and Storage Live Migration to maintain business continuity.
 
 == Requirements for SAN-based VMs
 
@@ -26,17 +26,17 @@ image::shift-toolkit-260.png["Migration workflow diagram showing VM movement fro
 
 The migration process consists of three main phases:
 
-.Migrate from SAN to NAS (VMware environment)*
+.Migrate from SAN to NAS (VMware environment)
 
 Use VMware vSphere Storage vMotion to migrate VMs and their disks from the SAN datastore to an NFS datastore. This operation can be performed without VM downtime.
 
-.Convert VMs with the Shift Toolkit*
+.Convert VMs with the Shift Toolkit
 
-After the VMs reside on the NFS datastore, the Shift Toolkit uses NetApp FlexClone technology to convert the VMs from VMware ESXi to Hyper-V. The converted VMs and their disks are placed on a CIFS share accessible by the Hyper-V host.
+After the VMs reside on the NFS datastore, the Shift Toolkit uses NetApp FlexClone technology to convert the VMs from VMware ESXi to any hypervisor. The converted VMs and their disks are placed on a qtree accessible by the respective hypervisor host.
 
-.Migrate back to SAN (Hyper-V environment)*
+.Migrate back to SAN
 
-After conversion, use Hyper-V Storage Live Migration to move the converted VMs and their disks from the CIFS share to a SAN-enabled Cluster Shared Volume (CSV). This allows you to maintain your SAN infrastructure in the Hyper-V environment.
+After conversion, use storage migration to move the converted VMs and their disks from the qtree to a SAN-enabled volume. This allows you to maintain your SAN infrastructure in the respective hypervisor environment.
 
 == Handling processor compatibility issues
 
