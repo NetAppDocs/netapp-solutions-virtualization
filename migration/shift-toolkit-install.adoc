@@ -18,7 +18,7 @@ Install the Shift Toolkit on a dedicated VM running a Windows operating system, 
 
 To get started with the toolkit, use a windows operating system on a designated virtual machine and make sure you meet the prerequisites, then install the package.
 
-Shift toolkit can be run on Windows 2019, 2022 and 2025 version. Download the Shift toolkit package from link:https://mysupport.netapp.com/site/tools/tool-eula/vm-data-collector[NetApp Toolchest] and then unzip the package and run the exe to install and start the service. Shift toolkit provides 2 packages – Online (~130MB in size) and Offline (~1.2GB in size). As the name indicates, online installer package downloads and installs the necessary pre-requisites from the internet. 
+Shift toolkit can be run on Windows 2019, 2022 and 2025 version. Download the Shift toolkit package from link:https://mysupport.netapp.com/site/tools/tool-eula/netapp-shift-toolkit[NetApp Toolchest] and then unzip the package and run the exe to install and start the service. Shift toolkit provides 2 packages – Online (~130MB in size) and Offline (~1.2GB in size). As the name indicates, online installer package downloads and installs the necessary pre-requisites from the internet. 
 
 image::shift-toolkit-010.png["Diagram showing the Shift Toolkit download selection"]
 
@@ -157,7 +157,7 @@ Note: In the current release, for KVM as the destination, VMDK to qcow2 or RAW c
 
 == Installation
 
-. Download link:https://mysupport.netapp.com/site/tools/tool-eula/vm-data-collector[Shift toolkit] package and unzip it.
+. Download link:https://mysupport.netapp.com/site/tools/tool-eula/netapp-shift-toolkit[Shift toolkit] package and unzip it.
 +
 image::shift-toolkit-015.png["Dialog showing the Shift Toolkit download options"]
 
