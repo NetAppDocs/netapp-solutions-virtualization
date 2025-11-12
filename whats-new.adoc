@@ -11,6 +11,10 @@ summary: Log of recent changes to the NetApp virtualization solutions collateral
 [.lead]
 Learn what's new in virtualization solutions.
 
+== 12 November 2025
+* Provided the correct download links for the NetApp Shift Toolkit
+* Added migration solutions for NetApp Shift Toolkit
+
 == 18 August 2025
 The NetApp Solutions site is now the link:https://docs.netapp.com/us-en/netapp-solutions-family/index.html[NetApp solutions family^], which includes the following sites:
 
