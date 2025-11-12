@@ -24,7 +24,7 @@ image::shift-toolkit-010.png["Diagram showing the Shift Toolkit download selecti
 
 While online installation offers convenience, offline installation provides more control over the installation process. With offline installation package, all the necessary pre-requisites are bundled within the package to install Shift toolkit. One major advantage of offline installation is that it allows to install Shift toolkit on virtual machines without an internet connection.
 
-Tip: Use the appropriate package for deployment. With offline mode, there is no need to modify the proxy settings as all the pre-requisites and files required are bundled.
+TIP: Use the appropriate package for deployment. With offline mode, there is no need to modify the proxy settings as all the pre-requisites and files required are bundled.
 
 Shift toolkit can be installed on a virtual machine running VMware or Microsoft Hyper-V server as long as there is connectivity between source and target environments, and it is a best practice to install Shift toolkit on its own VM. This approach allows you to target different Microsoft Hyper-V servers or VMware ESXi servers with a single Shift toolkit server.
 
