@@ -8,7 +8,15 @@ entries:
       - title: "About Shift Toolkit"
         url: /migration/shift-toolkit-overview.html
       - title: "Install Shift Toolkit"
-        url: /migration/shift-toolkit-install.html
+        entries:
+          - title: "Preparing for installation"
+            url: /migration/shift-toolkit-install-prepare.html
+          - title: "Pre-requisites for installation"
+            url: /migration/shift-toolkit-install-prereqs.html
+          - title: "Versions supported by Shift Toolkit"
+            url: /migration/shift-toolkit-install-support.html
+          - title: "Perform Shift Toolkit install/upgrade"
+            url: /migration/shift-toolkit-install.html
       - title: "Configure Shift Toolkit"
         url: /migration/shift-toolkit-ui.html
       - title: "Migrate VMs using Shift Toolkit"
