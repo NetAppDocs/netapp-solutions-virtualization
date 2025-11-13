@@ -10,7 +10,7 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-Install the Shift Toolkit on a dedicated VM running a Windows operating system, using either online or offline installation options. This process involves reviewing the installation requirements, configuring ONTAP Storage Virtual Machines (SVMs), qtrees, and CIFS shares, downloading the installation package, and running the installer.
+Prior to installing the Shift Toolkit, certain hardware, connectivity, and ONTAP storage requirements must be met.
 
 == Hardware requirements
 
