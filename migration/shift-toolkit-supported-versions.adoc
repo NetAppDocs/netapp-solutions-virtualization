@@ -11,15 +11,11 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-Prior to installing the Shift Toolkit, ensure that the versions of the operating system, VM guest operating system, ONTAP, and hypervisors are supported.
-
-== Supported operating systems
-
 Ensure that a supported versions of Windows and Linux guest operating systems are used for conversion and that Shift toolkit supports the version of ONTAP.
 
 == Supported VM guest operating systems
 
-The following versions of Windows are supported as guest operating systems for VM conversions:
+.Windows
 
 * Windows 10
 * Windows 11
@@ -28,7 +24,7 @@ The following versions of Windows are supported as guest operating systems for V
 * Windows Server 2022
 * Windows Server 2025
 
-The following versions of Linux are supported as guest operating systems for VM conversions:
+.Linux
 
 * CentOS Linux 7.x
 * Alma Linux 7.x
