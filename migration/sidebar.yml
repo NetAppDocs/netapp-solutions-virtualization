@@ -11,11 +11,11 @@ entries:
         url: /migration/shift-toolkit-supported-versions.html
       - title: "Install Shift Toolkit"
         entries:
-          - title: "Preparing for installation"
+          - title: "Prepare to install"
             url: /migration/shift-toolkit-install-prepare.html
-          - title: "Pre-requisites for installation"
+          - title: "Review install requirements"
             url: /migration/shift-toolkit-install-prereqs.html
-          - title: "Perform Shift Toolkit install/upgrade"
+          - title: "Install or upgrade Shift Toolkit"
             url: /migration/shift-toolkit-install.html
       - title: "Configure Shift Toolkit"
         url: /migration/shift-toolkit-ui.html

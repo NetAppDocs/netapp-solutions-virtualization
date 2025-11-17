@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: migration/shift-toolkit-install-prepare.html
 keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox
-summary: 
+summary: "Prepare to install the NetApp Shift Toolkit by ensuring your environment meets the prerequisites and selecting the appropriate installation package for your deployment scenario."
 ---
 = Prepare to install the NetApp Shift Toolkit for ONTAP storage
 :nofooter:
@@ -11,20 +11,36 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-Prior to installing the Shift Toolkit, ensure that the environment is set up for and supports installation.
+Prepare to install the NetApp Shift Toolkit by ensuring your environment meets the prerequisites and selecting the appropriate installation package for your deployment scenario.
 
-== Preparing for Installation
+== Before you begin
 
-To get started with the toolkit, use a windows operating system on a designated virtual machine and make sure you meet the prerequisites, then install the package.
+Verify that your environment meets the following requirements:
 
-Shift toolkit can be run on Windows 2019, 2022 and 2025 version. Download the Shift toolkit package from link:https://mysupport.netapp.com/site/tools/tool-eula/netapp-shift-toolkit[NetApp Toolchest] and then unzip the package and run the exe to install and start the service. Shift toolkit provides 2 packages – Online (~130MB in size) and Offline (~1.2GB in size). As the name indicates, online installer package downloads and installs the necessary pre-requisites from the internet. 
+* Windows Server 2019, 2022, or 2025
+* Dedicated virtual machine for the Shift Toolkit installation
+* Network connectivity between source and target environments
+* Virtual machine running on VMware vSphere or Microsoft Hyper-V
 
-image::shift-toolkit-010.png["Diagram showing the Shift Toolkit download selection"]
+NOTE: Install the Shift Toolkit on a dedicated VM to enable management of multiple source and target hypervisors from a single server.
 
-While online installation offers convenience, offline installation provides more control over the installation process. With offline installation package, all the necessary pre-requisites are bundled within the package to install Shift toolkit. One major advantage of offline installation is that it allows to install Shift toolkit on virtual machines without an internet connection.
+== Select an installation package
 
-TIP: Use the appropriate package for deployment. With offline mode, there is no need to modify the proxy settings as all the pre-requisites and files required are bundled.
+The Shift Toolkit is available in two installation packages from link:https://mysupport.netapp.com/site/tools/tool-eula/netapp-shift-toolkit[NetApp Toolchest]:
 
-Shift toolkit can be installed on a virtual machine running VMware or Microsoft Hyper-V server as long as there is connectivity between source and target environments, and it is a best practice to install Shift toolkit on its own VM. This approach allows you to target different Microsoft Hyper-V servers or VMware ESXi servers with a single Shift toolkit server.
+*Online installer (~130 MB)*
 
-NOTE: Install Shift toolkit on a dedicated VM.
+* Downloads and installs prerequisites from the internet during installation
+* Requires internet connectivity during installation
+* Smaller package size for faster download
+
+*Offline installer (~1.2 GB)*
+
+* Includes all prerequisites bundled within the package
+* Supports installation on VMs without internet access
+* No proxy configuration required
+* Provides more control over the installation process
+
+image::shift-toolkit-010.png[Shift Toolkit installation package options]
+
+TIP: Use the offline installer for air-gapped environments or when you need complete control over the installation process without external dependencies.

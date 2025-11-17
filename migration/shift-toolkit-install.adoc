@@ -2,88 +2,153 @@
 sidebar: sidebar
 permalink: migration/shift-toolkit-install.html
 keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox
-summary: 
+summary: "Install or upgrade the NetApp Shift Toolkit after verifying that your environment meets the preparation and prerequisite requirements."
 ---
 
-= Install the NetApp Shift Toolkit for ONTAP storage
+= Install or upgrade the NetApp Shift Toolkit for ONTAP storage
 :nofooter:
 :icons: font
 :linkattrs:
 :imagesdir: ../media/
 
 [.lead]
-After ensuring the preparation and pre-requisite criteria are met, the Shift Toolkit is ready to be installed or upgraded.
+Install or upgrade the NetApp Shift Toolkit after verifying that your environment meets the preparation and prerequisite requirements.
 
-== Installation
+== Install the Shift Toolkit
 
-. Download link:https://mysupport.netapp.com/site/tools/tool-eula/netapp-shift-toolkit[Shift toolkit] package and unzip it.
+Download and run the installer to set up the Shift Toolkit on your Windows server.
+
+.Steps
+
+. Download the link:https://mysupport.netapp.com/site/tools/tool-eula/netapp-shift-toolkit[Shift Toolkit] package and unzip it.
 +
-image::shift-toolkit-015.png["Dialog showing the Shift Toolkit download options"]
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-015.png[Shift Toolkit download options]
+====
 
-. Initiate the Shift toolkit installation by double-clicking the downloaded .exe file. 
+. Double-click the downloaded .exe file to initiate the Shift Toolkit installation.
 +
-image::shift-toolkit-016.png["Dialog showing the Shift Toolkit package to run"]
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-016.png[Shift Toolkit installation package]
+====
 +
-NOTE: All the pre-checks are performed and if the minimum requirements are not met appropriate error or warning messages are displayed.
+NOTE: All pre-checks are performed during installation. If minimum requirements are not met, appropriate error or warning messages are displayed.
 
-. The installer will begin the installation process. Select the appropriate location or use the default placement and click Next.
+. Select the installation location or use the default and click *Next*.
 +
-image::shift-toolkit-017.png["Dialog showing the Shift Toolkit destination folder"]
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-017.png[Shift Toolkit destination folder]
+====
 
-. The installer will prompt to select the IP address that will be used to access Shift toolkit UI.
+. Select the IP address that will be used to access the Shift Toolkit UI.
 +
-image::shift-toolkit-018.png["Dialog showing the IP address to launch the Shift Toolkit"]
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-018.png[IP address selection for Shift Toolkit]
+====
 +
-NOTE: The setup process allows to select the right IP address using a dropdown option if the VM is assigned with multiple NICs.
+NOTE: If the VM has multiple NICs, the setup process allows you to select the appropriate IP address from a dropdown.
 
-. In this step, the installer shows all the required components that will be automatically downloaded and installed as part of the process.  The following are the mandatory components that needs to be installed for proper functioning of Shift toolkit - MongoDB, Windows PowerShell 7, NetApp ONTAP PowerShell Toolkit, Policy file editor, Credential Manage, VMware.PowerCLI package and Java OpenJDK which is all packed into the package. 
+. Review the required components that will be automatically downloaded and installed, and then click *Next*. 
 +
-Click Next.
+These mandatory components are required for proper Shift Toolkit operation:
+
 +
-image::shift-toolkit-019.png["Dialog showing the packages to be installed"]
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-019.png[Packages to be installed]
+====
 
-. Review the JAVA OpenJDK GNU licensing information. Click Next.
+. Review the Java OpenJDK GNU licensing information and click *Next*.
 +
-image::shift-toolkit-020.png["Dialog showing the Java licensing information"]
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-020.png[Java licensing information]
+====
 
-. Keep the default for creating the desktop shortcut and click Next.
+. Keep the default setting for creating a desktop shortcut and click *Next*.
 +
-image::shift-toolkit-021.png["Dialog showing the additional Shift Toolkit options"]
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-021.png[Additional Shift Toolkit options]
+====
 
-. Setup is now ready to proceed with install. Click Install.
+. Click *Install* to begin the installation.
 +
-image::shift-toolkit-022.png["Dialog showing the Shift Toolkit installation options"]
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-022.png[Shift Toolkit installation confirmation]
+====
 
-. The installation starts and the process will download the required components and install them. Once done, click Finish.
+. Wait for the installation to complete. The installer downloads and installs all required components. Click *Finish* when complete.
 +
-image::shift-toolkit-023.png["Dialog showing the Shift Toolkit installation progress"]
-
-. Shift toolkit uses a self-signed certificate by default. Accept the certificate prompt and click on Next.
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-023.png[Shift Toolkit installation progress]
+====
 +
-NOTE: The certificate can be easily replaced with a third party or CA generated certificate. Simply replace the certificate within certs folder. The certs folder resides within the <installation directory>Storage>Certs.
+NOTE: The installation can take 10-15 minutes.
+
+. Accept the self-signed certificate prompt and click *Next*.
 +
-image::shift-toolkit-024.png["Dialog showing the Shift Toolkit SSL certificate selection"]
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-024.png[Shift Toolkit SSL certificate]
+====
++
+NOTE: The self-signed certificate can be replaced with a third-party or CA-generated certificate. Replace the certificate in the certs folder located at `<installation directory>\Storage\Certs`.
 
-. Once done, the installation completes.
+.Result
 
-NOTE: If the Shift toolkit VM does not have internet, the offline installer will perform the same steps but will install the components using the packages included in the executable.
+The Shift Toolkit installation is complete.
 
-image::shift-toolkit-025.png["Dialog showing the Shift Toolkit wizard"]
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-025.png[Shift Toolkit installation wizard completion]
+====
 
-NOTE: The installation can take 10 -15 mins.
+NOTE: For VMs without internet access, the offline installer performs the same steps but installs components using packages included in the executable.
 
-== Performing an upgrade
+== Upgrade the Shift Toolkit
 
-Upgrades are now fully automated and can be completed with a single click. An additional service makes the upgrades seamless. Shit toolkit updater service, which listens on port 3002 performs the following steps:
+Upgrades are fully automated and can be completed with a single click. 
 
-. Download the upgrade package.
-. Stop the Shift toolkit service
-. Extract the files and overwrite the required files.
-. Run update and uses the same IP address (retaining the metadata as is).
-. Once done, the UI is redirected to Shift toolkit UI listening on port 3001
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-026.png[Shift Toolkit upgrade option]
+====
 
-image::shift-toolkit-026.png["Dialog showing the Shift Toolkit upgrade option"]
+The Shift Toolkit updater service listens on port 3002 and performs the following steps:
 
-NOTE: For deployments without internet connectivity, manually download the upgrade package starting with “update” from the NetApp Toolchest and place it in a designated folder (C:\NetApp_Shift). This folder path should be created and specified during the update process. All other steps remain the same as in the online upgrade procedure.
+. Downloads the upgrade package
+. Stops the Shift Toolkit service
+. Extracts files and overwrites required files
+. Runs the update using the same IP address (retaining metadata)
+. Redirects the UI to the Shift Toolkit UI listening on port 3001
 
-image::shift-toolkit-027.png["Dialog showing the Shift Toolkit upgrade option"]
+
+.For deployments without internet connectivity
+Manually download the upgrade package (filename starts with "update") from NetApp Toolchest and place it in the designated folder `C:\NetApp_Shift`. 
+
+Create this folder path if it doesn't exist. All other steps remain the same as the online upgrade procedure.
+
+.Show example
+[%collapsible]
+====
+image::shift-toolkit-027.png[Shift Toolkit manual upgrade option]
+====
