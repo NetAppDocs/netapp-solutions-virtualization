@@ -4,7 +4,6 @@ permalink: migration/shift-toolkit-overview.html
 keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox
 summary: 
 ---
-
 = Learn about migrating VMs between virtualization environments using NetApp Shift Toolkit
 :hardbreaks:
 :nofooter:

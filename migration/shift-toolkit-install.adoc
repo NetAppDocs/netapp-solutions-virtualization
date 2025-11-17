@@ -4,7 +4,6 @@ permalink: migration/shift-toolkit-install.html
 keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox
 summary: "Install or upgrade the NetApp Shift Toolkit after verifying that your environment meets the preparation and prerequisite requirements."
 ---
-
 = Install or upgrade the NetApp Shift Toolkit for ONTAP storage
 :nofooter:
 :icons: font

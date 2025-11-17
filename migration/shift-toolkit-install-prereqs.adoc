@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: migration/shift-toolkit-install-prereqs.html
-keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox
+keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox, install, shift, toolkit, prereqs
 summary: "Verify that your environment meets the hardware, connectivity, and ONTAP storage requirements before installing the Shift Toolkit."
 ---
 = Requirements to install the NetApp Shift Toolkit

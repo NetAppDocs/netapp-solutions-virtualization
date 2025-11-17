@@ -4,7 +4,6 @@ permalink: migration/shift-toolkit-migrate-esxi2osv.html
 keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, redhat, osv
 summary: "Migrate VMs from VMware ESXi to Red Hat OpenShift Virtualization using the Shift Toolkit by preparing VMs, converting disk formats, and configuring the target environment."
 ---
-
 = Migrate VMs from VMware ESXi to Red Hat OpenShift Virtualization
 :hardbreaks:
 :nofooter:

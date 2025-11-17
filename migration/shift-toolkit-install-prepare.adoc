@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: migration/shift-toolkit-install-prepare.html
-keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox
+keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox, install, shift, toolkit
 summary: "Prepare to install the NetApp Shift Toolkit by ensuring your environment meets the prerequisites and selecting the appropriate installation package for your deployment scenario."
 ---
 = Prepare to install the NetApp Shift Toolkit for ONTAP storage

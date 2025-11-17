@@ -5,7 +5,7 @@ entries:
   - title: "Use Shift Toolkit to migrate or convert VMs"
     pdf-filename: "Shift Toolkit User Guide"
     entries:
-      - title: "About Shift Toolkit"
+      - title: "About the NetApp Shift Toolkit"
         url: /migration/shift-toolkit-overview.html
       - title: "Versions supported by Shift Toolkit"
         url: /migration/shift-toolkit-supported-versions.html
