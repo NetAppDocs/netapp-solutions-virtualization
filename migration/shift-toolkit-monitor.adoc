@@ -4,7 +4,6 @@ permalink: migration/shift-toolkit-monitor.html
 keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox
 summary: "Use the Shift Toolkit Job Monitoring dashboard to track migration, conversion, and blueprint operations in real time, enabling administrators to quickly identify job status and resolve issues."
 ---
-
 = Monitor migration jobs with the Shift Toolkit dashboard
 :hardbreaks:
 :nofooter:
