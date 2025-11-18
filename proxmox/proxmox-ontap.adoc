@@ -183,10 +183,8 @@ image:proxmox-ontap-009.png[NFS storage navigation]
 image:proxmox-ontap-010.png[NFS storage addition]
 
 . To enable nConnect option, go to shell on any one of the nodes on the cluster and type pvesm set pvenfs01 --options nconnect=4
-+
-. Here is the content in /etc/pve/storage.cfg for NFS.
-+
-image:proxmox-ontap-012.png[storage configuration file for NFS]
+where pvenfs01 is the storage id created in the above step. Note that if you plan to use trunking feature, ensure at least NFS v4.1 is used and set the option trunkdiscovery. pvesm set pvenfs01 --options vers=4.1,trunkdiscovery
+
 ====
 
 == LVM with iSCSI
