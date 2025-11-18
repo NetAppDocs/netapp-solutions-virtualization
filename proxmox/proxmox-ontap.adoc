@@ -54,7 +54,7 @@ Proxmox VE hosts need to have FC, Ethernet, or other supported interfaces cabled
 
 *SAN*
 
-* Stretch cluster across fault domains with SnapMirror active sync.
+* Stretch cluster across fault domains with SnapMirror active sync. Always check https://mysupport.netapp.com/matrix/#welcome[Interoperability Matrix Tool] for supported configurations.
 * ASA models provide active/active multipathing and fast path failover.
 * Support for FC, iSCSI, NVMe-oF protocols.
 * Support for iSCSI CHAP mutual authentication.
@@ -182,10 +182,8 @@ image:proxmox-ontap-009.png[NFS storage navigation]
 +
 image:proxmox-ontap-010.png[NFS storage addition]
 
-. For session trunking, on every Proxmox VE hosts, update the /etc/fstab file to mount the same NFS export using different lif address along with max_connect and NFS version option.
+. To enable nConnect option, go to shell on any one of the nodes on the cluster and type pvesm set pvenfs01 --options nconnect=4
 +
-image:proxmox-ontap-011.png[fstab entries for session trunk]
-
 . Here is the content in /etc/pve/storage.cfg for NFS.
 +
 image:proxmox-ontap-012.png[storage configuration file for NFS]
