@@ -1,0 +1,46 @@
+---
+sidebar: sidebar
+permalink: migration/shift-toolkit-install-prepare.html
+keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox, install, shift, toolkit
+summary: "Prepare to install the NetApp Shift Toolkit by ensuring your environment meets the prerequisites and selecting the appropriate installation package for your deployment scenario."
+---
+= Prepare to install the NetApp Shift Toolkit for ONTAP storage
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Prepare to install the NetApp Shift Toolkit by ensuring your environment meets the prerequisites and selecting the appropriate installation package for your deployment scenario.
+
+== Before you begin
+
+Verify that your environment meets the following requirements:
+
+* Windows Server 2019, 2022, or 2025
+* Dedicated virtual machine for the Shift Toolkit installation
+* Network connectivity between source and target environments
+* Virtual machine running on VMware vSphere or Microsoft Hyper-V
+
+NOTE: Install the Shift Toolkit on a dedicated VM to enable management of multiple source and target hypervisors from a single server.
+
+== Select an installation package
+
+The Shift Toolkit is available in two installation packages from link:https://mysupport.netapp.com/site/tools/tool-eula/netapp-shift-toolkit[NetApp Toolchest]:
+
+*Online installer (~130 MB)*
+
+* Downloads and installs prerequisites from the internet during installation
+* Requires internet connectivity during installation
+* Smaller package size for faster download
+
+*Offline installer (~1.2 GB)*
+
+* Includes all prerequisites bundled within the package
+* Supports installation on VMs without internet access
+* No proxy configuration required
+* Provides more control over the installation process
+
+image::shift-toolkit-010.png[Shift Toolkit installation package options]
+
+TIP: Use the offline installer for air-gapped environments or when you need complete control over the installation process without external dependencies.

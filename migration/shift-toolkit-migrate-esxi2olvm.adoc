@@ -4,7 +4,6 @@ permalink: migration/shift-toolkit-migrate-esxi2olvm.html
 keywords: netapp, vmware, esxi, vm, migration, virtualization, oracle, linux, olvm
 summary: "Migrate VMs from VMware ESXi to Oracle Linux Virtualization Manager using the Shift Toolkit by preparing VMs, converting disk formats, and configuring the target environment."
 ---
-
 = Migrate VMs from VMware ESXi to Oracle Linux Virtualization Manager
 :hardbreaks:
 :nofooter:
