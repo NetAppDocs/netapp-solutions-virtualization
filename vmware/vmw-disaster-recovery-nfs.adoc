@@ -137,7 +137,7 @@ The below screenshot shows the option to filter virtual machines or specific dat
 
 image:dr-draas-nfs-017.png["Figure showing input/output dialog or representing written content"]
 
-Once the resource groups are selected, create the failover mappings. In this step, specify how the resources from the source environment maps to the destination. This includes compute resources, virtual networks. IP customization, pre- and post-scripts, boot delays, application consistency and so on. For detailed information, refer to link:https://docs.netapp.com/us-en/bluexp-disaster-recovery/use/drplan-create.html#select-applications-to-replicate-and-assign-resource-groups[Create a replication plan].
+Once the resource groups are selected, create the failover mappings. In this step, specify how the resources from the source environment maps to the destination. This includes compute resources, virtual networks. IP customization, pre- and post-scripts, boot delays, application consistency and so on. For detailed information, refer to link:https://docs.netapp.com/us-en/data-services-disaster-recovery/use/drplan-create.html#select-applications-to-replicate-and-assign-resource-groups[Create a replication plan].
 
 image:dr-draas-nfs-018.png["Figure showing input/output dialog or representing written content"]
 

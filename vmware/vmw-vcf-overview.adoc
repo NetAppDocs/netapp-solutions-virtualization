@@ -107,7 +107,7 @@ For more information regarding the top ONTAP Benefits for VMware VCF identified 
 * link:vmw-getting-started-hmc.html[Hybrid Multicloud with VMware and NetApp]
 * link:vmw-getting-started-security.html[Security and ransomware protection]
 * link:vmw-getting-started-migration.html[Easy migration of VMware workloads to NetApp]
-* link:vmw-dr-gs.html[BlueXP Disaster Recovery]
+* link:vmw-dr-gs.html[NetApp Disaster Recovery]
 * link:vmw-getting-started-dii.html[Data Insfrastructure Insights]
 * link:vmw-getting-started-vmdc.html[VM Data Collector]
 

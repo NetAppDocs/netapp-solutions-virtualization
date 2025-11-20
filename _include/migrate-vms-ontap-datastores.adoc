@@ -376,7 +376,7 @@ $targetvm, $targetvmdisk | Get-SPBMEntityConfiguration
 * https://docs.vmware.com/en/Site-Recovery-Manager/index.html[Site Recovery Manager (SRM)] is typically meant for Disaster Recovery purposes and also often used for planned migration utilizing storage array based replication.
 * Continous Data Protection (CDP) products use https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/7-0/vsphere-storage-7-0/filtering-virtual-machine-i-o-in-vsphere/about-i-o-filters/classes-of-vaio-filters.html[vSphere API for IO (VAIO)] to intercept the data and send a copy to remote location for near zero RPO solution.
 * Backup and Recovery products can also be utilized. But often results in longer RTO.
-* https://docs.netapp.com/us-en/bluexp-disaster-recovery/get-started/dr-intro.html[BlueXP Disaster Recovery as a Service (DRaaS)] utilizes storage array based replication and automates certain tasks to recover the VMs at target site.
+* https://docs.netapp.com/us-en/data-services-disaster-recovery/get-started/dr-intro.html[NetApp Disater Recovery] utilizes storage array based replication and automates certain tasks to recover the VMs at target site.
 ====
 
 .Migration of VMs in hybrid cloud environment
@@ -387,7 +387,7 @@ $targetvm, $targetvmdisk | Get-SPBMEntityConfiguration
 ** link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-aws-vmc-migrate-hcx.html[TR 4942: Migrate Workloads to FSx ONTAP datastore using VMware HCX^]
 ** link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-azure-avs-migrate-hcx.html[TR-4940: Migrate workloads to Azure NetApp Files datastore using VMware HCX - Quickstart guide^]
 ** link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-gcp-gcve-migrate-hcx.html[Migrate workloads to Google Cloud NetApp Volumes datastore on Google Cloud VMware Engine using VMware HCX - Quickstart guide^]
-* https://docs.netapp.com/us-en/bluexp-disaster-recovery/get-started/dr-intro.html[BlueXP Disaster Recovery as a Service (DRaaS)] utilizes storage array based replication and automates certain tasks to recover the VMs at target site.
+* https://docs.netapp.com/us-en/data-services-disaster-recovery/get-started/dr-intro.html[NetApp Disaster Recovery] utilizes storage array based replication and automates certain tasks to recover the VMs at target site.
 * With supported Continous Data Protection (CDP) products that use https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/7-0/vsphere-storage-7-0/filtering-virtual-machine-i-o-in-vsphere/about-i-o-filters/classes-of-vaio-filters.html[vSphere API for IO (VAIO)] to intercept the data and send a copy to remote location for near zero RPO solution.
 
 [TIP]
@@ -497,6 +497,6 @@ To allow network communication with existing VMs on other clusters on source vCe
 * https://techdocs.broadcom.com/us/en/vmware-cis/nsx/vmware-nsx/4-2/administration-guide/managing-nsx-t-in-multiple-locations/nsx-t-federation/networking-topologies-in-nsx-federation/tier-0-in-federation.html[Tier-0 Gateway Configurations in NSX Federation]
 * https://techdocs.broadcom.com/us/en/vmware-cis/hcx/vmware-hcx/4-11/vmware-hcx-user-guide-4-11.html[HCX 4.8 User Guide]
 * https://techdocs.broadcom.com/us/en/vmware-cis/live-recovery.html[VMware Live Recovery Documentation]
-* https://docs.netapp.com/us-en/bluexp-disaster-recovery/get-started/dr-intro.html[BlueXP disaster recovery for VMware]
+* https://docs.netapp.com/us-en/data-services-disaster-recovery/get-started/dr-intro.html[NetApp Disaster Recovery for VMware]
 
 // NetApp Solutions restructuring (jul 2025) - renamed from vmware/migrate-vms-to-ontap-datastore.adoc

@@ -343,7 +343,7 @@ By integrating with 1P services powered by NetApp on each hyperscalar, organizat
 
 === Disaster Recovery between on-premises sites
 
-For more details, please visit link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-dr-vmfs.html[DR using BlueXP DRaaS for VMFS Datastores^]
+For more details, please visit link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-dr-vmfs.html[DR using NetApp Disaster Recovery for VMFS Datastores^]
 
 === Disaster Recovery between on-premises and VMware Cloud in any hyperscalar
 

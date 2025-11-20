@@ -48,7 +48,7 @@ entries:
       - title: "VCF 9 deployment with ONTAP"
         url: /vmware/vmw-vcf-deployment.html
       - title: "VCF 9 DR with NetApp Disaster Recovery"
-        url: /vmware/vmw-vcf-dr-bxp-nfs.html
+        url: /vmware/vmw-vcf-disaster-recovery-nfs.html
       - title: "Convert existing vSphere clusters to VCF"
         entries:
           - title: "About converting existing vSphere clusters to VCF"
