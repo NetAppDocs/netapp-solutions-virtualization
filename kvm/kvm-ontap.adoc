@@ -57,7 +57,7 @@ KVM hosts need to have FC, Ethernet, or other supported interfaces cabled to swi
 
 *SAN*
 
-* Stretch cluster across fault domains with SnapMirror active sync.
+* Stretch cluster across fault domains with SnapMirror active sync. Always check https://mysupport.netapp.com/matrix/#welcome[Interoperability Matrix Tool] for supported configurations.
 * ASA models provide active/active multipathing and fast path failover.
 * Support for FC, iSCSI, NVMe-oF protocols.
 * Support for iSCSI CHAP mutual authentication.
