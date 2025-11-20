@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: virtualization/virt-options-on-netapp.html
+permalink: virtualization/virt-options-on-netapp_old.html
 keywords: virtualization, overview, options, vmware, alternatives, hyperv, proxmox, openshift
 summary: "This document provides an overview of why NetApp is the best platform for virtualization environments - regardless of the virtualization solution."
 ---

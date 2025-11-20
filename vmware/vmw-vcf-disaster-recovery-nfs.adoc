@@ -46,7 +46,7 @@ To get started with NetApp Disaster Recovery, use NetApp Console and then access
 +
 image::vmw-vcf-dr-nfs-002.png[NetApp Disaster Recovery Dashboard]
 
-Before the configuring disaster recovery plan, ensure the following link:https://docs.netapp.com/us-en/data-services-disaster-recovery/get-started/dr-prerequisites.html[pre-requisites] are met:
+Before configuring the disaster recovery plan, ensure the following link:https://docs.netapp.com/us-en/data-services-disaster-recovery/get-started/dr-prerequisites.html[pre-requisites] are met:
 
 * The Console agent is set up in NetApp Console. 
 * The agent instance have connectivity to the source and destination workload domain vCenter and storage systems.

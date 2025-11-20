@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: vmware/vmw-dii.html
+permalink: vmware/vmw-dii_old.html
 keywords: vsphere, ontap, data infrastructure insights, asa, all-flash san array, 
 summary:
 ---
