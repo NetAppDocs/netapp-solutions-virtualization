@@ -139,17 +139,6 @@ entries:
           - title: "Protect VCF workload domains with NVMe"
             url: /vmware/vmw-vcf-scv-nvme.html
 #
-      - title: "Protect VMware datastores with NetApp Console"
-        entries:
-          - title: "About protecting VMware datastores with NetApp Disaster Recovery"
-            url: /vmware/vmw-vcf-disaster-recovery.html
-          - title: "Configure data protection with SnapCenter and NetApp Console"
-            url: /vmware/vmw-vcf-321-data-protection.html
-          - title: "Set up disaster recovery for VMFS datastores"
-            url: /vmware/vmw-disaster-recovery-vmfs.html
-          - title: "Set up disaster recovery for NFS datastores"
-            url: /vmware/vmw-disaster-recovery-nfs.html
-#
       - title: "Protect workloads with vSphere Metro Storage Cluster"
         entries:
           - title: "About integrating ONTAP high availability"
