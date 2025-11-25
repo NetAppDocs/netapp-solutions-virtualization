@@ -47,6 +47,8 @@ Now if all these needs to be orchestrated and integrated with SIEM tools, then a
 
 In this example, NFS datastore "Src_NFS_DS04" is protected using NetApp Ransomware Resilience.
 
+NOTE: The steps outlined below are with BlueXP. The workflow is similar with the NetApp Console. 
+
 image:nfs-arp-005.png["Figure showing input/output dialog or representing written content"]
 
 image:nfs-arp-006.png["Figure showing input/output dialog or representing written content"]
@@ -71,7 +73,7 @@ This section looks at how NetApp Ransomware Resilience orchestrates recovery fro
 
 NOTE: If the VM is managed by SnapCenter, NetApp Ransomware Resilience restores the VM back to its previous state using the VM-consistent process. 
 
-. Access NetApp Ransomware Resilience and an alert appears on theNetApp Ransomware Resilience Dashboard.
+. Access NetApp Ransomware Resilience and an alert appears on the NetApp Ransomware Resilience Dashboard.
 
 . Click on the alert to review the incidents on that specific volume for the generated alert
 +

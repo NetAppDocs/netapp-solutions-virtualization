@@ -4,7 +4,7 @@ permalink: vmware/vmw-vcf-disaster-recovery-nfs.html
 keywords: netapp, vmware, cloud, foundation, vcf, nfs
 summary: Disaster recovery solution for VCF with NetApp Disaster Recovery.
 ---
-= Implementing Disaster Recovery with NetApp NetApp Disaster Recovery
+= Implementing Disaster Recovery with NetApp Disaster Recovery
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -16,7 +16,7 @@ VCF disaster recovery solution for NFS datastore with NetApp SnapMirror and NetA
 
 Block-level replication from a production site to a disaster recovery (DR) site offers a resilient and cost-effective strategy for protecting workloads against site outages and data corruption events, including ransomware attacks. NetApp SnapMirror replication enables VMware VCF 9 workload domains running on on-premises ONTAP systems—using either NFS or VMFS datastores—to be replicated to a secondary ONTAP system located in a designated recovery datacenter where VMware is also deployed.
 
-For more information, see the following link:https://docs.netapp.com/us-en/data-services-disaster-recovery/[NetApp Disaster Recover documentation].
+For more information, see the following link:https://docs.netapp.com/us-en/data-services-disaster-recovery/[NetApp Disaster Recovery documentation].
 
 This section outlines the configuration of NetApp Disaster Recovery to establish DR for on-premises VMware virtual machines. 
 
