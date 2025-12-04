@@ -71,7 +71,7 @@ image:vmware-vcf-asa-021.png[vSphere client recent tasks pane]
 
 * For information on configuring ONTAP storage systems, refer to link:https://docs.netapp.com/us-en/ontap[ONTAP 9 documentation^].
 
-* For information on configuring VCF, refer to link:https://techdocs.broadcom.com/us-en/vmware-cis/vcf.html[VMware Cloud Foundation documentation^].
+* For information on configuring VCF, refer to link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf.html[VMware Cloud Foundation documentation^].
 
 * For information on using VMFS iSCSI datastores with VMware, refer to link:vmw-vmfs-iscsi.html[vSphere VMFS datastore - iSCSI storage backend with ONTAP].
 

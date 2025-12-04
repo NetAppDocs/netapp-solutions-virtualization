@@ -85,7 +85,7 @@ The following is an example of a JSON file for NSX deployment.
 +
 . Copy the JSON file to a directory on the SDDC Manager.
 +
-NOTE: When deploying an NSX Manager cluster in a convert or import operation, NSX-VLAN networking is utilized. For information about NSX-VLAN networking limitations, refer to https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/considerations-before-converting-or-importing-existing-vsphere-environments-into-vcf-admin.html[Considerations Before Converting or Importing Existing vSphere Environments into VMware Cloud Foundation].
+NOTE: When deploying an NSX Manager cluster in a convert or import operation, NSX-VLAN networking is utilized. For information about NSX-VLAN networking limitations, refer to https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/map-for-administering-vcf-5-2/importing-existing-vsphere-environments-admin/considerations-before-converting-or-importing-existing-vsphere-environments-into-vcf-admin.html[Considerations Before Converting or Importing Existing vSphere Environments into VMware Cloud Foundation].
 
 == Step 3: Upload software to SDDC Manager
 Upload the VCF Import Tool bundle and the NSX deployment bundle to the SDDC Manager by following the instructions in the VMware documentation: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/seed-software-on-sddc-manager.html[Upload the Required Software to the SDDC Manager Appliance].

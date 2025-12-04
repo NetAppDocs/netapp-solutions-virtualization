@@ -122,7 +122,7 @@ Once the resource groups are created via replication plan, the next step is to c
 
 Note: By default, the same mapping parameters are used for both test and failover operations. To set different mappings for test environment, select the Test mapping option after unchecking the checkbox “Use same mappings for failover and test mappings”. Once the resource mapping is complete, click Next.
 
-image::vmw-vmw-vcf-dr-nfs-008.png[NetApp Disaster resource mapping]
+image::vmw-vcf-dr-nfs-008.png[NetApp Disaster resource mapping]
 
 Once done, review the created mappings and then click on Add plan.
 
