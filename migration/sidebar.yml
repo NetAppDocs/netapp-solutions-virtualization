@@ -3,18 +3,42 @@ title: "VM migration solutions"
 url: /migration/index.html
 entries:
   - title: "Use Shift Toolkit to migrate or convert VMs"
-    pdf-filename: "Use Shift Toolkit to migrate or convert VMs"
+    pdf-filename: "Shift Toolkit User Guide"
     entries:
-      - title: "About Shift Toolkit"
+      - title: "About the NetApp Shift Toolkit"
         url: /migration/shift-toolkit-overview.html
+      - title: "Versions supported by Shift Toolkit"
+        url: /migration/shift-toolkit-supported-versions.html
       - title: "Install Shift Toolkit"
-        url: /migration/shift-toolkit-install.html
+        entries:
+          - title: "Prepare to install"
+            url: /migration/shift-toolkit-install-prepare.html
+          - title: "Review install requirements"
+            url: /migration/shift-toolkit-install-prereqs.html
+          - title: "Install or upgrade Shift Toolkit"
+            url: /migration/shift-toolkit-install.html
       - title: "Configure Shift Toolkit"
         url: /migration/shift-toolkit-ui.html
       - title: "Migrate VMs using Shift Toolkit"
-        url: /migration/shift-toolkit-migration.html
+        entries:
+          - title: "Overview"
+            url: /migration/shift-toolkit-migration.html
+          - title: "Migrate VMs from VMware ESXi to Microsoft Hyper-V"
+            url: /migration/shift-toolkit-migrate-esxi2hyperv.html
+          - title: "Migrate VMs from Microsoft Hyper-V to VMware ESXi"
+            url: /migration/shift-toolkit-migrate-hyperv2esxi.html
+          - title: "Migrate VMs from VMware ESXi to Red Hat OpenShift Virtualization"
+            url: /migration/shift-toolkit-migrate-esxi2osv.html
+          - title: "Migrate VMs from VMware ESXi to Oracle Linux Virtualization Manager (OLVM)"
+            url: /migration/shift-toolkit-migrate-esxi2olvm.html
       - title: "Convert VMs using Shift Toolkit"
         url: /migration/shift-toolkit-conversion.html
+      - title: "Monitoring and dashboard"
+        url: /migration/shift-toolkit-monitor.html
+      - title: "Advanced Settings"
+        url: /migration/shift-toolkit-settings.html
+      - title: "Migrating from SAN environments"
+        url: /migration/shift-toolkit-san.html
       - title: "Next steps"
         url: /migration/shift-toolkit-summary.html
 #
