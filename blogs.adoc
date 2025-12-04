@@ -24,7 +24,7 @@ Read the blogs that offer practical guidance and best practices for integrating 
 
 ** link:https://www.netapp.com/blog/netapp-vmware-cloud-foundation-supplemental-storage[Part 4: ONTAP Tools for VMware and supplemental storage]
 
-* link:https://https://www.netapp.com/blog/vmware-optimize-storage-workloads/[Optimize storage and data-intensive VMware workloads in any cloud]
+* link:https://www.netapp.com/blog/vmware-optimize-storage-workloads/[Optimize storage and data-intensive VMware workloads in any cloud]
 
 * link:https://www.netapp.com/blog/vmware-migrate-workloads-azure/[Migrating storage-heavy VMware workloads to Azure VMware Solution? Read this first.]
 
