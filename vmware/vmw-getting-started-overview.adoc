@@ -64,5 +64,5 @@ Key ONTAP business continuity features include:
 ** Data Replication with SnapMirror: Taking advantage of snapshot copies, SnapMirror enables asynchronous and synchronous replication of data to remote sites or cloud environments for disaster recovery
 ** MetroCluster: ONTAP's MetroCluster technology provides synchronous replication between geographically separated sites, ensuring zero data loss and rapid recovery in the event of a site failure.
 ** Cloud Tiering: Cloud Tiering automatically identifies cold data (data that is infrequently accessed) on primary storage and moves it to lower-cost object storage, either in the cloud or on-premises.
-** BlueXP DRaaS: NetApp BlueXP Disaster Recovery as a Service (DRaaS) is a comprehensive solution designed to provide robust disaster recovery capabilities for businesses, ensuring data protection, rapid recovery, and business continuity in the event of a disaster. 
+** NetApp Disaster Recovery: NetApp Disaster Recovery is a comprehensive solution designed to provide robust disaster recovery capabilities for businesses, ensuring data protection, rapid recovery, and business continuity in the event of a disaster. 
 

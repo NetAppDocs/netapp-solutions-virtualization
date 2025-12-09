@@ -40,7 +40,7 @@ This scenario requires the following components and configurations:
 
 For information on configuring iSCSI VMFS datastores as supplemental storage refer to link:vmw-vcf-mgmt-supplemental-iscsi.html[*iSCSI as supplemental storage for Management Domains using ONTAP Tools for VMware*] in this documentation. The process for using OTV to deploy datastores is identical for management and workload domains.
 
-TIP: In addition to replicating backups taken with SCV to secondary storage, offsite copies of data can be made to object storage on one of the three (3) leading cloud providers using NetApp BlueXP backup and recovery for VMs. For more information refer to the solution link:vmw-vcf-321-data-protection.html[3-2-1 Data Protection for VMware with SnapCenter Plug-in and BlueXP backup and recovery for VMs].
+TIP: In addition to replicating backups taken with SCV to secondary storage, offsite copies of data can be made to object storage on one of the three (3) leading cloud providers using NetApp Backup and Recovery for VMs. For more information refer to this offering link:https://docs.netapp.com/us-en/data-services-backup-recovery/index.html[NetApp Backup and Recovery Documentation].
 
 image:vmware-vcf-asa-108.png[3-2-1 backup strategy]
 

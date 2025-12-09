@@ -65,12 +65,12 @@ NOTE: The `nConnect` session count is per host. Update other hosts after deploym
 * link:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_add_storage.html[Add the storage backend].
 * link:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_create_backup_policies.html[Create backup policies].
 * link:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_create_resource_groups.html[Create resource groups].
-.. Deploy the BlueXP Connector
-* link:https://docs.netapp.com/us-en/bluexp-setup-admin/concept-connectors.html#what-you-can-do-without-a-connector[Review what you can do without a Connector].
-* link:https://docs.netapp.com/us-en/bluexp-setup-admin/concept-modes.html#overview[Deploy the Connector].
-.. Use BlueXP for backup and recovery
-* link:https://docs.netapp.com/us-en/bluexp-backup-recovery/prev-vmware-protect-overview.html[Protect VM workloads].
-* link:https://docs.netapp.com/us-en/bluexp-backup-recovery/br-use-kubernetes-protect-overview.html[Protect VKS workloads].
+.. Deploy the NetApp Console agent
+* link:https://docs.netapp.com/us-en/console-setup-admin/concept-agents.html[Review what you can do without a Console agent].
+* link:https://docs.netapp.com/us-en/console-setup-admin/concept-modes.html#overview[Agent deployment modes].
+.. Use NetApp Backup and Recovery
+* link:https://docs.netapp.com/us-en/data-services-backup-recovery/prev-vmware-protect-overview.html[Protect VM workloads].
+* link:https://docs.netapp.com/us-en/data-services-backup-recovery/br-use-kubernetes-protect-overview.html[Protect VKS workloads].
 
 . After you import vCenter as a workload domain in the VCF instance, complete the following:
 .. Register ONTAP tools
@@ -82,9 +82,9 @@ NOTE: The `nConnect` session count is per host. Update other hosts after deploym
 * link:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_add_storage.html[Add the storage backend].
 * link:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_create_backup_policies.html[Create backup policies].
 * link:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_create_resource_groups.html[Create resource groups].
-.. Use BlueXP for backup and recovery
-* link:https://docs.netapp.com/us-en/bluexp-backup-recovery/prev-vmware-protect-overview.html[Protect VM workloads].
-* link:https://docs.netapp.com/us-en/bluexp-backup-recovery/br-use-kubernetes-protect-overview.html[Protect VKS workloads].
+.. Use NetApp Backup and Recovery
+* link:https://docs.netapp.com/us-en/data-services-backup-recovery/prev-vmware-protect-overview.html[Protect VM workloads].
+* link:https://docs.netapp.com/us-en/data-services-backup-recovery/br-use-kubernetes-protect-overview.html[Protect VKS workloads].
 
 You can reuse these steps whenever you create a new workload domain.
 

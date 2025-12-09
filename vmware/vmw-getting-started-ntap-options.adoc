@@ -86,7 +86,7 @@ With active-active pathing, both planned and unplanned takeovers have IO resumpt
 For more information see https://www.netapp.com/pdf.html?item=/media/85671-tr-4968.pdf[TR-4968, NetApp All-SAS Array – Data Availability and Integrity with the NetApp ASA].
 {nbsp}
 
-For detailed information see the https://www.netapp.com/data-storage/all-flash-san-storage-array[NetApp ASA landing page].
+For detailed information see the https://www.netapp.com/asa/[NetApp ASA landing page].
 {nbsp}
 
 == NetApp AFF (All Flash FAS) Benefits

@@ -16,7 +16,7 @@ NetApp Data Infrastructure Insights (formerly Cloud Insights) integrates with Op
 
 NetApp Cloud Insights is a cloud infrastructure monitoring tool that gives you visibility into your complete infrastructure. With Cloud Insights, you can monitor, troubleshoot, and optimize all your resources including your public clouds and your private data centers. For more information about NetApp Cloud Insights, refer to the https://docs.netapp.com/us-en/cloudinsights[Cloud Insights documentation].
 
-To start using Cloud Insights, you must sign up on the link:https://www.netapp.com/console[NetApp Console]. For details, refer to the link:https://docs.netapp.com/us-en/cloudinsights/task_cloud_insights_onboarding_1.html[Cloud Insights Onboarding]
+To start using Data Infrastructure Insights, you can sign up at the following link:https://www.netapp.com/forms/dii-free-trial/[Data Infrastructure Insights Free Trial]. For details, refer to the link:https://docs.netapp.com/us-en/cloudinsights/task_cloud_insights_onboarding_1.html[Data Infrastructure Insights Onboarding]
 
 Cloud Insights has several features that enable you to quickly and easily find data, troubleshoot issues, and provide insights into your environment. You can find data easily with powerful queries, you can visualize data in dashboards, and send email alerts for data thresholds you set. Refer to the link:https://docs.netapp.com/us-en/cloudinsights/concept_feature_tutorials.html#introduction[video tutorials] to help you understand these features.
 
