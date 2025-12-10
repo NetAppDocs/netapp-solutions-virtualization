@@ -77,7 +77,7 @@ This design is for customers providing cloud-like services with higher availabil
 
 For VMFS datastores, SnapMirror active sync provides an active-active storage unit for use with vSphere Metro Storage Cluster. Uniform access mode offers transparent storage failover, while Non-Uniform access mode requires VM restart on fault domain failure.
 
-For NFS datastores, ONTAP MetroCluster with vSphere Metro Storage Cluster ensures high availability. A mediator avoids split-brain scenarios and can now be hosted on BlueXP.
+For NFS datastores, ONTAP MetroCluster with vSphere Metro Storage Cluster ensures high availability. A mediator avoids split-brain scenarios and can now be hosted on NetApp Console.
 
 VM placement rules control VMs within the same fault domain for Management Domain components.
 
@@ -85,9 +85,9 @@ image::vmw-vcf-design-003.png[VCF Fleet with Multiple Sites in a Single Region]
 
 ONTAP tools provide a UI to set up SnapMirror active sync relationships. Storage Systems of both fault domains must be registered in ONTAP tools and SnapCenter Plug-in for VMware vSphere.
 
-You can implement 3-2-1 backup policies using BlueXP Backup and Recovery for VMs via SnapMirror and SnapMirror to Cloud. You can perform restores from any of the three locations.
+You can implement 3-2-1 backup policies using NetApp Backup and Recovery for VMs via SnapMirror and SnapMirror to Cloud. You can perform restores from any of the three locations.
 
-Trident Protect or BlueXP Backup and Recovery for Kubernetes protect VKS Cluster Applications.
+Trident Protect or NetApp Backup and Recovery for Kubernetes protect VKS Cluster Applications.
 
 For more info, check the link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/design/blueprints/vsphere-only-to-vcf-fleet-upgrade-blueprint.html[Broadcom Technical Documentation on VCF Fleet with Multiple Sites in a Single Region].
 
@@ -95,7 +95,7 @@ For more info, check the link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf
 
 This design is for customers spread globally, providing services in close proximity and disaster recovery solutions.
 
-You can manage Disaster Recovery for VMs with VMware Live Site Recovery or BlueXP Disaster Recovery as a Service. ONTAP tools offer the SRA (Storage Replication Adapter) to orchestrate storage operations with ONTAP.
+You can manage Disaster Recovery for VMs with VMware Live Site Recovery or NetApp Disaster Recovery. ONTAP tools offer the SRA (Storage Replication Adapter) to orchestrate storage operations with ONTAP.
 
 [cols="4,2,2", options="header"]
 |===
@@ -107,7 +107,7 @@ You can manage Disaster Recovery for VMs with VMware Live Site Recovery or BlueX
 
 image::vmw-vcf-design-004.png[VCF Fleet with Multiple Sites across Multiple Regions]
 
-ONTAP tools provide a UI for datastore replication setup. BlueXP can also be used for replication between storage arrays. SnapCenter Plug-in for VMware vSphere utilizes existing SnapMirror relationships for SnapShots.
+ONTAP tools provide a UI for datastore replication setup. NetApp Console can also be used for replication between storage arrays. SnapCenter Plug-in for VMware vSphere utilizes existing SnapMirror relationships for SnapShots.
 
 For more info, check the link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/design/blueprints/blueprint-4.html[Broadcom Technical Documentation on VCF Fleet with Multiple Sites Across Multiple Regions].
 
@@ -119,6 +119,6 @@ ASA, AFF, and FAS support this design option.
 
 image::vmw-vcf-design-005.png[VCF Fleet with Multiple Sites in a Single Region plus Additional Regions]
 
-You can use ONTAP tools or BlueXP to set up the replication relationship.
+You can use ONTAP tools or NetApp Console to set up the replication relationship.
 
 For more information, see the link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/design/blueprints/blueprint-5.html[Broadcom Technical Documentation on VCF Fleet with Multiple Sites in a Single Region plus Additional Regions].

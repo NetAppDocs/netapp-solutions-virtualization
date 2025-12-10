@@ -33,7 +33,7 @@ Proxmox VE hosts need to have FC, Ethernet, or other supported interfaces cabled
 * Tamperproof Snapshot copy locking
 * Encryption support
 * FabricPool to tier cold data to object store.
-* BlueXP and CloudInsights Integration.
+* NetApp Console and Data Infrastructure Insights integration.
 * Microsoft offloaded data transfer (ODX)
 
 *NAS*
