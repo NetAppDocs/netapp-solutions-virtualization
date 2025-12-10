@@ -24,5 +24,3 @@ Please refer to the following solutions for more details.
 * link:vmw-vcf-scv-multiwkld-protection.html[Protect VCF Multiple Workload Domains]
 
 * link:vmw-vcf-scv-nvme.html[Protect VCF Workload Domain with NVMe]
-
-* link:vmw-vcf-321-data-protection.html[3-2-1 Data Protection for VMware with SnapCenter Plug-in and BlueXP backup and recovery for VMs]

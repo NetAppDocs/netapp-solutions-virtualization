@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar
 permalink: vmware/vmw-dr-gs.html
-keywords: vmware, getting, started, overview, netapp, bluexp, disaster, recovery, draas
+keywords: vmware, getting, started, overview, netapp, console, disaster, recovery
 summary: 
 ---
-= Learn about disaster recovery of virtual machines using BlueXP disaster recovery
+= Learn about disaster recovery of virtual machines using NetApp Disaster Recovery
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -12,15 +12,15 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-BlueXP disaster recovery automates the replication and recovery of VMware virtual machines using ONTAP storage. It supports recovery from on-premises setup to VMware Cloud on AWS with Amazon FSx for NetApp ONTAP or another on-premises VMware environment. 
+NetApp Disaster Recovery automates the replication and recovery of VMware virtual machines using ONTAP storage. It supports recovery from on-premises setup to VMware Cloud on AWS with Amazon FSx for NetApp ONTAP or another on-premises VMware environment. 
 
 == Introduction
 
 Having a successful plan and combination of technologies ensures the protection of critical data, applications and VMs. The challenge with DR is determining the appropriate level of protection and associated costs. 
 
-ONTAP arrays offer built-in replication to transfer volume data, and therefore the virtual machines residing on the designated datastore LUNs, from one site to another. BlueXP DRaaS integrates with vSphere and automates the entire workflow for seamless failover and failback in the event of disaster. 
+ONTAP arrays offer built-in replication to transfer volume data, and therefore the virtual machines residing on the designated datastore LUNs, from one site to another. NetApp Disaster Recovery integrates with vSphere and automates the entire workflow for seamless failover and failback in the event of disaster. 
 
-For more information on BlueXP DRaaS, see link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-dr-overview.html[Overview of BlueXP DRaaS^].
+For more information on NetApp Disaster Recovery, see link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-dr-overview.html[Overview of NetApp Disaster Recovery^].
 
 == Considerations
 
@@ -34,8 +34,8 @@ To architect a DR solution, keep the following factors in mind:
 
 For more technical information on the available solutions, please see:
 
-* link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-dr-nfs.html[DR using BlueXP DRaaS for NFS Datastores^]
+* link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-dr-nfs.html[DR using NetApp Disaster Recovery for NFS Datastores^]
 
-* link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-dr-vmfs.html[DR using BlueXP DRaaS for VMFS Datastores^]
+* link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-dr-vmfs.html[DR using NetApp Disaster Recovery for VMFS Datastores^]
 
 // NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-getting-started-bluexp-disaster-recovery.adoc

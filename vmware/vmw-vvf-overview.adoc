@@ -166,9 +166,9 @@ The SnapCenter Plug-in orchestrates the quiescing of virtual machines in conjunc
 
 For more information refer to the https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere[SnapCenter Plug-in for VMware vSphere documentation].
 
-BlueXP integration enables 3-2-1 backup strategies that extend copies of data to object storage in the cloud.
+NetApp Backup and Recovery enables backup strategies that extend copies of data to object storage in the cloud.
 
-For more information on 3-2-1 backup strategies with BlueXP visit link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-321-dp-scv.html[3-2-1 Data Protection for VMware with SnapCenter Plug-in and BlueXP backup and recovery for VMs^].
+For more information on backup strategies with NetApp Backup and Recovery visit link:https://docs.netapp.com/us-en/data-services-backup-recovery/index.html[NetApp Backup and Recovery Documentation^].
 
 For step-by-step deployment instructions for the SnapCenter Plug-in, refer to the solution link:vmw-vcf-scv-viwld.html[Use SnapCenter Plug-in for VMware vSphere to protect VMs on VCF Workload Domains].
 
@@ -211,9 +211,9 @@ For more information refer to the https://techdocs.broadcom.com/us/en/vmware-cis
 
 See the the full solution at the NetApps Solutions documentation center: link:vmw-nfs-vlsr.html[Autonomous Ransomware Protection for NFS Storage]
 
-*BlueXP DRaaS* (Disaster Recovery as a Service) for NFS is a cost-effective disaster recovery solution designed for VMware workloads running on on-premises ONTAP systems with NFS datastores. It leverages NetApp SnapMirror replication to protect against site outages and data corruption events, such as ransomware attacks. Integrated with the NetApp BlueXP console, this service enables easy management and automated discovery of VMware vCenters and ONTAP storage. Organizations can create and test disaster recovery plans, achieving a Recovery Point Objective (RPO) of up to 5 minutes through block-level replication. BlueXP DRaaS utilizes ONTAP's FlexClone technology for space-efficient testing without impacting production resources. The service orchestrates failover and failback processes, allowing protected virtual machines to be brought up on the designated disaster recovery site with minimal effort. Compared to other well-known alternatives, BlueXP DRaaS offers these capabilities at a fraction of the cost, making it an efficient solution for organizations to set up, test, and execute disaster recovery operations for their VMware environments using ONTAP storage systems.
+*NetApp Disaster Recovery is a cost-effective disaster recovery solution designed for VMware workloads running on on-premises ONTAP systems with NFS datastores. It leverages NetApp SnapMirror replication to protect against site outages and data corruption events, such as ransomware attacks. Integrated with the NetApp Console, this service enables easy management and automated discovery of VMware vCenters and ONTAP storage. Organizations can create and test disaster recovery plans, achieving a Recovery Point Objective (RPO) of up to 5 minutes through block-level replication. NetApp Disaster Recovery utilizes ONTAP's FlexClone technology for space-efficient testing without impacting production resources. The service orchestrates failover and failback processes, allowing protected virtual machines to be brought up on the designated disaster recovery site with minimal effort. Compared to other well-known alternatives, NetApp Disaster Recovery offers these capabilities at a fraction of the cost, making it an efficient solution for organizations to set up, test, and execute disaster recovery operations for their VMware environments using ONTAP storage systems.
 
-See the the full solution at the NetApps Solutions documentation center: link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-dr-nfs.html[DR using BlueXP DRaaS for NFS Datastores^]
+See the the full solution at the NetApps Solutions documentation center: link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-dr-nfs.html[DR using NetApp Disaster Recovery NFS Datastores^]
 
 === Solutions Overview
 Solutions covered in this documentation:
