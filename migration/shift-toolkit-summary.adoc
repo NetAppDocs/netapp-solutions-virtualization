@@ -147,13 +147,13 @@ Select the *PRIVILEGES* tab:
 
 *Datastore*
 
-[compact]
+[options="compact"]
 * Browse datastore
 * Update virtual machine files
 
 *Virtual machine*
 
-[compact]
+[options="compact"]
 * Edit inventory
 ** Register
 ** Unregister
