@@ -145,31 +145,30 @@ To migrate virtual machines from VMware vSphere using Shift toolkit, create a RB
 
 Select the *PRIVILEGES* tab:
 
-*Datastore*
+[listing]
+----
+Datastore
+•	Browse datastore
+•	Update virtual machine files
 
-[options="compact"]
-* Browse datastore
-* Update virtual machine files
-
-*Virtual machine*
-
-[options="compact"]
-* Edit inventory
-** Register
-** Unregister
-* Interaction
-** Answer question
-** Console interaction
-** Power off
-** Power on
-* Snapshot management
-** Create snapshot
-** Remove snapshot
-** Rename snapshot
-* Guest operations
-** Guest operation modifications
-** Guest operation program execution
-** Guest operation queries
+Virtual machine
+•	Edit inventory
+    o	Register
+    o	Unregister
+•	Interaction
+    o	Answer question
+    o	Console interaction
+    o	Power off
+    o	Power on
+•	Snapshot management
+    o	Create snapshot
+    o	Remove snapshot
+    o	Rename snapshot
+•	Guest operations
+    o	Guest operation modifications
+    o	Guest operation program execution
+    o	Guest operation queries
+----
 
 image:shift-toolkit-085.png["Figure showing input/output dialog or representing written content"]
 
