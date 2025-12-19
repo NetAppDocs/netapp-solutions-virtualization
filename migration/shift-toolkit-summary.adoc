@@ -145,5 +145,6 @@ To migrate virtual machines from VMware vSphere using Shift toolkit, create a RB
 
 image:shift-toolkit-085.png["Figure showing input/output dialog or representing written content"]
 
+image:shift-toolkit-086.png["Figure showing input/output dialog or representing written content"]
 
 // NetApp Solutions restructuring (jul 2025) - renamed from vm-migrate/shift-toolkit-wrapup.adoc
