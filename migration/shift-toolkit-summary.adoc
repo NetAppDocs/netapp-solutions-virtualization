@@ -143,7 +143,31 @@ Once done, use the above created user while configuring the source and destinati
 
 To migrate virtual machines from VMware vSphere using Shift toolkit, create a RBAC user with the below mentioned privileges using  Administration > Access Control > Roles. 
 
-image:shift-toolkit-085.png["Figure showing input/output dialog or representing written content"]
+Select the *PRIVILEGES* tab:
 
+[listing]
+----
+Datastore
+•	Browse datastore
+•	Update virtual machine files
+
+Virtual machine
+•	Edit inventory
+    o	Register
+    o	Unregister
+•	Interaction
+    o	Answer question
+    o	Console interaction
+    o	Power off
+    o	Power on
+•	Snapshot management
+    o	Create snapshot
+    o	Remove snapshot
+    o	Rename snapshot
+•	Guest operations
+    o	Guest operation modifications
+    o	Guest operation program execution
+    o	Guest operation queries
+----
 
 // NetApp Solutions restructuring (jul 2025) - renamed from vm-migrate/shift-toolkit-wrapup.adoc
