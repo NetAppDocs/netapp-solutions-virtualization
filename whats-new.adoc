@@ -11,6 +11,16 @@ summary: Log of recent changes to the NetApp virtualization solutions collateral
 [.lead]
 Learn what's new in virtualization solutions.
 
+== 15 January 2026
+* Updated Proxmox VE solution contents to reflect Proxmox VE 9 release.
+* Added instructions to enable Anti-Ransomware protection on volumes used for Proxmox VE storage.
+* Added instructions to use FC and NVMe/FC as storage protocol for Proxmox VE.
+** link:proxmox/proxmox-ontap.html[Provision ONTAP storage for Proxmox Virtual Environment]
+* Added ONTAP integration for Proxmox Backup Server.
+** link:proxmox/proxmox-wkld-dp-pbs.html[Protect workloads running on Proxmox VE using Proxmox Backup Server and NetApp ONTAP]
+* Added deployment guidelines for ONTAP integration with Proxmox VE.
+** link:proxmox/proxmox-deployment-guidelines.html[NetApp ONTAP deployment guidelines for Proxmox Virtual Environment]
+
 == 12 November 2025
 * Provided the correct download links for the NetApp Shift Toolkit
 * Added migration solutions for NetApp Shift Toolkit

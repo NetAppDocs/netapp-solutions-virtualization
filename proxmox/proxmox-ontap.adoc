@@ -239,7 +239,7 @@ image:proxmox-ontap-024.png[FC interface details]
 
 . Create igroup and populate the host fc initiators.
 
-. Create the LUN with desired size on the SVM and present to igroup created in above step. Ensure Anti-Ransomware protection is enabled on the volume security tab.
+. Create the LUN with desired size on the SVM and present to igroup created in above step. Ensure Anti-Ransomware protection is enabled on the security tab on ASA systems and security tab on the volume for AFF/FAS systems.
 +
 image:proxmox-ontap-025.png[lun details]
 
@@ -337,7 +337,7 @@ image:proxmox-ontap-013.png[iscsi interface details]
 
 . Create igroup and populate the host iscsi initiators.
 
-. Create the LUN with desired size on the SVM and present to igroup created in above step. Ensure Anti-Ransomware protection is enabled on the volume security tab.
+. Create the LUN with desired size on the SVM and present to igroup created in above step. Ensure Anti-Ransomware protection is enabled on the security tab on ASA systems. For AFF/FAS systems, ensure Anti-Ransomware protection is enabled on the security tab on the volume.
 +
 image:proxmox-ontap-014.png[iscsi lun details]
 
