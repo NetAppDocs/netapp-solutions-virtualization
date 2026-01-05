@@ -9,6 +9,10 @@ indexpage:
           url: proxmox-overview.html
         - title: "Provision ONTAP storage for Proxmox VE"
           url: proxmox-ontap.html
+        - title: "Proxmox VE Deployment Guidelines with NetApp ONTAP"
+          url: proxmox-deploy-guidelines.html
+        - title: "Proxmox VE Workload Data Protection with Proxmox Backup Server and NetApp ONTAP"
+          url: proxmox-wkld-dp-pbs.html
 #
     - title: "Additional resources"
       links:

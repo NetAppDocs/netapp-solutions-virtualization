@@ -158,9 +158,11 @@ Proxmox VE hosts can also be backed up to Proxmox Backup Server. This includes c
 To back up a Proxmox VE host to PBS, follow these steps:
 
 . In the Proxmox VE shell or SSH session, use the `proxmox-backup-client` command to create a backup of the host. For example:
-+```
++
+```
 proxmox-backup-client backup <backupspec> --repository <pbs-storage>:<datastore> --ns <namespace>
-+```
+```
++
 Replace `<backupspec>` with the desired backup specification (e.g., `backupname and backuptype/<directory or files to backup>`), `<pbs-storage>` with the FQDN name of the PBS, `<datastore>` with the PBS datastore name, and `<namespace>` with the desired namespace. Assuming authentication and fingerprint environment variables are available.
 +
 image::proxmox-wkld-dp-pbs-017.png[Proxmox VE host backup command]
@@ -177,6 +179,7 @@ image::proxmox-wkld-dp-pbs-018.png[Viewing the files from Proxmox Backup Server 
 Proxmox VE allows the use of pre and post backup scripts to perform custom actions before and after the backup process. These scripts can be used to prepare the VM or container for backup, perform additional tasks, or clean up after the backup is complete.
 
 To use pre and post backup scripts in Proxmox VE, follow these steps:
+
 . Create the backup script on the Proxmox VE host. Ensure that the script is executable and have the necessary permissions. The following image shows the arguments that will be passed to the script on various events.
 +
 image::proxmox-wkld-dp-pbs-020.png[Script argument details for backup script]
