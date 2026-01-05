@@ -104,7 +104,7 @@ image:proxmox-ontap-001.png[nas interface details]
 +
 image:proxmox-ontap-002.png[Join domain info]
 
-. Create a volume. Remember to check the option to distribute data across the cluster to use FlexGroup.
+. Create a volume. Remember to check the option to distribute data across the cluster to use FlexGroup. Make sure Anti-Ransomware protection is enabled on the volume.
 +
 image:proxmox-ontap-023.png[FlexGroup option]
 
@@ -159,7 +159,7 @@ image:proxmox-ontap-001.png[nas interface details]
 
 . Create or update NFS export policy providing access to Proxmox VE host IP addresses or subnet. Refer to link:https://docs.netapp.com/us-en/ontap/nfs-config/create-export-policy-task.html[Export policy creation] and link:https://docs.netapp.com/us-en/ontap/nfs-config/add-rule-export-policy-task.html[Add rule to an export policy].
 
-. link:https://docs.netapp.com/us-en/ontap/nfs-config/create-volume-task.html[Create a volume]. For large capacity needs (>100TB), remember to check the option to distribute data across the cluster to use FlexGroup. If using FlexGroup, consider using pNFS enabled on SVM for better performance. pNFS can be enabled on SVM by following link:https://docs.netapp.com/us-en/ontap/nfs-config/enable-pnfs-svm-task.html[Enable pNFS on SVM]
+. link:https://docs.netapp.com/us-en/ontap/nfs-config/create-volume-task.html[Create a volume]. For large capacity needs (>100TB), remember to check the option to distribute data across the cluster to use FlexGroup. If using FlexGroup, consider using pNFS enabled on SVM for better performance. pNFS can be enabled on SVM by following link:https://docs.netapp.com/us-en/ontap/nfs-config/enable-pnfs-svm-task.html[Enable pNFS on SVM]. Also, make sure Anti-Ransomware protection is enabled on the volume.
 +
 image:proxmox-ontap-023.png[FlexGroup option]
 
@@ -239,7 +239,7 @@ image:proxmox-ontap-024.png[FC interface details]
 
 . Create igroup and populate the host fc initiators.
 
-. Create the LUN with desired size on the SVM and present to igroup created in above step.
+. Create the LUN with desired size on the SVM and present to igroup created in above step. Ensure Anti-Ransomware protection is enabled on the volume security tab.
 +
 image:proxmox-ontap-025.png[lun details]
 
@@ -337,7 +337,7 @@ image:proxmox-ontap-013.png[iscsi interface details]
 
 . Create igroup and populate the host iscsi initiators.
 
-. Create the LUN with desired size on the SVM and present to igroup created in above step.
+. Create the LUN with desired size on the SVM and present to igroup created in above step. Ensure Anti-Ransomware protection is enabled on the volume security tab.
 +
 image:proxmox-ontap-014.png[iscsi lun details]
 
@@ -405,6 +405,10 @@ If new to ONTAP, use System Manager for better experience.
 image:proxmox-ontap-029.png[nvme namespace creation]
 
 . Create subsystem and assign host nqns (if using CLI). Follow the above reference link.
+
+. Ensure Anti-Ransomware protection is enabled on the security tab.
++
+image:proxmox-ontap-032.png[Anti-Ransomware status]
 
 . Notify virtualization admin that the nvme namespace is created.
 ====
@@ -492,6 +496,8 @@ If new to ONTAP, use System Manager for better experience.
 image:proxmox-ontap-020.png[nvme namespace creation]
 
 . Create subsystem and assign host nqns (if using CLI). Follow the above reference link.
+
+. Ensure Anti-Ransomware protection is enabled on the security tab.
 
 . Notify virtualization admin that the nvme namespace is created.
 ====
