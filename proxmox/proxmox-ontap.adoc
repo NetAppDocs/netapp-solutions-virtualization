@@ -159,7 +159,7 @@ image:proxmox-ontap-001.png[nas interface details]
 
 . Create or update NFS export policy providing access to Proxmox VE host IP addresses or subnet. Refer to link:https://docs.netapp.com/us-en/ontap/nfs-config/create-export-policy-task.html[Export policy creation] and link:https://docs.netapp.com/us-en/ontap/nfs-config/add-rule-export-policy-task.html[Add rule to an export policy].
 
-. link:https://docs.netapp.com/us-en/ontap/nfs-config/create-volume-task.html[Create a volume]. For large capacity needs (>100TB), remember to check the option to distribute data across the cluster to use FlexGroup. If using FlexGroup, consider using pNFS enabled on SVM for better performance. pNFS can be enabled on SVM by following link:https://docs.netapp.com/us-en/ontap/nfs-config/enable-pnfs-svm-task.html[Enable pNFS on SVM]. Also, make sure Anti-Ransomware protection is enabled on the volume.
+. link:https://docs.netapp.com/us-en/ontap/nfs-config/create-volume-task.html[Create a volume]. For large capacity needs (>100TB), remember to check the option to distribute data across the cluster to use FlexGroup. If using FlexGroup, consider using pNFS enabled on SVM for better performance. pNFS can be enabled on SVM by following link:https://docs.netapp.com/us-en/ontap/pnfs/pnfs-commands.html#enable-nfsv4-1[Enable pNFS on SVM]. Also, make sure Anti-Ransomware protection is enabled on the volume.
 +
 image:proxmox-ontap-023.png[FlexGroup option]
 

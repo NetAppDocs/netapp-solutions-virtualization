@@ -42,7 +42,7 @@ A single PBS instance can manage multiple Proxmox VE clusters, providing a centr
 
 Prunning policies can be set up to automatically mark to delete old or unnecessary backup data and ensuring that only relevant data is retained. Garbage collection processes help to reclaim storage space by removing unused or obsolete data from the datastore.
 
-Proxmox Backup Server management can be performed through a web-based interface, command-line tools, or REST API, providing flexibility and ease of use for administrators. Web interface is available at port 8007. To access, use the URL https://<pbs-ip-address>:8007.
+Proxmox Backup Server management can be performed through a web-based interface, command-line tools, or REST API, providing flexibility and ease of use for administrators. Web interface is available at port 8007. To access, use the URL `https://<pbs-ip-address>:8007`.
 
 == Datastore configuration with ONTAP File or Block storage
 
