@@ -8,7 +8,7 @@ indexpage:
         - title: "About Proxmox VE"
           url: proxmox-overview.html
         - title: "Provision ONTAP storage for Proxmox VE"
-          entries:
+          links:
             - title: "Proxmox VE and ONTAP architecture"
               url: proxmox-ontap-architecture.html
             - title: "Supported storage types"
@@ -17,7 +17,7 @@ indexpage:
               url: proxmox-deploy-guidelines.html
             - title: "Configure storage protocols with ONTAP for Proxmox VE"
               url: proxmox-ontap.html
-              entries:
+              links:
                 - title: "Configure SMB/CIFS storage"
                   url: proxmox-ontap-smb.html
                 - title: "Configure NFS storage"
