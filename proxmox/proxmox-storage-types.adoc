@@ -1,0 +1,38 @@
+---
+sidebar: sidebar
+permalink: proxmox/proxmox-storage-types.html
+keywords: netapp, proxmox, proxmox ve, ontap, storage, nfs, smb, cifs, iscsi, fc, nvme, content types, vm disks, backups, templates
+summary: "Proxmox VE supports multiple storage types with ONTAP including NFS and SMB for NAS protocols and FC, iSCSI, and NVMe-oF for SAN protocols. Each protocol supports different content types including VM disks, backups, container volumes, ISO images, and templates."
+---
+= Supported storage types for Proxmox Virtual Environment
+:icons: font
+:imagesdir: ../media/
+
+[.lead]
+Proxmox Virtual Environment (VE) supports multiple storage protocols with NetApp ONTAP, including NFS and SMB for NAS and FC, iSCSI, and NVMe-oF for SAN. Each protocol supports different Proxmox VE content types including VM disks, backups, container volumes, ISO images, and templates.
+
+== NAS protocol support
+
+NAS protocols (NFS and SMB) support all Proxmox VE content types and are typically configured once at the datacenter level. Guest VMs can use raw, qcow2, or VMDK disk formats on NAS storage. ONTAP snapshots can be made visible to clients for accessing point-in-time copies of data.
+
+== SAN protocol support
+
+SAN protocols (FC, iSCSI, and NVMe-oF) are typically configured per host and support VM disk and container image content types in Proxmox VE. Guest VMs can use raw or qcow2 disk formats on block storage.
+
+== Storage type compatibility matrix
+
+[width=100%,cols="25% 15% 15% 15% 15% 15%", frame=all, grid=all, options="header"]
+|===
+| Content Type | NFS | SMB/CIFS | FC | iSCSI | NVMe-oF
+| Backups | Yes | Yes a| No^1^ a| No^1^ a| No^1^
+| VM Disks | Yes | Yes a| Yes^2^ a| Yes^2^ a| Yes^2^
+| CT Volumes | Yes | Yes a| Yes^2^ a| Yes^2^ a| Yes^2^
+| ISO Images | Yes | Yes a| No^1^ a| No^1^ a| No^1^
+| CT Templates | Yes | Yes a| No^1^ a| No^1^ a| No^1^
+| Snippets | Yes | Yes a| No^1^ a| No^1^ a| No^1^
+|===
+
+*Notes:*
+
+1. Requires cluster filesystem to create the shared folder and use Directory storage type.
+2. Use LVM storage type.

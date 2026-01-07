@@ -1,0 +1,75 @@
+---
+sidebar: sidebar
+permalink: proxmox/proxmox-ontap-nfs.html
+keywords: netapp, proxmox, proxmox ve, nfs, ontap, storage, nconnect, session trunking
+summary: "Configure NFS storage for Proxmox Virtual Environment using ONTAP. This procedure includes SVM enablement, LIF creation, export policy configuration, volume creation, and nConnect or session trunking setup for fault tolerance and performance."
+---
+= Configure NFS storage for Proxmox VE
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Configure NFS storage for Proxmox Virtual Environment (VE) using NetApp ONTAP. Use session trunking with NFS v4.1 or later for fault tolerance and performance enhancements with multiple network connections to the storage system.
+
+ONTAP supports all NFS versions supported by Proxmox VE. Use link:https://docs.netapp.com/us-en/ontap/nfs-trunking/index.html[session trunking] for fault tolerance and performance enhancements. Session trunking requires NFS v4.1 or later.
+
+If you are new to ONTAP, use System Manager Interface to complete these tasks.
+
+video::f6c9aba3-b070-45d6-8048-b22e001acfd4[panopto, title="NFS nconnect option with ONTAP", width=360]
+
+== Storage administrator tasks
+
+. Enable the SVM for NFS. Refer to link:https://docs.netapp.com/us-en/ontap/nfs-config/verify-protocol-enabled-svm-task.html[ONTAP 9 documentation].
+
+. Create at least two LIFs per controller. Follow the steps from the documentation. For reference, here is a screenshot of LIFs used in the lab.
++
+image:proxmox-ontap-001.png[nas interface details]
+
+. Create or update an NFS export policy to provide access to Proxmox VE host IP addresses or subnets. Refer to link:https://docs.netapp.com/us-en/ontap/nfs-config/create-export-policy-task.html[Export policy creation] and link:https://docs.netapp.com/us-en/ontap/nfs-config/add-rule-export-policy-task.html[Add rule to an export policy].
+
+. link:https://docs.netapp.com/us-en/ontap/nfs-config/create-volume-task.html[Create a volume]. For large capacity needs (>100TB), check the option to distribute data across the cluster to use FlexGroup. If using FlexGroup, consider enabling pNFS on the SVM for better performance by following link:https://docs.netapp.com/us-en/ontap/pnfs/pnfs-commands.html#enable-nfsv4-1[Enable pNFS on SVM]. Ensure Anti-Ransomware protection is enabled on the volume.
++
+image:proxmox-ontap-023.png[FlexGroup option]
+
+. link:https://docs.netapp.com/us-en/ontap/nfs-config/associate-export-policy-flexvol-task.html[Assign the export policy to the volume].
++
+image:proxmox-ontap-008.png[NFS volume info]
+
+. Notify the virtualization administrator that the NFS volume is ready.
+
+== Virtualization administrator tasks
+
+. Ensure at least two interfaces are configured in different VLANs for fault tolerance. Use NIC bonding.
+
+. Using the Management UI at `https:<proxmox-node>:8006`, click Datacenter, select Storage, click Add, and select NFS.
++
+image:proxmox-ontap-009.png[NFS storage navigation]
+
+. Enter the details. After providing the server information, the NFS exports should populate. Select from the list and choose the content options.
++
+image:proxmox-ontap-010.png[NFS storage addition]
+
+. To enable the nConnect option, open a shell on any cluster node and run the following command, where `<storage id>` is the storage ID created in the previous step:
++
+[source,shell]
+----
+pvesm set <storage id> --options nconnect=4
+----
++
+To use session trunking, ensure NFS v4.1 is used and set the trunkdiscovery and max_connect options:
++
+[source,shell]
+----
+pvesm set <storage id> --options vers=4.1,trunkdiscovery,max_connect=16,nconnect=4
+----
+
+. The following shows the content in /etc/pve/storage.cfg for the configured storage:
++
+image:proxmox-ontap-011.png[storage configuration file for NFS]
+
+. To verify the nConnect option is set, run `ss -an | grep :2049` on any Proxmox VE host and check for multiple connections to the NFS server IP. To verify pNFS is enabled, run `nfsstat -c` and check the layout-related metrics. Based on data traffic, multiple connections to data LIFs should be visible.
+
+NOTE: In session trunking, the nconnect option is set on only one of the trunk interfaces. With pNFS, the nconnect option is set on metadata and data interfaces.
