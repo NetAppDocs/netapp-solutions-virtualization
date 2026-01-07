@@ -15,10 +15,9 @@ indexpage:
               url: proxmox-storage-types.html
             - title: "Deployment guidelines"
               url: proxmox-deploy-guidelines.html
-            - title: "Configure Configure storage protocols with ONTAP for Proxmox VE"
+            - title: "Configure storage protocols with ONTAP for Proxmox VE"
+              url: proxmox-ontap.html
               entries:
-                - title: "Select a storage protocol"
-                  url: proxmox-ontap.html
                 - title: "Configure SMB/CIFS storage"
                   url: proxmox-ontap-smb.html
                 - title: "Configure NFS storage"
