@@ -5,38 +5,28 @@ indexpage:
   tiles:
     - title: "Get started"
       links:
-        - title: "About Proxmox VE"
+        - title: "Learn about Proxmox VE"
           url: proxmox-overview.html
-        - title: "Provision ONTAP storage for Proxmox VE"
-          links:
-            - title: "Proxmox VE and ONTAP architecture"
-              url: proxmox-ontap-architecture.html
-            - title: "Supported storage types"
-              url: proxmox-storage-types.html
-            - title: "Deployment guidelines"
-              url: proxmox-deploy-guidelines.html
-            - title: "Configure storage protocols with ONTAP for Proxmox VE"
-              url: proxmox-ontap.html
-              links:
-                - title: "Configure SMB/CIFS storage"
-                  url: proxmox-ontap-smb.html
-                - title: "Configure NFS storage"
-                  url: proxmox-ontap-nfs.html
-                - title: "Configure LVM with FC"
-                  url: proxmox-ontap-fc.html
-                - title: "Configure LVM with iSCSI"
-                  url: proxmox-ontap-iscsi.html
-                - title: "Configure LVM with NVMe/FC"
-                  url: proxmox-ontap-nvme-fc.html
-                - title: "Configure LVM with NVMe/TCP"
-                  url: proxmox-ontap-nvme-tcp.html
-
-        - title: "Proxmox VE Workload Data Protection with Proxmox Backup Server and NetApp ONTAP"
+#
+    - title: "Provision ONTAP storage for Proxmox VE"
+      links:
+        - title: "Proxmox VE and ONTAP architecture"
+          url: proxmox-ontap-architecture.html
+        - title: "Supported storage types"
+          url: proxmox-storage-types.html
+        - title: "Deployment guidelines"
+          url: proxmox-deploy-guidelines.html
+        - title: "Configure storage protocols with ONTAP for Proxmox VE"
+          url: proxmox-ontap.html
+#
+    - title: "Protect Proxmox VE workloads"
+      links:
+        - title: "Protect Proxmox VE workloads with Proxmox Backup Server and NetApp ONTAP"
           url: proxmox-wkld-dp-pbs.html
 #
     - title: "Additional resources"
       links:
-        - title: "NetApp Storage and NVMe-oF for Breakthrough Performance in Proxmox Virtualization Environments"
+        - title: "NetApp storage and NVMe-oF for breakthrough performance in Proxmox virtualization environments"
           url: https://www.credativ.de/en/blog/credativ-inside/netapp-storage-and-nvme-of-for-breakthrough-performance-in-proxmox-virtualization-environments/
         - title: "Proxmox VE documentation"
           url: https://pve.proxmox.com/pve-docs/chapter-sysadmin.html#external_metric_server

@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: proxmox/proxmox-wkld-dp-pbs.html
 keywords: netapp, proxmox, proxmox ve, all-flash, nfs, iscsi, nvme, fc, ontap, storage, aff, asa, virtual machines, vm, containers, proxmox backup server
-summary: "Protect Proxmox VE workloads using Proxmox Backup Server with NetApp ONTAP storage. This solution provides efficient backup and restore capabilities with incremental backups, deduplication, and disaster recovery using SnapMirror replication."
+summary: "Protect Proxmox VE workloads using Proxmox Backup Server with NetApp ONTAP storage. This procedure covers datastore configuration, backup operations, restore procedures, and disaster recovery setup using SnapMirror replication."
 ---
 = Protect Proxmox VE workloads with Proxmox Backup Server and NetApp ONTAP
 :hardbreaks:
@@ -12,47 +12,11 @@ summary: "Protect Proxmox VE workloads using Proxmox Backup Server with NetApp O
 :imagesdir: ../media/
 
 [.lead]
-Protect Proxmox Virtual Environment (VE) workloads using Proxmox Backup Server (PBS) integrated with NetApp ONTAP storage. This solution provides efficient backup and restore capabilities with incremental backups, deduplication, compression, and disaster recovery using ONTAP SnapMirror replication.
+Protect Proxmox Virtual Environment (VE) workloads using Proxmox Backup Server (PBS) integrated with NetApp ONTAP storage. This procedure covers datastore configuration, backup operations, restore procedures, and disaster recovery setup using ONTAP SnapMirror replication.
 
-== Solution architecture
+For information about Proxmox Backup Server architecture and ONTAP integration, see link:proxmox-pbs-architecture.html[Learn about Proxmox Backup Server architecture with NetApp ONTAP].
 
-The solution includes the following components:
-
-* *Proxmox VE cluster* - Provides virtualization capabilities and manages virtual machines (VMs) and containers across multiple nodes.
-* *Proxmox Backup Server* - Delivers dedicated backup and restore capabilities for Proxmox VE workloads with integration to ONTAP storage.
-* *NetApp ONTAP storage* - Provides high-performance, scalable storage for the Proxmox VE cluster and PBS backup datastores.
-* *Network infrastructure* - Ensures low-latency, high-throughput connectivity between Proxmox VE nodes, PBS, and ONTAP storage.
-* *NetApp Console* - Offers centralized management for multiple NetApp storage systems and data services.
-
-The following diagram shows the high-level architecture of the Proxmox Backup Server setup with ONTAP storage:
-
-image::proxmox-wkld-dp-pbs-001.png[Proxmox VE Workload Data Protection with PBS and NetApp ONTAP Architecture]
-
-== Proxmox Backup Server overview
-
-Proxmox Backup Server (PBS) delivers enterprise backup capabilities designed for Proxmox Virtual Environment (VE). PBS provides efficient and reliable backup and restore operations for VMs and containers with features including incremental backups, deduplication, compression, and encryption.
-
-=== Deployment considerations
-
-Deploy PBS on bare metal or as a VM on Proxmox VE. When deploying PBS as a VM, consider the backup server availability if the Proxmox VE host experiences downtime. Deploy PBS on bare metal or on a separate Proxmox VE host or cluster to ensure backup server availability during primary host failures.
-
-Backup contents are self-contained in the datastore, enabling datastore migration to another PBS instance if needed. This ensures backup data remains accessible even when the original PBS instance is unavailable.
-
-=== Storage backend support
-
-PBS supports various storage backends including local storage, NFS, iSCSI, FC, NVMe-oF, and S3 (Tech Preview). Integration with NetApp ONTAP storage enables organizations to leverage advanced data management features for enhanced data protection and recovery.
-
-Use ONTAP SnapMirror to replicate the PBS datastore to another ONTAP system for disaster recovery. This protects backup data and enables restoration after site failures.
-
-=== Multi-cluster management
-
-A single PBS instance can manage multiple Proxmox VE clusters, providing centralized backup for large-scale deployments. Use namespaces to logically separate backup data for different clusters or tenants, ensuring data isolation and security.
-
-Configure data retention policies to automatically manage backup data lifecycle and ensure compliance with organizational requirements. Set pruning policies to automatically mark old or unnecessary backup data for deletion. Garbage collection processes reclaim storage space by removing unused or obsolete data from the datastore.
-
-=== Management interfaces
-
-Manage PBS through a web-based interface, command-line tools, or REST API. Access the web interface at port 8007 using the URL `https://<pbs-ip-address>:8007`.
+For information about Proxmox Backup Server architecture and ONTAP integration, see link:proxmox-pbs-architecture.html[Learn about Proxmox Backup Server architecture with NetApp ONTAP].
 
 == Configure datastores with ONTAP file or block storage
 
@@ -96,13 +60,7 @@ image::proxmox-wkld-dp-pbs-003.png[S3 Endpoint configuration in PBS]
 +
 image::proxmox-wkld-dp-pbs-004.png[S3 Endpoint configuration file in PBS]
 +
-. Next, navigate to Datastore -> Add Datastore. Provide a name, select the datastore type as S3, and select the configured S3 endpoint. Provide the folder name on local datastore to be used as local cache and select the bucket.
-+
-image::proxmox-wkld-dp-pbs-005.png[S3 Datastore configuration in PBS]
-+
-image::proxmox-wkld-dp-pbs-006.png[S3 Datastore configuration file in PBS]
-
-== Create local sync jobs to ONTAP S3 storage
+. Nereate local sync jobs to ONTAP S3 storage
 
 Migrate data from the local PBS datastore to ONTAP S3 storage by creating a local sync job in PBS. This job copies backup data from the local datastore to the S3 datastore for offsite storage and long-term retention.
 
@@ -122,9 +80,9 @@ NOTE: For offsite storage and longer retention with ONTAP storage, Netapp Consol
 
 To add Proxmox Backup Server to a Proxmox VE cluster, follow these steps:
 
-. In the Proxmox VE web interface, navigate to Datacenter -> Storage and click on Add -> Proxmox Backup Server.
-. Provide a name for the PBS storage, enter the PBS server address, and provide the PBS datastore name and namespace.
-+
+. In the Proxmox VE web interface, navigate to Datacenter -> Storage aApp Console can be utilized for management and data services.
+
+== Add Proxmox Backup Server to Proxmox VE c
 image::proxmox-wkld-dp-pbs-009.png[Adding PBS storage in Proxmox VE]
 +
 . Provide PBS server certificate fingerprint for secure communication. Fingerprint can be obtained from PBS web interface or using the command on PBS: `proxmox-backup-manager cert info`.
