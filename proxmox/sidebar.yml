@@ -34,7 +34,7 @@ entries:
     entries:
       - title: "Solution architecture"
         url: /proxmox/proxmox-pbs-architecture.html
-      - title: "Review requirements"
+      - title: "Deployment requirements"
         url: /proxmox/proxmox-pbs-requirements.html
       - title: "Configure data protection"
         url: /proxmox/proxmox-wkld-dp-pbs.html

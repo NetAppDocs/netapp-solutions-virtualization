@@ -4,12 +4,12 @@ permalink: proxmox/proxmox-pbs-requirements.html
 keywords: netapp, proxmox, proxmox ve, proxmox backup server, ontap, storage, requirements, deployment, prerequisites
 summary: "Review requirements and deployment considerations for Proxmox Backup Server with NetApp ONTAP storage. This includes deployment options, storage backend support, multi-cluster management, and network configuration best practices."
 ---
-= Review requirements for Proxmox Backup Server with NetApp ONTAP
+= Deployment requirements and considerations for Proxmox Backup Server with NetApp ONTAP storage
 :icons: font
 :imagesdir: ../media/
 
 [.lead]
-Review the requirements and deployment considerations for Proxmox Backup Server (PBS) with NetApp ONTAP storage before implementation. This ensures proper planning for backup server deployment, storage configuration, and network connectivity.
+Review the deployment requirements and considerations for Proxmox Backup Server (PBS) with NetApp ONTAP storage before implementation. This ensures proper planning for backup server deployment, storage configuration, and network connectivity.
 
 == Deployment considerations
 

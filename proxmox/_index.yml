@@ -23,7 +23,7 @@ indexpage:
       links:
         - title: "Proxmox Backup Server architecture"
           url: proxmox-pbs-architecture.html
-        - title: "Review requirements"
+        - title: "Deployment requirements and considerations"
           url: proxmox-pbs-requirements.html
         - title: "Configure data protection"
           url: proxmox-wkld-dp-pbs.html

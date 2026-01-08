@@ -4,7 +4,7 @@ permalink: proxmox/proxmox-deploy-guidelines.html
 keywords: netapp, proxmox, proxmox ve, all-flash, nfs, iscsi, nvme, fc, ontap, storage, aff, asa, virtual machines, vm, containers, proxmox backup server
 summary: "Proxmox Virtual Environment (VE) integrates with NetApp ONTAP storage to provide shared storage for virtual machines and containers, enabling faster live migrations, consistent templates, and centralized backups. Learn about the architecture, network and storage configuration, and best practices for deploying and optimizing a Proxmox VE cluster with ONTAP storage systems."
 ---
-= Deploy guidelines for Proxmox Virtual Environment with NetApp ONTAP storage
+= Deployment guidelines for Proxmox Virtual Environment with NetApp ONTAP storage
 :hardbreaks:
 :nofooter:
 :icons: font
