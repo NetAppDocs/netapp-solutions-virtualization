@@ -107,7 +107,7 @@ image::proxmox-wkld-dp-pbs-008.png[Local Sync Job configuration in PBS]
 
 NOTE: For offsite storage and longer retention with ONTAP storage, Netapp Console can be utilized for management and data services.
 
-== Step 2: Add Proxmox Backup Server to Proxmox VE cluster
+== Add Proxmox Backup Server to Proxmox VE cluster
 
 Add Proxmox Backup Server as a storage target to enable backup operations for VMs and containers.
 
