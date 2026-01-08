@@ -4,7 +4,7 @@ permalink: videos/vmware-videos.html
 summary: Videos and demos showcasing VMware solutions integration with NetApp storage technologies
 keywords: vmware, vsphere, vcf, snapcenter, ontap tools, videos, demos
 ---
-= Watch videos on VMware virtualization with NetApp TEST
+= Watch videos on VMware virtualization with NetApp
 :hardbreaks:
 :nofooter:
 :icons: font
