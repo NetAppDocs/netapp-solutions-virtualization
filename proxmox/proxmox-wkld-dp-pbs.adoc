@@ -283,7 +283,7 @@ For bare-metal recovery or restoring to a different Proxmox VE host, use the `pr
 image::proxmox-wkld-dp-pbs-022.png[Restoring missing VM from PBS storage in Proxmox VE UI]
 ====
 
-== Configure disaster recovery and monitoring
+== Configure disaster recovery with SnapMirror
 
 Replicate the PBS datastore on ONTAP storage to another ONTAP system using SnapMirror for disaster recovery. This protects backup data and enables restoration after site failures.
 
@@ -325,4 +325,4 @@ image::proxmox-wkld-dp-pbs-025.png[Proxmox Datacenter Manager overview]
 
 == Summary
 
-Proxmox Backup Server integrated with NetApp ONTAP storage delivers robust and efficient data protection for Proxmox VE workloads. Organizations can ensure virtualized workload availability and integrity by leveraging ONTAP's advanced data management features and PBS's backup capabilities. Use this guide to deploy and manage the integrated solution with data protection best practices for Proxmox VE environments.
+Proxmox Backup Server integrated with NetApp ONTAP storage delivers robust and efficient data protection for Proxmox VE workloads. Organizations can ensure virtualized workload availability and integrity by leveraging ONTAP's advanced data management features and PBS's backup capabilities. 
