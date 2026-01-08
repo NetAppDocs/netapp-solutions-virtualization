@@ -33,7 +33,7 @@ Prepare the ONTAP storage backend and mount it on the PBS host. The preparation 
 
 PBS can use any folder mounted on local storage as a datastore. PBS stores catalog, index, and chunk files in the datastore. For optimal performance and scalability, use NetApp ONTAP SAN (iSCSI/FC/NVMe-oF) or NFS storage (with nConnect, session trunking, and pNFS enabled) as the PBS datastore
 
-*Step 1: Mount the storage on the PBS host*
+.Mount the storage on the PBS host
 
 . For SAN or NVMe-oF protocols, create a LUN or namespace on ONTAP and connect it to the PBS host. 
 
@@ -43,7 +43,7 @@ PBS can use any folder mounted on local storage as a datastore. PBS stores catal
 
 . Use fstab or automount to ensure the datastore mounts automatically on system reboot.
 
-*Step 2: Create the datastore in PBS*
+.Create the datastore in PBS
 
 After mounting the storage, create a new datastore in the PBS web interface.
 
@@ -57,7 +57,7 @@ After mounting the storage, create a new datastore in the PBS web interface.
 image::proxmox-wkld-dp-pbs-002.png[Local Datastore configuration in PBS]
 ====
 
-*Step 3: Configure datastores with ONTAP S3 storage*
+.Configure datastores with ONTAP S3 storage
 
 S3 storage is typically used for offsite backup and long-term retention. Proxmox Backup Server supports S3 storage as a Tech Preview feature.
 
@@ -143,7 +143,7 @@ The Proxmox VE cluster can now use the PBS datastore for backup and restore oper
 
 Back up Proxmox VE workloads to Proxmox Backup Server. This includes performing on-demand backups, configuring scheduled backup jobs, backing up host configuration files, and using pre and post backup scripts for custom actions.
 
-*Step 1: Perform on-demand backups*
+.Perform on-demand backups
 
 Create an immediate backup of a VM or container using Proxmox Backup Server.
 
@@ -169,7 +169,7 @@ image::proxmox-wkld-dp-pbs-013.png[On-Demand Backup selecting PBS target storage
 
 . Click Backup to initiate the backup process.
 
-*Step 2: Configure scheduled backups*
+.Configure scheduled backups
 
 Set up scheduled backups for VMs and containers using Proxmox Backup Server.
 
@@ -206,7 +206,7 @@ The scheduled job configuration is stored in the /etc/pve/job.cfg file on the Pr
 image::proxmox-wkld-dp-pbs-016.png[Scheduled Backup Job configuration file in Proxmox VE]
 ====
 
-*Step 3: Back up Proxmox VE host files to PBS*
+.Back up Proxmox VE host files to PBS
 
 Back up Proxmox VE host configuration files, system settings, and other critical data to Proxmox Backup Server.
 
@@ -235,7 +235,7 @@ image::proxmox-wkld-dp-pbs-018.png[Viewing the files from Proxmox Backup Server 
 . To restore the Proxmox VE host files from the backup, use the `proxmox-backup-client restore` command with the appropriate parameters.
 
 
-*Step 4: Use pre and post backup scripts*
+.Use pre and post backup scripts
 
 Proxmox VE supports pre and post backup scripts to perform custom actions before and after the backup process. Use these scripts to prepare VMs or containers for backup, perform additional tasks, or clean up after backup completion.
 
@@ -313,7 +313,7 @@ image::proxmox-wkld-dp-pbs-024.png[Reusing existing S3 datastore in PBS]
 .Result
 After adding the datastore, you can access the backup data and perform restore operations.
 
-== Monitor multiple clusters with Proxmox Datacenter Manager*
+== Monitor multiple clusters with Proxmox Datacenter Manager
 
 Monitor and manage multiple Proxmox VE and Proxmox Backup Server instances using Proxmox Datacenter Manager (PDM). PDM provides a centralized management interface for monitoring the health, performance, and status of multiple Proxmox VE clusters and PBS instances.
 
