@@ -28,31 +28,3 @@ image::proxmox-wkld-dp-pbs-001.png[Proxmox VE Workload Data Protection with PBS 
 == Proxmox Backup Server overview
 
 Proxmox Backup Server delivers enterprise backup capabilities designed for Proxmox Virtual Environment. PBS provides efficient and reliable backup and restore operations for VMs and containers with features including incremental backups, deduplication, compression, and encryption.
-
-=== Deployment considerations
-
-Deploy PBS on bare metal or as a VM on Proxmox VE. When deploying PBS as a VM, consider the backup server availability if the Proxmox VE host experiences downtime. Deploy PBS on bare metal or on a separate Proxmox VE host or cluster to ensure backup server availability during primary host failures.
-
-Backup contents are self-contained in the datastore, enabling datastore migration to another PBS instance if needed. This ensures backup data remains accessible even when the original PBS instance is unavailable.
-
-=== Storage backend support
-
-PBS supports various storage backends including local storage, NFS, iSCSI, FC, NVMe-oF, and S3 (Tech Preview). Integration with NetApp ONTAP storage enables organizations to leverage advanced data management features for enhanced data protection and recovery.
-
-Use ONTAP SnapMirror to replicate the PBS datastore to another ONTAP system for disaster recovery. This protects backup data and enables restoration after site failures.
-
-=== Multi-cluster management
-
-A single PBS instance can manage multiple Proxmox VE clusters, providing centralized backup for large-scale deployments. Use namespaces to logically separate backup data for different clusters or tenants, ensuring data isolation and security.
-
-Configure data retention policies to automatically manage backup data lifecycle and ensure compliance with organizational requirements. Set pruning policies to automatically mark old or unnecessary backup data for deletion. Garbage collection processes reclaim storage space by removing unused or obsolete data from the datastore.
-
-=== Management interfaces
-
-Manage PBS through a web-based interface, command-line tools, or REST API. Access the web interface at port 8007 using the URL `https://<pbs-ip-address>:8007`.
-
-== Network configuration best practices
-
-Ensure redundant network paths between PBS and ONTAP storage for high availability and performance. Consider link aggregation (LACP) for increased bandwidth and redundancy. Configure jumbo frames (MTU 9000) on all network devices to improve storage traffic performance.
-
-For NFS, create a dedicated export for the PBS datastore with appropriate permissions. For block protocols, ensure proper zoning and LUN masking to restrict access to authorized PBS hosts only.

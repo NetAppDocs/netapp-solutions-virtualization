@@ -21,7 +21,11 @@ indexpage:
 #
     - title: "Protect Proxmox VE workloads"
       links:
-        - title: "Protect Proxmox VE workloads with Proxmox Backup Server and NetApp ONTAP"
+        - title: "Proxmox Backup Server architecture"
+          url: proxmox-pbs-architecture.html
+        - title: "Review requirements"
+          url: proxmox-pbs-requirements.html
+        - title: "Configure data protection with Proxmox Backup Server"
           url: proxmox-wkld-dp-pbs.html
 #
     - title: "Additional resources"

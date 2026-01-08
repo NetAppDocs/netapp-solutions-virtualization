@@ -18,6 +18,8 @@ video::d66ef67f-bcc2-4ced-848e-b22e01588e8c[panopto, title="LVM shared pool with
 
 == Initial virtualization administrator tasks
 
+Complete these initial tasks to prepare Proxmox VE hosts for iSCSI connectivity and collect the necessary information for the storage administrator.
+
 . Verify two Linux VLAN interfaces are available.
 
 . Ensure multipath-tools is installed on all Proxmox VE hosts and starts on boot.
@@ -57,6 +59,8 @@ image:proxmox-ontap-014.png[iscsi lun details]
 
 == Final virtualization administrator tasks
 
+Complete these tasks to configure the iSCSI LUN as shared LVM storage in Proxmox VE.
+
 . Using the Management UI at `https:<proxmox node>:8006`, click Datacenter, select Storage, click Add, and select iSCSI.
 +
 image:proxmox-ontap-015.png[iscsi storage navigation]
@@ -75,6 +79,10 @@ image:proxmox-ontap-018.png[lvm storage creation]
 
 . The following shows the sample storage configuration file for LVM using iSCSI:
 +
+.Show example
+[%collapsible]
+====
 image:proxmox-ontap-019.png[lvm iscsi configuration]
+====
 +
 With Proxmox VE 9 and above, the storage configuration file includes the additional option `snapshot-as-volume-chain 1` when `Allow Snapshots as Volume-Chain` is enabled.

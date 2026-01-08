@@ -18,6 +18,8 @@ video::80164fe4-06db-4c21-a25d-b22e0179c3d2[panopto, title="LVM shared pool with
 
 == Initial virtualization administrator tasks
 
+Complete these initial tasks to prepare Proxmox VE hosts for NVMe/TCP connectivity and collect the necessary information for the storage administrator.
+
 . Verify two Linux VLAN interfaces are available.
 
 . On every Proxmox host in the cluster, run the following command to collect the host initiator information.
@@ -37,7 +39,11 @@ If you are new to ONTAP, use System Manager for a better experience.
 
 . Create the NVMe namespace.
 +
+.Show example
+[%collapsible]
+====
 image:proxmox-ontap-020.png[nvme namespace creation]
+====
 
 . Create the subsystem and assign host NQNs (if using CLI). Follow the reference link above.
 
@@ -46,6 +52,8 @@ image:proxmox-ontap-020.png[nvme namespace creation]
 . Notify the virtualization administrator that the NVMe namespace is created.
 
 == Final virtualization administrator tasks
+
+Complete these tasks to configure the NVMe namespace as shared LVM storage in Proxmox VE.
 
 . Navigate to a shell on each Proxmox VE host in the cluster and create the /etc/nvme/discovery.conf file. Update the content specific to your environment.
 +
@@ -89,15 +97,27 @@ vgcreate pvens02 /dev/mapper/<device id>
 
 . Using the Management UI at `https:<proxmox node>:8006`, click Datacenter, select Storage, click Add, and select LVM.
 +
+.Show example
+[%collapsible]
+====
 image:proxmox-ontap-017.png[lvm storage navigation]
+====
 
 . Provide the storage ID name, choose the existing volume group, and select the volume group that was just created with the CLI. Check the shared option. With Proxmox VE 9 and above, enable the `Allow Snapshots as Volume-Chain` option, which is visible when the Advanced check box is enabled.
 +
+.Show example
+[%collapsible]
+====
 image:proxmox-ontap-021.png[lvm on existing vg]
+====
 
 . The following shows a sample storage configuration file for LVM using NVMe/TCP:
 +
+.Show example
+[%collapsible]
+====
 image:proxmox-ontap-022.png[lvm on nvme tcp configuration]
+====
 +
 With Proxmox VE 9 and above, the storage configuration file includes the additional option `snapshot-as-volume-chain 1` when `Allow Snapshots as Volume-Chain` is enabled.
 
