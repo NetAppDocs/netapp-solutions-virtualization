@@ -235,7 +235,7 @@ image::proxmox-wkld-dp-pbs-018.png[Viewing the files from Proxmox Backup Server 
 . To restore the Proxmox VE host files from the backup, use the `proxmox-backup-client restore` command with the appropriate parameters.
 
 
-=== Use pre and post backup scripts
+*Step 4: Use pre and post backup scripts*
 
 Proxmox VE supports pre and post backup scripts to perform custom actions before and after the backup process. Use these scripts to prepare VMs or containers for backup, perform additional tasks, or clean up after backup completion.
 
