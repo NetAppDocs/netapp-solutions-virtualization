@@ -16,7 +16,7 @@ indexpage:
           url: proxmox-storage-types.html
         - title: "Deployment guidelines"
           url: proxmox-deploy-guidelines.html
-        - title: "Configure storage protocols with ONTAP for Proxmox VE"
+        - title: "Configure storage protocols"
           url: proxmox-ontap.html
 #
     - title: "Protect Proxmox VE workloads"
@@ -25,7 +25,7 @@ indexpage:
           url: proxmox-pbs-architecture.html
         - title: "Review requirements"
           url: proxmox-pbs-requirements.html
-        - title: "Configure data protection with Proxmox Backup Server"
+        - title: "Configure data protection"
           url: proxmox-wkld-dp-pbs.html
 #
     - title: "Additional resources"
