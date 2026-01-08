@@ -194,8 +194,11 @@ image::proxmox-wkld-dp-pbs-015.png[Scheduled Backup Job configuration in Proxmox
 . Configure additional options such as retention policies, compression, and snapshot mode.
 
 . Click Create to save the scheduled backup job configuration.
-
-The Proxmox VE cluster automatically performs backups of the specified VMs and containers according to the defined schedule using Proxmox Backup Server as the storage target. The scheduled job configuration is stored in the /etc/pve/job.cfg file on the Proxmox VE host.
++
+.Result
+The Proxmox VE cluster automatically performs backups of the specified VMs and containers according to the defined schedule using Proxmox Backup Server as the storage target. 
++
+The scheduled job configuration is stored in the /etc/pve/job.cfg file on the Proxmox VE host.
 +
 .Show example
 [%collapsible]
@@ -301,6 +304,7 @@ image::proxmox-wkld-dp-pbs-023.png[Reuse existing datastore in PBS]
 
 +
 For ONTAP S3 storage, enable both the "Reuse existing datastore" and "Overwrite in-use marker" options when adding the datastore in PBS.
++
 .Show example
 [%collapsible]
 ====
@@ -308,6 +312,7 @@ image::proxmox-wkld-dp-pbs-024.png[Reusing existing S3 datastore in PBS]
 ====
 +
 
+.Result
 After adding the datastore, you can access the backup data and perform restore operations.
 
 *Step 2: Monitor multiple clusters with Proxmox Datacenter Manager*
