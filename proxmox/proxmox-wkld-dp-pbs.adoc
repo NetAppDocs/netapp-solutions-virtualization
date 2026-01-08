@@ -285,15 +285,13 @@ image::proxmox-wkld-dp-pbs-022.png[Restoring missing VM from PBS storage in Prox
 
 == Configure disaster recovery and monitoring
 
-Protect backup data and manage multiple Proxmox environments. This includes replicating PBS datastores to another ONTAP system using SnapMirror for disaster recovery and monitoring multiple Proxmox VE and PBS instances using Proxmox Datacenter Manager.
-
-*Step 1: Configure disaster recovery with ONTAP SnapMirror*
-
 Replicate the PBS datastore on ONTAP storage to another ONTAP system using SnapMirror for disaster recovery. This protects backup data and enables restoration after site failures.
 
 . Configure SnapMirror replication for the PBS datastore volume.
 
-. In the event of a disaster, mount the replicated PBS datastore on a secondary PBS instance. When adding the datastore in PBS, enable the "Reuse existing datastore" advanced option to avoid datastore reinitialization.
+. In the event of a disaster, mount the replicated PBS datastore on a secondary PBS instance. 
++
+When adding the datastore in PBS, enable the "Reuse existing datastore" advanced option to avoid datastore reinitialization.
 +
 
 .Show example
@@ -315,7 +313,7 @@ image::proxmox-wkld-dp-pbs-024.png[Reusing existing S3 datastore in PBS]
 .Result
 After adding the datastore, you can access the backup data and perform restore operations.
 
-*Step 2: Monitor multiple clusters with Proxmox Datacenter Manager*
+== Monitor multiple clusters with Proxmox Datacenter Manager*
 
 Monitor and manage multiple Proxmox VE and Proxmox Backup Server instances using Proxmox Datacenter Manager (PDM). PDM provides a centralized management interface for monitoring the health, performance, and status of multiple Proxmox VE clusters and PBS instances.
 
