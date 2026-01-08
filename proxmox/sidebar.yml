@@ -36,5 +36,5 @@ entries:
         url: /proxmox/proxmox-pbs-architecture.html
       - title: "Review requirements"
         url: /proxmox/proxmox-pbs-requirements.html
-      - title: "Configure data protection with Proxmox Backup Server"
+      - title: "Configure data protection"
         url: /proxmox/proxmox-wkld-dp-pbs.html
