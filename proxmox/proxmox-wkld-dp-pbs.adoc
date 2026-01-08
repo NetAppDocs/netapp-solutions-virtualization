@@ -16,7 +16,7 @@ Protect Proxmox Virtual Environment (VE) workloads using Proxmox Backup Server (
 
 For information about Proxmox Backup Server architecture and ONTAP integration, see link:proxmox-pbs-architecture.html[Learn about Proxmox Backup Server architecture with NetApp ONTAP].
 
-=== Before you begin
+== Before you begin
 
 * Ensure redundant network paths between PBS and ONTAP storage for high availability and performance. 
 * Consider link aggregation (LACP) for increased bandwidth and redundancy. 
@@ -25,16 +25,15 @@ For information about Proxmox Backup Server architecture and ONTAP integration, 
 * For NFS, create a dedicated export for the PBS datastore with appropriate permissions.
 * For block protocols, ensure proper zoning and LUN masking to restrict access to authorized PBS hosts.
 
-== Step 1: Configure datastores
+== Configure datastores
 
 Configure Proxmox Backup Server datastores using NetApp ONTAP storage. This includes mounting ONTAP storage on the PBS host, creating a local datastore in the PBS web interface, and optionally configuring ONTAP S3 storage for offsite backup and long-term retention.
 
-=== Mount the storage
-
 Prepare the ONTAP storage backend and mount it on the PBS host. The preparation steps vary depending on whether you use file-based (NFS) or block-based (SAN/NVMe-oF) protocols.
 
-.About mounting storage
 PBS can use any folder mounted on local storage as a datastore. PBS stores catalog, index, and chunk files in the datastore. For optimal performance and scalability, use NetApp ONTAP SAN (iSCSI/FC/NVMe-oF) or NFS storage (with nConnect, session trunking, and pNFS enabled) as the PBS datastore
+
+*Step 1: Mount the storage on the PBS host*
 
 . For SAN or NVMe-oF protocols, create a LUN or namespace on ONTAP and connect it to the PBS host. 
 
@@ -44,7 +43,7 @@ PBS can use any folder mounted on local storage as a datastore. PBS stores catal
 
 . Use fstab or automount to ensure the datastore mounts automatically on system reboot.
 
-=== Create the datastore in PBS
+*Step 2: Create the datastore in PBS*
 
 After mounting the storage, create a new datastore in the PBS web interface.
 
@@ -58,7 +57,7 @@ After mounting the storage, create a new datastore in the PBS web interface.
 image::proxmox-wkld-dp-pbs-002.png[Local Datastore configuration in PBS]
 ====
 
-=== Configure datastores with ONTAP S3 storage
+*Step 3: Configure datastores with ONTAP S3 storage*
 
 S3 storage is typically used for offsite backup and long-term retention. Proxmox Backup Server supports S3 storage as a Tech Preview feature.
 
@@ -140,11 +139,11 @@ image::proxmox-wkld-dp-pbs-011.png[PBS certificate fingerprint configuration in 
 
 The Proxmox VE cluster can now use the PBS datastore for backup and restore operations for VMs and containers.
 
-== Step 3: Perform backups
+== Perform backups
 
 Back up Proxmox VE workloads to Proxmox Backup Server. This includes performing on-demand backups, configuring scheduled backup jobs, backing up host configuration files, and using pre and post backup scripts for custom actions.
 
-=== Perform on-demand backups
+*Step 1: Perform on-demand backups*
 
 Create an immediate backup of a VM or container using Proxmox Backup Server.
 
@@ -170,7 +169,7 @@ image::proxmox-wkld-dp-pbs-013.png[On-Demand Backup selecting PBS target storage
 
 . Click Backup to initiate the backup process.
 
-=== Configure scheduled backups
+*Step 2: Configure scheduled backups*
 
 Set up scheduled backups for VMs and containers using Proxmox Backup Server.
 
@@ -204,7 +203,7 @@ The Proxmox VE cluster automatically performs backups of the specified VMs and c
 image::proxmox-wkld-dp-pbs-016.png[Scheduled Backup Job configuration file in Proxmox VE]
 ====
 
-=== Back up Proxmox VE host files to PBS
+*Step 3: Back up Proxmox VE host files to PBS*
 
 Back up Proxmox VE host configuration files, system settings, and other critical data to Proxmox Backup Server.
 
@@ -259,7 +258,7 @@ image::proxmox-wkld-dp-pbs-019.png[Setting Backup Script in Proxmox VE]
 
 NOTE: Hookscripts can also be set at the VM or container level using the `qm set` or `pct set` commands with the `--hookscript` option. For a sample hookscript, see /usr/share/pve-docs/examples/guest-example-hookscript.pl on the Proxmox VE host.
 
-== Step 4: Restore VMs and containers
+== Restore VMs and containers
 
 Restore VMs and containers directly from the Proxmox VE web interface or from PBS storage.
 
@@ -281,11 +280,11 @@ For bare-metal recovery or restoring to a different Proxmox VE host, use the `pr
 image::proxmox-wkld-dp-pbs-022.png[Restoring missing VM from PBS storage in Proxmox VE UI]
 ====
 
-== Step 5: Configure disaster recovery and monitoring
+== Configure disaster recovery and monitoring
 
 Protect backup data and manage multiple Proxmox environments. This includes replicating PBS datastores to another ONTAP system using SnapMirror for disaster recovery and monitoring multiple Proxmox VE and PBS instances using Proxmox Datacenter Manager.
 
-=== Configure disaster recovery with ONTAP SnapMirror
+*Step 1: Configure disaster recovery with ONTAP SnapMirror*
 
 Replicate the PBS datastore on ONTAP storage to another ONTAP system using SnapMirror for disaster recovery. This protects backup data and enables restoration after site failures.
 
@@ -311,7 +310,7 @@ image::proxmox-wkld-dp-pbs-024.png[Reusing existing S3 datastore in PBS]
 
 After adding the datastore, you can access the backup data and perform restore operations.
 
-=== Monitor multiple clusters with Proxmox Datacenter Manager
+*Step 2: Monitor multiple clusters with Proxmox Datacenter Manager*
 
 Monitor and manage multiple Proxmox VE and Proxmox Backup Server instances using Proxmox Datacenter Manager (PDM). PDM provides a centralized management interface for monitoring the health, performance, and status of multiple Proxmox VE clusters and PBS instances.
 
