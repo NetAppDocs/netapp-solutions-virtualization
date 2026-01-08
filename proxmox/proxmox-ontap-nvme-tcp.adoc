@@ -1,0 +1,124 @@
+---
+sidebar: sidebar
+permalink: proxmox/proxmox-ontap-nvme-tcp.html
+keywords: netapp, proxmox, proxmox ve, nvme, nvme-tcp, lvm, ontap, storage
+summary: "Configure Logical Volume Manager (LVM) with NVMe over TCP for Proxmox Virtual Environment using ONTAP. This procedure includes nvme-cli installation, discovery configuration, namespace provisioning, subsystem setup, and volume group creation for shared storage."
+---
+= Configure LVM with NVMe/TCP for Proxmox VE
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Configure Logical Volume Manager (LVM) for shared storage across Proxmox Virtual Environment (VE) hosts using NVMe over TCP protocol with NetApp ONTAP. This configuration provides high-performance block-level storage access over standard Ethernet networks using the modern NVMe protocol.
+
+video::80164fe4-06db-4c21-a25d-b22e0179c3d2[panopto, title="LVM shared pool with NVMe/TCP using ONTAP", width=360]
+
+== Initial virtualization administrator tasks
+
+Complete these initial tasks to prepare Proxmox VE hosts for NVMe/TCP connectivity and collect the necessary information for the storage administrator.
+
+. Verify two Linux VLAN interfaces are available.
+
+. On every Proxmox host in the cluster, run the following command to collect the host initiator information.
++
+[source,shell]
+----
+nvme show-hostnqn
+----
+
+. Provide the collected host NQN information to the storage administrator and request an NVMe namespace of the required size.
+
+== Storage administrator tasks
+
+If you are new to ONTAP, use System Manager for a better experience.
+
+. Ensure the SVM is available with NVMe protocol enabled. Refer to link:https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html[NVMe tasks on ONTAP 9 documentation].
+
+. Create the NVMe namespace.
++
+.Show example
+[%collapsible]
+====
+image:proxmox-ontap-020.png[nvme namespace creation]
+====
+
+. Create the subsystem and assign host NQNs (if using CLI). Follow the reference link above.
+
+. Ensure Anti-Ransomware protection is enabled on the security tab.
+
+. Notify the virtualization administrator that the NVMe namespace is created.
+
+== Final virtualization administrator tasks
+
+Complete these tasks to configure the NVMe namespace as shared LVM storage in Proxmox VE.
+
+. Navigate to a shell on each Proxmox VE host in the cluster and create the /etc/nvme/discovery.conf file. Update the content specific to your environment.
++
+[source,shell]
+----
+root@pxmox01:~# cat /etc/nvme/discovery.conf 
+# Used for extracting default parameters for discovery
+#
+# Example:
+# --transport=<trtype> --traddr=<traddr> --trsvcid=<trsvcid> --host-traddr=<host-traddr> --host-iface=<host-iface>
+
+-t tcp -l 1800 -a 172.21.118.153
+-t tcp -l 1800 -a 172.21.118.154
+-t tcp -l 1800 -a 172.21.119.153
+-t tcp -l 1800 -a 172.21.119.154
+----
+
+. Log in to the NVMe subsystem.
++
+[source,shell]
+----
+nvme connect-all
+----
+
+. Inspect and collect device details.
++
+[source,shell]
+----
+nvme list
+nvme netapp ontapdevices
+nvme list-subsys
+lsblk -l
+----
+
+. Create the volume group.
++
+[source,shell]
+----
+vgcreate pvens02 /dev/mapper/<device id>
+----
+
+. Using the Management UI at `https:<proxmox node>:8006`, click Datacenter, select Storage, click Add, and select LVM.
++
+.Show example
+[%collapsible]
+====
+image:proxmox-ontap-017.png[lvm storage navigation]
+====
+
+. Provide the storage ID name, choose the existing volume group, and select the volume group that was just created with the CLI. Check the shared option. With Proxmox VE 9 and above, enable the `Allow Snapshots as Volume-Chain` option, which is visible when the Advanced check box is enabled.
++
+.Show example
+[%collapsible]
+====
+image:proxmox-ontap-021.png[lvm on existing vg]
+====
+
+. The following shows a sample storage configuration file for LVM using NVMe/TCP:
++
+.Show example
+[%collapsible]
+====
+image:proxmox-ontap-022.png[lvm on nvme tcp configuration]
+====
++
+With Proxmox VE 9 and above, the storage configuration file includes the additional option `snapshot-as-volume-chain 1` when `Allow Snapshots as Volume-Chain` is enabled.
+
+NOTE: The nvme-cli package includes nvmef-autoconnect.service, which can be enabled to automatically connect to targets on boot. Refer to the nvme-cli documentation for more details.

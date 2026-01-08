@@ -1,0 +1,72 @@
+---
+sidebar: sidebar
+permalink: proxmox/proxmox-ontap-architecture.html
+keywords: netapp, proxmox, proxmox ve, ontap, storage, architecture, nas, san, nfs, smb, iscsi, fc, nvme, flexgroup, flexcache, snapmirror
+summary: "NetApp ONTAP integrates with Proxmox Virtual Environment to provide enterprise-grade storage capabilities through NAS and SAN protocols. ONTAP delivers advanced data management features including snapshots, cloning, replication, and ransomware protection for virtualized workloads."
+---
+= Learn about ONTAP storage architecture for Proxmox Virtual Environment
+:icons: font
+:imagesdir: ../media/
+
+[.lead]
+NetApp ONTAP integrates with Proxmox Virtual Environment (VE) to provide enterprise-grade storage capabilities through NAS and SAN protocols. ONTAP delivers advanced data management features including snapshots, cloning, replication, and ransomware protection for virtualized workloads running on Proxmox VE clusters.
+
+== Solution architecture
+
+The solution architecture includes the following key components:
+
+* *Proxmox VE cluster:* A cluster of Proxmox VE nodes that provide virtualization capabilities and manage virtual machines (VMs) and containers.
+* *NetApp ONTAP storage:* A high-performance, scalable storage system that provides shared storage for the Proxmox VE cluster.
+* *Network infrastructure:* A robust network setup that ensures low-latency and high-throughput connectivity between Proxmox VE nodes and ONTAP storage.
+* *NetApp Console:* A centralized management interface for managing multiple NetApp storage systems and data services.
+* *Proxmox Backup Server:* A dedicated backup solution for Proxmox VE that integrates with ONTAP storage for efficient data protection.
+
+The following diagram shows the high-level architecture of the lab setup:
+
+image::proxmox-deploy-guidelines-001.png[Proxmox VE with NetApp ONTAP Architecture]
+
+== ONTAP features for Proxmox VE
+
+ONTAP provides a comprehensive set of enterprise storage features that enhance Proxmox VE deployments. These features span data management, protection, efficiency, and protocol support across both NAS and SAN storage architectures.
+
+=== Core data management features
+
+* Scale-out cluster architecture
+* Secure authentication and RBAC support
+* Zero trust multi-admin support
+* Secure multitenancy
+* Data replication with SnapMirror
+* Point-in-time copies with snapshots
+* Space-efficient clones
+* Storage efficiency features including deduplication and compression
+* Trident CSI support for Kubernetes
+* SnapLock for compliance
+* Tamperproof snapshot copy locking
+* Data-at-rest and data-in-flight encryption
+* FabricPool to tier cold data to object storage
+* NetApp Console and Data Infrastructure Insights integration
+* Microsoft Offloaded Data Transfer (ODX)
+
+=== NAS protocol features
+
+* FlexGroup volumes provide scale-out NAS containers with high performance, load distribution, and scalability
+* FlexCache distributes data globally while providing local read and write access
+* Multiprotocol support enables the same data to be accessible via both SMB and NFS
+* NFS nConnect allows multiple TCP sessions per connection to increase network throughput and utilize high-speed NICs
+* NFS session trunking provides increased data transfer speeds, high availability, and fault tolerance
+* SMB multichannel provides increased data transfer speeds, high availability, and fault tolerance
+* Integration with Active Directory and LDAP for file permissions
+* Secure connections with NFS over TLS
+* NFS Kerberos authentication support
+* NFS over RDMA for low-latency access
+* Name mapping between Windows and Unix identities
+* Autonomous ransomware protection with built-in threat detection
+* File System Analytics for capacity and usage insights
+
+=== SAN protocol features
+
+* Stretch clusters across fault domains with SnapMirror active sync (always check the https://mysupport.netapp.com/matrix/#welcome[Interoperability Matrix Tool] for supported configurations)
+* ASA models provide active-active multipathing and fast path failover
+* Protocol support for FC, iSCSI, and NVMe-oF
+* iSCSI CHAP mutual authentication
+* Selective LUN mapping and portsets for enhanced security

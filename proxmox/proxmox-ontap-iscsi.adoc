@@ -1,0 +1,88 @@
+---
+sidebar: sidebar
+permalink: proxmox/proxmox-ontap-iscsi.html
+keywords: netapp, proxmox, proxmox ve, iscsi, lvm, ontap, storage
+summary: "Configure Logical Volume Manager (LVM) with iSCSI for Proxmox Virtual Environment using ONTAP. This procedure includes multipath configuration, LUN provisioning, igroup setup, and volume group creation for shared storage."
+---
+= Configure LVM with iSCSI for Proxmox VE
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Configure Logical Volume Manager (LVM) for shared storage across Proxmox Virtual Environment (VE) hosts using iSCSI protocol with NetApp ONTAP. This configuration enables block-level storage access over standard Ethernet networks with multipath support.
+
+video::d66ef67f-bcc2-4ced-848e-b22e01588e8c[panopto, title="LVM shared pool with iSCSI using ONTAP", width=360]
+
+== Initial virtualization administrator tasks
+
+Complete these initial tasks to prepare Proxmox VE hosts for iSCSI connectivity and collect the necessary information for the storage administrator.
+
+. Verify two Linux VLAN interfaces are available.
+
+. Ensure multipath-tools is installed on all Proxmox VE hosts and starts on boot.
++
+[source,shell]
+----
+apt list | grep multipath-tools
+# If need to install, execute the following line.
+apt-get install multipath-tools
+systemctl enable multipathd
+----
+
+. Collect the iSCSI host IQN for all Proxmox VE hosts and provide it to the storage administrator.
++
+[source,shell]
+----
+cat /etc/iscsi/initiator.name
+----
+
+== Storage administrator tasks
+
+If you are new to ONTAP, use System Manager for a better experience.
+
+. Ensure the SVM is available with iSCSI protocol enabled. Follow link:https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html[ONTAP 9 documentation].
+
+. Create two LIFs per controller dedicated for iSCSI.
++
+image:proxmox-ontap-013.png[iscsi interface details]
+
+. Create an igroup and populate the host iSCSI initiators.
+
+. Create the LUN with the desired size on the SVM and present it to the igroup created in the previous step. Ensure Anti-Ransomware protection is enabled on the security tab for ASA systems. For AFF/FAS systems, ensure Anti-Ransomware protection is enabled on the security tab for the volume.
++
+image:proxmox-ontap-014.png[iscsi lun details]
+
+. Notify the virtualization administrator that the LUN is created.
+
+== Final virtualization administrator tasks
+
+Complete these tasks to configure the iSCSI LUN as shared LVM storage in Proxmox VE.
+
+. Using the Management UI at `https:<proxmox node>:8006`, click Datacenter, select Storage, click Add, and select iSCSI.
++
+image:proxmox-ontap-015.png[iscsi storage navigation]
+
+. Provide the storage ID name. The iSCSI LIF address from ONTAP should be able to pick the target when there is no communication issue. If the intention is to not directly provide LUN access to guest VMs, uncheck that option.
++
+image:proxmox-ontap-016.png[iscsi storage type creation]
+
+. Click Add and select LVM.
++
+image:proxmox-ontap-017.png[lvm storage navigation]
+
+. Provide the storage ID name and select the base storage that matches the iSCSI storage created in the previous step. Select the LUN for the base volume and provide the volume group name. Ensure the shared option is selected. With Proxmox VE 9 and above, enable the `Allow Snapshots as Volume-Chain` option, which is visible when the Advanced check box is enabled.
++
+image:proxmox-ontap-018.png[lvm storage creation]
+
+. The following shows the sample storage configuration file for LVM using iSCSI:
++
+.Show example
+[%collapsible]
+====
+image:proxmox-ontap-019.png[lvm iscsi configuration]
+====
++
+With Proxmox VE 9 and above, the storage configuration file includes the additional option `snapshot-as-volume-chain 1` when `Allow Snapshots as Volume-Chain` is enabled.

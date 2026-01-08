@@ -1,0 +1,106 @@
+---
+sidebar: sidebar
+permalink: proxmox/proxmox-ontap-smb.html
+keywords: netapp, proxmox, proxmox ve, smb, cifs, ontap, storage
+summary: "Configure SMB/CIFS storage for Proxmox Virtual Environment using ONTAP. This procedure includes SVM enablement, LIF creation, Active Directory configuration, volume creation, and multichannel setup for fault tolerance and enhanced performance."
+---
+= Configure SMB/CIFS storage for Proxmox VE
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Configure SMB/CIFS storage for Proxmox Virtual Environment (VE) using NetApp ONTAP. SMB multichannel provides fault tolerance and boosts performance with multiple network connections to the storage system.
+
+SMB/CIFS file shares require configuration tasks by both storage and virtualization administrators. For more details, refer to link:https://www.netapp.com/pdf.html?item=/media/17136-tr4740.pdf[TR4740 - SMB 3.0 Multichannel].
+
+NOTE: Passwords are saved in clear text files and are accessible only to the root user. Refer to link:https://pve.proxmox.com/pve-docs/chapter-pvesm.html#storage_cifs[Proxmox VE documentation].
+
+video::5b4ae54a-08d2-4f7d-95ec-b22d015f6035[panopto, title="SMB shared storage pool with ONTAP", width=360]
+
+== Storage administrator tasks
+
+If you are new to ONTAP, use System Manager Interface to complete these tasks.
+
+. Enable the SVM for SMB. Follow link:https://docs.netapp.com/us-en/ontap/smb-config/configure-access-svm-task.html[ONTAP 9 documentation] for more information.
+
+. Create at least two LIFs per controller. Follow the steps from the documentation. For reference, here is a screenshot of LIFs used in this solution.
++
+.Show example
+[%collapsible]
+====
+image:proxmox-ontap-001.png[nas interface details]
+====
+
+. Configure Active Directory or workgroup-based authentication. Follow the steps from the documentation.
++
+.Show example
+[%collapsible]
+====
+image:proxmox-ontap-002.png[Join domain info]
+====
+
+. Create a volume. Check the option to distribute data across the cluster to use FlexGroup. Ensure Anti-Ransomware protection is enabled on the volume.
++
+.Show example
+[%collapsible]
+====
+image:proxmox-ontap-023.png[FlexGroup option]
+====
+
+. Create an SMB share and adjust permissions. Follow link:https://docs.netapp.com/us-en/ontap/smb-config/configure-client-access-shared-storage-concept.html[ONTAP 9 documentation] for more information.
++
+.Show example
+[%collapsible]
+====
+image:proxmox-ontap-003.png[SMB share info]
+====
+
+. Provide the SMB server, share name, and credentials to the virtualization administrator.
+
+== Virtualization administrator tasks
+
+Complete these tasks to add the SMB share as storage in Proxmox VE and enable multichannel for improved performance and fault tolerance.
+
+. Collect the SMB server, share name, and credentials for share authentication.
+
+. Ensure at least two interfaces are configured in different VLANs for fault tolerance. Verify the NIC supports RSS.
+
+. Using the Management UI at `https:<proxmox-node>:8006`, click Datacenter, select Storage, click Add, and select SMB/CIFS.
++
+.Show example
+[%collapsible]
+====
+image:proxmox-ontap-004.png[SMB storage navigation]
+====
+
+. Enter the details. The share name should auto-populate. Select all content types, and click Add.
++
+.Show example
+[%collapsible]
+====
+image:proxmox-ontap-005.png[SMB storage addition]
+====
+
+. To enable the multichannel option, open a shell on any cluster node and run the following command, where `<storage id>` is the storage ID created in the previous step:
++
+[source,shell]
+----
+pvesm set <storage id> --options multichannel,max_channels=16
+----
++
+.Show example
+[%collapsible]
+====
+image:proxmox-ontap-006.png[multichannel setup]
+====
+
+. The following shows the content in /etc/pve/storage.cfg for the configured storage:
++
+.Show example
+[%collapsible]
+====
+image:proxmox-ontap-007.png[storage configuration file for SMB]
+====
