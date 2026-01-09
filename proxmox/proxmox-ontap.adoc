@@ -14,9 +14,11 @@ summary: "Provision ONTAP storage for Proxmox Virtual Environment (VE) using NAS
 [.lead]
 Provision ONTAP storage for Proxmox Virtual Environment (VE) using NAS protocols (NFS, SMB) and SAN protocols (FC, iSCSI, NVMe). Select the appropriate protocol-specific procedure to configure shared storage for your Proxmox VE cluster.
 
-Ensure Proxmox VE hosts have FC, Ethernet, or other supported interfaces cabled to switches with communication to ONTAP logical interfaces. Always check the https://mysupport.netapp.com/matrix/#welcome[Interoperability Matrix Tool] for supported configurations.
+Ensure Proxmox VE hosts have FC, Ethernet, or other supported interfaces cabled to switches with communication to ONTAP logical interfaces. Always check the https://mysupport.netapp.com/matrix/#welcome[Interoperability Matrix Tool] for supported configurations. Example scenarios are created with assumption that two high speed network interface cards are available on each Proxmox VE host which are connected together to create bonded interfaces for fault tolerance and performance. Same uplink connections are used for all network traffic including host management, VM/container traffic, and storage access. When more network interfaces are available, consider separating storage traffic from other types of traffic.
 
-For information about ONTAP storage architecture and supported storage types, see link:proxmox-ontap-architecture.html[Learn about ONTAP storage architecture for Proxmox VE] and link:proxmox-storage-types.html[Learn about supported storage types for Proxmox VE].
+For information about ONTAP storage architecture and supported storage types, see link:proxmox-ontap-architecture.html[Learn about ONTAP storage architecture for Proxmox VE] and link:proxmox-storage-types.html[Learn about supported storage types for Proxmox VE]. 
+
+NOTE: When using LVM with SAN protocols (FC, iSCSI, NVMe-oF), the volume group can contain multiple LUNs or NVMe namespaces. In that case, all the LUNs or namespaces must be part of same consistency group to ensure data integrity. We don't support volume group that spans multiple ONTAP SVMs. Each volume group must be created from LUNs or namespaces from the same SVM.
 
 == Choose a storage protocol
 

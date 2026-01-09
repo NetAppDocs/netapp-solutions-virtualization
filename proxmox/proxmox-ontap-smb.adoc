@@ -31,7 +31,7 @@ If you are new to ONTAP, use System Manager Interface to complete these tasks.
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-001.png[nas interface details]
+image:proxmox-ontap-smb-001.png[nas interface details]
 ====
 
 . Configure Active Directory or workgroup-based authentication. Follow the steps from the documentation.
@@ -39,7 +39,7 @@ image:proxmox-ontap-001.png[nas interface details]
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-002.png[Join domain info]
+image:proxmox-ontap-smb-002.png[Join domain info]
 ====
 
 . Create a volume. Check the option to distribute data across the cluster to use FlexGroup. Ensure Anti-Ransomware protection is enabled on the volume.
@@ -47,7 +47,7 @@ image:proxmox-ontap-002.png[Join domain info]
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-023.png[FlexGroup option]
+image:proxmox-ontap-smb-003.png[FlexGroup option]
 ====
 
 . Create an SMB share and adjust permissions. Follow link:https://docs.netapp.com/us-en/ontap/smb-config/configure-client-access-shared-storage-concept.html[ONTAP 9 documentation] for more information.
@@ -55,7 +55,7 @@ image:proxmox-ontap-023.png[FlexGroup option]
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-003.png[SMB share info]
+image:proxmox-ontap-smb-004.png[SMB share info]
 ====
 
 . Provide the SMB server, share name, and credentials to the virtualization administrator.
@@ -73,7 +73,7 @@ Complete these tasks to add the SMB share as storage in Proxmox VE and enable mu
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-004.png[SMB storage navigation]
+image:proxmox-ontap-smb-005.png[SMB storage navigation]
 ====
 
 . Enter the details. The share name should auto-populate. Select all content types, and click Add.
@@ -81,7 +81,7 @@ image:proxmox-ontap-004.png[SMB storage navigation]
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-005.png[SMB storage addition]
+image:proxmox-ontap-smb-006.png[SMB storage addition]
 ====
 
 . To enable the multichannel option, open a shell on any cluster node and run the following command, where `<storage id>` is the storage ID created in the previous step:
@@ -94,7 +94,7 @@ pvesm set <storage id> --options multichannel,max_channels=16
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-006.png[multichannel setup]
+image:proxmox-ontap-smb-007.png[multichannel setup]
 ====
 
 . The following shows the content in /etc/pve/storage.cfg for the configured storage:
@@ -102,5 +102,5 @@ image:proxmox-ontap-006.png[multichannel setup]
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-007.png[storage configuration file for SMB]
+image:proxmox-ontap-smb-008.png[storage configuration file for SMB]
 ====

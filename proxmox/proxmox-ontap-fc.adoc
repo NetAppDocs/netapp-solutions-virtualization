@@ -47,13 +47,13 @@ If you are new to ONTAP, use System Manager for a better experience.
 
 . Create two LIFs per controller dedicated for FC.
 +
-image:proxmox-ontap-024.png[FC interface details]
+image:proxmox-ontap-fc-001.png[FC interface details]
 
 . Create an igroup and populate the host FC initiators.
 
 . Create the LUN with the desired size on the SVM and present it to the igroup created in the previous step. Ensure Anti-Ransomware protection is enabled on the security tab for ASA systems and on the volume security tab for AFF/FAS systems.
 +
-image:proxmox-ontap-025.png[lun details]
+image:proxmox-ontap-fc-002.png[lun details]
 
 . Notify the virtualization administrator that the LUN is created.
 
@@ -97,7 +97,7 @@ vgs
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-026.png[lvm storage navigation]
+image:proxmox-ontap-fc-003.png[lvm storage navigation]
 ====
 
 . Provide the storage ID name, choose the existing volume group, and select the volume group that was just created with the CLI. Check the shared option. With Proxmox VE 9 and above, enable the `Allow Snapshots as Volume-Chain` option, which is visible when the Advanced check box is enabled.
@@ -105,7 +105,7 @@ image:proxmox-ontap-026.png[lvm storage navigation]
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-027.png[lvm storage creation]
+image:proxmox-ontap-fc-004.png[lvm storage creation]
 ====
 
 . The following shows the sample storage configuration file for LVM using FC:
@@ -113,7 +113,7 @@ image:proxmox-ontap-027.png[lvm storage creation]
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-028.png[lvm fc configuration]
+image:proxmox-ontap-fc-005.png[lvm fc configuration]
 ====
 +
 With Proxmox VE 9 and above, the storage configuration file includes the additional option `snapshot-as-volume-chain 1` when `Allow Snapshots as Volume-Chain` is enabled.

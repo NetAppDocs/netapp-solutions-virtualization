@@ -25,7 +25,7 @@ indexpage:
           url: proxmox-pbs-architecture.html
         - title: "Deployment requirements and considerations"
           url: proxmox-pbs-requirements.html
-        - title: "Configure data protection"
+        - title: "Configure data protection with Proxmox Backup Server"
           url: proxmox-wkld-dp-pbs.html
 #
     - title: "Additional resources"

@@ -17,7 +17,7 @@ NAS protocols (NFS and SMB) support all Proxmox VE content types and are typical
 
 == SAN protocol support
 
-SAN protocols (FC, iSCSI, and NVMe-oF) are typically configured per host and support VM disk and container image content types in Proxmox VE. Guest VMs can use raw or qcow2 disk formats on block storage.
+SAN protocols (FC, iSCSI, and NVMe-oF) are typically configured per host and support VM disk and container image content types in Proxmox VE. Guest VMs can use raw, VMDK or qcow2 disk formats on block storage.
 
 == Storage type compatibility matrix
 

@@ -27,6 +27,6 @@ The solution includes the following components:
 
 The following diagram shows the high-level architecture of the Proxmox Backup Server setup with ONTAP storage:
 
-image::proxmox-wkld-dp-pbs-001.png[Proxmox VE Workload Data Protection with PBS and NetApp ONTAP Architecture]
+image::proxmox-pbs-architecture-001.png[Proxmox VE Workload Data Protection with PBS and NetApp ONTAP Architecture]
 
 

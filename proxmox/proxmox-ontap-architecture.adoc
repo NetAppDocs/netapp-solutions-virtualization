@@ -42,6 +42,7 @@ ONTAP provides a comprehensive set of enterprise storage features that enhance P
 * Trident CSI support for Kubernetes
 * SnapLock for compliance
 * Tamperproof snapshot copy locking
+* Ransomware protection with autonomous threat detection
 * Data-at-rest and data-in-flight encryption
 * FabricPool to tier cold data to object storage
 * NetApp Console and Data Infrastructure Insights integration

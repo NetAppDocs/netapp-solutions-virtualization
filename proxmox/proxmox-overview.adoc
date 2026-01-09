@@ -82,7 +82,7 @@ To import VMs from a Broadcom vSphere environment, the vSphere host can also be 
 
 == Network
 
-Proxmox VE supports both host based networking and cluster wide VNets using native Linux networking features like Linux bridge and Open vSwitch, to implement Software Defined Networking (SDN). The Ethernet interfaces on the host can be bonded together to provide redundancy and high availability. For other options, refer to link:https://pve.proxmox.com/pve-docs/chapter-sysadmin.html#_choosing_a_network_configuration[Proxmox VE documentation]
+Proxmox VE supports both host based networking and cluster wide VNets using native Linux networking features like Linux bridge and Open vSwitch, to implement Software Defined Networking (SDN). The Ethernet interfaces on the host can be bonded together to provide fault tolerance and high availability. For other options, refer to link:https://pve.proxmox.com/pve-docs/chapter-sysadmin.html#_choosing_a_network_configuration[Proxmox VE documentation]
 
 image:proxmox-overview-008.png[Bonded network]
 

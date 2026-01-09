@@ -31,17 +31,17 @@ Complete these tasks to provision NFS storage on ONTAP for use with Proxmox VE.
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-001.png[nas interface details]
+image:proxmox-ontap-nfs-001.png[nas interface details]
 ====
 
 . Create or update an NFS export policy to provide access to Proxmox VE host IP addresses or subnets. Refer to link:https://docs.netapp.com/us-en/ontap/nfs-config/create-export-policy-task.html[Export policy creation] and link:https://docs.netapp.com/us-en/ontap/nfs-config/add-rule-export-policy-task.html[Add rule to an export policy].
 
-. link:https://docs.netapp.com/us-en/ontap/nfs-config/create-volume-task.html[Create a volume]. For large capacity needs (>100TB), check the option to distribute data across the cluster to use FlexGroup. If using FlexGroup, consider enabling pNFS on the SVM for better performance by following link:https://docs.netapp.com/us-en/ontap/pnfs/pnfs-commands.html#enable-nfsv4-1[Enable pNFS on SVM]. Ensure Anti-Ransomware protection is enabled on the volume.
+. link:https://docs.netapp.com/us-en/ontap/nfs-config/create-volume-task.html[Create a volume]. For large capacity needs (>100TB), check the option to distribute data across the cluster to use FlexGroup. If using FlexGroup, consider enabling pNFS on the SVM for better performance by following link:https://docs.netapp.com/us-en/ontap/pnfs/pnfs-commands.html#enable-nfsv4-1[Enable pNFS on SVM]. When using pNFS, ensure the Proxmox VE hosts has data access to all controllers (data LIFs). Ensure Anti-Ransomware protection is enabled on the volume.
 +
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-023.png[FlexGroup option]
+image:proxmox-ontap-nfs-002.png[FlexGroup option]
 ====
 
 . link:https://docs.netapp.com/us-en/ontap/nfs-config/associate-export-policy-flexvol-task.html[Assign the export policy to the volume].
@@ -49,7 +49,7 @@ image:proxmox-ontap-023.png[FlexGroup option]
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-008.png[NFS volume info]
+image:proxmox-ontap-nfs-003.png[NFS volume info]
 ====
 
 . Notify the virtualization administrator that the NFS volume is ready.
@@ -65,7 +65,7 @@ Complete these tasks to add the NFS volume as storage in Proxmox VE and configur
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-009.png[NFS storage navigation]
+image:proxmox-ontap-nfs-004.png[NFS storage navigation]
 ====
 
 . Enter the details. After providing the server information, the NFS exports should populate. Select from the list and choose the content options.
@@ -73,7 +73,7 @@ image:proxmox-ontap-009.png[NFS storage navigation]
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-010.png[NFS storage addition]
+image:proxmox-ontap-nfs-005.png[NFS storage addition]
 ====
 
 . To enable the nConnect option, open a shell on any cluster node and run the following command, where `<storage id>` is the storage ID created in the previous step:
@@ -87,7 +87,7 @@ To use session trunking, ensure NFS v4.1 is used and set the trunkdiscovery and 
 +
 [source,shell]
 ----
-pvesm set <storage id> --options vers=4.1,trunkdiscovery,max_connect=16,nconnect=4
+pvesm set <storage id> --options vers=4.1,trunkdiscovery,max_connect=16
 ----
 
 . The following shows the content in /etc/pve/storage.cfg for the configured storage:
@@ -95,9 +95,9 @@ pvesm set <storage id> --options vers=4.1,trunkdiscovery,max_connect=16,nconnect
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-011.png[storage configuration file for NFS]
+image:proxmox-ontap-nfs-006.png[storage configuration file for NFS]
 ====
 
 . To verify the nConnect option is set, run `ss -an | grep :2049` on any Proxmox VE host and check for multiple connections to the NFS server IP. To verify pNFS is enabled, run `nfsstat -c` and check the layout-related metrics. Based on data traffic, multiple connections to data LIFs should be visible.
 
-NOTE: In session trunking, the nconnect option is set on only one of the trunk interfaces. With pNFS, the nconnect option is set on metadata and data interfaces.
+NOTE: In session trunking, the nconnect option is set on only one of the trunk interfaces. With pNFS, the nconnect option is set on metadata and data interfaces. For production environments, use either nConnect or session trunking, not both.

@@ -45,7 +45,7 @@ If you are new to ONTAP, use System Manager for a better experience.
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-029.png[nvme namespace creation]
+image:proxmox-ontap-nvme-fc-001.png[nvme namespace creation]
 ====
 
 . Create the subsystem and assign host NQNs (if using CLI). Follow the reference link above.
@@ -55,7 +55,7 @@ image:proxmox-ontap-029.png[nvme namespace creation]
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-032.png[Anti-Ransomware status]
+image:proxmox-ontap-nvme-fc-002.png[Anti-Ransomware status]
 ====
 
 . Notify the virtualization administrator that the NVMe namespace is created.
@@ -100,7 +100,7 @@ vgs
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-026.png[lvm storage navigation]
+image:proxmox-ontap-nvme-fc-003.png[lvm storage navigation]
 ====
 
 . Provide the storage ID name, choose the existing volume group, and select the volume group that was just created with the CLI. Check the shared option. With Proxmox VE 9 and above, enable the `Allow Snapshots as Volume-Chain` option, which is visible when the Advanced check box is enabled.
@@ -108,7 +108,7 @@ image:proxmox-ontap-026.png[lvm storage navigation]
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-030.png[lvm on existing vg]
+image:proxmox-ontap-nvme-fc-004.png[lvm on existing vg]
 ====
 
 . The following shows a sample storage configuration file for LVM using NVMe/FC:
@@ -116,5 +116,5 @@ image:proxmox-ontap-030.png[lvm on existing vg]
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-031.png[lvm on nvme fc configuration]
+image:proxmox-ontap-nvme-fc-005.png[lvm on nvme fc configuration]
 ====

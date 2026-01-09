@@ -20,11 +20,11 @@ For information about supported storage types and content compatibility, see lin
 Follow these guidelines to optimize network performance and reliability:
 
 * Ensure dual redundant network paths between Proxmox VE nodes and ONTAP storage.
-* Use link aggregation (LACP) for increased bandwidth and redundancy.
+* Use link aggregation (LACP) for increased bandwidth and fault tolerance.
 * Design the network topology to avoid spanning tree issues. Use features like RSTP or MSTP if necessary.
 * Implement VLANs to segment different types of traffic and enhance security.
 * Configure jumbo frames (MTU 9000) on all network devices to improve performance for storage traffic.
-* Use Open vSwitch (OVS) over Linux Bridge when VLAN zones are configured.
+* Consider using Open vSwitch (OVS) over Linux Bridge when VLAN zones are configured.
 
 == Storage configuration best practices
 Follow these best practices to optimize storage performance and scalability:
@@ -32,7 +32,7 @@ Follow these best practices to optimize storage performance and scalability:
 * Use ONTAP's advanced data management features, such as snapshots and cloning, to enhance data protection and recovery.
 * Use FlexGroup volumes for large capacity requirements to leverage the full potential of ONTAP scalability.
 * In geographically distributed environments, use FlexCache to distribute images and templates closer to the Proxmox VE nodes for faster deployment times and central management.
-* When using NFS, use the combination of nConnect, session trunking, and pNFS to optimize performance and availability.
+* When using FlexGroup with NFS, use the combination of nConnect or session trunking, and pNFS to optimize performance and availability.
 * For block protocols, ensure proper zoning and LUN masking to restrict access to authorized Proxmox VE nodes only.
 * Allocate sufficient storage capacity to accommodate VM growth and data needs.
 * Implement storage tiering to optimize performance and cost efficiency.
