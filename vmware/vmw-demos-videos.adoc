@@ -82,18 +82,6 @@ video::9b66ac8d-d2b1-4ac4-a33c-b16900f67df6[panopto, title="NFS Datastores as Pr
 video::1d0e1af1-40ae-483a-be6f-b156015507cc[panopto, title="iSCSI Datastores as Supplemental Storage for VCF Management Domains"]
 ====
 
-.NetApp with VMware Tanzu
-[%collapsible%open]
-====
-VMware Tanzu enables customers to deploy, administer, and manage their Kubernetes environment through vSphere or the VMware Cloud Foundation. This portfolio of products from VMware allows customer to manage all their relevant Kubernetes clusters from a single control plane by choosing the VMware Tanzu edition that best suits their needs.
-
-For more information about VMware Tanzu, see the https://tanzu.vmware.com/tanzu[VMware Tanzu Overview^]. This review covers use cases, available additions, and more about VMware Tanzu.
-
-video::ZtbXeOJKhrc[youtube, title="How to use vVols with NetApp and VMware Tanzu Basic, part 1", width=360]
-video::FVRKjWH7AoE[youtube, title="How to use vVols with NetApp and VMware Tanzu Basic, part 2", width=360]
-video::Y-34SUtTTtU[youtube, title="How to use vVols with NetApp and VMware Tanzu Basic, part 3", width=360]
-====
-
 .NetApp Cloud Insights
 [%collapsible%open]
 ====

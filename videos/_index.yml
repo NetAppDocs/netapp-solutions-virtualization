@@ -28,8 +28,6 @@ indexpage:
           url: vmware-videos.html#azure-vmware-solutions
         - title: "VMware Cloud Foundation with NetApp ONTAP"
           url: vmware-videos.html#vmware-cloud-foundation-with-netapp-ontap
-        - title: "NetApp with VMware Tanzu"
-          url: vmware-videos.html#netapp-with-vmware-tanzu
         - title: "NetApp Cloud Insights"
           url: vmware-videos.html#netapp-cloud-insights
 #

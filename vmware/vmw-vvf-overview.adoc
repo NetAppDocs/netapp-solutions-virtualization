@@ -49,7 +49,7 @@ The VVF solution supports both native Kubernetes and virtual machine-based workl
 * VMware vSphere
 * VMware vSAN
 * Aria Standard
-* VMware Tanzu Kubernetes Grid Service for vSphere
+* VMware vSphere Kubernetes vSphere
 * vSphere Distributed Switch
 
 For more information on VVF included components, refer to  architecture and planning, refer to https://www.vmware.com/docs/vmw-datasheet-vsphere-product-line-comparison[VMware vSphere Product Live Comparison].
