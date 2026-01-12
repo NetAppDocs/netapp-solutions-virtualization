@@ -15,8 +15,9 @@ entries:
       - title: "Deployment guidelines"
         url: /proxmox/proxmox-deploy-guidelines.html
       - title: "Configure storage protocols with ONTAP for Proxmox VE"
-        url: /proxmox/proxmox-ontap.html
         entries:
+          - title: "Learn about storage protocols for Proxmox VE with NetApp ONTAP"
+            url: /proxmox/proxmox-ontap.html
           - title: "Configure SMB/CIFS storage"
             url: /proxmox/proxmox-ontap-smb.html
           - title: "Configure NFS storage"

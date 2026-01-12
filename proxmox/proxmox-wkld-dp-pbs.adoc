@@ -31,7 +31,7 @@ Configure Proxmox Backup Server datastores using NetApp ONTAP storage. This incl
 
 Prepare the ONTAP storage backend and mount it on the PBS host. The preparation steps vary depending on whether you use file-based (NFS) or block-based (SAN/NVMe-oF) protocols.
 
-PBS can use any folder mounted on local storage as a datastore. PBS stores catalog, index, and chunk files in the datastore. For optimal performance and scalability, use NetApp ONTAP SAN (iSCSI/FC/NVMe-oF) or NFS storage (with nConnect, session trunking, and pNFS enabled) as the PBS datastore
+PBS can use any folder mounted on local storage as a datastore. PBS stores catalog, index, and chunk files in the datastore. For optimal performance and scalability, use NetApp ONTAP SAN (iSCSI/FC/NVMe-oF) or NFS storage (with nConnect or session trunking, and pNFS enabled) as the PBS datastore
 
 .-> Mount the storage on the PBS host
 
@@ -83,7 +83,15 @@ image::proxmox-wkld-dp-pbs-003.png[S3 Endpoint configuration in PBS]
 image::proxmox-wkld-dp-pbs-004.png[S3 Endpoint configuration file in PBS]
 ====
 
-. Create local sync jobs to ONTAP S3 storage.
+. Next, navigate to Datastore → Add Datastore. Provide a name, select the datastore type as S3, and select the configured S3 endpoint. Provide the folder name on local datastore to be used as local cache and select the bucket.
+.Show example
+[%collapsible]
+====
+image::proxmox-wkld-dp-pbs-005.png[S3 Datastore configuration in PBS]
+image::proxmox-wkld-dp-pbs-006.png[S3 Datastore configuration file in PBS]
+====
+
+== Create local sync jobs to ONTAP S3 storage.
 +
 Migrate data from the local PBS datastore to ONTAP S3 storage by creating a local sync job in PBS. This job copies backup data from the local datastore to the S3 datastore for offsite storage and long-term retention.
 
