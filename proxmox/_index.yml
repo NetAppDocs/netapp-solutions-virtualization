@@ -32,10 +32,14 @@ indexpage:
       links:
         - title: "NetApp storage and NVMe-oF for breakthrough performance in Proxmox virtualization environments"
           url: https://www.credativ.de/en/blog/credativ-inside/netapp-storage-and-nvme-of-for-breakthrough-performance-in-proxmox-virtualization-environments/
+        - title: "Linux Bridge vs Open vSwitch for Proxmox VE"
+          url: https://community.netapp.com/t5/Tech-ONTAP-Blogs/Networking-with-Proxmox-VE/ba-p/465060
         - title: "Proxmox VE documentation"
           url: https://pve.proxmox.com/pve-docs/chapter-sysadmin.html#external_metric_server
         - title: Back up and restore Proxmox VE
           url: https://pve.proxmox.com/pve-docs/chapter-vzdump.html
         - title: Storage for Proxmox VE
           url: https://pve.proxmox.com/pve-docs/chapter-pvesm.html
+        - title: Proxmox VE with SolidFire storage
+          url: https://community.netapp.com/t5/SolidFire-and-HCI/Proxmox-VE-with-SolidFire-NetApp-HCI/td-p/461937
 #
