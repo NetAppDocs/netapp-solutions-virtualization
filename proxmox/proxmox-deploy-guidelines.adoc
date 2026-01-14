@@ -1,0 +1,59 @@
+---
+sidebar: sidebar
+permalink: proxmox/proxmox-deploy-guidelines.html
+keywords: netapp, proxmox, proxmox ve, all-flash, nfs, iscsi, nvme, fc, ontap, storage, aff, asa, virtual machines, vm, containers, proxmox backup server
+summary: "Proxmox Virtual Environment (VE) integrates with NetApp ONTAP storage to provide shared storage for virtual machines and containers, enabling faster live migrations, consistent templates, and centralized backups. Learn about the architecture, network and storage configuration, and best practices for deploying and optimizing a Proxmox VE cluster with ONTAP storage systems."
+---
+= Deployment guidelines for Proxmox Virtual Environment with NetApp ONTAP storage
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Proxmox Virtual Environment (VE) integrates with NetApp ONTAP storage to provide shared storage for virtual machines and containers, enabling faster live migrations, consistent templates, and centralized backups. Learn about network and storage configuration guidelines and best practices for deploying and optimizing a Proxmox VE cluster with ONTAP storage systems.
+
+For information about supported storage types and content compatibility, see link:proxmox-storage-types.html[Learn about supported storage types for Proxmox VE].
+
+== Network configuration guidelines
+Follow these guidelines to optimize network performance and reliability:
+
+* Ensure dual redundant network paths between Proxmox VE nodes and ONTAP storage.
+* Use link aggregation (LACP) for increased bandwidth and fault tolerance.
+* Design the network topology to avoid spanning tree issues. Use features like RSTP or MSTP if necessary.
+* Implement VLANs to segment different types of traffic and enhance security.
+* Configure jumbo frames (MTU 9000) on all network devices to improve performance for storage traffic.
+* Consider using Open vSwitch (OVS) over Linux Bridge when VLAN zones are configured.
+
+== Storage configuration best practices
+Follow these best practices to optimize storage performance and scalability:
+
+* Use ONTAP's advanced data management features, such as snapshots and cloning, to enhance data protection and recovery.
+* Use FlexGroup volumes for large capacity requirements to leverage the full potential of ONTAP scalability.
+* In geographically distributed environments, use FlexCache to distribute images and templates closer to the Proxmox VE nodes for faster deployment times and central management.
+* When using FlexGroup with NFS, use the combination of nConnect or session trunking, and pNFS to optimize performance and availability.
+* For block protocols, ensure proper zoning and LUN masking to restrict access to authorized Proxmox VE nodes only.
+* Allocate sufficient storage capacity to accommodate VM growth and data needs.
+* Implement storage tiering to optimize performance and cost efficiency.
+* Monitor storage performance and health regularly using NetApp management tools.
+* Use NetApp Console for centralized management of multiple ONTAP systems.
+* Enable ransomware protection features on ONTAP to safeguard against ransomware attacks.
+
+== Proxmox VE configuration guidelines
+Follow these guidelines to optimize Proxmox VE with NetApp ONTAP storage:
+
+* Update Proxmox VE to the latest stable version to benefit from recent features and bug fixes.
+* Configure Proxmox VE to use shared storage from NetApp ONTAP for VM storage.
+* Set up Proxmox VE clusters to enable high availability and live migration of VMs.
+* Use a redundant network for cluster communication and dedicate one for live migration.
+* Avoid reusing the same VM or container IDs across clusters to prevent conflicts.
+* Use VirtIO SCSI single controller for better performance and features in VMs.
+* Enable the IO threads option for VMs with high IO demands.
+* Enable discard/TRIM support on VM disks to optimize storage usage.
+
+
+
+
+
+
