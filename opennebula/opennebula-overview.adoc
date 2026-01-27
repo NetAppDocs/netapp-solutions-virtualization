@@ -62,6 +62,8 @@ VM to VM affinity/anti-affinity rules can be defined to control the placement of
 
 Kubernetes clusters can be deployed using OneKE service. OneKE allows to create and manage CNCF certified Kubernetes clusters based on SUSE Rancher. The Kubernetes clusters can be deployed on top of the OpenNebula virtual machines, providing a seamless integration between the cloud infrastructure and container orchestration.
 
+OpenNebula supports NVIDIA vGPU and MIG (Multi Instance GPU) for virtual machines to leverage the power of GPUs for high-performance computing, machine learning, and other GPU-intensive workloads.
+
 == Storage
 
 OpenNebula provides four types of datastores to manage storage resources: System, Image, File and Backup datastores. System datastores are used to store the virtual machine disks and configuration files. Image datastores are used to store virtual machine images, ISOs and data disks. File datastores are used to store files that can be accessed by virtual machines. Backup datastores are used to store backups of virtual machines and their data.
