@@ -22,7 +22,7 @@ The solution architecture includes the following key components:
 * *NetApp Console:* A centralized management interface for managing multiple NetApp storage systems and data services.
 
 
-The following diagram shows the high-level architecture of the lab setup:
+The following diagram shows the high-level architecture of OpenNebula integrated with NetApp ONTAP storage:
 
 image::opennebula-netapp-architecture-001.png[OpenNebula with NetApp ONTAP Architecture]
 

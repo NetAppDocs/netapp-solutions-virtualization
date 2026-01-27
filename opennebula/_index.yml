@@ -17,14 +17,7 @@ indexpage:
         - title: "Configure storage protocols"
           url: opennebula-netapp-protocols.html
 #
-    - title: "Protect OpenNebula workloads"
-      links:
-        - title: "OpenNebula Backup architecture"
-          url: opennebula-backup-architecture.html
-        - title: "Deployment requirements and considerations"
-          url: opennebula-backup-requirements.html
-        - title: "Configure data protection with OpenNebula Backup Datastore"
-          url: opennebula-wkld-dp.html
+
 #
     - title: "Additional resources"
       links:
