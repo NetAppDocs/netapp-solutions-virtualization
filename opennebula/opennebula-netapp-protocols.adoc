@@ -1,0 +1,40 @@
+---
+sidebar: sidebar
+permalink: opennebula/opennebula-netapp-protocols.html
+keywords: netapp, opennebula, all-flash, nfs, iscsi, ontap, storage, aff
+summary: "Provision ONTAP storage for OpenNebula using NAS protocols (NFS, SMB) and SAN protocols (FC, iSCSI, NVMe). Select the appropriate protocol-specific procedure to configure shared storage for your OpenNebula environment."
+---
+= Learn about storage protocols for OpenNebula with NetApp ONTAP
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Provision ONTAP storage for OpenNebula using NAS protocols (NFS, SMB) and SAN protocols (FC, iSCSI, NVMe). Select the appropriate protocol-specific procedure to configure shared storage for your OpenNebula environment.
+
+Ensure OpenNebula frontend and hypervisor hosts have FC, Ethernet, or other supported interfaces cabled to switches with communication to ONTAP logical interfaces. Always check the https://mysupport.netapp.com/matrix/#welcome[Interoperability Matrix Tool] for supported configurations. Example scenarios are created with assumption that two high speed network interface cards are available on each OpenNebula host which are connected together to create bonded interfaces for fault tolerance and performance. Same uplink connections are used for all network traffic including host management, VM/container traffic, and storage access. When more network interfaces are available, consider separating storage traffic from other types of traffic.
+
+For information about ONTAP storage architecture and supported storage types, see link:opennebula-netapp-architecture.html[Learn about NetApp storage architecture for OpenNebula] and link:opennebula-storage-types.html[Learn about supported storage types for OpenNebula]. 
+
+NOTE: When using LVM with SAN protocols (FC, iSCSI, NVMe-oF), the volume group can contain multiple LUNs or NVMe namespaces. In that case, all the LUNs or namespaces must be part of same consistency group to ensure data integrity. We don't support volume group that spans multiple ONTAP SVMs. Each volume group must be created from LUNs or namespaces from the same SVM.
+
+== Choose a storage protocol
+
+Select the protocol that matches your environment and requirements:
+
+* link:opennebula-netapp-iscsi.html[Configure NetApp driver with iSCSI] - Configure OpenNebula NetApp driver with iSCSI for block storage access over standard Ethernet networks with multipath support. This is Enterprise Edition only feature. It utilizes ONTAP native clones for efficient VM provisioning.
+
+* link:opennebula-ontap-smb.html[Configure SMB/CIFS storage] - Configure SMB/CIFS file shares for OpenNebula with multichannel support for fault tolerance and enhanced performance over multiple network connections.
+
+* link:opennebula-ontap-nfs.html[Configure NFS storage] - Configure NFS storage for OpenNebula with nConnect or session trunking for fault tolerance and performance enhancements using multiple network connections.
+
+* link:opennebula-ontap-fc.html[Configure LVM Thin with FC] - Configure Logical Volume Manager (LVM) with Fibre Channel for high-performance, low-latency block storage access across OpenNebula hosts.
+
+* link:opennebula-ontap-iscsi.html[Configure LVM Thin with iSCSI] - Configure Logical Volume Manager (LVM) with iSCSI for block storage access over standard Ethernet networks with multipath support.
+
+* link:opennebula-ontap-nvme-fc.html[Configure LVM Thin with NVMe/FC] - Configure Logical Volume Manager (LVM) with NVMe over Fibre Channel for high-performance block storage using the modern NVMe protocol.
+
+* link:opennebula-ontap-nvme-tcp.html[Configure LVM Thin with NVMe/TCP] - Configure Logical Volume Manager (LVM) with NVMe over TCP for high-performance block storage over standard Ethernet networks using the modern NVMe protocol.
+
