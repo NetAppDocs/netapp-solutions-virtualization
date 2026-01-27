@@ -1,0 +1,36 @@
+---
+sidebar: sidebar
+permalink: opennebula/opennebula-storage-types.html
+keywords: netapp, opennebula, ontap, storage, nfs, smb, cifs, iscsi, fc, nvme, content types, vm disks, backups, templates
+summary: "OpenNebula supports multiple storage types with ONTAP including NFS and SMB for NAS protocols and FC, iSCSI, and NVMe-oF for SAN protocols. 
+---
+= Supported storage types for OpenNebula
+:icons: font
+:imagesdir: ../media/
+
+[.lead]
+OpenNebula supports multiple storage protocols with NetApp ONTAP, including NFS and SMB for NAS and FC, iSCSI, and NVMe-oF for SAN. Based on existing skillset and requirements, users can choose the appropriate storage protocol.
+
+== NAS protocol support
+
+NAS protocols (NFS and SMB) support shared filesystem across the frontend and hypervisor hosts. ONTAP snapshots can be made visible to clients for accessing point-in-time copies of data. ONTAP FlexCache can be used for Image Datastores within zones that are geographically distributed. ONTAP NFS supports nConnect for better performance by using multiple connections per session. While using FlexGroup for large datastores (> 100TB), pNFS is recommended to distribute the load across multiple nodes. Rember to configure at least one data lif per controller in the ONTAP cluster and hypervisor hosts need to have connectivity.
+
+== SAN protocol support
+
+Enterprise edition includes NetApp driver which works with iSCSI protocol on AFF and FAS systems. Other SAN protocols (FC, and NVMe-oF) are typically configured for LVM driver. LVM thin pool is created per virtual machine for thin provisioning and snapshot support. Hypervisor hosts need to have connectivity to the storage system. Cluster LVM support is not required to use LVM storage type.
+
+== Storage type compatibility matrix
+
+[width=100%,cols="25% 15% 15% 15% 15% 15%", frame=all, grid=all, options="header"]
+|===
+| Datastore Type| NFS | SMB/CIFS | FC | iSCSI | NVMe-oF
+| Image | Yes | Yes | Yes a| Yes^1^ | Yes
+| System | Yes | Yes | Yes a| Yes^1^ | Yes
+| Kernel and File | Yes | Yes | Yes | Yes | Yes
+| Backup | Yes | Yes | Yes | Yes | Yes
+|===
+
+*Notes:*
+
+1. NetApp driver is available in Enterprise edition for iSCSI protocol to utilize native ONTAP features. 
+

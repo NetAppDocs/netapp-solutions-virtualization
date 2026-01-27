@@ -1,0 +1,41 @@
+section: OpenNebula
+title: "OpenNebula""
+url: /opennebula/index.html
+entries:
+  - title: "About OpenNebula"
+    pdf-filename: "Overview of OpenNebula on NetApp"
+    url: /opennebula/opennebula-overview.html
+  - title: "Provision NetApp storage for OpenNebula"
+    pdf-filename: "NetApp storage for OpenNebula"
+    entries:
+      - title: "Solution architecture"
+        url: /opennebula/opennebula-netapp-architecture.html
+      - title: "Supported storage types"
+        url: /opennebula/opennebula-storage-types.html
+      - title: "Configure storage protocols with NetApp for OpenNebula"
+        entries:
+          - title: "Storage protocols overview"
+            url: /opennebula/opennebula-netapp-protocols.html
+          - title: "Configure SMB/CIFS storage"
+            url: /opennebula/opennebula-netapp-smb.html
+          - title: "Configure NFS storage"
+            url: /opennebula/opennebula-netapp-nfs.html
+          - title: "Configure NetApp ONTAP iSCSI storage"
+            url: /opennebula/opennebula-ontap-iscsi.html
+          - title: "Configure LVM with FC"
+            url: /opennebula/opennebula-netapp-fc.html
+          - title: "Configure LVM with iSCSI"
+            url: /opennebula/opennebula-netapp-iscsi.html
+          - title: "Configure LVM with NVMe/FC"
+            url: /opennebula/opennebula-netapp-nvme-fc.html
+          - title: "Configure LVM with NVMe/TCP"
+            url: /opennebula/opennebula-netapp-nvme-tcp.html
+  - title: "Protect OpenNebula workloads"
+    pdf-filename: "OpenNebula Workload Data Protection with OpenNebula Backup and NetApp ONTAP"
+    entries:
+      - title: "Solution architecture"
+        url: /opennebula/opennebula-backup-architecture.html
+      - title: "Deployment requirements"
+        url: /opennebula/opennebula-backup-requirements.html
+      - title: "Configure data protection with OpenNebula Backup Datastore"
+        url: /opennebula/opennebula-wkld-dp.html
