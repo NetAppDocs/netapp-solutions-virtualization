@@ -5,7 +5,10 @@ keywords: netapp, opennebula, ontap, storage, nfs, smb, cifs, iscsi, fc, nvme, c
 summary: "OpenNebula supports multiple storage types with ONTAP including NFS and SMB for NAS protocols and FC, iSCSI, and NVMe-oF for SAN protocols. 
 ---
 = Supported storage types for OpenNebula
+:hardbreaks:
+:nofooter:
 :icons: font
+:linkattrs:
 :imagesdir: ../media/
 
 [.lead]

@@ -5,7 +5,10 @@ keywords: netapp, opennebula, ontap, storage, architecture, nas, san, nfs, smb, 
 summary: "NetApp integrates with OpenNebula to provide enterprise-grade storage capabilities through NAS and SAN protocols. ONTAP delivers advanced data management features including snapshots, cloning, replication, and ransomware protection for virtualized workloads."
 ---
 = Learn about ONTAP storage architecture for OpenNebula
+:hardbreaks:
+:nofooter:
 :icons: font
+:linkattrs:
 :imagesdir: ../media/
 
 [.lead]

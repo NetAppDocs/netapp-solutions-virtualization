@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar
-permalink: opennebula/opennebula-ontap-iscsi.html
+permalink: opennebula/opennebula-netapp-iscsi.html
 keywords: netapp, opennebula, opennebula ve, iscsi, lvm, ontap, storage
 summary: "Configure Logical Volume Manager (LVM) with iSCSI for OpenNebula Virtual Environment using ONTAP. This procedure includes multipath configuration, LUN provisioning, igroup setup, and volume group creation for shared storage."
 ---
-= Configure LVM Thin with iSCSI for OpenNebula
+= Configure NetApp Datastore with iSCSI for OpenNebula
 :hardbreaks:
 :nofooter:
 :icons: font
