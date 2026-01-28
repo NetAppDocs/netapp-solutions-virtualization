@@ -12,7 +12,7 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-OpenNebula is an open-source cloud management platform for managing heterogeneous distributed data center infrastructures. It provides a simple but feature-rich solution to build private, public and hybrid clouds. OpenNebula supports virtual machines with KVM, linux containers with LXC, and CNCF certified Kubernetes based on SUSE Rancher. 
+OpenNebula is an open-source cloud management platform for managing heterogeneous distributed data center infrastructures. It provides a simple but modular and feature-rich solution to build cloud and edge computing platforms. OpenNebula supports virtual machines with KVM, linux containers with LXC, and CNCF certified Kubernetes clusters based on SUSE Rancher. 
 
 == Overview
 

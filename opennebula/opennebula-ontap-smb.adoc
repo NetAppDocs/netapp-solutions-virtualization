@@ -62,45 +62,124 @@ image:opennebula-ontap-smb-004.png[SMB share info]
 
 == Virtualization administrator tasks
 
-Complete these tasks to add the SMB share as storage in OpenNebula and enable multichannel for improved performance and fault tolerance.
+Complete these tasks to add the SMB share as Datastore in OpenNebula and enable multichannel for improved performance and fault tolerance.
 
 . Collect the SMB server, share name, and credentials for share authentication.
 
 . Ensure at least two interfaces are configured in different VLANs for fault tolerance. Verify the NIC supports RSS.
 
-. Using the Management UI at `https:<opennebula-node>:8006`, click Datacenter, select Storage, click Add, and select SMB/CIFS.
+. SSH to one of the frontend server and create a configuration file based on desired Datastore type. Sample files are shown below:
++
+[role="tabbed-block"]
+====
+.Backup
+--
+. For Restic,
+[source,shell]
+----
+cat smb-restic.conf
+NAME = "Backup-Restic-SMB"
+TYPE = "BACKUP_DS"
+
+DS_MAD = "restic"
+TM_MAD = "-"
+
+RESTIC_PASSWORD = "<restic_password>"
+RESTIC_SFTP_SERVER = "<backup server>"
+----
+
+. For Rsync,
+[source,shell]
+----
+cat smb-rsync.conf
+NAME = "Backup-Rsync-SMB"
+TYPE = "BACKUP_DS"
+
+DS_MAD = "rsync"
+TM_MAD = "-"
+
+RSYNC_USER = "<rsync_user>"
+RSYNC_HOST = "<backup server>"
+----
+
+--
+
+.File
+--
+cat smb-kernel.conf
+NAME = "File-Kernel-SMB"
+TYPE = "FILE_DS"
+DS_MAD = "fs"
+TM_MAD = "local"
+SAFE_DIRS = "/var/tmp/files"
+--
+
+.Image
+--
+cat smb-image.conf
+NAME = "Image-SMB"
+TYPE = "IMAGE_DS"
+DS_MAD = "fs"
+TM_MAD = "shared"  
+--
+
+.System
+--
+cat smb-system.conf
+NAME = "System-SMB"
+TYPE = "SYSTEM_DS"
+TM_MAD = "shared"
+--
+====
+
+. Execute `onedatastore create <configuration file>`. Note the datastore ID returned after creation.
 +
 .Show example
 [%collapsible]
+[source,shell]
 ====
-image:opennebula-ontap-smb-005.png[SMB storage navigation]
-====
-
-. Enter the details. The share name should auto-populate. Select all content types, and click Add.
-+
-.Show example
-[%collapsible]
-====
-image:opennebula-ontap-smb-006.png[SMB storage addition]
+onedatastore create smb-system.conf
+ID: 100
 ====
 
-. To enable the multichannel option, open a shell on any cluster node and run the following command, where `<storage id>` is the storage ID created in the previous step:
+. Create a smb credential file in /etc/. This step is not required if using kerberos authentication (KVM host joined to <domain>).
 +
 [source,shell]
 ----
-pvesm set <storage id> --options multichannel,max_channels=16
+cat /etc/smb-credentials-<datastore_id>.cfg
+username=<smb_username>
+password=<smb_password>
+domain=<smb_domain> 
 ----
+. Set proper permissions (640) on the credential file. Change ownership to oneadmin user and group if required.
+
+. Update /etc/fstab or automount configuration to enable multichannel. Assuming the default datastore location as /var/lib/one/datastores. If not check the DATASTORE_LOCATION parameter in /etc/one/oned.conf. Ensure the <datastore_id> folder exists under the datastores location. 
 +
 .Show example
 [%collapsible]
+[role="tabbed-block"]
 ====
-image:opennebula-ontap-smb-007.png[multichannel setup]
+.Using /etc/fstab
+--
+[source,shell]
+----
+# credentials mapping to file option is not required when using kerberos authentication
+//<smb_server>/<smb_share> /var/lib/one/datastores/<datastore_id> cifs credentials=/etc/smb-credentials-<datastore_id>.cfg,_netdev,noauto,x-systemd.automount,vers=3.0,multichannel,max_channels=16,nofail 0 0
+----
+--
+
+.Using automount
+--
+[source,shell]
+----
+# credentials mapping to file option is not required when using kerberos authentication
+/var/lib/one/datastores/<datastore_id> -fstype=cifs,credentials=/etc/smb-credentials-<datastore_id>.cfg,vers=3.0,multichannel,max_channels=16 ://<smb_server>/<smb_share>
+----
+--
 ====
 
-. The following shows the content in /etc/pve/storage.cfg for the configured storage:
-+
-.Show example
-[%collapsible]
-====
-image:opennebula-ontap-smb-008.png[storage configuration file for SMB]
-====
+. Mount the datastore using `mount -a` or `systemctl reload autofs` command.
+
+. Verify the datastore is mounted with mount command and verify the datastore capacity with `onedatastore show <datastore_id>` command.
+
+. Ensure oneadmin user and group own the datastore folder. Adjust permissions using `chown -R oneadmin:oneadmin /var/lib/one/datastores/<datastore_id>` command.
