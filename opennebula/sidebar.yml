@@ -17,16 +17,16 @@ entries:
           - title: "Storage protocols overview"
             url: /opennebula/opennebula-netapp-protocols.html
           - title: "Configure SMB/CIFS storage"
-            url: /opennebula/opennebula-netapp-smb.html
+            url: /opennebula/opennebula-ontap-smb.html
           - title: "Configure NFS storage"
-            url: /opennebula/opennebula-netapp-nfs.html
+            url: /opennebula/opennebula-ontap-nfs.html
           - title: "Configure NetApp ONTAP iSCSI storage"
-            url: /opennebula/opennebula-ontap-iscsi.html
-          - title: "Configure LVM with FC"
-            url: /opennebula/opennebula-netapp-fc.html
-          - title: "Configure LVM with iSCSI"
             url: /opennebula/opennebula-netapp-iscsi.html
+          - title: "Configure LVM with FC"
+            url: /opennebula/opennebula-ontap-fc.html
+          - title: "Configure LVM with iSCSI"
+            url: /opennebula/opennebula-ontap-iscsi.html
           - title: "Configure LVM with NVMe/FC"
-            url: /opennebula/opennebula-netapp-nvme-fc.html
+            url: /opennebula/opennebula-ontap-nvme-fc.html
           - title: "Configure LVM with NVMe/TCP"
-            url: /opennebula/opennebula-netapp-nvme-tcp.html
+            url: /opennebula/opennebula-ontap-nvme-tcp.html

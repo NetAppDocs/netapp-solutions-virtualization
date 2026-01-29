@@ -122,6 +122,8 @@ image:opennebula-overview-010.png[OpenNebula Hooks and VM Lifecycle]
 
 For more information about OpenNebula Hooks, refer https://docs.opennebula.io/7.0/product/integration_references/system_interfaces/hook_driver/[OpenNebula Using Hooks].
 
+https://github.com/OpenNebula/one-swap[OneSwap tool] allows to migrate virtual machines from vSphere to OpenNebula KVM environment. It creates the images from vSphere VMDK files and generates the corresponding OpenNebula VM templates. NetApp Shift toolkit can convert vSphere VMDK files to QCOW2 format for use with OpenNebula.Using NetApp Shift toolkit API with OneSwap allows to automate the migration process on ONTAP file shares quickly and efficiently. For more information about NetApp shift toolkit, refer link:migration/shift-toolkit-conversion.html[Shift Toolkit Conversion].    
+
 == Data Protection
 
 OpenNebula provides support for backup using rsync, restic and Veeam. Veeam integration is only available with Enterprise edition. Backup datastores are used to store backups of virtual machines and their data. Backup jobs can be scheduled to run at specific intervals, ensuring that virtual machines are regularly backed up.

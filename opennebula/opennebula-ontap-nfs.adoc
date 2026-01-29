@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar
 permalink: opennebula/opennebula-ontap-nfs.html
-keywords: netapp, opennebula, opennebula ve, nfs, ontap, storage, nconnect, session trunking
-summary: "Configure NFS storage for OpenNebula Virtual Environment using ONTAP. This procedure includes SVM enablement, LIF creation, export policy configuration, volume creation, and nConnect or session trunking setup for fault tolerance and performance."
+keywords: netapp, opennebula, kvm, nfs, ontap, storage, nconnect, session trunking
+summary: "Configure NFS Datastore storage for OpenNebula using ONTAP. This procedure includes SVM enablement, LIF creation, export policy configuration, volume creation, and nConnect or session trunking setup for fault tolerance and performance."
 ---
 = Configure NFS storage for OpenNebula using ONTAP
 :hardbreaks:
@@ -12,17 +12,16 @@ summary: "Configure NFS storage for OpenNebula Virtual Environment using ONTAP. 
 :imagesdir: ../media/
 
 [.lead]
-Configure NFS storage for Proxmox Virtual Environment (VE) using NetApp ONTAP. Use session trunking with NFS v4.1 or later for fault tolerance and performance enhancements with multiple network connections to the storage system.
+Configure NFS storage for OpenNebula using NetApp ONTAP. Use nConnect or session trunking with pNFS (v4.1 or later )while using FlexGroup volumes for efficient resource management, fault tolerance, and performance enhancements. A single NFS export can be used for both Image and System datastores for a OpenNebula cluster. When planning to use FlexCache, dedicate the nfs export for Image datastores only.
 
-ONTAP supports all NFS versions supported by Proxmox VE. Use link:https://docs.netapp.com/us-en/ontap/nfs-trunking/index.html[session trunking] for fault tolerance and performance enhancements. Session trunking requires NFS v4.1 or later.
+Consider MetroCluster configuration for high availability and disaster recovery scenarios.
 
 If you are new to ONTAP, use System Manager Interface to complete these tasks.
 
-video::f6c9aba3-b070-45d6-8048-b22e001acfd4[panopto, title="NFS nconnect option with ONTAP", width=360]
 
 == Storage administrator tasks
 
-Complete these tasks to provision NFS storage on ONTAP for use with Proxmox VE.
+Complete these tasks to provision NFS storage on ONTAP for use with OpenNebula.
 
 . Enable the SVM for NFS. Refer to link:https://docs.netapp.com/us-en/ontap/nfs-config/verify-protocol-enabled-svm-task.html[ONTAP 9 documentation].
 
@@ -31,73 +30,136 @@ Complete these tasks to provision NFS storage on ONTAP for use with Proxmox VE.
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-nfs-001.png[nas interface details]
+image:opennebula-ontap-nfs-001.png[nas interface details]
 ====
 
-. Create or update an NFS export policy to provide access to Proxmox VE host IP addresses or subnets. Refer to link:https://docs.netapp.com/us-en/ontap/nfs-config/create-export-policy-task.html[Export policy creation] and link:https://docs.netapp.com/us-en/ontap/nfs-config/add-rule-export-policy-task.html[Add rule to an export policy].
+. Create or update an NFS export policy to provide access to OpenNebula host IP addresses or subnets. Refer to link:https://docs.netapp.com/us-en/ontap/nfs-config/create-export-policy-task.html[Export policy creation] and link:https://docs.netapp.com/us-en/ontap/nfs-config/add-rule-export-policy-task.html[Add rule to an export policy].
 
-. link:https://docs.netapp.com/us-en/ontap/nfs-config/create-volume-task.html[Create a volume]. For large capacity needs (>100TB), check the option to distribute data across the cluster to use FlexGroup. If using FlexGroup, consider enabling pNFS on the SVM for better performance by following link:https://docs.netapp.com/us-en/ontap/pnfs/pnfs-commands.html#enable-nfsv4-1[Enable pNFS on SVM]. When using pNFS, ensure the Proxmox VE hosts has data access to all controllers (data LIFs). Ensure Anti-Ransomware protection is enabled on the volume.
+. link:https://docs.netapp.com/us-en/ontap/nfs-config/create-volume-task.html[Create a volume]. For large capacity needs (>100TB), check the option to distribute data across the cluster to use FlexGroup. If using FlexGroup, consider enabling pNFS on the SVM for better performance by following link:https://docs.netapp.com/us-en/ontap/pnfs/pnfs-commands.html#enable-nfsv4-1[Enable pNFS on SVM]. When using pNFS, ensure the OpenNebula hosts has data access to all controllers (data LIFs). Ensure Anti-Ransomware protection is enabled on the volume.
 +
 .Show example
 [%collapsible]
 ====
-image:proxmox-ontap-nfs-002.png[FlexGroup option]
+image:opennebula-ontap-nfs-002.png[FlexGroup option]
 ====
 
-. link:https://docs.netapp.com/us-en/ontap/nfs-config/associate-export-policy-flexvol-task.html[Assign the export policy to the volume].
-+
-.Show example
-[%collapsible]
-====
-image:proxmox-ontap-nfs-003.png[NFS volume info]
-====
-
-. Notify the virtualization administrator that the NFS volume is ready.
+. Notify the virtualization administrator that the NFS volume is ready and provide NFS export path details.
 
 == Virtualization administrator tasks
 
-Complete these tasks to add the NFS volume as storage in Proxmox VE and configure nConnect or session trunking for improved performance.
+Complete these tasks to add the NFS volume as Datastore in OpenNebula and configure nConnect or session trunking for improved performance.
 
 . Ensure at least two interfaces are configured in different VLANs for fault tolerance. Use NIC bonding.
 
-. Using the Management UI at `https:<proxmox-node>:8006`, click Datacenter, select Storage, click Add, and select NFS.
+. SSH to one of the frontend server and create a configuration file based on desired Datastore type. Sample files are shown below:
 +
-.Show example
-[%collapsible]
+[role="tabbed-block"]
 ====
-image:proxmox-ontap-nfs-004.png[NFS storage navigation]
-====
-
-. Enter the details. After providing the server information, the NFS exports should populate. Select from the list and choose the content options.
-+
-.Show example
-[%collapsible]
-====
-image:proxmox-ontap-nfs-005.png[NFS storage addition]
-====
-
-. To enable the nConnect option, open a shell on any cluster node and run the following command, where `<storage id>` is the storage ID created in the previous step:
-+
+.Backup
+--
+. For Restic,
 [source,shell]
 ----
-pvesm set <storage id> --options nconnect=4
+$cat nfs-restic.conf
+NAME = "Backup-Restic-NFS"
+TYPE = "BACKUP_DS"
+
+DS_MAD = "restic"
+TM_MAD = "-"
+
+RESTIC_PASSWORD = "<restic_password>"
+RESTIC_SFTP_SERVER = "<backup server>"
 ----
-+
-To use session trunking, ensure NFS v4.1 is used and set the trunkdiscovery and max_connect options:
-+
+
+. For Rsync,
 [source,shell]
 ----
-pvesm set <storage id> --options vers=4.1,trunkdiscovery,max_connect=16
+$cat nfs-rsync.conf
+NAME = "Backup-Rsync-NFS"
+TYPE = "BACKUP_DS"
+
+DS_MAD = "rsync"
+TM_MAD = "-"
+
+RSYNC_USER = "<rsync_user>"
+RSYNC_HOST = "<backup server>"
 ----
 
-. The following shows the content in /etc/pve/storage.cfg for the configured storage:
-+
-.Show example
-[%collapsible]
-====
-image:proxmox-ontap-nfs-006.png[storage configuration file for NFS]
+--
+
+.File
+[source,shell]
+--
+$cat nfs-kernel.conf
+NAME = "File-Kernel-NFS"
+TYPE = "FILE_DS"
+DS_MAD = "fs"
+TM_MAD = "local"
+SAFE_DIRS = "/var/tmp/files"
+--
+
+.Image
+[source,shell]
+--
+$cat nfs-image.conf
+NAME = "Image-NFS"
+TYPE = "IMAGE_DS"
+DS_MAD = "fs"
+TM_MAD = "shared"  
+--
+
+.System
+[source,shell]
+--
+$cat nfs-system.conf
+NAME = "System-NFS"
+TYPE = "SYSTEM_DS"
+TM_MAD = "shared"
+--
 ====
 
-. To verify the nConnect option is set, run `ss -an | grep :2049` on any Proxmox VE host and check for multiple connections to the NFS server IP. To verify pNFS is enabled, run `nfsstat -c` and check the layout-related metrics. Based on data traffic, multiple connections to data LIFs should be visible.
+. Execute `onedatastore create <configuration file>`. Note the datastore ID returned after creation.
++
+[source,shell]
+====
+onedatastore create nfs-system.conf
+ID: 101
+====
+
+
+. Gather the uid and gid of oneadmin user using `id oneadmin` command.
+
+. Update /etc/fstab or automount configuration to mount the datastore with desired mount options. Assuming the default datastore location as /var/lib/one/datastores. Can be validated with `onedatastore show <datastore_id>`. If not check the DATASTORE_LOCATION parameter in /etc/one/oned.conf. Ensure the <datastore_id> folder exists under the datastores location. Sample entries are shown below:
++
+[role="tabbed-block"]
+====
+.Using /etc/fstab
+--
+[source,shell]
+----
+# To use session trunking, use the option trunkdiscovery
+//<nfs_server>/<nfs_share> /var/lib/one/datastores/<datastore_id> nfs nconnect=8,max_channels=16,_netdev,noauto,x-systemd.automount,nofail,uid=<oneadmin uid>,gid=<oneadmin gid> 0 0
+----
+
+--
+
+.Using automount
+--
+[source,shell]
+----
+# To use session trunking, use the option trunkdiscovery
+/var/lib/one/datastores/<datastore_id> -fstype=nfs,nconnect=8,max_channels=16,_netdev,noauto,x-systemd.automount,nofail,uid=<oneadmin uid>,gid=<oneadmin gid> <nfs_server>:/<nfs_share>
+----
+
+--
+====
+
+. Mount the datastore using `mount -a` or `systemctl reload autofs` command.
+
+. Verify the datastore is mounted with mount command and verify the datastore capacity with `onedatastore show <datastore_id>` command.
+
+. Ensure oneadmin user and group own the datastore folder. Adjust permissions using `chown -R oneadmin:oneadmin /var/lib/one/datastores/<datastore_id>` command.
+
+. To verify the nConnect option is set, run `ss -an | grep :2049` on any OpenNebula host and check for multiple connections to the NFS server IP. To verify pNFS is enabled, run `nfsstat -c` and check the layout-related metrics. Based on data traffic, multiple connections to data LIFs should be visible.
 
 NOTE: In session trunking, the nconnect option is set on only one of the trunk interfaces. With pNFS, the nconnect option is set on metadata and data interfaces. For production environments, use either nConnect or session trunking, not both.

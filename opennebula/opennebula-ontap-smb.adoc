@@ -149,7 +149,7 @@ ID: 100
 +
 [source,shell]
 ----
-cat /etc/smb-credentials-<datastore_id>.cfg
+$cat /etc/smb-credentials-<datastore_id>.cfg
 username=<smb_username>
 password=<smb_password>
 domain=<smb_domain> 

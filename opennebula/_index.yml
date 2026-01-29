@@ -1,7 +1,7 @@
 indexpage:
   title: NetApp - OpenNebula solutions
-  lead: "NetApp OpenNebula solutions are a set of strategic and technology capabilities that demonstrate the capabilities of NetApp storage for virtualization using OpenNebula."
-  summary: "NetApp OpenNebula solutions are a set of strategic and technology capabilities that demonstrate the capabilities of NetApp storage for virtualization using OpenNebula."
+  lead: "NetApp OpenNebula solutions are a set of technology capabilities that demonstrate the capabilities of NetApp storage for virtualization using OpenNebula."
+  summary: "NetApp OpenNebula solutions are a set of technology capabilities that demonstrate the capabilities of NetApp storage for virtualization using OpenNebula."
   tiles:
     - title: "Get started"
       links:
@@ -21,8 +21,10 @@ indexpage:
 #
     - title: "Additional resources"
       links:
-        - title: OpenNebula documentation
+        - title: OpenNebula 7.0 documentation
           url: https://docs.opennebula.io/7.0/getting_started/
+        - title: OpenNebula documentation (Previous versions - 4.x to 6.x)
+          url: https://docs.opennebula.io/6.10/
         - title: OpenNebula YouTube channel
           url: https://www.youtube.com/@OpenNebula/playlists
         - title: OpenNebula Forum
