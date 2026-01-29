@@ -464,4 +464,4 @@ NOTE: Before getting started with this specific integration, contact your Red Ha
 
 The following video demonstrates the process outlined in this solution.
 
-video::7e2abc5e-2919-43d6-a5c2-b3760100adaf[panopto, title="Zero touch migration from ESX to Oracle Linux Virtualization Manager (OLVM)"]
+video::7e2abc5e-2919-43d6-a5c2-b3760100adaf[panopto, title="Zero touch migration from ESX to Red Hat OpenShift Virtualization (OSV)"]
