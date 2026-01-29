@@ -66,6 +66,8 @@ Complete these tasks to add the SMB share as Datastore in OpenNebula and enable 
 
 . Collect the SMB server, share name, and credentials for share authentication.
 
+. Ensure following packages are installed on Fedora sssd realmd adcli oddjob oddjob-mkhomedir samba-common-tools krb5-workstation cifs-utils for Active Directory integration and SMB mount support. Debian packages are realmd sssd sssd-tools libnss-sss libpam-sss adcli samba-common-bin packagekit krb5-user cifs-utils.
+
 . Ensure at least two interfaces are configured in different VLANs for fault tolerance. Verify the NIC supports RSS.
 
 . SSH to one of the frontend server and create a configuration file based on desired Datastore type. Sample files are shown below:
@@ -77,7 +79,7 @@ Complete these tasks to add the SMB share as Datastore in OpenNebula and enable 
 . For Restic,
 [source,shell]
 ----
-cat smb-restic.conf
+$cat smb-restic.conf
 NAME = "Backup-Restic-SMB"
 TYPE = "BACKUP_DS"
 
@@ -91,7 +93,7 @@ RESTIC_SFTP_SERVER = "<backup server>"
 . For Rsync,
 [source,shell]
 ----
-cat smb-rsync.conf
+$cat smb-rsync.conf
 NAME = "Backup-Rsync-SMB"
 TYPE = "BACKUP_DS"
 
@@ -105,8 +107,9 @@ RSYNC_HOST = "<backup server>"
 --
 
 .File
+[source,shell]
 --
-cat smb-kernel.conf
+$cat smb-kernel.conf
 NAME = "File-Kernel-SMB"
 TYPE = "FILE_DS"
 DS_MAD = "fs"
@@ -115,8 +118,9 @@ SAFE_DIRS = "/var/tmp/files"
 --
 
 .Image
+[source,shell]
 --
-cat smb-image.conf
+$cat smb-image.conf
 NAME = "Image-SMB"
 TYPE = "IMAGE_DS"
 DS_MAD = "fs"
@@ -124,8 +128,9 @@ TM_MAD = "shared"
 --
 
 .System
+[source,shell]
 --
-cat smb-system.conf
+$cat smb-system.conf
 NAME = "System-SMB"
 TYPE = "SYSTEM_DS"
 TM_MAD = "shared"
@@ -134,8 +139,6 @@ TM_MAD = "shared"
 
 . Execute `onedatastore create <configuration file>`. Note the datastore ID returned after creation.
 +
-.Show example
-[%collapsible]
 [source,shell]
 ====
 onedatastore create smb-system.conf
@@ -153,10 +156,10 @@ domain=<smb_domain>
 ----
 . Set proper permissions (640) on the credential file. Change ownership to oneadmin user and group if required.
 
-. Update /etc/fstab or automount configuration to enable multichannel. Assuming the default datastore location as /var/lib/one/datastores. If not check the DATASTORE_LOCATION parameter in /etc/one/oned.conf. Ensure the <datastore_id> folder exists under the datastores location. 
+. Gather the uid and gid of oneadmin user using `id oneadmin` command.
+
+. Update /etc/fstab or automount configuration to enable multichannel. Assuming the default datastore location as /var/lib/one/datastores. If not check the DATASTORE_LOCATION parameter in /etc/one/oned.conf. Ensure the <datastore_id> folder exists under the datastores location. Sample entries are shown below:
 +
-.Show example
-[%collapsible]
 [role="tabbed-block"]
 ====
 .Using /etc/fstab
@@ -164,7 +167,7 @@ domain=<smb_domain>
 [source,shell]
 ----
 # credentials mapping to file option is not required when using kerberos authentication
-//<smb_server>/<smb_share> /var/lib/one/datastores/<datastore_id> cifs credentials=/etc/smb-credentials-<datastore_id>.cfg,_netdev,noauto,x-systemd.automount,vers=3.0,multichannel,max_channels=16,nofail 0 0
+//<smb_server>/<smb_share> /var/lib/one/datastores/<datastore_id> cifs credentials=/etc/smb-credentials-<datastore_id>.cfg,_netdev,noauto,x-systemd.automount,vers=3.0,multichannel,max_channels=16,nofail,uid=<oneadmin uid>,gid=<oneadmin gid> 0 0
 ----
 --
 
@@ -173,7 +176,7 @@ domain=<smb_domain>
 [source,shell]
 ----
 # credentials mapping to file option is not required when using kerberos authentication
-/var/lib/one/datastores/<datastore_id> -fstype=cifs,credentials=/etc/smb-credentials-<datastore_id>.cfg,vers=3.0,multichannel,max_channels=16 ://<smb_server>/<smb_share>
+/var/lib/one/datastores/<datastore_id> -fstype=cifs,credentials=/etc/smb-credentials-<datastore_id>.cfg,vers=3.0,multichannel,max_channels=16,uid=<oneadmin uid>,gid=<oneadmin gid> ://<smb_server>/<smb_share>
 ----
 --
 ====
