@@ -178,6 +178,7 @@ domain=<smb_domain>
 # credentials mapping to file option is not required when using kerberos authentication
 /var/lib/one/datastores/<datastore_id> -fstype=cifs,credentials=/etc/smb-credentials-<datastore_id>.cfg,vers=3.0,multichannel,max_channels=16,uid=<oneadmin uid>,gid=<oneadmin gid> ://<smb_server>/<smb_share>
 ----
+
 --
 ====
 

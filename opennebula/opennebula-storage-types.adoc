@@ -37,6 +37,10 @@ Enterprise edition includes NetApp driver which works with iSCSI protocol on AFF
 
 To use with NetApp driver, iSCSI sessions and multipath need to be configured on hypervisor hosts. For LVM driver, except for system datastore, the logical volume needs to have filesystem created and mounted. For system datastore, the volume group needs to be named as "vg-one-<datastore_id>" where <datastore_id> is the numeric identifier of the datastore in OpenNebula. All Datastore types (Image, System, Kernel and File, and Backup) support SAN protocols.
 
+== NetApp ONTAP API Driver
+
+OpenNebula’s native NetApp integration uses ONTAP’s API to automatically create and manage volumes, LUNs, snapshots, and mappings. This method offers the best level of automation and avoids manual iSCSI and LVM setup. Refer link:https://docs.opennebula.io/7.0/integrations/storage_extensions/netapp/[OpenNebula documentation]  for  more information.
+
 == Storage type compatibility matrix
 
 [width=100%,cols="25% 15% 15% 15% 15% 15%", frame=all, grid=all, options="header"]
@@ -52,3 +56,21 @@ To use with NetApp driver, iSCSI sessions and multipath need to be configured on
 
 1. NetApp driver is available in Enterprise edition for iSCSI protocol to utilize native ONTAP features. 
 
+== OpenNebula cluster storage types supported with ONTAP
+
+Here is a comparison of features supported by different storage types in OpenNebula when using NetApp ONTAP as the backend.
+
+[width=100%,cols="30% 20% 20% 20%",frame=all,grid=all,options="header"]
+|===
+| Feature | NetApp ONTAP API | LVM-thin | NFS/SMB
+| VM disks | Yes | Yes | Yes
+| Image storage^1^ | Yes | Yes | Yes
+| Live snapshots | Yes | Yes | Yes
+| Clone VM or image | Yes | Yes | Yes
+| Incremental backup^2^ | Yes | Yes | Yes
+|===
+
+*Notes:*
+
+1. Image storage refers to using the backend for OpenNebula image datastores. LVM-thin and ONTAP API methods involve copying or creating block devices from the image source.
+2. Incremental backups work with `qcow2` disks (on NFS/SMB) or with block devices that support tracking changes. The OpenNebula NetApp ONTAP driver uses rolling snapshots to make incremental backups.  IMPORTANT: incremental backups require the `nbd` kernel module to be loaded.
