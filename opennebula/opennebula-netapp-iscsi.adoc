@@ -22,7 +22,7 @@ Complete these initial tasks to prepare OpenNebula hosts for iSCSI connectivity 
 
 . Verify two Linux VLAN interfaces are available.
 
-. Ensure multipath-tools is installed on all OpenNebula hosts and starts on boot.
+. Ensure multipath-tools and iSCSI initiator utilities are installed on all OpenNebula hosts and starts on boot.
 +
 [role="tabbed-block"]
 ====
@@ -68,11 +68,11 @@ If you are new to ONTAP, use System Manager for a better experience.
 
 . Ensure the SVM is available with iSCSI protocol enabled. Follow link:https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html[ONTAP 9 documentation].
 
-. Create two LIFs per controller dedicated for iSCSI.
+. Create two LIFs per controller dedicated for iSCSI. Two LIFs per controller are recommended for redundancy and multipath performance. Ensure the LIFs are created on the VLAN interfaces configured on OpenNebula hosts. Jumbo frames (MTU 9000) are recommended for better performance.
 +
 image:opennebula-netapp-iscsi-001.png[iscsi interface details]
 
-. Create an igroup and populate the host iSCSI initiators.
+. Create an igroup and populate the host iSCSI initiators. Typically one igroup is created for one OpenNebula cluster. Include frontend servers and hypervisor hosts in the same igroup to support both Image and System datastores.
 
 . Create an ONTAP role and user account with ONTAP REST API access scoped to the target SVM. This user will be used by the NetApp driver in OpenNebula. See link:https://docs.netapp.com/us-en/ontap-automation/rest/rbac_overview.html[Work with users and roles] ONTAP documentation for more information. Keep note of the Username and Password, to be used in the Virtualization Configuration Tasks.
 
@@ -80,16 +80,20 @@ image:opennebula-netapp-iscsi-001.png[iscsi interface details]
   - The SVM
   - The Aggregate(s) / Tier(s) to be used
   - The igroup with the OpenNebula hosts
+  - The iSCSI Target IQN (typically same as SVM IQN). Virtualization admin can retrieve this information using `iscsiadm -m session` command after logging into one of the OpenNebula hosts and discovering the iSCSI target.
   +
-  TIP: System Manager displays the UUID in the URL when viewing the resource details.
-+
 [source,shell]
 ----
 NETAPP_SVM="85c23687-d5d9-11f0-86c4-d039eac4d4b3"
-NETAPP_TARGET="iqn.1992-08.com.netapp:sn.85c23687d5d911f086c4d039eac4d4b3:vs.6"
 NETAPP_AGGREGATES="6e8f9995-42dd-400a-a440-646639dc5d0b"
 NETAPP_IGROUP="5ad9faf3-d62c-11f0-86c4-d039eac4d4b3"
+NETAPP_TARGET="iqn.1992-08.com.netapp:sn.85c23687d5d911f086c4d039eac4d4b3:vs.6"
 ----
+
+  TIP: System Manager displays the UUID in the URL when viewing the resource details.
+
+
+
 
 == Final virtualization administrator tasks
 

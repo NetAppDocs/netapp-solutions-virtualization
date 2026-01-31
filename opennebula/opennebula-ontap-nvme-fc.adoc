@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar
 permalink: opennebula/opennebula-ontap-nvme-fc.html
-keywords: netapp, opennebula, opennebula ve, nvme, nvme-fc, lvm, ontap, storage
-summary: "Configure Logical Volume Manager (LVM) with NVMe over Fibre Channel for OpenNebula Virtual Environment using ONTAP. This procedure includes nvme-cli installation, namespace provisioning, subsystem setup, and volume group creation for shared storage."
+keywords: netapp, opennebula, lvm thin, nvme, nvme-fc, lvm, ontap, storage
+summary: "Configure Logical Volume Manager (LVM) Datastore with NVMe over Fibre Channel for OpenNebula using ONTAP. This procedure includes nvme-cli installation, namespace provisioning, subsystem setup, and volume group creation for shared datastores."
 ---
-= Configure LVM Thin with NVMe/FC for OpenNebula
+= Configure LVM Thin with ONTAP NVMe/FC for OpenNebula
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -12,18 +12,20 @@ summary: "Configure Logical Volume Manager (LVM) with NVMe over Fibre Channel fo
 :imagesdir: ../media/
 
 [.lead]
-Configure Logical Volume Manager (LVM) for shared storage across Proxmox Virtual Environment (VE) hosts using NVMe over Fibre Channel protocol with NetApp ONTAP. This configuration provides high-performance block-level storage access with low latency using the modern NVMe protocol.
-
-//video::80164fe4-06db-4c21-a25d-b22e0179c3d2[panopto, title="LVM shared pool with NVMe/FC using ONTAP", width=360]
+Configure Logical Volume Manager (LVM) for shared datastore across OpenNebula hosts using NVMe over Fibre Channel protocol with NetApp ONTAP. This configuration provides high-performance block-level storage access with low latency using the modern NVMe protocol.
 
 == Initial virtualization administrator tasks
 
-Complete these initial tasks to prepare Proxmox VE hosts for NVMe/FC connectivity and collect the necessary information for the storage administrator.
+Complete these initial tasks to prepare OpenNebula hosts for NVMe/FC connectivity and collect the necessary information for the storage administrator.
 
 . Verify two HBA interfaces are available.
 
-. On every Proxmox host in the cluster, run the following commands to collect the WWPN information and verify the nvme-cli package is installed.
+. On every OpenNebula host in the cluster, run the following commands to collect the WWPN information and verify the nvme-cli package is installed.
 +
+[role="tabbed-block"]
+====
+.Debian/Ubuntu
+--
 [source,shell]
 ----
 apt update
@@ -32,7 +34,22 @@ cat /sys/class/fc_host/host*/port_name
 nvme show-hostnqn
 ----
 
-. Provide the collected host NQN and WWPN information to the storage administrator and request an NVMe namespace of the required size.
+--
+
+.RHEL/AlmaLinux
+--
+[source,shell]
+----
+dnf update
+dnf install nvme-cli
+cat /sys/class/fc_host/host*/port_name
+nvme show-hostnqn
+----
+
+--
+====
+
+. Provide the collected host NQN and WWPN information to the storage administrator and request an NVMe namespace of the required size. WWPNs are needed for fabric zoning. Provide those info to the administrator who takes care of fabric zoning.
 
 == Storage administrator tasks
 
@@ -40,31 +57,21 @@ If you are new to ONTAP, use System Manager for a better experience.
 
 . Ensure the SVM is available with NVMe protocol enabled. Refer to link:https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html[NVMe tasks on ONTAP 9 documentation].
 
-. Create the NVMe namespace.
-+
-.Show example
-[%collapsible]
-====
-image:proxmox-ontap-nvme-fc-001.png[nvme namespace creation]
-====
+. Ensure that two LIFs per controller are created and dedicated for NVMe/FC. Gather the WWPN addresses for the NVMe/FC LIFs created and provide them to the administrator who takes care of fabric zoning.
 
-. Create the subsystem and assign host NQNs (if using CLI). Follow the reference link above.
+. Create the NVMe namespace.
+
+. Create the subsystem and assign host NQNs. 
 
 . Ensure Anti-Ransomware protection is enabled on the security tab.
-+
-.Show example
-[%collapsible]
-====
-image:proxmox-ontap-nvme-fc-002.png[Anti-Ransomware status]
-====
 
 . Notify the virtualization administrator that the NVMe namespace is created.
 
 == Final virtualization administrator tasks
 
-Complete these tasks to configure the NVMe namespace as shared LVM storage in Proxmox VE.
+Complete these tasks to configure the NVMe namespace as shared LVM storage in OpenNebula.
 
-. Navigate to a shell on each Proxmox VE host in the cluster and verify the new namespace is visible.
+. Navigate to a shell on each OpenNebula host in the cluster and verify the new namespace is visible.
 
 . Check namespace details.
 +
@@ -83,38 +90,80 @@ nvme list-subsys
 lsblk -N
 ----
 
-. Create the volume group.
+. SSH to one of the fronend server and create a configuration file based on desired Datastore type. For complete attribute list, refer https://docs.opennebula.io/7.0/product/cluster_configuration/san_storage/lvm_drivers/[OpenNebula LVM documentation]. Sample files are shown below:
++
+[role="tabbed-block"]
+====
+
+.Image
+[source,shell]
+--
+$cat nvmefc-image.conf
+NAME = "Image-NVMEFC01"
+TYPE = "IMAGE_DS"
+DS_MAD = "fs"
+TM_MAD = "fs_lvm_ssh"  
+DISK_TYPE = "block"
+LVM_THIN_ENABLE = "yes"
+--
+
+.System
+[source,shell]
+--
+$cat nvmefc-system.conf
+NAME = "System-NVMEFC02"
+TYPE = "SYSTEM_DS"
+TM_MAD = "fs_lvm_ssh"
+DISK_TYPE = "block"
+BRIDGE_LIST = "<space-separated list of OpenNebula hosts>" # If NVMe namespace not presented to frontend hosts
+LVM_THIN_ENABLE = "yes"
+--
+====
+
+. Execute `onedatastore create <configuration file>`. Note the datastore ID returned after creation.
 +
 [source,shell]
+====
+onedatastore create nvmefc-system.conf
+ID: 108
+====
+
+. Create volume group on the NVMe namespace using `vgcreate <vg_name> <nvme_device>` command. For Image datastores, the volume group name can be named anything desired. For System datastores, the volume group name must be of format `vg-one-<datastore id>`. This is required for OpenNebula to identify the correct volume group for system datastores. Proceed with following steps if you are creating Image datastore. For system datastores, stop here.
+
+. For Image datastores, create logical volume thin pool using `lvcreate -l 100%FREE -n <logical volume name> <volume group name>` command. For System datastores, OpenNebula automatically creates the LVM thin pool when required.
+
+. For Image datastores, create filesystem on the logical volume using `mkfs.ext4 /dev/<volume group>/<logical volume>` command. System datastores do not require filesystem creation.
+
+. Update /etc/fstab or automount configuration to mount the datastore with desired mount options. Assuming the default datastore location as /var/lib/one/datastores. Can be validated with `onedatastore show <datastore_id>`. If not check the DATASTORE_LOCATION parameter in /etc/one/oned.conf. Ensure the <datastore_id> folder exists under the datastores location. Sample entries are shown below:
++
+[role="tabbed-block"]
+====
+.Using /etc/fstab
+--
+[source,shell]
 ----
-vgcreate <volume group name> /dev/mapper/<device id>
-# Where <volume group name> is the desired name for the volume group and <device id> is the nvme device id.
-pvs
-# Verify the physical volume is part of the volume group.
-vgs
-# Verify the volume group is created.
+# To use session trunking, use the option trunkdiscovery
+/dev/<vg name>/<logical volume> /var/lib/one/datastores/<datastore_id> ext4 _netdev,noauto,x-systemd.automount,nofail 0 2
 ----
 
-. Using the Management UI at `https:<proxmox node>:8006`, click Datacenter, select Storage, click Add, and select LVM.
-+
-.Show example
-[%collapsible]
-====
-image:proxmox-ontap-nvme-fc-003.png[lvm storage navigation]
+--
+
+.Using automount
+--
+[source,shell]
+----
+# To use session trunking, use the option trunkdiscovery
+/var/lib/one/datastores/<datastore_id> -fstype=ext4,_netdev,noauto,x-systemd.automount,nofail,rw :/dev/<vg name>/<logical volume>
+----
+
+--
 ====
 
-. Provide the storage ID name, choose the existing volume group, and select the volume group that was just created with the CLI. Check the shared option. With Proxmox VE 9 and above, enable the `Allow Snapshots as Volume-Chain` option, which is visible when the Advanced check box is enabled.
-+
-.Show example
-[%collapsible]
-====
-image:proxmox-ontap-nvme-fc-004.png[lvm on existing vg]
-====
+. Mount the datastore using `mount -a` or `systemctl reload autofs` command.
 
-. The following shows a sample storage configuration file for LVM using NVMe/FC:
-+
-.Show example
-[%collapsible]
-====
-image:proxmox-ontap-nvme-fc-005.png[lvm on nvme fc configuration]
-====
+. Verify the datastore is mounted with mount command and verify the datastore capacity with `onedatastore show <datastore_id>` command.
+
+. Ensure oneadmin user and group own the datastore folder. Adjust permissions using `chown -R oneadmin:oneadmin /var/lib/one/datastores/<datastore_id>` command.
+
+
+

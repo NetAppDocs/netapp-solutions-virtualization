@@ -73,4 +73,6 @@ Here is a comparison of features supported by different storage types in OpenNeb
 *Notes:*
 
 1. Image storage refers to using the backend for OpenNebula image datastores. LVM-thin and ONTAP API methods involve copying or creating block devices from the image source.
-2. Incremental backups work with `qcow2` disks (on NFS/SMB) or with block devices that support tracking changes. The OpenNebula NetApp ONTAP driver uses rolling snapshots to make incremental backups.  IMPORTANT: incremental backups require the `nbd` kernel module to be loaded.
+2. Incremental backups work with `qcow2` disks (on NFS/SMB) or with block devices that support tracking changes. The OpenNebula NetApp ONTAP driver uses rolling snapshots to make incremental backups. 
+
+NOTE: incremental backups require the `nbd` kernel module to be loaded.

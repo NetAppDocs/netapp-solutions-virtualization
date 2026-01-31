@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar
 permalink: opennebula/opennebula-ontap-fc.html
-keywords: netapp, opennebula, opennebula ve, fc, fibre channel, lvm, ontap, storage
-summary: "Configure Logical Volume Manager (LVM) with Fibre Channel for OpenNebula Virtual Environment using ONTAP. This procedure includes multipath configuration, LUN provisioning, igroup setup, and volume group creation for shared storage."
+keywords: netapp, opennebula, lvm thin, fc, fibre channel, lvm, ontap, storage
+summary: "Configure Logical Volume Manager (LVM) datastore with Fibre Channel for OpenNebula using ONTAP. This procedure includes multipath configuration, LUN provisioning, igroup setup, and volume group creation for shared datastore."
 ---
-= Configure LVM Thin with FC for OpenNebula
+= Configure LVM Thin with ONTAP FC for OpenNebula
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -12,27 +12,47 @@ summary: "Configure Logical Volume Manager (LVM) with Fibre Channel for OpenNebu
 :imagesdir: ../media/
 
 [.lead]
-Configure Logical Volume Manager (LVM) for shared storage across Proxmox Virtual Environment (VE) hosts using Fibre Channel protocol with NetApp ONTAP. This configuration enables block-level storage access with high performance and low latency.
+Configure Logical Volume Manager (LVM) Datastore for shared storage across OpenNebula hosts using Fibre Channel protocol with NetApp ONTAP. This configuration enables block-level storage access with high performance and low latency.
 
-//video::d66ef67f-bcc2-4ced-848e-b22e01588e8c[panopto, title="LVM shared pool with FC using ONTAP", width=360]
 
 == Initial virtualization administrator tasks
 
-Complete these initial tasks to prepare Proxmox VE hosts for FC connectivity and collect the necessary information for the storage administrator.
+Complete these initial tasks to prepare OpenNebula hosts for FC connectivity and collect the necessary information for the storage administrator.
 
 . Verify two HBA interfaces are available.
 
-. Ensure multipath-tools is installed on all Proxmox VE hosts and starts on boot.
+. Ensure multipath-tools is installed on all OpenNebula hosts and starts on boot.
 +
+[role="tabbed-block"]
+====
+.Debian/Ubuntu
+--
 [source,shell]
 ----
 apt list | grep multipath-tools
 # If need to install, execute the following line.
 apt-get install multipath-tools
-systemctl enable multipathd
+# If /etc/multipath.conf is not present, first make sure the multipathd service is started.
+systemctl enable --now multipathd
 ----
 
-. Collect the WWPN for all Proxmox VE hosts and provide it to the storage administrator.
+--
+
+.RHEL/AlmaLinux
+--
+[source,shell]
+----
+dnf list installed | grep device-mapper-multipath
+# If need to install, execute the following line.
+dnf install device-mapper-multipath
+# If /etc/multipath.conf is not present, first make sure the multipathd service is started.
+systemctl enable --now multipathd
+----
+
+--
+====
+
+. Collect the WWPN for all OpenNebula hosts and provide it to the storage administrator and administrator who takes care of fabric zoning.
 +
 [source,shell]
 ----
@@ -45,75 +65,100 @@ If you are new to ONTAP, use System Manager for a better experience.
 
 . Ensure the SVM is available with FC protocol enabled. Follow link:https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html[ONTAP 9 documentation].
 
-. Create two LIFs per controller dedicated for FC.
-+
-image:proxmox-ontap-fc-001.png[FC interface details]
+. Create two LIFs per controller dedicated for FC. Gather the WWPN addresses for the FC LIFs created and provide them to the administrator who takes care of fabric zoning.
 
-. Create an igroup and populate the host FC initiators.
+. Create an igroup and populate the host FC initiators. Typically one igroup is created for one OpenNebula cluster. Include frontend servers and hypervisor hosts in the same igroup to support both Image and System datastores.
 
 . Create the LUN with the desired size on the SVM and present it to the igroup created in the previous step. Ensure Anti-Ransomware protection is enabled on the security tab for ASA systems and on the volume security tab for AFF/FAS systems.
-+
-image:proxmox-ontap-fc-002.png[lun details]
+
 
 . Notify the virtualization administrator that the LUN is created.
 
 == Final virtualization administrator tasks
 
-Complete these tasks to configure the LUN as shared LVM storage in Proxmox VE.
+Complete these tasks to configure the FC LUN as shared LVM Datastore in OpenNebula.
 
-. Navigate to a shell on each Proxmox VE host in the cluster and verify the disk is visible.
+. SSH to all OpenNebula servers and complete the following steps on each host.
+
+. Execute `rescan-scsi-bus.sh` or `echo "- - -" > /sys/class/scsi_host/host*/scan` to rescan the SCSI bus and detect new LUNs.
+
+. Verify the LUN is visible on all OpenNebula hosts using `lsblk -S` or fdisk -l command. Note the device name (e.g., sde, sdf) for the LUN created.
+
+. Add the device to multipath configuration by executing `multipath -a /dev/<device_name>`. Then, execute `multipath -r` to reload the multipath configuration. Verify the multipath configuration by executing `multipath -ll` command.
+
+. SSH to one of the fronend server and create a configuration file based on desired Datastore type. For complete attribute list, refer https://docs.opennebula.io/7.0/product/cluster_configuration/san_storage/lvm_drivers/[OpenNebula LVM documentation]. Sample files are shown below:
++
+[role="tabbed-block"]
+====
+
+.Image
+[source,shell]
+--
+$cat fc-image.conf
+NAME = "Image-FC01"
+TYPE = "IMAGE_DS"
+DS_MAD = "fs"
+TM_MAD = "fs_lvm_ssh"  
+DISK_TYPE = "block"
+LVM_THIN_ENABLE = "yes"
+--
+
+.System
+[source,shell]
+--
+$cat fc-system.conf
+NAME = "System-FC02"
+TYPE = "SYSTEM_DS"
+TM_MAD = "fs_lvm_ssh"
+DISK_TYPE = "block"
+BRIDGE_LIST = "<space-separated list of OpenNebula hosts>" # If LUN not presented to frontend hosts
+LVM_THIN_ENABLE = "yes"
+--
+====
+
+. Execute `onedatastore create <configuration file>`. Note the datastore ID returned after creation.
 +
 [source,shell]
-----
-lsblk -S
-rescan-scsi-bus.sh
-lsblk -S
-----
+====
+onedatastore create fc-system.conf
+ID: 107
+====
 
-. Verify the device appears in the multipath list.
+. Create volume group on the FC LUN using `vgcreate <vg_name> <multipath_device>` command. For Image datastores, the volume group name can be named anything desired. For System datastores, the volume group name must be of format `vg-one-<datastore id>`. This is required for OpenNebula to identify the correct volume group for system datastores. Proceed with following steps if you are creating Image datastore. For system datastores, stop here.
+
+. For Image datastores, create logical volume thin pool using `lvcreate -l 100%FREE -n <logical volume name> <volume group name>` command. For System datastores, OpenNebula automatically creates the LVM thin pool when required.
+
+. For Image datastores, create filesystem on the logical volume using `mkfs.ext4 /dev/<volume group>/<logical volume>` command. System datastores do not require filesystem creation.
+
+. Update /etc/fstab or automount configuration to mount the datastore with desired mount options. Assuming the default datastore location as /var/lib/one/datastores. Can be validated with `onedatastore show <datastore_id>`. If not check the DATASTORE_LOCATION parameter in /etc/one/oned.conf. Ensure the <datastore_id> folder exists under the datastores location. Sample entries are shown below:
 +
+[role="tabbed-block"]
+====
+.Using /etc/fstab
+--
 [source,shell]
 ----
-multipath -ll
-multipath -a /dev/sdX  # replace sdX with the device name
-multipath -r
-multipath -ll
+# To use session trunking, use the option trunkdiscovery
+/dev/<vg name>/<logical volume> /var/lib/one/datastores/<datastore_id> ext4 _netdev,noauto,x-systemd.automount,nofail 0 2
 ----
 
-. Create the volume group.
-+
+--
+
+.Using automount
+--
 [source,shell]
 ----
-vgcreate <volume group name> /dev/mapper/<device id>
-# Where <volume group name> is the desired name for the volume group and <device id> is the multipath device id.
-pvs
-# Verify the physical volume is part of the volume group.
-vgs
-# Verify the volume group is created.
+# To use session trunking, use the option trunkdiscovery
+/var/lib/one/datastores/<datastore_id> -fstype=ext4,_netdev,noauto,x-systemd.automount,nofail,rw :/dev/<vg name>/<logical volume>
 ----
 
-. Using the Management UI at `https:<proxmox node>:8006`, click Datacenter, select Storage, click Add, and select LVM.
-+
-.Show example
-[%collapsible]
-====
-image:proxmox-ontap-fc-003.png[lvm storage navigation]
+--
 ====
 
-. Provide the storage ID name, choose the existing volume group, and select the volume group that was just created with the CLI. Check the shared option. With Proxmox VE 9 and above, enable the `Allow Snapshots as Volume-Chain` option, which is visible when the Advanced check box is enabled.
-+
-.Show example
-[%collapsible]
-====
-image:proxmox-ontap-fc-004.png[lvm storage creation]
-====
+. Mount the datastore using `mount -a` or `systemctl reload autofs` command.
 
-. The following shows the sample storage configuration file for LVM using FC:
-+
-.Show example
-[%collapsible]
-====
-image:proxmox-ontap-fc-005.png[lvm fc configuration]
-====
-+
-With Proxmox VE 9 and above, the storage configuration file includes the additional option `snapshot-as-volume-chain 1` when `Allow Snapshots as Volume-Chain` is enabled.
+. Verify the datastore is mounted with mount command and verify the datastore capacity with `onedatastore show <datastore_id>` command.
+
+. Ensure oneadmin user and group own the datastore folder. Adjust permissions using `chown -R oneadmin:oneadmin /var/lib/one/datastores/<datastore_id>` command.
+
+
