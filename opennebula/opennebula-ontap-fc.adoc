@@ -90,6 +90,48 @@ Complete these tasks to configure the FC LUN as shared LVM Datastore in OpenNebu
 +
 [role="tabbed-block"]
 ====
+.Backup
+--
+. For Restic,
+[source,shell]
+----
+$cat fc-restic.conf
+NAME = "Backup-Restic-FC"
+TYPE = "BACKUP_DS"
+
+DS_MAD = "restic"
+TM_MAD = "-"
+
+RESTIC_PASSWORD = "<restic_password>"
+RESTIC_SFTP_SERVER = "<backup server>"
+----
+
+. For Rsync,
+[source,shell]
+----
+$cat fc-rsync.conf
+NAME = "Backup-Rsync-FC"
+TYPE = "BACKUP_DS"
+
+DS_MAD = "rsync"
+TM_MAD = "-"
+
+RSYNC_USER = "<rsync_user>"
+RSYNC_HOST = "<backup server>"
+----
+
+--
+
+.File
+[source,shell]
+--
+$cat fc-kernel.conf
+NAME = "File-Kernel-FC"
+TYPE = "FILE_DS"
+DS_MAD = "fs"
+TM_MAD = "local"
+SAFE_DIRS = "/var/tmp/files"
+--
 
 .Image
 [source,shell]
@@ -124,11 +166,11 @@ onedatastore create fc-system.conf
 ID: 107
 ====
 
-. Create volume group on the FC LUN using `vgcreate <vg_name> <multipath_device>` command. For Image datastores, the volume group name can be named anything desired. For System datastores, the volume group name must be of format `vg-one-<datastore id>`. This is required for OpenNebula to identify the correct volume group for system datastores. Proceed with following steps if you are creating Image datastore. For system datastores, stop here.
+. Create volume group on the FC LUN using `vgcreate <vg_name> <multipath_device>` command. For Image datastores, the volume group name can be named anything desired. For System datastores, the volume group name must be of format `vg-one-<datastore id>`. This is required for OpenNebula to identify the correct volume group for system datastores. Proceed with following steps if you are creating Backup/File/Image datastore. For system datastores, stop here.
 
-. For Image datastores, create logical volume thin pool using `lvcreate -l 100%FREE -n <logical volume name> <volume group name>` command. For System datastores, OpenNebula automatically creates the LVM thin pool when required.
+. Create logical volume thin pool using `lvcreate -l 100%FREE -n <logical volume name> <volume group name>` command. For System datastores, OpenNebula automatically creates the LVM thin pool when required.
 
-. For Image datastores, create filesystem on the logical volume using `mkfs.ext4 /dev/<volume group>/<logical volume>` command. System datastores do not require filesystem creation.
+. Create filesystem on the logical volume using `mkfs.ext4 /dev/<volume group>/<logical volume>` command. System datastores do not require filesystem creation.
 
 . Update /etc/fstab or automount configuration to mount the datastore with desired mount options. Assuming the default datastore location as /var/lib/one/datastores. Can be validated with `onedatastore show <datastore_id>`. If not check the DATASTORE_LOCATION parameter in /etc/one/oned.conf. Ensure the <datastore_id> folder exists under the datastores location. Sample entries are shown below:
 +
