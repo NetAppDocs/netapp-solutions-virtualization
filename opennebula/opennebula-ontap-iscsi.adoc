@@ -53,7 +53,7 @@ systemctl enable --now iscsid
 --
 ====
 
-. Collect the iSCSI host IQN for all Proxmox VE hosts and provide it to the storage administrator.
+. Collect the iSCSI host IQN for all OpenNebula hosts and provide it to the storage administrator.
 +
 [source,shell]
 ----
