@@ -27,7 +27,7 @@ Frontend servers need to have access to image datastores. Mounting the image dat
 
 == NAS protocol support
 
-NAS protocols (NFS and SMB) support shared filesystem across the frontend and hypervisor hosts. ONTAP snapshots can be made visible to clients for accessing point-in-time copies of data. ONTAP FlexCache can be used for Image Datastores within zones that are geographically distributed. ONTAP NFS supports nConnect for better performance by using multiple connections per session. While using FlexGroup for large datastores (> 100TB), pNFS is recommended to distribute the load across multiple nodes. Rember to configure at least one data lif per controller in the ONTAP cluster and hypervisor hosts need to have connectivity.
+NAS protocols (NFS and SMB) support shared filesystem across the frontend and hypervisor hosts. ONTAP snapshots can be made visible to clients for accessing point-in-time copies of data. ONTAP FlexCache can be used for Image Datastores within zones that are geographically distributed. ONTAP NFS supports nConnect for better performance by using multiple connections per session. While using FlexGroup for large datastores (> 100TB), pNFS is recommended to distribute the load across multiple nodes. Remember to configure at least one data lif per controller in the ONTAP cluster and hypervisor hosts need to have connectivity.
 
 All Datastore types (Image, System, Kernel and File, and Backup) support NAS protocols. 
 
