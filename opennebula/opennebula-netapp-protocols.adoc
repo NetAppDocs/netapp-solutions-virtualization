@@ -38,4 +38,4 @@ Select the protocol that matches your environment and requirements:
 
 * link:opennebula-ontap-nvme-tcp.html[Configure LVM Thin with NVMe/TCP] - Configure Logical Volume Manager (LVM) with NVMe over TCP for high-performance block storage over standard Ethernet networks using the modern NVMe protocol.
 
-NOTE: If need assitance with E-Series or EF-Series storage protocols, check the link https://docs.netapp.com/us-en/e-series/config-linux/index.html[NetApp E-Series and EF-Series documentation for setting up LVM on Linux environments] along with one of the LVM Thin documentation for reference. 
+NOTE: If need assistance with E-Series or EF-Series storage protocols, check the link https://docs.netapp.com/us-en/e-series/config-linux/index.html[NetApp E-Series and EF-Series documentation for setting up LVM on Linux environments] along with one of the LVM Thin documentation for reference. 
