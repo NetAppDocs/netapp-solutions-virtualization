@@ -77,6 +77,7 @@ image:opennebula-ontap-iscsi-001.png[iscsi interface details]
 Complete these tasks to configure the iSCSI LUN as shared LVM Datastore in OpenNebula.
 
 . SSH to one of the frontend server and discover all iSCSI Lif portals by providing one of the iSCSI data lif addresses.
++
 [source,shell]
 ----
 iscsiadm -m discovery -t sendtargets -p <iscsi data lif address>

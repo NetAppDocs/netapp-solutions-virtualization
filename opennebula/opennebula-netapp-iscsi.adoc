@@ -100,6 +100,7 @@ NETAPP_TARGET="iqn.1992-08.com.netapp:sn.85c23687d5d911f086c4d039eac4d4b3:vs.6"
 Complete these tasks to configure the iSCSI Datastore on OpenNebula.
 
 . SSH to one of the frontend server and discover all iSCSI Lif portals by providing one of the iSCSI data lif addresses.
++
 [source,shell]
 ----
 iscsiadm -m discovery -t sendtargets -p <iscsi data lif address>
