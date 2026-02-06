@@ -1,6 +1,6 @@
 section: opennebula
 title: "OpenNebula"
-url: opennebula/index.html
+url: /opennebula/index.html
 entries:
   - title: "About OpenNebula"
     pdf-filename: "Overview of OpenNebula on NetApp"
