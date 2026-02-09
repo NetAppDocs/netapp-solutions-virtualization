@@ -1,0 +1,77 @@
+---
+sidebar: sidebar
+permalink: opennebula/opennebula-netapp-architecture.html
+keywords: netapp, opennebula, ontap, storage, architecture, nas, san, nfs, smb, iscsi, fc, nvme, flexgroup, flexcache, snapmirror
+summary: "NetApp integrates with OpenNebula to provide enterprise-grade storage capabilities through NAS and SAN protocols. ONTAP delivers advanced data management features including snapshots, cloning, replication, and ransomware protection for virtualized workloads."
+---
+= Learn about ONTAP storage architecture for OpenNebula
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+NetApp products integrates with OpenNebula to provide enterprise-grade storage capabilities through NAS and SAN protocols. ONTAP delivers advanced data management features including snapshots, cloning, replication, and ransomware protection for virtualized workloads running on OpenNebula clusters.
+
+== Solution architecture
+
+The solution architecture includes the following key components:
+
+* *OpenNebula Frontend servers:* A set of OpenNebula frontend servers that provide cloud managment features to manage virtual machines (VMs) and Kubernetes Clusters.
+* *OpenNebula Compute nodes:* A set of compute nodes that host the virtual machines and Kubernetes clusters managed by OpenNebula.
+* *NetApp ONTAP storage:* A high-performance, scalable storage system that provides shared storage for the OpenNebula cluster.
+* *Network infrastructure:* A robust network setup that ensures low-latency and high-throughput connectivity between OpenNebula nodes and ONTAP storage.
+* *NetApp Console:* A centralized management interface for managing multiple NetApp storage systems and data services.
+
+
+The following diagram shows the high-level architecture of OpenNebula integrated with NetApp ONTAP storage:
+
+image::opennebula-netapp-architecture-001.png[OpenNebula with NetApp ONTAP Architecture]
+
+== ONTAP features for OpenNebula
+
+ONTAP provides a comprehensive set of enterprise storage features that enhance OpenNebula deployments. These features span data management, protection, efficiency, and protocol support across both NAS and SAN storage architectures.
+
+=== Core data management features
+
+* Scale-out cluster architecture
+* Secure authentication and RBAC support
+* Zero trust multi-admin support
+* Secure multitenancy
+* Data replication with SnapMirror
+* Point-in-time copies with snapshots
+* Space-efficient clones
+* Storage efficiency features including deduplication and compression
+* Trident CSI support for Kubernetes
+* SnapLock for compliance
+* Tamperproof snapshot copy locking
+* Ransomware protection with autonomous threat detection
+* Data-at-rest and data-in-flight encryption
+* FabricPool to tier cold data to object storage
+* NetApp Console and Data Infrastructure Insights integration
+* Microsoft Offloaded Data Transfer (ODX)
+
+=== NAS protocol features
+
+* FlexGroup volumes provide scale-out NAS containers with high performance, load distribution, and scalability
+* FlexCache distributes data globally while providing local read and write access
+* Multiprotocol support enables the same data to be accessible via both SMB and NFS
+* NFS nConnect allows multiple TCP sessions per connection to increase network throughput and utilize high-speed NICs
+* NFS session trunking provides increased data transfer speeds, high availability, and fault tolerance
+* SMB multichannel provides increased data transfer speeds, high availability, and fault tolerance
+* Integration with Active Directory and LDAP for file permissions
+* Secure connections with NFS over TLS
+* NFS Kerberos authentication support
+* NFS over RDMA for low-latency access
+* Name mapping between Windows and Unix identities
+* Autonomous ransomware protection with built-in threat detection
+* File System Analytics for capacity and usage insights
+
+=== SAN protocol features
+
+* Stretch clusters across fault domains with SnapMirror active sync (always check the https://mysupport.netapp.com/matrix/#welcome[Interoperability Matrix Tool] for supported configurations)
+* ASA models provide active-active multipathing and fast path failover
+* Protocol support for FC, iSCSI, and NVMe-oF
+* iSCSI CHAP mutual authentication
+* Selective LUN mapping and portsets for enhanced security
