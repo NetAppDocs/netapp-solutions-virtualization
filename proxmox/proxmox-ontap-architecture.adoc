@@ -63,11 +63,14 @@ ONTAP provides a comprehensive set of enterprise storage features that enhance P
 * Name mapping between Windows and Unix identities
 * Autonomous ransomware protection with built-in threat detection
 * File System Analytics for capacity and usage insights
+* Metrocluster support for high availability.
 
 === SAN protocol features
 
 * Stretch clusters across fault domains with SnapMirror active sync (always check the https://mysupport.netapp.com/matrix/#welcome[Interoperability Matrix Tool] for supported configurations)
+* Metrocluster support for high availability.
 * ASA models provide active-active multipathing and fast path failover
 * Protocol support for FC, iSCSI, and NVMe-oF
 * iSCSI CHAP mutual authentication
 * Selective LUN mapping and portsets for enhanced security
+
