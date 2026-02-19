@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar
 permalink: openshift/osv-vm-dr-using-tp.html
-keywords: OpenShift, OCP, Trident, Trident protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, ROSA, Red Hat OpenShift Virtualization
+keywords: OpenShift, OCP, Trident, Trident Protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, ROSA, Red Hat OpenShift Virtualization
 summary: Red Hat OpenShift Virtualization on ROSA
 ---
-= Set up failover and failback for VMs in Red Hat OpenShift Virtualization using Trident protect
+= Set up failover and failback for VMs in Red Hat OpenShift Virtualization using Trident Protect
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -17,7 +17,7 @@ Set up disaster recovery for VMs in OpenShift Virtualization using Trident Prote
 == Prerequisites
 *   Trident must be installed. Backend and storage classes must be created before OpenShift Virtualization is installed on the cluster using the OpenShift Virtualization operator. 
 
-*   Trident protect must be installed to implement failover and failback operations for the OpenShift VMs. Refer to the instructions here to link:https://docs.netapp.com/us-en/trident/trident-protect/trident-protect-installation.html[install trident protect]
+*   Trident Protect must be installed to implement failover and failback operations for the OpenShift VMs. Refer to the instructions here to link:https://docs.netapp.com/us-en/trident/trident-protect/trident-protect-installation.html[install Trident Protect]
 
 image:redhat-openshift-ocpv-tp-001.png[OCP-v trident protect installed in trident-protect namespace]
 
@@ -86,7 +86,7 @@ Ensure that ontap S3 vault is created and is in the Available state
 
 image:redhat-openshift-ocpv-tp-002.png[OCP-v appvault in trident-protect namespace]
 
-== Create a Trident protect app for the VM
+== Create a Trident Protect app for the VM
 
 Create an app custom resource in the namespace where the VM is located. 
 
@@ -97,7 +97,7 @@ tridentctl-protect create app source-vm -n source-ns --namespaces source-ns
 
 image:redhat-openshift-ocpv-tp-004.png[OCP-v app in source-ns namespace]
 
-== Create a Trident protect app for the Disaster Recovery VM in a new namespace
+== Create a Trident Protect app for the Disaster Recovery VM in a new namespace
 
 [source,CLI]
 oc create ns dr-ns
