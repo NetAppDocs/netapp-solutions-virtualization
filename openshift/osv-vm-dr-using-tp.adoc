@@ -19,7 +19,7 @@ Set up disaster recovery for VMs in OpenShift Virtualization using Trident Prote
 
 *   Trident Protect must be installed to implement failover and failback operations for the OpenShift VMs. Refer to the instructions here to link:https://docs.netapp.com/us-en/trident/trident-protect/trident-protect-installation.html[install Trident Protect]
 
-image:redhat-openshift-ocpv-tp-001.png[OCP-v trident protect installed in trident-protect namespace]
+image:redhat-openshift-ocpv-tp-001.png[OCP-v Trident Protect installed in trident-protect namespace]
 
 A VM must be available in OpenShift Virtualization. For details about deploying a new VM, or migrating an existing VM into OpenShift Virtualization, see the appropriate section in the documentation.
 
