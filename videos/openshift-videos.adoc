@@ -28,9 +28,9 @@ video::27773297-a80c-473c-ab41-b01200fa009a[panopto, title="Workload Migration -
 
 == Data protection and disaster recovery
 
-video::4670e188-3d67-4207-84c5-b2d500f934a0[panopto, title="Protecting a VM using Trident protect", width=360]
+video::4670e188-3d67-4207-84c5-b2d500f934a0[panopto, title="Protecting a VM using Trident Protect", width=360]
 
-video::ae4bdcf7-b344-4f19-89ed-b2d500f94efd[panopto, title="Disaster Recovery for a VM using Trident protect", width=360]
+video::ae4bdcf7-b344-4f19-89ed-b2d500f94efd[panopto, title="Disaster Recovery for a VM using Trident Protect", width=360]
 
 video::f2a8fa24-2971-4cdc-9bbb-b1f1007032ea[panopto, title="Failover/Failback of OpenShift VMs using advanced data management capabilities of Trident (Only Early Access Program available)", width=360]
 
