@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: openshift/osv-trident-install.html
 keywords: OpenShift, OCP, Trident, Trident Protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, Red Hat OpenShift Virtualization
-summary: "Install Trident with the Red Hat Certified Trident Operator and create storage objects for ONTAP and FSxN to enable dynamic volume provisioning for containers and VMs."
+summary: "Install Trident with the Red Hat Certified Trident Operator and create storage objects for ONTAP and Amazon FSx for NetApp ONTAP to enable dynamic volume provisioning for containers and VMs."
 ---
 = Install Trident on a Red Hat OpenShift cluster and create storage objects
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: "Install Trident with the Red Hat Certified Trident Operator and create
 :imagesdir: ../media/
 
 [.lead]
-Install Trident with the Red Hat Certified Trident Operator and create storage objects for ONTAP and FSxN to enable dynamic volume provisioning for containers and VMs. Prepare worker nodes for block access when required.
+Install Trident with the Red Hat Certified Trident Operator and create storage objects for ONTAP and Amazon FSx for NetApp ONTAP to enable dynamic volume provisioning for containers and VMs. Prepare worker nodes for block access when required.
 
 .Before you begin
 * To create VMs in OpenShift Virtualization (on-premises and ROSA), install Trident and create backend and StorageClass objects in the OpenShift cluster before you install OpenShift Virtualization. Set the default StorageClass and default VolumeSnapshotClass to use Trident. OpenShift Virtualization requires this configuration to make golden images available locally for VM creation using templates.
@@ -24,11 +24,11 @@ Install Trident with the Red Hat Certified Trident Operator and create storage o
 oc delete dv,VolumeSnapshot -n openshift-virtualization-os-images --selector=cdi.kubevirt.io/dataImportCron
 ----
 
-For sample YAML files to create Trident objects for FSxN storage on ROSA clusters and a VolumeSnapshotClass, see the sections later on this page.
+For sample YAML files to create Trident objects for Amazon FSx for NetApp ONTAP storage on ROSA clusters and a VolumeSnapshotClass, see the sections later on this page.
 
 == Install Trident
 
-The Red Hat Certified Trident Operator is supported by NetApp for OpenShift on-premises, in public clouds, and in managed services such as ROSA. Starting with Trident 25.02, the operator can also prepare worker nodes for iSCSI when you use FSxN and plan to run OpenShift Virtualization VM workloads.
+The Red Hat Certified Trident Operator is supported by NetApp for OpenShift on-premises, in public clouds, and in managed services such as ROSA. Starting with Trident 25.02, the operator can also prepare worker nodes for iSCSI when you use Amazon FSx for NetApp ONTAP and plan to run OpenShift Virtualization VM workloads.
 
 For other installation options, see link:https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html[the Trident documentation].
 
@@ -337,13 +337,13 @@ oc create -f tbc-fc.yaml -n trident
 oc create -f sc-fc.yaml
 ----
 
-== Configure Trident for ROSA clusters using FSxN storage
+== Configure Trident for ROSA clusters using Amazon FSx for NetApp ONTAP storage
 
-Use the following examples to create a Trident backend and a StorageClass for FSxN storage. Replace the placeholder values with your FSxN cluster details.
+Use the following examples to create a Trident backend and a StorageClass for Amazon FSx for NetApp ONTAP storage. Replace the placeholder values with your Amazon FSx for NetApp ONTAP cluster details.
 
-.Trident backend and storage class for FSxN NAS
+.Trident backend and storage class for Amazon FSx for NetApp ONTAP NAS
 
-Create a TridentBackendConfig and StorageClass for FSxN with ONTAP NAS to enable NFS-based persistent storage provisioning on ROSA clusters. The backend configuration uses FSxN DNS names for management and data LIFs, and includes credentials stored in a Kubernetes Secret in the trident namespace.
+Create a TridentBackendConfig and StorageClass for Amazon FSx for NetApp ONTAP with ONTAP NAS to enable NFS-based persistent storage provisioning on ROSA clusters. The backend configuration uses Amazon FSx for NetApp ONTAP DNS names for management and data LIFs, and includes credentials stored in a Kubernetes Secret in the trident namespace.
 
 .Steps
 . Create the backend secret and backend configuration file.
@@ -398,9 +398,9 @@ oc create -f tbc-fsx-nas.yaml -n trident
 oc create -f sc-fsx-nas.yaml
 ----
 
-.Trident backend and storage class for FSxN iSCSI
+.Trident backend and storage class for Amazon FSx for NetApp ONTAP iSCSI
 
-Create a TridentBackendConfig and StorageClass for FSxN with ONTAP SAN to enable iSCSI-based block storage provisioning on ROSA clusters. The backend configuration uses the ontap-san driver and includes credentials stored in a Kubernetes Secret. Ensure that worker nodes are prepared for iSCSI access.
+Create a TridentBackendConfig and StorageClass for Amazon FSx for NetApp ONTAP with ONTAP SAN to enable iSCSI-based block storage provisioning on ROSA clusters. The backend configuration uses the ontap-san driver and includes credentials stored in a Kubernetes Secret. Ensure that worker nodes are prepared for iSCSI access.
 
 .Steps
 . Create the backend secret and backend configuration file.
