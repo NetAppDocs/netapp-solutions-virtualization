@@ -103,7 +103,7 @@ Use the following examples to create a Trident backend and a StorageClass for yo
 Create a TridentBackendConfig and StorageClass for ONTAP NAS to enable NFS-based persistent storage provisioning. The backend configuration includes credentials stored in a Kubernetes Secret and references your ONTAP SVM and management LIF.
 
 .Steps
-1. Create the backend secret and backend configuration file.
+. Create the backend secret and backend configuration file.
 +
 [source,yaml]
 ----
@@ -126,14 +126,14 @@ spec:
   storageDriverName: ontap-nas
   managementLIF: <cluster management lif>
   backendName: tbc-nas
-  svm: zoneb <replace with your SVM name>
-  storagePrefix: testzoneb <replace with your prefix>
+  svm: zoneb #<replace with your SVM name>
+  storagePrefix: testzoneb #<replace with your prefix>
   defaults:
     nameTemplate: "{{ .config.StoragePrefix }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}"
   credentials:
     name: tbc-nas-secret
 ----
-2. Create the StorageClass definition.
+. Create the StorageClass definition.
 +
 [source,yaml]
 ----
@@ -150,7 +150,7 @@ parameters:
   snapshots: "true"
 allowVolumeExpansion: true
 ----
-3. Create the objects in the cluster.
+. Create the objects in the cluster.
 +
 [source,bash]
 ----
@@ -163,7 +163,7 @@ oc create -f sc-nas.yaml
 Create a TridentBackendConfig and StorageClass for ONTAP SAN to enable iSCSI-based block storage provisioning. The backend configuration uses the ontap-san driver and includes credentials stored in a Kubernetes Secret.
 
 .Steps
-1. Create the backend secret and backend configuration file.
+. Create the backend secret and backend configuration file.
 +
 [source,yaml]
 ----
@@ -190,7 +190,7 @@ spec:
   credentials:
     name: backend-tbc-ontap-iscsi-secret
 ----
-2. Create the StorageClass definition.
+. Create the StorageClass definition.
 +
 [source,yaml]
 ----
@@ -208,7 +208,7 @@ parameters:
   snapshots: "true"
 allowVolumeExpansion: true
 ----
-3. Create the objects in the cluster.
+. Create the objects in the cluster.
 +
 [source,bash]
 ----
@@ -221,7 +221,7 @@ oc create -f sc-iscsi.yaml
 Create a TridentBackendConfig and StorageClass for ONTAP SAN with NVMe over TCP to enable high-performance block storage provisioning. The backend configuration uses the ontap-san driver optimized for NVMe/TCP transport and includes credentials stored in a Kubernetes Secret.
 
 .Steps
-1. Create the backend secret and backend configuration file.
+. Create the backend secret and backend configuration file.
 +
 [source,yaml]
 ----
@@ -248,7 +248,7 @@ spec:
   credentials:
     name: backend-tbc-ontap-nvme-secret
 ----
-2. Create the StorageClass definition.
+. Create the StorageClass definition.
 +
 [source,yaml]
 ----
@@ -266,7 +266,7 @@ parameters:
   snapshots: "true"
 allowVolumeExpansion: true
 ----
-3. Create the objects in the cluster.
+. Create the objects in the cluster.
 +
 [source,bash]
 ----
@@ -279,7 +279,7 @@ oc create -f sc-nvme.yaml
 Create a TridentBackendConfig and StorageClass for ONTAP SAN with Fibre Channel to enable FC-based block storage provisioning. The backend configuration uses the ontap-san driver with the FCP protocol specified and includes credentials stored in a Kubernetes Secret.
 
 .Steps
-1. Create the backend secret and backend configuration file.
+. Create the backend secret and backend configuration file.
 +
 [source,yaml]
 ----
@@ -302,15 +302,15 @@ spec:
   storageDriverName: ontap-san
   managementLIF: <cluster mgmt lif>
   backendName: tbc-fc
-  svm: openshift-fc <replace with your SVM name>
+  svm: openshift-fc #<replace with your SVM name>
   sanType: fcp
-  storagePrefix: demofc <replace with you prefix>
+  storagePrefix: demofc #<replace with you prefix>
   defaults:
     nameTemplate: "{{ .config.StoragePrefix }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}"
   credentials:
     name: tbc-fc-secret
 ----
-2. Create the StorageClass definition.
+. Create the StorageClass definition.
 +
 [source,yaml]
 ----
@@ -328,7 +328,7 @@ parameters:
   snapshots: "true"
 allowVolumeExpansion: true
 ----
-3. Create the objects in the cluster.
+. Create the objects in the cluster.
 +
 [source,bash]
 ----
@@ -345,7 +345,7 @@ Use the following examples to create a Trident backend and a StorageClass for FS
 Create a TridentBackendConfig and StorageClass for FSxN with ONTAP NAS to enable NFS-based persistent storage provisioning on ROSA clusters. The backend configuration uses FSxN DNS names for management and data LIFs, and includes credentials stored in a Kubernetes Secret in the trident namespace.
 
 .Steps
-1. Create the backend secret and backend configuration file.
+. Create the backend secret and backend configuration file.
 +
 [source,yaml]
 ----
@@ -375,7 +375,7 @@ spec:
   credentials:
     name: backend-fsx-ontap-nas-secret
 ----
-2. Create the StorageClass definition.
+. Create the StorageClass definition.
 +
 [source,yaml]
 ----
@@ -391,7 +391,7 @@ parameters:
 allowVolumeExpansion: true
 reclaimPolicy: Retain
 ----
-3. Create the objects in the cluster.
+. Create the objects in the cluster.
 +
 [source,bash]
 ----
@@ -404,7 +404,7 @@ oc create -f sc-fsx-nas.yaml
 Create a TridentBackendConfig and StorageClass for FSxN with ONTAP SAN to enable iSCSI-based block storage provisioning on ROSA clusters. The backend configuration uses the ontap-san driver and includes credentials stored in a Kubernetes Secret. Ensure that worker nodes are prepared for iSCSI access.
 
 .Steps
-1. Create the backend secret and backend configuration file.
+. Create the backend secret and backend configuration file.
 +
 [source,yaml]
 ----
@@ -431,7 +431,7 @@ spec:
   credentials:
     name: backend-tbc-fsx-iscsi-secret
 ----
-2. Create the StorageClass definition.
+. Create the StorageClass definition.
 +
 [source,yaml]
 ----
@@ -462,7 +462,7 @@ oc create -f sc-fsx-iscsi.yaml
 Create a VolumeSnapshotClass definition and apply it to the cluster.
 
 .Steps
-1. Create the VolumeSnapshotClass definition.
+. Create the VolumeSnapshotClass definition.
 +
 [source,yaml]
 ----
@@ -474,7 +474,7 @@ metadata:
 driver: csi.trident.netapp.io
 deletionPolicy: Retain
 ----
-2. Create the VolumeSnapshotClass in the cluster.
+. Create the VolumeSnapshotClass in the cluster.
 +
 [source,bash]
 ----
@@ -490,7 +490,7 @@ Set the Trident StorageClass and VolumeSnapshotClass as the defaults in the Open
 Set a Trident-backed StorageClass as the cluster default so that PersistentVolumeClaims automatically use it when no storage class is specified. You need to configure two annotations: one for the cluster-wide default and one specific to OpenShift Virtualization.
 
 .Steps
-1. Set the cluster-wide default StorageClass annotation.
+. Set the cluster-wide default StorageClass annotation.
 +
 Ensure that only one StorageClass is set as default. If another StorageClass is already set to default, set its annotation to false.
 +
@@ -508,7 +508,7 @@ From the CLI:
 kubectl patch storageclass <storage class name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 ----
 
-2. Set the OpenShift Virtualization specific default annotation.
+. Set the OpenShift Virtualization specific default annotation.
 +
 OpenShift Virtualization uses a specific annotation that takes precedence over the cluster's general `is-default-class` annotation. If another StorageClass is already set to default, set its annotation to false.
 +
@@ -531,7 +531,7 @@ kubectl patch storageclass <storage class name> -p '{"metadata": {"annotations":
 Set a Trident-backed VolumeSnapshotClass as the cluster default to enable snapshot-based operations for persistent volumes. This ensures that VolumeSnapshots automatically use the Trident CSI driver when no snapshot class is specified and allows OpenShift Virtualization to create snapshots of golden images.
 
 .Steps
-1. Set the default VolumeSnapshotClass annotation.
+. Set the default VolumeSnapshotClass annotation.
 +
 Ensure that only one VolumeSnapshotClass is set as default. If another VolumeSnapshotClass is already set to default, set its annotation to false.
 +
@@ -549,7 +549,7 @@ From the CLI:
 oc patch VolumeSnapshotClass <snapshot class name> --type=merge -p '{"metadata":{"annotations":{"snapshot.storage.kubernetes.io/is-default-class":"true"}}}'
 ----
 
-2. Delete any pre-existing DV and VolumeSnapshot objects.
+. Delete any pre-existing DV and VolumeSnapshot objects.
 +
 [source,bash]
 ----
