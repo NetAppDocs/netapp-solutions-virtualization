@@ -23,7 +23,7 @@ Install Trident with the Red Hat Certified Trident Operator and create storage o
 ----
 oc delete dv,VolumeSnapshot -n openshift-virtualization-os-images --selector=cdi.kubevirt.io/dataImportCron
 ----
-+
+
 For sample YAML files to create Trident objects for FSxN storage on ROSA clusters and a VolumeSnapshotClass, see the sections later on this page.
 
 == Install Trident
@@ -34,7 +34,7 @@ For other installation options, see link:https://docs.netapp.com/us-en/trident/t
 
 .Steps
 . In *OperatorHub*, select *Certified NetApp Trident*.
-+ 
++
 .Show example
 [%collapsible]
 ====
@@ -355,7 +355,6 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: backend-fsx-ontap-nas-secret
-  namespace: trident
 type: Opaque
 stringData:
   username: <cluster admin username>
@@ -365,7 +364,6 @@ apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
 metadata:
   name: backend-fsx-ontap-nas
-  namespace: trident
 spec:
   version: 1
   backendName: fsx-ontap
@@ -396,7 +394,7 @@ reclaimPolicy: Retain
 +
 [source,bash]
 ----
-oc create -f tbc-fsx-nas.yaml -n trident 
+oc create -f tbc-fsx-nas.yaml -n trident
 oc create -f sc-fsx-nas.yaml
 ----
 
@@ -509,7 +507,7 @@ From the CLI:
 kubectl patch storageclass <storage class name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 ----
 
-. Set the OpenShift Virtualization specific default annotation.
+. Set the OpenShift Virtualization-specific default annotation.
 +
 OpenShift Virtualization uses a specific annotation that takes precedence over the cluster's general `is-default-class` annotation. If another StorageClass is already set to default, set its annotation to false.
 +
