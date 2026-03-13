@@ -24,7 +24,7 @@ Install Trident with the Red Hat Certified Trident Operator and create storage o
 oc delete dv,VolumeSnapshot -n openshift-virtualization-os-images --selector=cdi.kubevirt.io/dataImportCron
 ----
 +
-For sample YAML files to create Trident objects for FSxN storage on ROSA clusters and a VolumeSnapshotClass, see the sections later in this page.
+For sample YAML files to create Trident objects for FSxN storage on ROSA clusters and a VolumeSnapshotClass, see the sections later on this page.
 
 == Install Trident
 
@@ -232,7 +232,7 @@ metadata:
   name: backend-tbc-ontap-nvme-secret
 type: Opaque
 stringData:
-  username: <cluster admin password>
+  username: <cluster admin username>
   password: <cluster admin password>
 ---
 apiVersion: trident.netapp.io/v1
@@ -290,7 +290,7 @@ metadata:
   name: tbc-fc-secret
 type: Opaque
 stringData:
-  username: <cluster admin password>
+  username: <cluster admin username>
   password: <cluster admin password>
 ---
 apiVersion: trident.netapp.io/v1
@@ -453,7 +453,7 @@ allowVolumeExpansion: true
 +
 [source,bash]
 ----
-oc create -f tbc-fsx-iscsi.yaml
+oc create -f tbc-fsx-iscsi.yaml -n trident
 oc create -f sc-fsx-iscsi.yaml
 ----
 
@@ -498,7 +498,7 @@ In the console, edit the annotation:
 +
 [source]
 ----
-storageclass.kubernetes.io/is-default-class -> set it to true
+storageclass.kubernetes.io/is-default-class: true
 ----
 +
 From the CLI:
@@ -516,7 +516,7 @@ In the console, edit the annotation:
 +
 [source]
 ----
-storageclass.kubevirt.io/is-default-virt-class -> set it to true
+storageclass.kubevirt.io/is-default-virt-class: true
 ----
 +
 From the CLI:
@@ -539,7 +539,7 @@ In the console, edit the annotation:
 +
 [source]
 ----
-snapshot.storage.kubernetes.io/is-default-class -> set it to true
+snapshot.storage.kubernetes.io/is-default-class: true
 ----
 +
 From the CLI:
