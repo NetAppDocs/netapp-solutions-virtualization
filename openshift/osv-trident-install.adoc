@@ -87,7 +87,7 @@ image:rh-os-n-use-case-osv-trident-install-006.png[multipathd running]
 image:rh-os-n-use-case-osv-trident-install-007.png[multipath.conf file running]
 ====
 
-== Video Demonstration 
+== Video Demonstration
 
 The following video shows a demonstration of installing Trident using Red Hat Certified Trident Operator.
 
@@ -126,8 +126,8 @@ spec:
   storageDriverName: ontap-nas
   managementLIF: <cluster management lif>
   backendName: tbc-nas
-  svm: zoneb
-  storagePrefix: testzoneb
+  svm: zoneb <replace with your SVM name>
+  storagePrefix: testzoneb <replace with your prefix>
   defaults:
     nameTemplate: "{{ .config.StoragePrefix }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}"
   credentials:
@@ -302,9 +302,9 @@ spec:
   storageDriverName: ontap-san
   managementLIF: <cluster mgmt lif>
   backendName: tbc-fc
-  svm: openshift-fc
+  svm: openshift-fc <replace with your SVM name>
   sanType: fcp
-  storagePrefix: demofc
+  storagePrefix: demofc <replace with you prefix>
   defaults:
     nameTemplate: "{{ .config.StoragePrefix }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}"
   credentials:
@@ -357,7 +357,7 @@ metadata:
   namespace: trident
 type: Opaque
 stringData:
-  username: <cluster admin lif>
+  username: <cluster admin username>
   password: <cluster admin passwd>
 ---
 apiVersion: trident.netapp.io/v1
@@ -498,7 +498,7 @@ In the console, edit the annotation:
 +
 [source]
 ----
-storageclass.kubernetes.io/is-default-class: true
+storageclass.kubernetes.io/is-default-class: "true"
 ----
 +
 From the CLI:
@@ -516,7 +516,7 @@ In the console, edit the annotation:
 +
 [source]
 ----
-storageclass.kubevirt.io/is-default-virt-class: true
+storageclass.kubevirt.io/is-default-virt-class: "true"
 ----
 +
 From the CLI:
@@ -539,7 +539,7 @@ In the console, edit the annotation:
 +
 [source]
 ----
-snapshot.storage.kubernetes.io/is-default-class: true
+snapshot.storage.kubernetes.io/is-default-class: "true"
 ----
 +
 From the CLI:
