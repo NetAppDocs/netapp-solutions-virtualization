@@ -547,7 +547,7 @@ From the CLI:
 +
 [source,bash]
 ----
-oc patch VolumeSnapshotClass <snapshot class name> --type=merge -p '{"metadata":{"annotations":{"snapshot.storage.kubernetes.io/is-default-class":"true"}}}'
+oc patch volumesnapshotclass <snapshot class name> --type=merge -p '{"metadata":{"annotations":{"snapshot.storage.kubernetes.io/is-default-class":"true"}}}'
 ----
 
 . Delete any pre-existing DV and VolumeSnapshot objects.
