@@ -89,7 +89,7 @@ image:rh-os-n-use-case-osv-trident-install-007.png[multipath.conf file running]
 
 == Video Demonstration
 
-The following video shows a demonstration of installing Trident using Red Hat Certified Trident Operator.
+The following video shows a demonstration of installing Trident using the Red Hat Certified Trident Operator.
 
 video::15c225f3-13ef-41ba-b255-b2d500f927c0[panopto, title="Installing Trident 25.02.1 using the certified Trident Operator in OpenShift", width=360]
 
@@ -358,7 +358,7 @@ metadata:
 type: Opaque
 stringData:
   username: <cluster admin username>
-  password: <cluster admin passwd>
+  password: <cluster admin password>
 ---
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
