@@ -34,7 +34,7 @@ For other installation options, see link:https://docs.netapp.com/us-en/trident/t
 
 .Steps
 . In *OperatorHub*, select *Certified NetApp Trident*.
-+ 
++
 .Show example
 [%collapsible]
 ====
@@ -243,7 +243,7 @@ spec:
   version: 1
   storageDriverName: ontap-san
   sanType: nvme
-  managementLIF: <cluster management LIF>
+  managementLIF: <cluster management lif>
   backendName: backend-tbc-ontap-nvme
   svm: <SVM name>
   credentials:
