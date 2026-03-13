@@ -28,7 +28,7 @@ For sample YAML files to create Trident objects for FSxN storage on ROSA cluster
 
 == Install Trident
 
-The Red Hat Certified Trident Operator is supported by NetApp for OpenShift on premises, in public clouds, and in managed services such as ROSA. Starting with Trident 25.02, the operator can also prepare worker nodes for iSCSI when you use FSxN and plan to run OpenShift Virtualization VM workloads.
+The Red Hat Certified Trident Operator is supported by NetApp for OpenShift on-premises, in public clouds, and in managed services such as ROSA. Starting with Trident 25.02, the operator can also prepare worker nodes for iSCSI when you use FSxN and plan to run OpenShift Virtualization VM workloads.
 
 For other installation options, see link:https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html[the Trident documentation].
 
@@ -304,7 +304,7 @@ spec:
   backendName: tbc-fc
   svm: openshift-fc #<replace with your SVM name>
   sanType: fcp
-  storagePrefix: demofc #<replace with you prefix>
+  storagePrefix: demofc #<replace with your prefix>
   defaults:
     nameTemplate: "{{ .config.StoragePrefix }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}"
   credentials:
@@ -449,7 +449,7 @@ parameters:
   snapshots: "true"
 allowVolumeExpansion: true
 ----
-3. Create the objects in the cluster.
+. Create the objects in the cluster.
 +
 [source,bash]
 ----
