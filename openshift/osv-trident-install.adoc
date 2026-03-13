@@ -107,7 +107,7 @@ Create a TridentBackendConfig and StorageClass for ONTAP NAS to enable NFS-based
 +
 [source,yaml]
 ----
-cat tbc-nas.yaml
+# tbc-nas.yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -137,7 +137,7 @@ spec:
 +
 [source,yaml]
 ----
-cat sc-nas.yaml
+# sc-nas.yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -167,7 +167,7 @@ Create a TridentBackendConfig and StorageClass for ONTAP SAN to enable iSCSI-bas
 +
 [source,yaml]
 ----
-cat tbc-iscsi.yaml
+# tbc-iscsi.yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -194,7 +194,7 @@ spec:
 +
 [source,yaml]
 ----
-cat sc-iscsi.yaml
+# sc-iscsi.yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -225,7 +225,7 @@ Create a TridentBackendConfig and StorageClass for ONTAP SAN with NVMe over TCP 
 +
 [source,yaml]
 ----
-cat tbc-nvme.yaml
+# tbc-nvme.yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -253,7 +253,7 @@ spec:
 +
 [source,yaml]
 ----
-cat sc-nvme.yaml
+# sc-nvme.yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -284,7 +284,7 @@ Create a TridentBackendConfig and StorageClass for ONTAP SAN with Fibre Channel 
 +
 [source,yaml]
 ----
-cat tbc-fc.yaml
+# tbc-fc.yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -315,7 +315,7 @@ spec:
 +
 [source,yaml]
 ----
-cat sc-fc.yaml
+# sc-fc.yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -350,7 +350,7 @@ Create a TridentBackendConfig and StorageClass for FSxN with ONTAP NAS to enable
 +
 [source,yaml]
 ----
-cat tbc-fsx-nas.yaml
+# tbc-fsx-nas.yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -380,7 +380,7 @@ spec:
 +
 [source,yaml]
 ----
-cat sc-fsx-nas.yaml
+# sc-fsx-nas.yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -409,7 +409,7 @@ Create a TridentBackendConfig and StorageClass for FSxN with ONTAP SAN to enable
 +
 [source,yaml]
 ----
-cat tbc-fsx-iscsi.yaml
+# tbc-fsx-iscsi.yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -436,7 +436,7 @@ spec:
 +
 [source,yaml]
 ----
-cat sc-fsx-iscsi.yaml
+# sc-fsx-iscsi.yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -467,7 +467,7 @@ Create a VolumeSnapshotClass definition and apply it to the cluster.
 +
 [source,yaml]
 ----
-cat snapshot-class.yaml
+# snapshot-class.yaml
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
 metadata:
