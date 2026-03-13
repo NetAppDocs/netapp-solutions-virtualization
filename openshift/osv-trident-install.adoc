@@ -242,6 +242,7 @@ metadata:
 spec:
   version: 1
   storageDriverName: ontap-san
+  sanType: nvme
   managementLIF: <cluster management LIF>
   backendName: backend-tbc-ontap-nvme
   svm: <SVM name>
