@@ -34,13 +34,13 @@ For other installation options, see link:https://docs.netapp.com/us-en/trident/t
 
 .Steps
 . In *OperatorHub*, select *Certified NetApp Trident*.
-+
++ 
 .Show example
 [%collapsible]
 ====
 image:rh-os-n-use-case-osv-trident-install-001.png[operator hub]
 ====
-+
+
 . On the *Install* page, keep the latest version and select *Install*.
 +
 .Show example
@@ -48,7 +48,7 @@ image:rh-os-n-use-case-osv-trident-install-001.png[operator hub]
 ====
 image:rh-os-n-use-case-osv-trident-install-002.png[install]
 ====
-+
+
 . After the operator installs, select *View operator* and create an instance of the Trident Orchestrator.
 +
 If you want to prepare worker nodes for iSCSI, switch to YAML view and add `iscsi` to `nodePrep`.
@@ -58,7 +58,7 @@ If you want to prepare worker nodes for iSCSI, switch to YAML view and add `iscs
 ====
 image:rh-os-n-use-case-osv-trident-install-003.png[add iscsi for node prep]
 ====
-+
+
 . Confirm that all Trident pods are running in the cluster.
 +
 .Show example
@@ -396,7 +396,7 @@ reclaimPolicy: Retain
 +
 [source,bash]
 ----
-oc create -f tbc-fsx-nas.yaml
+oc create -f tbc-fsx-nas.yaml -n trident 
 oc create -f sc-fsx-nas.yaml
 ----
 
