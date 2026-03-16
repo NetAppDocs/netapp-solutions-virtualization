@@ -358,8 +358,8 @@ metadata:
   name: backend-fsx-ontap-nas-secret
 type: Opaque
 stringData:
-  username: <FSx for ONTAP or SVM admin username, for example fsxadmin>
-  password: <FSx for ONTAP or SVM admin password>
+  username: <FSx for ONTAP, for example fsxadmin>
+  password: <FSx for ONTAP password>
 ---
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -415,8 +415,8 @@ metadata:
   name: backend-tbc-fsx-iscsi-secret
 type: Opaque
 stringData:
-  username: <cluster admin username>
-  password: <cluster admin password>
+  username: <FSx for ONTAP, for example fsxadmin>
+  password: <FSx for ONTAP password>
 ---
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
