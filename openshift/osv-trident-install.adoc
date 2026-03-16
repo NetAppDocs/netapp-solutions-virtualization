@@ -19,6 +19,7 @@ Install Trident with the Red Hat Certified Trident Operator and create storage o
 
 * If you installed the OpenShift Virtualization operator before Trident, delete golden images created with a different storage class using the following command. After you set Trident classes as the default StorageClass and VolumeSnapshotClass, OpenShift Virtualization recreates the golden images using Trident.
 +
+.Delete any pre-existing DataVolume (DV) and VolumeSnapshot
 [source,bash]
 ----
 oc delete dv,VolumeSnapshot -n openshift-virtualization-os-images --selector=cdi.kubevirt.io/dataImportCron
@@ -124,7 +125,7 @@ metadata:
 spec:
   version: 1
   storageDriverName: ontap-nas
-  managementLIF: <cluster management lif>
+  managementLIF: <ONTAP management LIF>
   backendName: tbc-nas
   svm: zoneb #<replace with your SVM name>
   storagePrefix: testzoneb #<replace with your prefix>
@@ -243,7 +244,7 @@ spec:
   version: 1
   storageDriverName: ontap-san
   sanType: nvme
-  managementLIF: <cluster management lif>
+  managementLIF: <ONTAP management LIF>
   backendName: backend-tbc-ontap-nvme
   svm: <SVM name>
   credentials:
@@ -301,7 +302,7 @@ metadata:
 spec:
   version: 1
   storageDriverName: ontap-san
-  managementLIF: <cluster mgmt lif>
+  managementLIF: <ONTAP management LIF>
   backendName: tbc-fc
   svm: openshift-fc #<replace with your SVM name>
   sanType: fcp
@@ -357,8 +358,8 @@ metadata:
   name: backend-fsx-ontap-nas-secret
 type: Opaque
 stringData:
-  username: <cluster admin username>
-  password: <cluster admin password>
+  username: <FSx for ONTAP or SVM admin username, for example fsxadmin>
+  password: <FSx for ONTAP or SVM admin password>
 ---
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -378,7 +379,7 @@ spec:
 +
 [source,yaml]
 ----
-# sc-fsx-nas.yaml
+# sc-fsx-nas.yaml (storage class name is trident-csi)
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -424,7 +425,7 @@ metadata:
 spec:
   version: 1
   storageDriverName: ontap-san
-  managementLIF: <management LIF>
+  managementLIF: <Management DNS name>
   backendName: fsx-iscsi
   svm: <SVM name>
   credentials:
@@ -548,12 +549,6 @@ From the CLI:
 oc patch volumesnapshotclass <snapshot class name> --type=merge -p '{"metadata":{"annotations":{"snapshot.storage.kubernetes.io/is-default-class":"true"}}}'
 ----
 
-. Delete any pre-existing DV and VolumeSnapshot objects.
-+
-[source,bash]
-----
-oc delete dv,VolumeSnapshot -n openshift-virtualization-os-images --selector=cdi.kubevirt.io/dataImportCron
-----
 
 
 // NetApp Solutions restructuring (jul 2025) - renamed from containers/rh-os-n_use_case_openshift_virtualization_trident_install.adoc
