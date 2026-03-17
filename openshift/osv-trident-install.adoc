@@ -86,7 +86,7 @@ image:rh-os-n-use-case-osv-trident-install-006.png[multipathd running]
 image:rh-os-n-use-case-osv-trident-install-007.png[multipath.conf file running]
 ====
 
-=== Video Demonstration
+.Video Demonstration
 
 The following video shows a demonstration of installing Trident using the Red Hat Certified Trident Operator.
 
@@ -502,7 +502,7 @@ oc create -f snapshot-class.yaml
 Set the Trident StorageClass and VolumeSnapshotClass as the defaults in the OpenShift cluster. This is required for OpenShift Virtualization to create golden image sources for VM templates.
 
 .Steps
-. Set the default Trident StorageClass
+. Set the default Trident StorageClass.
 +
 Set a Trident-backed StorageClass as the cluster default so that PersistentVolumeClaims automatically use it when no storage class is specified. You need to configure two annotations: one for the cluster-wide default and one specific to OpenShift Virtualization.
 +
@@ -542,7 +542,7 @@ From the CLI:
 kubectl patch storageclass <storage class name> -p '{"metadata": {"annotations":{"storageclass.kubevirt.io/is-default-virt-class": "true"}}}'
 ----
 
-. Set the default Trident VolumeSnapshotClass
+. Set the default Trident VolumeSnapshotClass.
 +
 Set a Trident-backed VolumeSnapshotClass as the cluster default to enable snapshot-based operations for persistent volumes. This ensures that VolumeSnapshots automatically use the Trident CSI driver when no snapshot class is specified and allows OpenShift Virtualization to create snapshots of golden images.
 +
