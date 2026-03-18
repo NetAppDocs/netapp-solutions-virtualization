@@ -17,7 +17,7 @@ Install Trident with the Red Hat Certified Trident Operator and create storage o
 .Before you begin
 * To create VMs in OpenShift Virtualization (on-premises and ROSA), install Trident and create backend and StorageClass objects in the OpenShift cluster before you install OpenShift Virtualization. Set the default StorageClass and default VolumeSnapshotClass to use Trident. OpenShift Virtualization requires this configuration to make golden images available locally for VM creation using templates.
 
-* If you installed the OpenShift Virtualization operator before Trident, delete golden images created with a different storage class using the following command. After you set Trident classes as the default StorageClass and VolumeSnapshotClass, OpenShift Virtualization recreates the golden images using Trident.
+* If you installed the OpenShift Virtualization operator before Trident, delete golden images created with a different StorageClass using the following command. After you set Trident classes as the default StorageClass and VolumeSnapshotClass, OpenShift Virtualization recreates the golden images using Trident.
 +
 .Delete any pre-existing DataVolume (DV) and VolumeSnapshot
 [source,bash]
