@@ -80,3 +80,7 @@ The Shift toolkit is validated against the following Oracle Linux Virtualization
 .KVM
 
 For KVM destinations, the Shift Toolkit supports disk format conversion only (VMDK to QCOW2 or RAW). Hypervisor connection details are not required when selecting KVM from the destination dropdown. After conversion, use the QCOW2 disks to provision VMs on KVM-based platforms.
+
+.Proxmox VE
+
+The Shift toolkit is validated against Proxmox VE running 9.X and later.
