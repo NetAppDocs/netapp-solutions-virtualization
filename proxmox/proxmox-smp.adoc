@@ -17,37 +17,39 @@ Storage Manager for Proxmox (SMP) offers end-to-end storage management for virtu
 
 === Key features
 
-*End-to-end storage management*: SMP provides complete lifecycle management for virtual machines, from provisioning storage to backup and recovery.
+* *End-to-end storage management*: SMP provides complete lifecycle management for virtual machines, from provisioning storage to backup and recovery.
 
-*Direct storage management*: Proxmox administrators can manage storage directly, streamlining operations and reducing complexity.
+* *Direct storage management*: Proxmox administrators can manage storage directly, streamlining operations and reducing complexity.
 
-*Standalone installer*: SMP is delivered as a standalone installer that seamlessly connects to Proxmox nodes via APIs.
+* *Standalone installer*: SMP is delivered as a standalone installer that seamlessly connects to Proxmox nodes via APIs.
 
 === Capabilities
 
 Each component of SMP is designed to enhance storage management efficiency:
 
-*Storage provisioning*: Easily allocate and manage storage resources for Proxmox hosts and associated virtual machines.
+* *Storage provisioning*: Easily allocate and manage storage resources for Proxmox hosts and associated virtual machines.
 
-*NFS storage provisioning*: Set up and configure ONTAP NFS storage to be used with your Proxmox environment.
+** *NFS storage provisioning*: Set up and configure ONTAP NFS storage to be used with your Proxmox environment.
 
-*iSCSI storage provisioning*: Implement thick LVM with multipath for robust and efficient iSCSI storage management.
+** *iSCSI storage provisioning*: Implement thick LVM with multipath for robust and efficient iSCSI storage management.
 
-*Backup and recovery*: Perform reliable backups and swift recoveries to ensure data integrity and availability.
+* *Backup and recovery*: Perform reliable backups and swift recoveries to ensure data integrity and availability.
 
-*Crash-consistent and file-consistent backups*: Ensure data integrity by setting up both crash-consistent and VM-consistent backup mechanisms.
+** *Crash-consistent and file-consistent backups*: Ensure data integrity by setting up both crash-consistent and VM-consistent backup mechanisms.
 
-*VM restore operations*: Execute virtual machine restore processes to recover data and maintain system availability.
+** *VM restore operations*: Execute virtual machine restore processes to recover data and maintain system availability.
 
-*Storage efficiency*: ONTAP provides a comprehensive suite of storage efficiency technologies designed to minimize the storage required for data. These technologies not only reduce storage consumption but also enhance system performance, delivering rapid VM provisioning, streamlined dataset copies, and efficient data management.
+* *Storage efficiency*: ONTAP provides a comprehensive suite of storage efficiency technologies designed to minimize the storage required for data. These technologies not only reduce storage consumption but also enhance system performance, delivering:
+** Rapid VM provisioning: Streamline the provisioning of virtual machines for quicker deployment.
+** Quicker Dataset Copies: Speed up the duplication of datasets for efficient data management.
 
 === Prerequisites
 
 Ensure you have completed the following before proceeding:
 
-* Working Proxmox Virtual Environment (PVE) 8.x or later cluster
+* Working Proxmox Virtual Environment (PVE) 8.x or later cluster.
 * ONTAP All Flash FAS (AFF) storage with NFS and iSCSI protocol enabled at the SVM level. For instructions, see link:proxmox-ontap-nfs.html[Configure NFS datastores with ONTAP].
-* Proxmox hosts and ONTAP storage are network reachable from the SMP host
+* Proxmox hosts and ONTAP storage are network reachable from the SMP host.
 
 == Install and set up Storage Manager for Proxmox
 
@@ -111,7 +113,7 @@ Ensure the following prerequisites are met:
 
 .About this task
 
-Once the connectivity is established between the hypervisor and storage, configuration takes a couple of clicks and about 2 minutes.
+After the connectivity is established between the hypervisor and storage, configuration takes a couple of clicks and about 2 minutes.
 
 === Add a plan
 
