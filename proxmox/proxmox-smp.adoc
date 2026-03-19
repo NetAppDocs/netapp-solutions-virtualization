@@ -40,8 +40,8 @@ Each component of SMP is designed to enhance storage management efficiency:
 ** *VM restore operations*: Execute virtual machine restore processes to recover data and maintain system availability.
 
 * *Storage efficiency*: ONTAP provides a comprehensive suite of storage efficiency technologies designed to minimize the storage required for data. These technologies not only reduce storage consumption but also enhance system performance, delivering:
-** Rapid VM provisioning: Streamline the provisioning of virtual machines for quicker deployment.
-** Quicker Dataset Copies: Speed up the duplication of datasets for efficient data management.
+** *Rapid VM provisioning*: Streamline the provisioning of virtual machines for quicker deployment.
+** *Quicker Dataset Copies*: Speed up the duplication of datasets for efficient data management.
 
 === Prerequisites
 
@@ -99,7 +99,9 @@ image::proxmox-smp-image5.png[SMP user interface home screen]
 
 == Configure Storage Manager for Proxmox
 
-Once the storage and connectivity to both the storage and Proxmox nodes have been configured properly, configure SMP to automate the provisioning and protection of virtual machines leveraging ONTAP Snapshot and FlexClone functionalities.
+When the storage and connectivity to both the storage and Proxmox nodes have been configured properly, configure SMP to automate the provisioning and protection of virtual machines leveraging ONTAP Snapshot and FlexClone functionalities.
+
+The first step is to discover and add the ONTAP storage endpoint and then the target Proxmox nodes to SMP.
 
 .Before you begin
 
@@ -114,10 +116,6 @@ Ensure the following prerequisites are met:
 .About this task
 
 After the connectivity is established between the hypervisor and storage, configuration takes a couple of clicks and about 2 minutes.
-
-=== Add a plan
-
-The first step is to discover and add the ONTAP storage endpoint and then the target Proxmox nodes to SMP.
 
 .Steps
 
