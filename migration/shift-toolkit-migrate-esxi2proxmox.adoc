@@ -55,7 +55,7 @@ NOTE: The VMware tools removal happens on the destination hypervisor once the VM
 
 ** Ensure the ISO specified in the link is used as the preparation script use .msi package to install the drivers and qemu-guest-agents. Once the pre-requisites are in place, login to Shift toolkit UI and configure the site with Proxmox VE as the destination hypervisor. To add, click on “Add New Site” and select “Destination”.
 
-== Step 1: Add the destination site (Hyper-V)
+== Step 1: Add the destination site (Proxmox VE)
 
 Add the destination Proxmox VE environment to the Shift Toolkit.
 
@@ -160,7 +160,7 @@ image::shift-toolkit-455.png[VM selection]
 image::shift-toolkit-456.png[Migration details]
 ====
 +
-NOTE: Ensure the destination path (where the converted VMs are stored) is set to a qtree when converting VMs from ESXi to Hyper-V. Multiple qtrees can be created and used for storing converted VM disks.
+NOTE: Ensure the destination path (where the converted VMs are stored) is set to a qtree when converting VMs from ESXi to Proxmox VE. Multiple qtrees can be created and used for storing converted VM disks.
 +
 NOTE: Multiple qtrees can be created and used for storing the converted VM disks accordingly.
 
@@ -311,7 +311,7 @@ When prepareVM completes successfully, the blueprint status updates to "Active."
 
 == Step 4: Execute the migration
 
-Trigger the migration workflow to convert VMs from VMware ESXi to Microsoft Hyper-V.
+Trigger the migration workflow to convert VMs from VMware ESXi to Proxmox VE.
 
 .Before you begin
 
@@ -319,7 +319,6 @@ Trigger the migration workflow to convert VMs from VMware ESXi to Microsoft Hype
 * Ensure the Shift VM is part of the domain
 * Ensure CIFS share is configured with appropriate permissions
 * The qtree used for migration or conversion has the right security style
-* As a quick test, try creating a VM using Hyper-V Manager from any Hyper-V host within the cluster and place the VHDX on the CIFS share
 
 .Steps
 
@@ -351,7 +350,7 @@ image::shift-toolkit-467.png[Migration complete]
 .Show example
 [%collapsible]
 ====
-image::shift-toolkit-468.png[VMs in Hyper-V Manager]
+image::shift-toolkit-468.png[VMs in Proxmox VE]
 ====
 
 == Shift toolkit workflow
