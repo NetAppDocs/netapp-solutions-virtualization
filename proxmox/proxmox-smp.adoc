@@ -715,11 +715,3 @@ image::proxmox-smp-image45.png[SMP Dashboard showing cluster health, VM distribu
 
 == Summary
 Storage Manager for Proxmox delivers a streamlined and unified way to manage protection, cloning, and recovery operations across Proxmox environments. By integrating directly with ONTAP, the solution brings the efficiency, reliability, and performance of enterprise-class storage into everyday VM workflows. ONTAP's space-efficient snapshots, rapid cloning capabilities, and built-in replication provide consistent and predictable data protection, while SMP simplifies these capabilities into an intuitive, task-focused interface.
-
-== Related information
-
-To learn more, review the following related topics:
-
-* link:proxmox-ontap.html[Learn about Proxmox Virtual Environment with ONTAP]
-* link:proxmox-ontap-nfs.html[Configure NFS datastores with ONTAP]
-* link:proxmox-ontap-iscsi.html[Configure iSCSI datastores with ONTAP]
