@@ -47,8 +47,8 @@ Each component of SMP is designed to enhance storage management efficiency:
 
 Ensure you have completed the following before proceeding:
 
-* Working Proxmox Virtual Environment (PVE) 8.x or later cluster.
-* ONTAP All Flash FAS (AFF) storage with NFS and iSCSI protocol enabled at the SVM level. For instructions, see link:proxmox-ontap-nfs.html[Configure NFS datastores with ONTAP].
+* Working Proxmox Virtual Environment (PVE) 9.x or later cluster.
+* ONTAP All Flash FAS (AFF) storage with NFS and iSCSI protocol enabled at the SVM level. For instructions, see link:proxmox-ontap-nfs.html[Configure NFS datastores with ONTAP] and link:proxmox-ontap-iscsi.html[Configure Proxmox VE 9.x for iSCSI with ONTAP storage].
 * Proxmox hosts and ONTAP storage are network reachable from the SMP host.
 
 == Install and set up Storage Manager for Proxmox
@@ -75,12 +75,6 @@ NOTE: No extra package dependencies are required because SMP leverages the avail
 [%collapsible]
 ====
 image::proxmox-smp-image2.png[SMP installation wizard]
-====
-+
-.View SMP service running
-[%collapsible]
-====
-image::proxmox-smp-image3.png[SMP service running after installation]
 ====
 
 . Open a web browser and access the SMP UI by entering `\http://<IP address specified during installation>:4001`
@@ -139,7 +133,7 @@ You can add ONTAP using either the cluster endpoint or the SVM management LIF.
 .. Cluster IP address or FQDN
 .. Username to access the ONTAP cluster
 .. Password to access the ONTAP cluster
-.. Select *Accept Self signed certificate* and click *Continue*
+.. Select *Accept Self signed certificate* and click *Add Storage Cluster*
 +
 .View Add ONTAP: cluster endpoint
 [%collapsible]
@@ -151,7 +145,7 @@ image::proxmox-smp-image7.png[Add ONTAP dialog for cluster endpoint credentials]
 .. SVM management LIF or FQDN
 .. Username to access the SVM
 .. Password to access the SVM
-.. Select *Accept Self signed certificate* and click *Continue*
+.. Select *Accept Self signed certificate* and click *Add Storage Cluster*
 +
 .View Add ONTAP: SVM management LIF
 [%collapsible]
@@ -204,7 +198,7 @@ image::proxmox-smp-image11.png[SMP Plan discovery showing VMs and associated met
 * Ensure the ONTAP storage system is added first, so the discovery job can map existing resources accordingly. If Proxmox is added first, run a discovery job against ONTAP.
 * If the credential or API token requires an update later, navigate to *Settings* and select the *Update Credentials* option.
 
-.View Plan overview
+.View Update Credentials
 [%collapsible]
 ====
 image::proxmox-smp-image12.png[SMP Plan overview after successful configuration]
@@ -420,9 +414,9 @@ When SMP provisions new ONTAP FlexVol volumes and LUNs, several default configur
 
 === NConnect behavior
 
-When using NFS storage with Proxmox VE, be aware of specific behavior in the Linux NFS client (as used by Debian, the base OS for Proxmox VE). The Linux kernel may reuse the mount parameters from the first time an NFS export is mounted on a node. If the same export is mounted again with different mount options, those new options may not be applied.
+When using NFS storage with Proxmox VE, be aware of specific behavior in the Linux NFS client (as used by Debian, the base OS for Proxmox VE). The Linux kernel may reuse the mount parameters from the first time an NFS export is mounted on a node. If the same export is mounted again with different mount options, those new options may not be applied. 
 
-As a best practice, create and mount separate exports and use different NFS server IP addresses, such as distinct data LIFs.
+As a best practice, create and mount separate exports and use different NFS server IP addresses, such as distinct data LIFs. SMP automatically detects existing connections along with their associated nconnect values and applies the appropriate nconnect value to any new connections.
 
 == Protect virtual machines
 
@@ -454,23 +448,26 @@ image::proxmox-smp-image27.png[SMP Protect Backup page listing Proxmox virtual m
 image::proxmox-smp-image28.png[Backup dialog showing VM selection and backup options]
 ====
 
-. The backup workflow allows selection between crash-consistent and file-consistent protection. File-consistent mode optionally uses QEMU fsfreeze to ensure in-guest filesystem quiescence before the snapshot is taken.
+. The backup workflow allows selection between crash-consistent and file-consistent protection.
 +
-NOTE: ONTAP snapshots are taken at the volume level, capturing all VM disks and configuration files within the NFS datastore in a single snapshot. When VM-consistent protection is selected, Proxmox snapshots are created only for the chosen VMs; all other VMs in the volume are included as crash-consistent within the same ONTAP snapshot.
+File-consistent mode optionally uses QEMU fsfreeze to ensure in-guest filesystem quiescence before the snapshot is taken. If fsfreeze fails, the system falls back to using a Proxmox snapshot.
++
+NOTE: This fallback mechanism applies only to virtual machines stored on NFS volumes.
 +
 .View Backup dialog: consistency options
 [%collapsible]
 ====
 image::proxmox-smp-image29.png[Backup dialog showing crash-consistent and file-consistent protection options]
 ====
-
-. During the backup process, a temporary Proxmox snapshot is taken, the ONTAP snapshot is created, and the Proxmox snapshot is subsequently removed.
 +
 .View Backup progress
 [%collapsible]
 ====
 image::proxmox-smp-image30.png[Backup progress showing temporary Proxmox snapshot and ONTAP snapshot creation]
 ====
++
+NOTE: ONTAP snapshots are taken at the volume level, capturing all VM disks and configuration files within the NFS datastore in a single snapshot. When VM-consistent protection is selected, Proxmox snapshots are created only for the chosen VMs; all other VMs in the volume are included as crash-consistent within the same ONTAP snapshot.
+
 
 .Additional backup options
 
@@ -504,7 +501,7 @@ image::proxmox-smp-image31.png[Resource Group tab with option to create a new re
 image::proxmox-smp-image32.png[Create Resource Group dialog with VM and datastore selection options]
 ====
 
-NOTE: Backups taken at the datastore (volume) level are always crash-consistent. A resource group can contain only one resource type: either VMs or datastores. For iSCSI-based storage, backups are always crash-consistent. Support for the QEMU fsfreeze method will be introduced in the next release.
+NOTE: Backups taken at the datastore (volume) level are always crash-consistent. A resource group can contain only one resource type: either VMs or datastores. For iSCSI-based storage, backups are always crash-consistent.
 
 === Backup workflow details
 
@@ -628,6 +625,20 @@ NOTE: When a storage-level restore is initiated, all virtual machines on that vo
 ====
 image::proxmox-smp-image40.png[Storage-level restore displaying all VMs on the selected volume]
 ====
+
+=== Restore workflow details
+
+The restore workflow varies depending on the underlying storage type and involves the following key steps:
+
+. *Define the restore scope*: Select whether the protection target is a datastore (ONTAP volume), a resource group (multiple volumes or VMs), or individual VM.
+
+. *Execute the restore operation*: The VM restore process differs based on storage protocol:
+
+* *NFS-based restores*: When restoring a volume or datastore on NFS, SMP initiates a volume snap restore operation on the target volume. For VMs hosted on NFS volumes, SMP validates the restore parameters including VM ID, snapshot name, site IDs, and storage type. If the VM is running, SMP stops it by polling its status and issuing a stop command. The system then restores VM disks from the snapshot using a file-level restore operation.
+
+* *iSCSI-based restores*: For iSCSI datastores or LUNs, SMP restores the LUN from the snapshot, verifies the restored device, performs an iSCSI rescan across Proxmox nodes, and ensures device accessibility. For VMs residing on iSCSI storage, SMP clones the snapshot LUNs, maps the cloned LUNs to the Proxmox host, and performs iSCSI discovery to import them. The restored storage is then added, and VM configurations are updated. VM disks are moved back to their original storage with progress tracked per VM. The process concludes with cleanup activities, including the removal of temporary storage and deletion of cloned LUNs.
+
+By default, clone is performed against the active file system. The clone workflow also allows selection of a snapshot, in which case file clones are performed using a new volume created from the selected snapshot.
 
 == Clone virtual machines
 
