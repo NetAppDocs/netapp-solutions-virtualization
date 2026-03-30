@@ -275,14 +275,42 @@ image::proxmox-smp-image16.png[Proxmox Details section for NFS datastore configu
 .View NFS provisioning result
 [%collapsible]
 ====
-image::proxmox-smp-image17.png[NFS datastore provisioning completed successfully]
+image::proxmox-smp-image18.png[NFS datastore provisioning completed successfully]
 ====
 +
 .View NFS datastore in Proxmox
 [%collapsible]
 ====
-image::proxmox-smp-image18.png[NFS datastore registered in Proxmox cluster]
+image::proxmox-smp-image17.png[NFS datastore registered in Proxmox cluster]
 ====
+
+==== Edit a provisioned volume
+
+Use SMP to modify volume settings after provisioning.
+
+.Steps
+
+. In the SMP GUI, locate the volume in the *Provision* tab.
+
+. Click the three vertical dots (⋮) next to the volume.
+
+. Select *Edit* from the context menu to open the volume settings.
+
+. Modify the volume settings as needed:
++
+* *Resize volume*: Adjust the volume's storage capacity
++
+NOTE: Resizing is applicable to NFS volumes only.
++
+* *Snapshot Locking*: Enable to prevent snapshots from being deleted or altered
++
+NOTE: This requires the SnapLock license to be installed on the cluster, and the cluster's compliance clock must be initialized.
++
+* *Anti-Ransomware Protection*: Enable to proactively detect and alert on unusual activity that could signal a ransomware attack
++
+* *Export policy*: Update or modify the export policy
+
+. Click *Save* to apply the changes.
 
 === Provision iSCSI storage
 
