@@ -275,6 +275,7 @@ image::proxmox-smp-image16.png[Proxmox Details section for NFS datastore configu
 .View NFS provisioning result
 [%collapsible]
 ====
+image::proxmox-smp-image18a.png[NFS volume provisioning in progress]
 image::proxmox-smp-image18.png[NFS datastore provisioning completed successfully]
 ====
 +
@@ -295,6 +296,12 @@ Use SMP to modify volume settings after provisioning.
 . Click the three vertical dots (⋮) next to the volume.
 
 . Select *Edit* from the context menu to open the volume settings.
++
+.View Edit Volume dialog
+[%collapsible]
+====
+image::proxmox-smp-image18b.png[Edit Volume dialog showing volume configuration options]
+====
 
 . Modify the volume settings as needed:
 +
