@@ -49,6 +49,39 @@ Ensure you have completed the following before proceeding:
 
 * Working Proxmox Virtual Environment (PVE) 9.x or later cluster.
 * ONTAP All Flash FAS (AFF) storage with NFS and iSCSI protocol enabled at the SVM level. For instructions, see link:proxmox-ontap-nfs.html[Configure NFS datastores with ONTAP] and link:proxmox-ontap-iscsi.html[Configure Proxmox VE 9.x for iSCSI with ONTAP storage].
++
+[NOTE]
+====
+For iSCSI LUN configuration, the following should be enabled:
+
+*Install multi-path and iSCSI on all Proxmox hosts:*
+----
+apt update
+apt install open-iscsi multipath-tools -y
+systemctl enable --now iscsid multipathd
+----
+
+*Configure iSCSI initiator and connect via iSCSI (on Proxmox hosts):*
+
+Create or update `/etc/multipath.conf`:
+----
+touch /etc/multipath.conf
+----
+
+Or use:
+----
+cat << 'EOF' > /etc/multipath.conf
+defaults {
+   user_friendly_names yes
+   find_multipaths yes
+}
+blacklist {
+   devnode "^sd[a]$"
+}
+EOF
+----
+====
+
 * Proxmox hosts and ONTAP storage are network reachable from the SMP host.
 
 == Install and set up Storage Manager for Proxmox
