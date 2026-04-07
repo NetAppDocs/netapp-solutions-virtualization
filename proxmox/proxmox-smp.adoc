@@ -109,6 +109,18 @@ NOTE: No extra package dependencies are required because SMP leverages the avail
 ====
 image::proxmox-smp-image2.png[SMP installation wizard]
 ====
++
+*Alternative installation using Shift toolkit*
++
+As an alternative to the standalone installer, you can install Proxmox VE Storage Manager through Shift toolkit:
++
+* Open Shift Toolkit
+* Navigate to *Settings* > *Advanced* > *Storage Manager*
+* Enable Proxmox VE using the toggle switch
+* Wait for the system to automatically install the necessary components
+* Once installation is complete, access Storage Manager by clicking *View* or by opening a web browser to `\https://<Shift_server_IP>:4001`
++
+For example: `\https://10.61.187.117:4001`
 
 . Open a web browser and access the SMP UI by entering `\http://<IP address specified during installation>:4001`
 +
