@@ -7,6 +7,7 @@ summary: "Storage Manager for Proxmox (SMP) provides comprehensive storage provi
 = Configure and use Storage Manager for Proxmox
 :icons: font
 :imagesdir: ../media/
+:linkattrs:
 
 [.lead]
 Storage Manager for Proxmox (SMP) provides comprehensive storage provisioning and lifecycle management for virtual machines in Proxmox environments using NetApp ONTAP storage systems. SMP enables administrators to manage storage directly, simplifying operations through automated provisioning, backup, restore, and cloning capabilities.
@@ -35,7 +36,7 @@ Each component of SMP is designed to enhance storage management efficiency:
 
 * *Backup and recovery*: Perform reliable backups and swift recoveries to ensure data integrity and availability.
 
-** *Crash-consistent and file-consistent backups*: Ensure data integrity by setting up both crash-consistent and VM-consistent backup mechanisms.
+** *Crash-consistent and file-consistent backups*: Ensure data integrity by setting up both crash-consistent and file-consistent backup mechanisms.
 
 ** *VM restore operations*: Execute virtual machine restore processes to recover data and maintain system availability.
 
@@ -54,7 +55,8 @@ Ensure you have completed the following before proceeding:
 ====
 For iSCSI LUN configuration, the following should be enabled:
 
-*Install multi-path and iSCSI on all Proxmox hosts:*
+*Install multipath and iSCSI on all Proxmox hosts:*
+[source,shell]
 ----
 apt update
 apt install open-iscsi multipath-tools -y
@@ -64,11 +66,13 @@ systemctl enable --now iscsid multipathd
 *Configure iSCSI initiator and connect via iSCSI (on Proxmox hosts):*
 
 Create or update `/etc/multipath.conf`:
+[source,shell]
 ----
 touch /etc/multipath.conf
 ----
 
 Or use:
+[source,shell]
 ----
 cat << 'EOF' > /etc/multipath.conf
 defaults {
@@ -118,11 +122,11 @@ As an alternative to the standalone installer, you can install Proxmox VE Storag
 * Navigate to *Settings* > *Advanced* > *Storage Manager*.
 * Enable Proxmox VE using the toggle switch.
 * Wait for the system to automatically install the necessary components.
-* After installation is complete, access Storage Manager by clicking *View* or by opening a web browser to `\https://<Shift_server_IP>:4001`
+* After installation is complete, access Storage Manager by clicking *View* or by opening a web browser to `https://<Shift_server_IP>:4001`
 +
-For example: `\https://10.61.187.117:4001`
+For example: `https://10.61.187.117:4001`
 
-. Open a web browser and access the SMP UI by entering `\http://<IP address specified during installation>:4001`
+. Open a web browser and access the SMP UI by entering `http://<IP address specified during installation>:4001`
 +
 .View SMP login screen
 [%collapsible]
@@ -148,7 +152,7 @@ Ensure the following prerequisites are met:
 
 * SMP is installed
 * SMP instance has connectivity to the Proxmox nodes and storage systems
-* NetApp Data ONTAP cluster to provide NFS or iSCSI storage pools
+* ONTAP cluster to provide NFS or iSCSI storage pools
 * DNS resolution is in place when using DNS names. Otherwise, use IP addresses for discovery.
 * The environment has supported versions of Proxmox Virtual Environment servers
 
@@ -178,7 +182,7 @@ You can add ONTAP using either the cluster endpoint or the SVM management LIF.
 .. Cluster IP address or FQDN
 .. Username to access the ONTAP cluster
 .. Password to access the ONTAP cluster
-.. Select *Accept Self signed certificate* and click *Add Storage Cluster*
+.. Select *Accept self-signed certificate* and click *Add Storage Cluster*
 +
 .View Add ONTAP: cluster endpoint
 [%collapsible]
@@ -190,7 +194,7 @@ image::proxmox-smp-image7.png[Add ONTAP dialog for cluster endpoint credentials]
 .. SVM management LIF or FQDN
 .. Username to access the SVM
 .. Password to access the SVM
-.. Select *Accept Self signed certificate* and click *Add Storage Cluster*
+.. Select *Accept self-signed certificate* and click *Add Storage Cluster*
 +
 .View Add ONTAP: SVM management LIF
 [%collapsible]
@@ -206,7 +210,7 @@ To add Proxmox nodes, specify the IP address of one of the existing Proxmox node
 .. Proxmox standalone IP address or FQDN
 .. Username to access Proxmox
 .. Password to access Proxmox host for performing inventory of the resources
-.. Select *Accept Self signed certificate* and click *Continue*
+.. Select *Accept self-signed certificate* and click *Continue*
 +
 .View Add Proxmox: node credentials
 [%collapsible]
