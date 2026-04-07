@@ -112,13 +112,13 @@ image::proxmox-smp-image2.png[SMP installation wizard]
 +
 *Alternative installation using Shift toolkit*
 +
-As an alternative to the standalone installer, you can install Proxmox VE Storage Manager through Shift toolkit:
+As an alternative to the standalone installer, you can install Proxmox VE Storage Manager using Shift toolkit:
 +
-* Open Shift Toolkit
-* Navigate to *Settings* > *Advanced* > *Storage Manager*
-* Enable Proxmox VE using the toggle switch
-* Wait for the system to automatically install the necessary components
-* Once installation is complete, access Storage Manager by clicking *View* or by opening a web browser to `\https://<Shift_server_IP>:4001`
+* Open Shift Toolkit.
+* Navigate to *Settings* > *Advanced* > *Storage Manager*.
+* Enable Proxmox VE using the toggle switch.
+* Wait for the system to automatically install the necessary components.
+* After installation is complete, access Storage Manager by clicking *View* or by opening a web browser to `\https://<Shift_server_IP>:4001`
 +
 For example: `\https://10.61.187.117:4001`
 
@@ -546,7 +546,7 @@ image::proxmox-smp-image29.png[Backup dialog showing crash-consistent and file-c
 image::proxmox-smp-image30.png[Backup progress showing temporary Proxmox snapshot and ONTAP snapshot creation]
 ====
 +
-NOTE: ONTAP snapshots are taken at the volume level, capturing all VM disks and configuration files within the NFS datastore in a single snapshot. When VM-consistent protection is selected, Proxmox snapshots are created only for the chosen VMs; all other VMs in the volume are included as crash-consistent within the same ONTAP snapshot.
+NOTE: ONTAP snapshots are taken at the volume level, capturing all VM disks and configuration files within the NFS datastore in a single snapshot. When VM-consistent protection is selected, fsfreeze is issued only against the chosen VMs; all other VMs in the volume are included as crash-consistent within the same ONTAP snapshot.
 
 
 .Additional backup options
@@ -590,16 +590,15 @@ The high-level backup workflow includes:
 . *Define the protection scope*: Select whether the protection target is a datastore (ONTAP volume), a resource group (multiple volumes or VMs), or individual VM.
 
 . *Confirm the consistency method*: Choose how consistency is created before the ONTAP snapshot:
-** A temporary Proxmox VM snapshot (common for qcow2 on NFS)
-** QEMU guest agent freeze/thaw for in-guest filesystem quiescing and Windows VSS integration
+** QEMU guest agent freeze/thaw for in-guest filesystem quiescing and Windows VSS integration.
 
-. *Create temporary Proxmox snapshots*: For the VMs in scope, create short-lived Proxmox snapshots to stabilize disk state and dump the VM config files.
+. *Dump the VM config files*.
 
 . *Take the ONTAP snapshot*: Capture an ONTAP snapshot of the datastore volume while the VMs are in a consistent state. This becomes the retained backup copy.
 
-. *Remove temporary Proxmox snapshots*: Delete the Proxmox snapshots after the ONTAP snapshot completes to prevent delta-file growth.
+. *Remove temporary Proxmox snapshots*: Delete the Proxmox snapshots after the ONTAP snapshot completes to prevent delta file growth.
 
-. *Apply retention and replication policies*: Apply the configured ONTAP retention policy and replicate the snapshot set if disaster recovery replication is enabled.
+. *Apply retention and replication policies (using policies)*: Apply the configured ONTAP retention policy and replicate the snapshot set if disaster recovery replication is enabled.
 
 This approach minimizes storage space and network bandwidth by storing only changed information. Use Snapshot copies to make quick copies of the VM or datastore without affecting performance and then send them to a secondary system by using NetApp SnapMirror technology for longer-term, off-site data protection.
 
@@ -623,7 +622,7 @@ image::proxmox-smp-image33.png[Backup Policies page with option to add a new pol
 .. Choose the *Target* based on the selected type
 .. Set the *Backup Frequency* (hourly, daily, weekly, or monthly)
 .. Configure *Retention*, using either "Days to Keep" or "Number to Keep" (default retention value is 7)
-.. Choose the *Replication Mode*:
+.. Choose the *Replication Mode* (disabled in the current release):
 *** Update SnapMirror after backup
 *** Update SnapVault after backup
 +
@@ -718,8 +717,6 @@ The restore workflow varies depending on the underlying storage type and involve
 
 * *iSCSI-based restores*: For iSCSI datastores or LUNs, SMP restores the LUN from the snapshot, verifies the restored device, performs an iSCSI rescan across Proxmox nodes, and ensures device accessibility. For VMs residing on iSCSI storage, SMP clones the snapshot LUNs, maps the cloned LUNs to the Proxmox host, and performs iSCSI discovery to import them. The restored storage is then added, and VM configurations are updated. VM disks are moved back to their original storage with progress tracked per VM. The process concludes with cleanup activities, including the removal of temporary storage and deletion of cloned LUNs.
 
-By default, clone is performed against the active file system. The clone workflow also allows selection of a snapshot, in which case file clones are performed using a new volume created from the selected snapshot.
-
 == Clone virtual machines
 
 Use SMP to create clones of virtual machines for development, testing, or rapid provisioning.
@@ -773,6 +770,8 @@ image::proxmox-smp-image43.png[Cloned VMs appearing in Backup and Clone lists]
 SMP automates rapid VM cloning by offloading the heavy lifting to ONTAP to perform storage-side clones instead of host-side file copies. Under the covers, SMP taps ONTAP FlexClone semantics (snapshot-based, writable, space-efficient clones) so clones are created quickly and consume little capacity initially; it avoids data reads/writes through the Proxmox host where possible.
 
 This approach accelerates VM provisioning by pushing clone work into ONTAP, delivering fast, thin, storage-efficient clones suitable for Dev/Test, labs, and rapid refresh cycles.
+
+By default, clone is performed against the active file system. The clone workflow also allows selection of a snapshot, in which case file clones are performed using a new volume created from the selected snapshot.
 
 == Monitor operations
 
