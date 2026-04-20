@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: openshift/osv-storage-getting-started.html
 keywords: Trident, Trident, persistent storage
-summary: NetApp provides a number of products which assist our customers with orchestrating and managing persistent data in container based environments, like Red Hat OpenShift.
+summary: NetApp provides a number of products which assist our customers with orchestrating and managing persistent data in container based environments, like Red Hat OpenShift
 ---
 
 = Learn about NetApp Trident integration with Red Hat OpenShift
