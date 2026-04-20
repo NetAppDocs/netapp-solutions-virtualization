@@ -16,7 +16,7 @@ entries:
     pdf-filename: "Red Hat OpenShift Storage and Virtualization"
     entries:
     - title: "Getting Started with Storage"
-      url: /openshift/osv-storage-getting-started.html"
+      url: /openshift/osv-storage-getting-started.html
     - title: "Storage Provisioning"
       url: /openshift/osv-trident-install.html
       #url: /openshift/osv-storage-provisioning.html
