@@ -197,8 +197,8 @@ parameters:
 allowVolumeExpansion: true
 ----
 
+--
 
-====
 .NAS economy
 --
 
@@ -244,9 +244,8 @@ The value is the maximum FlexVol size that you request when using qtrees in onta
 **denyNewVolumePools** 
 This parameter restricts ontap-nas-economy backends from creating new FlexVol volumes to contain their qtrees. Only preexisting Flexvols are used for provisioning new PVs. 
 
-====
+--
 
-====
 .SAN and SAN economy
 --
 The following parameters can be included for SAN driver configuration:
@@ -263,9 +262,9 @@ The following parameters can be included for SAN economy driver configuration:
 The value is the maximum FlexVol size that you request when using SAN economy backend. No default value is set, and this parameter is not enforced by default. If you set this parameter, the Trident operator limits the maximum flexvol size that can be create for creating LUNs in the flexvol. This parameter can help you control capacity utilization in your cluster by restricting the size of FlexVols used for provisioning PVs.
 
 **denyNewVolumePools** This parameter restricts SAN economy backends from creating new FlexVol volumes to contain their LUNs. Only preexisting Flexvols are used for provisioning new PVs.
-====
+--
 
-====
+
 .iSCSI SAN
 --
 
@@ -343,9 +342,9 @@ parameters:
   snapshots: "true"
 allowVolumeExpansion: true
 ----
-====
 
-====
+--
+
 .NVMe/TCP SAN
 --
 Create a TridentBackendConfig and StorageClass for ONTAP SAN with NVMe over TCP to enable high-performance block storage provisioning. The backend configuration uses the ontap-san driver optimized for NVMe/TCP transport and includes credentials stored in a Kubernetes Secret.
@@ -430,9 +429,8 @@ allowVolumeExpansion: true
 NOTE: If you plan to use ReadWriteMany (RWX) volumes with the NVMe protocol, a single RWX NVMe volume cannot be mounted by more than 64 nodes in a Kubernetes cluster.
 For more information about this limitation and information about the Super-subsystem model introduced in Trident 26.02 and the Per-volume subsystem model prior to Trident 26.02, see the Trident documentation: https://docs.netapp.com/us-en/trident/trident-use/ontap-san-prep.html#nvme-tcp-considerations.
 
-====
+--
 
-====
 .FC SAN
 --
 Create a TridentBackendConfig and StorageClass for ONTAP SAN with Fibre Channel to enable FC-based block storage provisioning. The backend configuration uses the ontap-san driver with the FCP protocol specified and includes credentials stored in a Kubernetes Secret.
@@ -517,7 +515,8 @@ parameters:
   snapshots: "true"
 allowVolumeExpansion: true
 ----
-====
+
+--
 
 
 Review the Trident documentation for additional samples of yaml files, and information on access modes and volume modes supported by SAN drivers and NAS drivers.
