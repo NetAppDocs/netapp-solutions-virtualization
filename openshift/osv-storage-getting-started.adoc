@@ -12,7 +12,7 @@ summary: NetApp provides a number of products which assist our customers with or
 :linkattrs:
 :imagesdir: ../media/
 
-.lead
+[.lead]
 Storage is crucial in containerized applications, ensuring data is persistently available and efficiently managed across dynamic and often ephemeral environments. Modern storage solutions for containers are designed to scale seamlessly with applications, providing the flexibility to dynamically allocate storage resources based on application needs, supporting both growth and varying workloads. Since OpenShift Virtualization enables the VMs to run as containers, they use the same storage as other applications in the OpenShift Clusters. 
 
 NetApp ONTAP is a robust and highly scalable data management software that serves as the backbone for NetApp's enterprise-grade storage solutions. It provides a unified storage architecture that integrates seamlessly with various storage environments, including on-premises, cloud, and hybrid setups. ONTAP supports a variety of protocols such as NFS, CIFS/SMB, iSCSI, FC, and NVMe over TCP, allowing for seamless integration with different applications and workloads. It enables the consolidation of SAN, NAS, and object storage into a single platform, simplifying management and reducing costs. NetApp ONTAP is available on-premises as well as managed services in the cloud. 
@@ -33,7 +33,7 @@ Trident supports drivers for ONTAP storage on-premises and managed storage servi
 **Advanced Data Management**
 Leveraging ONTAP's snapshot and cloning capabilities for efficient data protection and rapid provisioning of test and development environments.
 
-For complete details on Trident, refer to NetApp Trident [documentation here](https://docs.netapp.com/us-en/trident/).
+For complete details on Trident, refer to NetApp Trident link:(https://docs.netapp.com/us-en/trident/)[documentation here]
 
 == Trident Protect
 
@@ -56,9 +56,9 @@ Provides tools and features that help organizations meet compliance requirements
 **Disaster Recovery**
 Integrates with ONTAP's replication features to provide robust disaster recovery solutions, ensuring business continuity even in the face of catastrophic events.
 
-For complete details on Trident Protect, refer to NetApp Trident Protect [documentation here](https://docs.netapp.com/us-en/trident/trident-protect/learn-about-trident-protect.html).
+For complete details on Trident Protect, refer to NetApp Trident Protect link:(https://docs.netapp.com/us-en/trident/trident-protect/learn-about-trident-protect.html)[documentation here].
 
-== NetApp ONTAP hardware models and Trident drivers
+== NetApp ONTAP hardware models and Protocols supported
 NetApp ONTAP software runs on a variety of hardware models, each designed to cater to different performance and capacity requirements. Trident extends its robust capabilities to support various NetApp ONTAP systems, including All Flash FAS (AFF), All SAN Array (ASA), and ASA R2 systems. This support ensures that organizations can leverage the full potential of their high-performance storage solutions in containerized environments.
 
 **All Flash FAS (AFF) Systems**
@@ -78,10 +78,10 @@ NetApp AFX is a purpose-built, disaggregated, all-flash storage architecture des
 .   Protocols supported for ASA R2: iSCSI, FC, NVMe/TCP
 .   Protocols supported for AFX: Starting with Trident 25.10, only NFS protocol is supported; SMB protocol is not supported.
 
-
+== Trident drivers for ONTAP storage
 Trident includes the following CSI drivers, each capable of provisioning a volume in the backend storage 
 
-**For NAS protocols on supported hardware models**
+=== For NAS protocols on supported hardware models
 
 1.	ontap-nas: One pvc maps to 1 pv which is a dedicated flexvolume
 
@@ -93,7 +93,7 @@ However, please be aware that Snapshots, Clones and Replication features are not
 
 3.  ontap-nas-flexgroup: Each PV provisioned as a full ONTAP FlexGroup, and all aggregates assigned to a SVM are used.
 
-**For SAN protocols on supported hardware models**
+=== For SAN protocols on supported hardware models
 
 3.	ontap-san: One pvc maps to 1 pv which is a LUN on dedicated flexvolume
 

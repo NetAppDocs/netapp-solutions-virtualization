@@ -196,7 +196,7 @@ parameters:
   snapshots: "true"
 allowVolumeExpansion: true
 ----
-====
+
 
 ====
 .NAS economy
@@ -583,8 +583,8 @@ allowVolumeExpansion: true
 reclaimPolicy: Retain
 ----
 
---
 
+====
 .iSCSI
 --
 Create a TridentBackendConfig and StorageClass for Amazon FSx for NetApp ONTAP with ONTAP SAN to enable iSCSI-based block storage provisioning on ROSA clusters. The backend configuration uses the ontap-san driver and includes credentials stored in a Kubernetes Secret. Ensure that worker nodes are prepared for iSCSI access.
@@ -636,7 +636,7 @@ parameters:
 allowVolumeExpansion: true
 ----
 
---
+
 ====
 
 == Step 3: Create a VolumeSnapshotClass configuration file
