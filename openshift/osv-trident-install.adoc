@@ -111,8 +111,8 @@ NOTE: In the sample yaml files provided for each protocol, if storagePrefix is n
 [role="tabbed-block"]
 ====
 .NAS
---
 
+--
 Create a TridentBackendConfig and StorageClass for ONTAP NAS to enable NFS-based persistent storage provisioning. The backend configuration includes credentials stored in a Kubernetes Secret and references your ONTAP SVM and management LIF. 
 
 
@@ -196,12 +196,11 @@ parameters:
   snapshots: "true"
 allowVolumeExpansion: true
 ----
-
 --
 
 .NAS economy
---
 
+--
 Create a TridentBackendConfig and StorageClass for ONTAP NAS economy driver to enable NFS-based persistent storage provisioning using qtrees. The backend configuration includes credentials stored in a Kubernetes Secret and references your ONTAP SVM and management LIF. 
 
 
@@ -247,6 +246,7 @@ This parameter restricts ontap-nas-economy backends from creating new FlexVol vo
 --
 
 .SAN and SAN economy
+
 --
 The following parameters can be included for SAN driver configuration:
 **limitVolumeSize** 
@@ -262,12 +262,13 @@ The following parameters can be included for SAN economy driver configuration:
 The value is the maximum FlexVol size that you request when using SAN economy backend. No default value is set, and this parameter is not enforced by default. If you set this parameter, the Trident operator limits the maximum flexvol size that can be create for creating LUNs in the flexvol. This parameter can help you control capacity utilization in your cluster by restricting the size of FlexVols used for provisioning PVs.
 
 **denyNewVolumePools** This parameter restricts SAN economy backends from creating new FlexVol volumes to contain their LUNs. Only preexisting Flexvols are used for provisioning new PVs.
+
 --
 
 
 .iSCSI SAN
---
 
+--
 Create a TridentBackendConfig and StorageClass for ONTAP SAN with iSCSI to enable iSCSI-based block storage provisioning. The backend configuration uses the ontap-san driver and includes credentials stored in a Kubernetes Secret. The sanType parameter defaults to iSCSI protocol if omitted.
 
 Backend secret and backend configuration file using username password authentication (save as `tbc-iscsi.yaml`):
@@ -346,6 +347,7 @@ allowVolumeExpansion: true
 --
 
 .NVMe/TCP SAN
+
 --
 Create a TridentBackendConfig and StorageClass for ONTAP SAN with NVMe over TCP to enable high-performance block storage provisioning. The backend configuration uses the ontap-san driver optimized for NVMe/TCP transport and includes credentials stored in a Kubernetes Secret.
 
@@ -432,6 +434,7 @@ For more information about this limitation and information about the Super-subsy
 --
 
 .FC SAN
+
 --
 Create a TridentBackendConfig and StorageClass for ONTAP SAN with Fibre Channel to enable FC-based block storage provisioning. The backend configuration uses the ontap-san driver with the FCP protocol specified and includes credentials stored in a Kubernetes Secret.
 
@@ -517,6 +520,7 @@ allowVolumeExpansion: true
 ----
 
 --
+====
 
 
 Review the Trident documentation for additional samples of yaml files, and information on access modes and volume modes supported by SAN drivers and NAS drivers.
