@@ -21,8 +21,7 @@ entries:
       url: /openshift/osv-trident-install.html
       #url: /openshift/osv-storage-provisioning.html
     - title: " Virtualization Layer"
-      url: /openshift/osv-virtualization-layer.html
-
+      url: /openshift/osv-deployment.html
   - title: "Migration"
     pdf-filename: "Red Hat OpenShift Virtualization Migration"
     entries:
@@ -43,7 +42,7 @@ entries:
       - title: "Backup and restore using NetApp Console B/R"
         url: /openshift/osv-data-protection-console-br.html
       - title: "Backup and restore using Trident Protect"
-        url: /openshift/osv-data-protection-trident-protect.html
+        url: /openshift/osv-vm-dp-using-tp.html
       - title: "Backup and restore using third party tools"
         url: /openshift/osv-data-protection-third-party-tools.html
 
