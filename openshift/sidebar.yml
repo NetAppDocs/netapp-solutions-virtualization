@@ -10,7 +10,7 @@ entries:
     pdf-filename: "Red Hat OpenShift Virtualization Design and Sizing Considerations"
     entries:
       - title: "Deployment models"
-        url: /openshift/osv-deployment-models.html
+        url: /openshift/osv-overview.html
 
   - title: "Getting Started "
     pdf-filename: "Red Hat OpenShift Storage and Virtualization"
