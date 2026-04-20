@@ -60,7 +60,7 @@ Another advantage of using Trident CSI:
 After you have set the Trident Storage Class as default for the cluster, you can create additional Storage Classes for Trident with different parameters and they will be automatically recognized by OpenShift Virtualization with appropriate storage profiles created for them. You can then specify the storage class to be used for the VM's boot disk and data disks in the VM definition.
 
 
-Installing OpenShift Virtualization on the OpenShift cluster is a straightforward process using the OpenShift Virtualization operator available in the OpenShift OperatorHub. For detailed steps on how to install OpenShift Virtualization, see the documentation https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/virtualization/installing[here].
+Installing OpenShift Virtualization on the OpenShift cluster is a straightforward process using the OpenShift Virtualization operator available in the OpenShift OperatorHub. For detailed steps on how to install OpenShift Virtualization, see the documentation link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/virtualization/installing[here].
 
 Install OpenShift Virtualization on a Red Hat OpenShift bare-metal cluster. This procedure includes logging in with cluster-admin access, navigating to the OperatorHub, and installing the OpenShift Virtualization operator. 
 

@@ -20,7 +20,7 @@ entries:
     - title: "Storage Provisioning"
       url: /openshift/osv-trident-install.html
       #url: /openshift/osv-storage-provisioning.html
-    - title: " Virtualization Layer"
+    - title: "Virtualization Layer"
       url: /openshift/osv-deployment.html
   - title: "Migration"
     pdf-filename: "Red Hat OpenShift Virtualization Migration"
