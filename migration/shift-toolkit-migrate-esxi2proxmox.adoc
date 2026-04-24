@@ -51,9 +51,9 @@ NOTE: The VMware tools removal happens on the destination hypervisor once the VM
 
 * Use a local administrator account when running Invoke-VMScript to prepare Windows VMs or use an Active Directory account that is part of the local Administrators group. For Linux systems, use an account that can execute commands without requiring a password (e.g via passwordless sudo).
 
-* For Windows VMs, ensure the VirtIO ISO is mounted; otherwise, the preparation process will fail. The VirtIO ISO driver can be downloaded from here. The script will detect the mounted drive and copy the required files automatically.
+* For Windows VMs, ensure the VirtIO ISO is mounted; otherwise, the preparation process will fail. The VirtIO ISO driver can be downloaded from link:https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.271-1/virtio-win-0.1.271.iso[here]. The script will detect the mounted drive and copy the required files automatically.
 
-** Ensure the ISO specified in the link is used as the preparation script use .msi package to install the drivers and qemu-guest-agents. Once the pre-requisites are in place, login to Shift toolkit UI and configure the site with Proxmox VE as the destination hypervisor. To add, click on “Add New Site” and select “Destination”.
+** Ensure the ISO specified in the link is used as the preparation script uses the .msi package to install the drivers and qemu-guest-agents. Once the pre-requisites are in place, login to Shift toolkit UI and configure the site with Proxmox VE as the destination hypervisor. To add, click on “Add New Site” and select “Destination”.
 
 == Step 1: Add the destination site (Proxmox VE)
 
