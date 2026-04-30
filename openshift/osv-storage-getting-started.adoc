@@ -88,20 +88,17 @@ Trident includes the following CSI drivers, each capable of provisioning a volum
 2.	ontap-nas-economy: Each PV provisioned is a qtree, with a configurable number of qtrees per FlexVolume (default is 200, configurable between 50 and 300).
 One pvc maps to 1 pv which is a qtree on a shared flexvolume
 
-NOTE: You can place all the disks of the VMs as qtrees in a single volume. 
-However, please be aware that Snapshots, Clones and Replication features are not supported by Trident. When those features are managed by the Storage administrator, they are not PV granular. 
+NOTE: You can place all the disks of the VMs as qtrees in a single volume. However, please be aware that Snapshots, Clones and Replication features are not supported by Trident. When those features are managed by the Storage administrator, they are not PV granular. 
 
-3.  ontap-nas-flexgroup: Each PV provisioned as a full ONTAP FlexGroup, and all aggregates assigned to a SVM are used.
+3.  ontap-nas-flexgroup: Each PV provisioned is a full ONTAP FlexGroup, and all aggregates assigned to a SVM are used.
 
 === For SAN protocols on supported hardware models
 
 1.	ontap-san: One pvc maps to 1 pv which is a LUN on dedicated flexvolume
 
-2.	ontap-san-economy: One pvc maps to 1 pv which is a  LUN on shared flexvolume
-You can have multiple LUNs in the shared flexvolume.( default is 100, configurable between 50 and 200 LUNs/PVs per flexvol volume)
+2.	ontap-san-economy: One pvc maps to 1 pv which is a  LUN on shared flexvolume. You can have multiple LUNs in the shared flexvolume.(default is 100, configurable between 50 and 200 LUNs/PVs per flexvol volume)
 
-NOTE: You can place all the disks of the VMs as LUNs in a single volume. 
-However, this driver, while it supports Snapshots and Clones, it does not support Replication. When Replication is managed by Storage administrator, it is not PV granular.
+NOTE: You can place all the disks of the VMs as LUNs in a single volume. However, this driver, while it supports Snapshots and Clones, it does not support Replication. When Replication is managed by Storage administrator, it is not PV granular.
 
 image:redhat-openshift-osv-storage-001.png[Trident Drivers for ONTAP storage]
 
