@@ -32,7 +32,7 @@ entries:
       - title: "Migrate Virtual Machines with storage offload"
         url: /openshift/osv-migration-storage-offload.html
       - title: "Migrate Virtual Machines with Shift toolkit"
-        url: /openshift/osv-migration-shift-toolkit.html 
+        url: /openshift/osv-migration-shift-toolkit.html
       - title: "Migrate Virtual Machines with MTV and Shift toolkit"
         url: /openshift/osv-migration-mtv-shift-toolkit.html
 

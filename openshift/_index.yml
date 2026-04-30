@@ -20,8 +20,6 @@ indexpage:
 #
     - title: "Deploy on premises"
       links:
-        - title: "Deployment requirements"
-          url: osv-deployment-prerequisites.html
         - title: "Deploy Red Hat OpenShift Virtualization with ONTAP"
           url: osv-deployment.html
         - title: "Create VMs"
