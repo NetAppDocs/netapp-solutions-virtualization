@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar
 permalink: openshift/osv-storage-getting-started.html
-keywords: Trident, Trident, persistent storage
-summary: NetApp provides a number of products which assist our customers with orchestrating and managing persistent data in container based environments, like Red Hat OpenShift
+keywords: Trident, persistent storage
+summary: NetApp provides a number of products that assist customers with orchestrating and managing persistent data in container-based environments such as Red Hat OpenShift.
 ---
 
 = Learn about NetApp Trident integration with Red Hat OpenShift
@@ -33,7 +33,7 @@ Trident supports drivers for ONTAP storage on-premises and managed storage servi
 **Advanced Data Management**
 Leveraging ONTAP's snapshot and cloning capabilities for efficient data protection and rapid provisioning of test and development environments.
 
-For complete details on Trident, refer to NetApp Trident link:(https://docs.netapp.com/us-en/trident/)[documentation here]
+For complete details on Trident, refer to NetApp Trident link:https://docs.netapp.com/us-en/trident/[documentation here]
 
 == Trident Protect
 
@@ -56,7 +56,7 @@ Provides tools and features that help organizations meet compliance requirements
 **Disaster Recovery**
 Integrates with ONTAP's replication features to provide robust disaster recovery solutions, ensuring business continuity even in the face of catastrophic events.
 
-For complete details on Trident Protect, refer to NetApp Trident Protect link:(https://docs.netapp.com/us-en/trident/trident-protect/learn-about-trident-protect.html)[documentation here].
+For complete details on Trident Protect, refer to NetApp Trident Protect link:https://docs.netapp.com/us-en/trident/trident-protect/learn-about-trident-protect.html[documentation here].
 
 == NetApp ONTAP hardware models and Protocols supported
 NetApp ONTAP software runs on a variety of hardware models, each designed to cater to different performance and capacity requirements. Trident extends its robust capabilities to support various NetApp ONTAP systems, including All Flash FAS (AFF), All SAN Array (ASA), and ASA R2 systems. This support ensures that organizations can leverage the full potential of their high-performance storage solutions in containerized environments.

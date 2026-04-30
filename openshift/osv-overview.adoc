@@ -44,12 +44,12 @@ While OpenShift Virtualization differs conceptually from VMware vSphere, it offe
 **Persistent Storage:** Persistent Volume Claims (PVC) and Persistent Volumes (PV) correspond to Datastores in vSphere.
 
 == For vSphere administrators
-For a list of vSphere concepts mapping to their closest OpenShift Virtualization counterparts refer to the (https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/virtualization/about#virt-vmware-comparison_about-virt)[documentation here].
+For a list of vSphere concepts mapping to their closest OpenShift Virtualization counterparts refer to the link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/virtualization/about#virt-vmware-comparison_about-virt[documentation here].
 
 == Additional Resources
 You can manage your cluster and virtualization resources through the Virtualization perspective of the **OpenShift Container Platform web console** or the **OpenShift CLI (oc)**. 
 
-To learn more about Red Hat OpenShift Virtualization, see the documentation https://www.openshift.com/learn/topics/virtualization/[here].
+To learn more about Red Hat OpenShift Virtualization, see the documentation link:https://www.openshift.com/learn/topics/virtualization/[here].
 
 
 

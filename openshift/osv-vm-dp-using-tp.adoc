@@ -109,7 +109,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-008.png[ONTAP S3 Appvault created]
 == Create a VM in OpenShift Virtualization
 
 .Create a VM in OpenShift Virtualization
-[%collapsible%close]
+[%collapsible]
 ====
 The following screen shots show the creation of the VM (demo-fedora in namespace demo) from the console using the template. The root disk chooses the default storage class automatically, so, verify that the default storage class is set appropriately. In this setup, the default storage class is **sc-zonea-san**.  Ensure that when you create the additional disk, you choose the storage class sc-zonea-san and check the "**Apply optimized storage settings**" checkbox.  This will set the Access modes to RWX and Volume Mode to Block.
 
@@ -133,7 +133,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-007.png[vm, pods and pvc created]
 == Create an app
 
 .Create App
-[%collapsible%close]
+[%collapsible]
 ====
 **Create a trident protect app for the VM**
 
@@ -163,7 +163,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-009.png[App created]
 == Protect the app by creating a backup
 
 .Create Backups
-[%collapsible%close]
+[%collapsible]
 ====
 **Create an On-demand Backup**
 
@@ -217,7 +217,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-017.png[Backups created on demand and on Sched
 == Restore from Backup
 
 .Restore from Backups
-[%collapsible%close]
+[%collapsible]
 ====
 
 **Restore the VM to the same namespace**
@@ -302,7 +302,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-023.png[VM in the new namespace]
 == Protect the app using Snapshots
 
 .Create Snapshots
-[%collapsible%close]
+[%collapsible]
 ====
 **Create an on-demand snapshot**
 Create a snapshot for the app and specify the appvault where it needs to be stored. 
@@ -375,7 +375,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-026.png[scheduled snapshot]
 == Restore from Snapshot
 
 .Restore from Snapshot
-[%collapsible%close]
+[%collapsible]
 ====
 **Restore the VM from the snapshot to the same namespace**
 Delete the VM demo-fedora from the demo2 namespace.
@@ -458,7 +458,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-032.png[VM restored in new namespace]
 == Restore a Specific VM
 
 .Selecting specific VMs in a namespace to create snapshots/backups and restore
-[%collapsible%close]
+[%collapsible]
 ====
 
 In the previous example, we had a single VM within a namespace. By including the entire namespace in the backup, all resources associated with that VM were captured. In the following example, we add another VM to the same namespace and create an app just for this new VM by using a label selector.
@@ -562,7 +562,7 @@ A simple way to restore only a specific file from the VM disks, is to make the s
 NOTE: If you are using NFS version 4, you cannot see the .snapshot dir when you list files with an ls command. But you can cd to the .snapshot directory. 
 
 .Example of single file restore by accessing the .snapshot directory and copying a file from a snapshot
-[%collapsible%close]
+[%collapsible]
 ====
 
 [source,yaml]

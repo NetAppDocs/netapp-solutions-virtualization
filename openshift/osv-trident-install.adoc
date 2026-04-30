@@ -106,7 +106,7 @@ Create YAML files for each protocol you want to configure. You can configure one
 Create a TridentBackendConfig and StorageClass for each protocol. The backend configuration includes credentials stored in a Kubernetes Secret.
 
 .Essential guidelines for backend configuration basic options
-[%collapsible%close]
+[%collapsible]
 ====
 
 . The backend configuration files references your **ONTAP SVM** and **management LIF**. +
@@ -116,7 +116,7 @@ Create a TridentBackendConfig and StorageClass for each protocol. The backend co
 ====
 
 .Essential guidelines for backend configuration options for NAS economy driver
-[%collapsible%close]
+[%collapsible]
 ====
 
 The following parameters can be included for **NAS economy driver** configuration:
@@ -128,7 +128,7 @@ The following parameters can be included for **NAS economy driver** configuratio
 ====
 
 .Essential guidelines for backend configuration options for SAN driver
-[%collapsible%close]
+[%collapsible]
 ====
 
 The following parameters can be included for **SAN driver** configuration:
@@ -139,7 +139,7 @@ The following parameters can be included for **SAN driver** configuration:
 ====
 
 .Essential guidelines for backend configuration options for SAN economy driver
-[%collapsible%close]
+[%collapsible]
 ====
 The following parameters can be included for **SAN economy driver** configuration:
 
@@ -149,7 +149,7 @@ The following parameters can be included for **SAN economy driver** configuratio
 ====
 
 .Essential guidelines for backend configuration options for provisioning volumes
-[%collapsible%close]
+[%collapsible]
 ====
 
 NOTE: In the sample yaml files provided for each protocol, if storagePrefix is not provided, the default prefix “trident” is used. When using ontap-nas-economy and a storagePrefix that is 24 or more characters, the qtrees will not have the storage prefix embedded, though it will be in the volume name.
