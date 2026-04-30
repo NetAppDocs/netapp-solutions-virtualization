@@ -95,9 +95,9 @@ However, please be aware that Snapshots, Clones and Replication features are not
 
 === For SAN protocols on supported hardware models
 
-3.	ontap-san: One pvc maps to 1 pv which is a LUN on dedicated flexvolume
+1.	ontap-san: One pvc maps to 1 pv which is a LUN on dedicated flexvolume
 
-4.	ontap-san-economy: One pvc maps to 1 pv which is a  LUN on shared flexvolume
+2.	ontap-san-economy: One pvc maps to 1 pv which is a  LUN on shared flexvolume
 You can have multiple LUNs in the shared flexvolume.( default is 100, configurable between 50 and 200 LUNs/PVs per flexvol volume)
 
 NOTE: You can place all the disks of the VMs as LUNs in a single volume. 

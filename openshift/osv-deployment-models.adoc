@@ -35,6 +35,6 @@ b.	**Self-Managed Services (Customer Managed)**: In this case, the OpenShift Con
 3. **Red Hat OpenShift Virtualization Engine:** A bare metal-only, virtualization infrastructure, purpose-built to provide enterprises with a reliable, enterprise-grade solution for deploying, managing, and scaling VMs. A subset of OpenShift functionality, this edition of OpenShift is targeted at virtual machine-only workloads. 
 
 == Additional Resources
-For complete details on OpenShift Container platform, refer to the Red Hat link:(https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/overview/ocp-overview)[documentation here.]
+For complete details on OpenShift Container platform, refer to the Red Hat link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/overview/ocp-overview[documentation here.]
 
-For complete details on OpenShift Virtualization, refer to the Red Hat link:(https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/virtualization/index)[documentation here.]
+For complete details on OpenShift Virtualization, refer to the Red Hat link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/virtualization/index[documentation here.]

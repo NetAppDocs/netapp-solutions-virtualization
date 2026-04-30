@@ -297,7 +297,7 @@ allowVolumeExpansion: true
 Create a TridentBackendConfig and StorageClass for ONTAP NAS economy driver to enable NFS-based persistent storage provisioning using qtrees. The backend configuration includes credentials stored in a Kubernetes Secret and references your ONTAP SVM and management LIF. 
 
 
-Sample backend secret and backend configuration file using username and password authentication (save as `tbc-nas.yaml`):
+Sample backend secret and backend configuration file using username and password authentication (save as `tbc-nas-economy.yaml`):
 
 [source,yaml]
 ----
@@ -373,6 +373,7 @@ spec:
 Backend secret and backend configuration file using client certificate authentication (save as `tbc-iscsi.yaml`):
 
 [source,yaml]
+----
 # tbc-iscsi.yaml
 apiVersion: v1
 kind: Secret
@@ -747,6 +748,9 @@ For on-premises clusters:
 ----
 oc create -f tbc-nas.yaml -n trident
 oc create -f sc-nas.yaml
+
+oc create -f tbc-nas-economy.yaml -n trident
+oc create -f sc-nas-economy.yaml
 
 oc create -f tbc-iscsi.yaml -n trident
 oc create -f sc-iscsi.yaml
