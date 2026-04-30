@@ -103,9 +103,101 @@ NOTE: Complete either the on-premises or ROSA section below based on your enviro
 
 Create YAML files for each protocol you want to configure. You can configure one or more of the following protocols: NAS for NFS-based file storage, iSCSI for iSCSI block storage, NVMe/TCP for high-performance NVMe over TCP block storage, or FC for Fibre Channel block storage.
 
-Create a TridentBackendConfig and StorageClass for each protocol. The backend configuration includes credentials stored in a Kubernetes Secret and references your ONTAP SVM and management LIF. You can use username and password to authenticate with ONTAP. It can be cluster admin or vserver admin username and password. You can also use a client certificate for authentication with ONTAP. For details about how to generate the client certificate, private key and CA certificate and their base64 version, please review link:https://docs.netapp.com/us-en/trident/trident-use/ontap-san-prep.html#enable-certificate-based-authentication[Trident documentation here].
+Create a TridentBackendConfig and StorageClass for each protocol. The backend configuration includes credentials stored in a Kubernetes Secret.
+
+.Essential guidelines for backend configuration basic options
+[%collapsible%close]
+====
+
+. The backend configuration files references your **ONTAP SVM** and **management LIF**. +
+. You can use **username and password** to authenticate with ONTAP. It can be cluster admin or vserver admin username and password. +
+. You can also use a **client certificate** for authentication with ONTAP. For details about how to generate the client certificate, private key and CA certificate and their base64 version, please review link:https://docs.netapp.com/us-en/trident/trident-use/ontap-san-prep.html#enable-certificate-based-authentication[Trident documentation here].
+
+====
+
+.Essential guidelines for backend configuration options for NAS economy driver
+[%collapsible%close]
+====
+
+The following parameters can be included for **NAS economy driver** configuration:
+
+. **qtreesPerFlexvol** The value must be in range 50-300, default value is 200. +
+. **limitVolumePoolSize** The value is the maximum FlexVol size that you request when using qtrees in ontap-nas-economy backend. No default value is set, and this parameter is not enforced by default. If you set this parameter, the Trident operator creates a new FlexVol when the current FlexVol reaches the specified size. This parameter can help you control capacity utilization in your cluster by restricting the size of FlexVols used for provisioning PVs. +
+. **denyNewVolumePools** This parameter restricts ontap-nas-economy backends from creating new FlexVol volumes to contain their qtrees. Only preexisting Flexvols are used for provisioning new PVs. 
+
+====
+
+.Essential guidelines for backend configuration options for SAN driver
+[%collapsible%close]
+====
+
+The following parameters can be included for **SAN driver** configuration:
+
+. **limitVolumeSize** The value is the maximum volume size that you request when using SAN backend. No default value is set, and this parameter is not enforced by default. If you set this parameter, the Trident operator fails provisioning if requested volume size is above this value. You can use this parameter to restrict the maximum size of volumes it manages for LUNs. +
+. **lunsPerFlexvol** Maximum LUNs per Flexvol, must be in range [50, 200], default is 100. If you set this parameter, the Trident operator creates a new FlexVol when the current FlexVol reaches the specified number of LUNs. This parameter can help you control capacity utilization in your cluster by restricting the number of LUNs per FlexVol used for provisioning PVs.
+
+====
+
+.Essential guidelines for backend configuration options for SAN economy driver
+[%collapsible%close]
+====
+The following parameters can be included for **SAN economy driver** configuration:
+
+. **limitVolumePoolSize** The value is the maximum FlexVol size that you request when using SAN economy backend. No default value is set, and this parameter is not enforced by default. If you set this parameter, the Trident operator limits the maximum flexvol size that can be create for creating LUNs in the flexvol. This parameter can help you control capacity utilization in your cluster by restricting the size of FlexVols used for provisioning PVs. +
+. **denyNewVolumePools** This parameter restricts SAN economy backends from creating new FlexVol volumes to contain their LUNs. Only preexisting Flexvols are used for provisioning new PVs.
+
+====
+
+.Essential guidelines for backend configuration options for provisioning volumes
+[%collapsible%close]
+====
 
 NOTE: In the sample yaml files provided for each protocol, if storagePrefix is not provided, the default prefix “trident” is used. When using ontap-nas-economy and a storagePrefix that is 24 or more characters, the qtrees will not have the storage prefix embedded, though it will be in the volume name.
+
+When you create a volume in ONTAP directly from system manager or from CLI, without providing values for all the optional parameters, there are some default values set automatically during provisioning of a volume as shown below. 
+
+image:rh-os-n-use-case-osv-trident-install-volumes-001.png[Create volume in ONTAP]
+
+image:rh-os-n-use-case-osv-trident-install-volumes-002.png[default values for volume parameters]
+
+Here is an example of a volume created using Trident backend configuration. It does not have any options set explicitly in the defaults section except the name template. 
+
+[source,yaml]
+----
+oc describe tbc -n trident tbc-nas
+### output truncated for brevity
+Spec:
+  Backend Name:  tbc-nas
+  Credentials:
+    Name:  tbc-nas-secret
+  Defaults: # There are no defaults set except for the volume name template.
+    Name Template:      {{ .config.StoragePrefix }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}
+  Management LIF:       10.192.102.50
+  Storage Driver Name:  ontap-nas
+  Storage Prefix:       testautomation
+  Svm:                  oc-test-automation
+----
+
+When the volume is created using this backend configuration, the options that are not set in the backend configuration file are set to the default values as shown below.
+
+image:rh-os-n-use-case-osv-trident-install-volumes-003.png[Volume created using Trident backend configuration]
+
+
+However, when you set values in the default section in the trident backend configuration, you can create volumes that can have specific values for those parameters.
+In the following example, snapshotPolicy is set to default policy (it is none if you do not set anything explicitly) and snapshotDir is set to true in the default section of the backend configuration yaml. With these settings, you can see that the backend volume gets those values. (snapdir-access is true and snapshot-policy is default)
+
+image:rh-os-n-use-case-osv-trident-install-volumes-004.png[default section with explicit values]
+
+image:rh-os-n-use-case-osv-trident-install-volumes-005.png[explicitly set snapshotDir and snapshotPolicy values in backend configuration]
+
+image:rh-os-n-use-case-osv-trident-install-volumes-006.png[explicitly set snapshotDir and snapshotPolicy values in volume]
+
+==== 
+
+For all other additional parameters, please review Trident documentation:
+
+. link:https://docs.netapp.com/us-en/trident/trident-use/ontap-nas-examples.html#backend-configuration-options[Trident NAS backend configuration options] +
+. link:https://docs.netapp.com/us-en/trident/trident-use/ontap-san-examples.html#backend-configuration-options[Trident SAN backend configuration options] 
 
 
 [role="tabbed-block"]
@@ -196,10 +288,11 @@ parameters:
   snapshots: "true"
 allowVolumeExpansion: true
 ----
+
 --
 
-.NAS economy
 
+.NAS economy
 --
 Create a TridentBackendConfig and StorageClass for ONTAP NAS economy driver to enable NFS-based persistent storage provisioning using qtrees. The backend configuration includes credentials stored in a Kubernetes Secret and references your ONTAP SVM and management LIF. 
 
@@ -244,26 +337,6 @@ The value is the maximum FlexVol size that you request when using qtrees in onta
 This parameter restricts ontap-nas-economy backends from creating new FlexVol volumes to contain their qtrees. Only preexisting Flexvols are used for provisioning new PVs. 
 
 --
-
-.SAN and SAN economy
-
---
-NOTE: The following parameters can be included for **SAN driver configuration**:
-**limitVolumeSize** 
-The value is the maximum volume size that you request when using SAN backend. No default value is set, and this parameter is not enforced by default. If you set this parameter, the Trident operator fails provisioning if requested volume size is above this value. You can use this parameter to restrict the maximum size of volumes it manages for LUNs.
-
-**lunsPerFlexvol**  
-Maximum LUNs per Flexvol, must be in range [50, 200], default is 100. If you set this parameter, the Trident operator creates a new FlexVol when the current FlexVol reaches the specified number of LUNs. This parameter can help you control capacity utilization in your cluster by restricting the number of LUNs per FlexVol used for provisioning PVs.
-
-
-The following parameters can be included for **SAN economy driver configuration**:
-**limitVolumePoolSize** 
-The value is the maximum FlexVol size that you request when using SAN economy backend. No default value is set, and this parameter is not enforced by default. If you set this parameter, the Trident operator limits the maximum flexvol size that can be create for creating LUNs in the flexvol. This parameter can help you control capacity utilization in your cluster by restricting the size of FlexVols used for provisioning PVs.
-
-**denyNewVolumePools** This parameter restricts SAN economy backends from creating new FlexVol volumes to contain their LUNs. Only preexisting Flexvols are used for provisioning new PVs.
-
---
-
 
 .iSCSI SAN
 

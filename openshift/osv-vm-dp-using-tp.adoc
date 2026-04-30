@@ -33,7 +33,7 @@ Trident Protect enables snapshots, backups, restore, and disaster recovery of ap
 == Create App Vault for Object Storage
 
 .Create AppVault
-[%collapsible%open]
+[%collapsible%close]
 ====
 Prior to creating the snapshots and backups for an application or a VM, an Object Storage must be configured in Trident Protect to store the snapshots and backups. This is done using the bucket CR. Only administrators can create a bucket CR and configure it. 
 The bucket CR is known as AppVault in Trident Protect. AppVault objects are the declarative Kubernetes workflow representation of a storage bucket. An AppVault CR contains the configurations necessary for a bucket to be used in protection operations, such as backups, snapshots, restore operations, and SnapMirror replication. 
@@ -109,7 +109,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-008.png[ONTAP S3 Appvault created]
 == Create a VM in OpenShift Virtualization
 
 .Create a VM in OpenShift Virtualization
-[%collapsible%open]
+[%collapsible%close]
 ====
 The following screen shots show the creation of the VM (demo-fedora in namespace demo) from the console using the template. The root disk chooses the default storage class automatically, so, verify that the default storage class is set appropriately. In this setup, the default storage class is **sc-zonea-san**.  Ensure that when you create the additional disk, you choose the storage class sc-zonea-san and check the "**Apply optimized storage settings**" checkbox.  This will set the Access modes to RWX and Volume Mode to Block.
 
@@ -133,7 +133,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-007.png[vm, pods and pvc created]
 == Create an app
 
 .Create App
-[%collapsible%open]
+[%collapsible%close]
 ====
 **Create a trident protect app for the VM**
 
@@ -163,7 +163,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-009.png[App created]
 == Protect the app by creating a backup
 
 .Create Backups
-[%collapsible%open]
+[%collapsible%close]
 ====
 **Create an On-demand Backup**
 
@@ -217,7 +217,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-017.png[Backups created on demand and on Sched
 == Restore from Backup
 
 .Restore from Backups
-[%collapsible%open]
+[%collapsible%close]
 ====
 
 **Restore the VM to the same namespace**
@@ -302,7 +302,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-023.png[VM in the new namespace]
 == Protect the app using Snapshots
 
 .Create Snapshots
-[%collapsible%open]
+[%collapsible%close]
 ====
 **Create an on-demand snapshot**
 Create a snapshot for the app and specify the appvault where it needs to be stored. 
@@ -375,7 +375,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-026.png[scheduled snapshot]
 == Restore from Snapshot
 
 .Restore from Snapshot
-[%collapsible%open]
+[%collapsible%close]
 ====
 **Restore the VM from the snapshot to the same namespace**
 Delete the VM demo-fedora from the demo2 namespace.
@@ -458,7 +458,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-032.png[VM restored in new namespace]
 == Restore a Specific VM
 
 .Selecting specific VMs in a namespace to create snapshots/backups and restore
-[%collapsible%open]
+[%collapsible%close]
 ====
 
 In the previous example, we had a single VM within a namespace. By including the entire namespace in the backup, all resources associated with that VM were captured. In the following example, we add another VM to the same namespace and create an app just for this new VM by using a label selector.
@@ -555,6 +555,50 @@ BackupRestore "demo2-centos-restore" created.
 image:rh-os-n-use-case-ocpv-tp-dp-037.png[create centos vm bir]
 
 image:rh-os-n-use-case-ocpv-tp-dp-038.png[centos vm created]
+====
+
+== Single File Restore for a VM
+A simple way to restore only a specific file from the VM disks, is to make the snapshot directory on the volume that is backing the VM disks to be visible to the client. This can be done by editing the trident backend configuration to include the default section and set the snapshotDir parameter to true. This will automatically enable you to access the .snapshot directory in the client from the same mount location as the main volume. The .snapshot directory contains all the snapshots. You can change directory to the required snapshot, find the file you want to restore and copy it into the required location. 
+NOTE: If you are using NFS version 4, you cannot see the .snapshot dir when you list files with an ls command. But you can cd to the .snapshot directory. 
+
+.Example of single file restore by accessing the .snapshot directory and copying a file from a snapshot
+[%collapsible%close]
+====
+
+[source,yaml]
+....
+#single-file-restore.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: task-single-file-restore
+spec:
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: test-trident-set-defaults
+  containers:
+    - name: task-pv-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: /data
+          name: task-pv-storage
+# oc apply -f single-file-restore.yaml
+....
+
+image:rh-os-n-use-case-ocpv-tp-dp-sfr-001.png[pod and the pvc of the VM]
+
+image:rh-os-n-use-case-ocpv-tp-dp-sfr-002.png[ONTAP Volume name for the VM disk]
+
+image:rh-os-n-use-case-ocpv-tp-dp-sfr-003.png[snapshot directory visible in the client] 
+
+image:rh-os-n-use-case-ocpv-tp-dp-sfr-004.png[mount directory in the VM]
+
+image:rh-os-n-use-case-ocpv-tp-dp-sfr-005.png[losing a file in the VM and copying the file from the snapshot directory to the main directory to restore it]
+
 ====
 
 == Video Demonstration 
