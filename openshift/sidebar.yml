@@ -12,16 +12,16 @@ entries:
       - title: "Deployment models"
         url: /openshift/osv-overview.html
 
-  - title: "Getting Started "
+  - title: "Getting Started"
     pdf-filename: "Red Hat OpenShift Storage and Virtualization"
     entries:
-    - title: "Getting Started with Storage"
-      url: /openshift/osv-storage-getting-started.html
-    - title: "Storage Provisioning"
-      url: /openshift/osv-trident-install.html
-      #url: /openshift/osv-storage-provisioning.html
-    - title: "Virtualization Layer"
-      url: /openshift/osv-deployment.html
+      - title: "Getting Started with Storage"
+        url: /openshift/osv-storage-getting-started.html
+      - title: "Storage Provisioning"
+        url: /openshift/osv-trident-install.html
+        #url: /openshift/osv-storage-provisioning.html
+      - title: "Virtualization Layer"
+        url: /openshift/osv-deployment.html
   - title: "Migration"
     pdf-filename: "Red Hat OpenShift Virtualization Migration"
     entries:
