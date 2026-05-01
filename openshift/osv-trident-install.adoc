@@ -593,7 +593,64 @@ allowVolumeExpansion: true
 ----
 
 --
+
+.iscsi SAN economy
+--
+Create a TridentBackendConfig and StorageClass for ONTAP SAN economy with iscsi to enable iscsi-based block storage provisioning. The backend configuration uses the ontap-san driver with the iscsi protocol and includes credentials stored in a Kubernetes Secret.
+
+Backend secret and backend configuration file using client certificate authentication  (save as `tbc-san-eco.yaml`):
+
+[source,yaml]
+----
+
+# tbc-san-eco.yaml
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ontap-san-cert-auth
+  namespace: trident
+type: Opaque
+stringData:
+  clientPrivateKey:
+    <client private key that you generated>
+---
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: tbc-san-eco-cert
+  namespace: trident
+spec:
+  version: 1
+  storageDriverName: ontap-san-economy
+  managementLIF: "10.192.102.47"
+  #dataLIF: 10.61.180.32
+  backendName: tbc_san_eco
+  svm: oc-automation-svm #<replace with your SVM name>
+  storagePrefix: oc_automation #<replace with your prefix>
+  credentials:
+    name: ontap-san-cert-auth
+  clientCertificate:
+    <client certificate that you generated>
+
+----
+
+[source,yaml]
+----
+# sc-san-eco.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: sc-san-eco
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "ontap-san-economy"
+  provisioningType: "thin"
+  snapshots: "true"
+----
+--
 ====
+
 
 
 Review the Trident documentation for additional samples of yaml files, and information on access modes and volume modes supported by SAN drivers and NAS drivers.
