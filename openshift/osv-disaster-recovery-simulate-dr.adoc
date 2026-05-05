@@ -1,0 +1,12 @@
+---
+sidebar: sidebar
+permalink: openshift/osv-disaster-recovery-simulate-dr.html
+keywords: OpenShift, OCP, Trident, Trident Protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, Red Hat OpenShift Virtualization
+summary: Red Hat OpenShift Virtualization
+---
+
+[.lead]
+==  Failover without site outage for OpenShift Virtualization
+This section describes how to perform a failover of a VM from a source cluster without a site outage. This is useful for testing the failover process, and for performing planned maintenance on the source cluster.    
+To perform a failover without a site outage, first ensure that the source and target clusters are set up for disaster recovery as described in the previous sections. Then, instead of simulating a site outage on the source cluster, simply execute the failover operation using Trident Protect. This can be achieved by promoting the AppMirror relationship. This will replicate the latest snapshot data to the target cluster and start the VM on the target cluster while the VM is still running on the source cluster. After confirming that the VM is running successfully on the target cluster, you can then shut down the VM on the source cluster to complete the failover process. This method allows you to test failover and maintain VM availability without needing to take down the entire source cluster.
+

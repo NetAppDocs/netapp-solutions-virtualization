@@ -1,0 +1,50 @@
+---
+sidebar: sidebar
+permalink: openshift/osv-disaster-recovery-requirements.html
+keywords: OpenShift, OCP, Trident, Trident Protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, Red Hat OpenShift Virtualization
+summary: Red Hat OpenShift Virtualization
+---
+= Learn about Red Hat OpenShift Virtualization
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Review the requirements to install and deploy OpenShift virtualization with ONTAP storage systems.
+
+== Prerequisites
+1. A Red Hat OpenShift cluster with OpenShift Virtualization installed and configured. For installation instructions, see the link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/virtualization/installing-virtualization[documentation here].
+
+2. A NetApp ONTAP storage system with an SVM configured to provide storage for the OpenShift cluster. The SVM must have at least one management LIF and one data LIF configured and accessible from the OpenShift cluster.
+
+3. NetApp Trident installed and configured on the OpenShift cluster to provision persistent storage from the ONTAP SVM. For installation instructions, see the link:https://docs.netapp.com/us-en/trident/[Trident documentation here].
+
+4. Trident backend configuration created for the ONTAP SVM and a StorageClass configured on the OpenShift cluster to use that Trident backend as the provisioner. For instructions on how to create a Trident backend configuration and StorageClass, see the link:https://docs.netapp.com/us-en/trident/trident-installation/installing-trident-on-kubernetes.html[Trident installation documentation here].
+
+5. Cluster-admin access to the OpenShift cluster and admin access to the ONTAP storage system to perform the necessary configurations.
+
+6. An admin workstation with `tridentctl` and `oc` tools installed and added to the $PATH environment variable to interact with the OpenShift cluster and Trident.
+
+7. Adequate hardware resources on the OpenShift cluster to support the OpenShift Virtualization operator and the VMs that will be provisioned. For more details on resource requirements, see the link:https://docs.openshift.com/container-platform/4.7/virt/install/preparing-cluster-for-virt.html#virt-cluster-resource-requirements_preparing-cluster-for-virt[documentation here].
+
+8. Optionally, configure node placement rules for OpenShift Virtualization to specify a subset of cluster nodes to host the OpenShift Virtualization operators, controllers, and VMs. For instructions on how to configure node placement rules, see the link:https://docs.openshift.com/container-platform/4.7/virt/install/virt-specifying-nodes-for-virtualization-components.html[documentation here].
+
+9. For the storage backing OpenShift Virtualization, it is recommended to have a dedicated StorageClass that requests storage from a particular Trident backend, which in turn is backed by a dedicated SVM. This maintains a level of multitenancy with regard to the data being served for VM-based workloads on the OpenShift cluster.
+
+10. A VM must be available in OpenShift Virtualization. For details about deploying a new VM, or migrating an existing VM into OpenShift Virtualization, see the appropriate section in the documentation.
+
+== Install NetApp Trident Protect for OpenShift Virtualization  
+To enable disaster recovery capabilities for OpenShift Virtualization workloads using NetApp Trident Protect, you must have Trident Protect installed and configured on the OpenShift cluster. Trident Protect can be installed using helm chart. 
+NOTE: Trident Protect installation must be done after installing Trident.
+
+For complete installation instructions, see the link:https://docs.netapp.com/us-en/trident/trident-protect/learn-about-trident-protect.html[Trident Protect documentation here].
+
+.Show example
+[%collapsible]
+====
+image: osv-disaster-recovery-001.png[Trident Protect installation]
+
+image: osv-disaster-recovery-002.png[Trident Protect installation complete]
+====

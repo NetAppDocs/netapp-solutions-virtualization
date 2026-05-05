@@ -1,0 +1,13 @@
+---
+sidebar: sidebar
+permalink: openshift/osv-disaster-recovery-failback.html
+keywords: OpenShift, OCP, Trident, Trident Protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, Red Hat OpenShift Virtualization
+summary: Red Hat OpenShift Virtualization
+---
+
+[.lead]
+==  Failback for OpenShift Virtualization Disaster Recovery
+This section describes how to perform a failback of a VM from the disaster recovery target cluster back to the source cluster after a failover has occurred. This process is necessary to restore the original state of the environment after the source cluster has been recovered from an outage.
+To perform a failback, first ensure that the source cluster is fully operational and ready to receive the VM back from the target cluster. Then, execute the failback operation using Trident Protect by demoting the AppMirror relationship. This will replicate the latest snapshot data back to the source cluster and start the VM on the source cluster while the VM is still running on the target cluster. After confirming that the VM is running successfully on the source cluster, you can then shut down the VM on the target cluster to complete the failback process. This method allows you to restore the original state of your environment and maintain VM availability throughout the failback process.
+
+You will need to perform some cleanup operations after failback is complete to remove any resources that are no longer needed, such as the AppMirror relationship and any replicated data on the target cluster. This will help to free up resources and ensure that your environment is clean and ready for future disaster recovery operations if needed.
