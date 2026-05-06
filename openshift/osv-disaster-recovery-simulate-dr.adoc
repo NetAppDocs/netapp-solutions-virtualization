@@ -6,7 +6,63 @@ summary: Red Hat OpenShift Virtualization
 ---
 
 [.lead]
-==  Failover without site outage for OpenShift Virtualization
-This section describes how to perform a failover of a VM from a source cluster without a site outage. This is useful for testing the failover process, and for performing planned maintenance on the source cluster.    
-To perform a failover without a site outage, first ensure that the source and target clusters are set up for disaster recovery as described in the previous sections. Then, instead of simulating a site outage on the source cluster, simply execute the failover operation using Trident Protect. This can be achieved by promoting the AppMirror relationship. This will replicate the latest snapshot data to the target cluster and start the VM on the target cluster while the VM is still running on the source cluster. After confirming that the VM is running successfully on the target cluster, you can then shut down the VM on the source cluster to complete the failover process. This method allows you to test failover and maintain VM availability without needing to take down the entire source cluster.
 
+==  Failover without site outage for OpenShift Virtualization
+This section describes how to perform a failover of a VM from a source cluster without a site outage. This is useful for testing the failover process, and for performing planned maintenance on the source cluster. +  
+
+To perform a failover without a site outage, first ensure that the source and target clusters are set up for disaster recovery as described in the previous sections. Then, perform the following steps:
+
+1. Establish the AppMirror relationship between the source and the target cluster. When the AppMirror relationship is established, the most recent snapshot is transferred to the destination namespace. The PVC is created for the VM in the destination namespace, however, the VM pod is not yet created in the destination namespace.
++
+
+.Show example
+[%collapsible]
+====
+
+[source,yaml]
+----
+# application-mirror-relationship.yaml
+apiVersion: protect.trident.netapp.io/v1
+kind: AppMirrorRelationship
+metadata:
+  name: amr2
+spec:
+  desiredState: Established
+  destinationAppVaultRef: ontap-s3-appvault
+  destinationApplicationRef: test-dest-app
+  namespaceMapping:
+  - destination: test-dr-ns-dest
+    source: test-dr-ns
+  recurrenceRule: |-
+    DTSTART:20240901T000200Z
+    RRULE:FREQ=MINUTELY;INTERVAL=5
+  sourceAppVaultRef: ontap-s3-appvault
+  sourceApplicationName: test-source-app
+  sourceApplicationUID: "<application-uid-of-the-source-app>"
+  storageClassName: "sc-nas"
+----
+
+image:osv-disaster-recovery-009.png[OCP-v AppMirror relationship in trident-protect namespace]
+
+image:osv-disaster-recovery-010.png[OCP-v AppMirror relationship established in trident-protect namespace]
+
+NOTE: The AppMirror relationship should be created from the cli of the destination cluster. It should be created with the desired state as Established. This will ensure that the latest snapshot data is replicated to the destination cluster.
+====
+
+2. Promote the AppMirror relationship. Change the desired state of the relationship to "Promoted" to create the VM in the destination namespace. The VM is still running in the source namespace. The latest snapshot data is replicated to the destination cluster and the VM is started on the destination cluster. This method allows you to test failover and maintain VM availability without needing to take down the entire source cluster.
++
+.Show example
+[%collapsible]
+====
+oc patch amr amr1 -n test-dr-ns-dest --type=merge -p '{"spec":{"desiredState":"Promoted"}}'
+
+
+image:osv-disaster-recovery-012.png[OCP-v AppMirror relationship Promoted]
+
+[Source, cli]
+----
+oc get pod, pvc,vm -n test-dr-ns-dest +
+oc get pod, pvc,vm -n test-dr-ns
+----
+
+====

@@ -11,15 +11,13 @@ summary: Red Hat OpenShift Virtualization
 :linkattrs:
 :imagesdir: ../media/
 
-[.lead]
-== Setup Disaster Recovery Target Cluster for OpenShift Virtualization. 
-
-Note: All the following steps are performed on the target cluster, which is the cluster where the protected VM will failover to when a site outage occurs on the source cluster.
-
-== Create AppVault using ONTAP S3
-Set up the appvault on the target cluster by following the same steps as shown in the source cluster setup instructions. The appvault on the target cluster will be used to receive replicated data from the source cluster, and to restore that data when failover or failback operations are executed.
-
+1. Create an AppVault Object in the destination cluster. This should point to the same S3 as the source so that it can get the snapshot from the S3 where the source cluster placed it.
++
+.Show example
+[%collapsible]
+====
 [source,yaml]
+----
 apiVersion: v1
 # You can provide the keys either as stringData or base 64 encoded data
 stringData:
@@ -33,8 +31,10 @@ metadata:
   name: appvault-secret
   namespace: trident-protect
 type: Opaque
+----
 
 [source,yaml]
+----
 apiVersion: protect.trident.netapp.io/v1
 kind: AppVault
 metadata:
@@ -57,17 +57,24 @@ spec:
         key: secretAccessKey
         name: appvault-secret
   providerType: OntapS3
+----
 
-Ensure that ONTAP S3 vault is created and is in the Available state
+
 [source, cli]
+----
 oc create -f app-vault-secret.yaml -n trident-protect
 oc create -f app-vault.yaml -n trident-protect
+----
 
-image:osv-disaster-recovery-003.png[OCP-v AppVault in trident-protect namespace]
+image:osv-disaster-recovery-011.png[OCP-v AppVault in trident-protect namespace]
 
-== Create a Trident Protect app in this target cluster. 
+====
 
-This app will be used as the target app for replication. To create the app, follow the same steps as shown in the source cluster setup instructions to create an app custom resource. When creating the app CR, ensure that you select the appvault created in the previous step as the target vault for this app. Also ensure you have created a new namespace where the app will be replicated to, and select that namespace as the target namespace for this app.
+2. Create a new namespace on the destination cluster to host the failed over VM. Create an App in the destination cluster that references the AppVault created in step 1 and the new namespace. This App will be used to establish the AppMirror relationship between the source and destination cluster, and to manage the replication of data from the source cluster to the destination cluster.
++
+.Show example
+[%collapsible]
+====
 
 [source,yaml]
 ----
@@ -80,38 +87,11 @@ metadata:
   namespace: test-dr-ns-dest
 spec:
   includedNamespaces:
-  - namespace: test-dr-ns
+  - namespace: test-dr-ns-dest
 ----
 
-Create AppMirrot Relationship between the source and the destination app. This can be done by creating a new AppMirror CR with the source app as the source and the destination app as the target. Once the AppMirror CR is created, you should start seeing the data from the source app being replicated to the destination app.
-NOTE: Cluster and SVM peering and network connectivity between the source cluster and the ONTAP S3 endpoint must be in place for the replication to work.   
-
-[source,yaml]
-# application-mirror-relationship.yaml
-
-apiVersion: protect.trident.netapp.io/v1
-kind: AppMirrorRelationship
-metadata:
-  name: amr1
-spec:
-  desiredState: Established
-  destinationAppVaultRef: ontap-s3-appvault
-  destinationApplicationRef: dr-source-vm-failback
-  namespaceMapping:
-  - destination: test-dr-ns
-    source: test-dr-ns-dest
-  recurrenceRule: |-
-    DTSTART:20240901T000200Z
-    RRULE:FREQ=MINUTELY;INTERVAL=5
-  sourceAppVaultRef: ontap-s3-appvault
-  sourceApplicationName: test-dest-app
-  sourceApplicationUID: "1b164123-83db-4f83-a47e-1bc4728af239"
-  storageClassName: "sc-nas"
-
-  When the AppMirror relationship is established, the most recent snapshot is transferred to the destination namespace. The PVC is created for the VM in the dr namespace, however, the VM pod is not yet created in the dr namespace. 
-
-.Show example
-[%collapsible]
-====
-image:rosv-disaster-recovery-007.png[AMR relationship created]
+[source,CLI]
+----
+tridentctl-protect create app <dest-app-name> -n <dest-ns> --namespaces <dest-ns> 
+---- 
 ====

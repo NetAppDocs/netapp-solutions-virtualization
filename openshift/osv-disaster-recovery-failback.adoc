@@ -7,7 +7,95 @@ summary: Red Hat OpenShift Virtualization
 
 [.lead]
 ==  Failback for OpenShift Virtualization Disaster Recovery
-This section describes how to perform a failback of a VM from the disaster recovery target cluster back to the source cluster after a failover has occurred. This process is necessary to restore the original state of the environment after the source cluster has been recovered from an outage.
-To perform a failback, first ensure that the source cluster is fully operational and ready to receive the VM back from the target cluster. Then, execute the failback operation using Trident Protect by demoting the AppMirror relationship. This will replicate the latest snapshot data back to the source cluster and start the VM on the source cluster while the VM is still running on the target cluster. After confirming that the VM is running successfully on the source cluster, you can then shut down the VM on the target cluster to complete the failback process. This method allows you to restore the original state of your environment and maintain VM availability throughout the failback process.
+Using Trident Protect, you can achieve "fail back" after a failover operation by using the following sequence of operations. In this workflow to restore the original replication direction, Trident Protect replicates (resyncs) any application changes back to the original source application before reversing the replication direction.
 
-You will need to perform some cleanup operations after failback is complete to remove any resources that are no longer needed, such as the AppMirror relationship and any replicated data on the target cluster. This will help to free up resources and ensure that your environment is clean and ready for future disaster recovery operations if needed.
+This process starts from a relationship that has completed a failover to a destination and involves the following steps:
+
+1. Start with a failed over state.
+
+2. Reverse resync the replication relationship
+
+When you reverse resync a failed over replication relationship, the destination application becomes the source application, and the source becomes the destination. Changes made to the destination application during failover are kept.
+
+2a. On the original destination cluster, delete the AppMirrorRelationship CR. This causes the destination to become the source. If there are any protection schedules remaining on the new destination cluster, remove them.
+
+.Show example
+[%collapsible]
+====
+image:osv-disaster-recovery-013.png[OCP-v AppMirror relationship deleted to start failback]
+====
+
+2b. Create a Snapshot on the new source cluster (original destination) to capture any changes made during the failover period. This ensures that all changes are replicated back to the original source cluster during the resync process.
+
+.Show example
+[%collapsible]
+====
+[source,yaml]
+----
+# snapshot.yaml
+apiVersion: protect.trident.netapp.io/v1
+kind: Snapshot
+metadata:
+  name: test-source-dr-init-snapshot-failback
+  namespace: test-dr-ns
+spec:
+  applicationRef: test-dest-app
+  appVaultRef: ontap-s3-appvault
+  reclaimPolicy: Delete
+----
+
+image:osv-disaster-recovery-014.png[OCP-v ondemand snapshot of the VM created using Trident Protect CLI on the new source cluster]
+image:osv-disaster-recovery-015.png[OCP-v ondemand snapshot of the VM getting created using Trident Protect CLI on the new source cluster]
+image:osv-disaster-recovery-016.png[OCP-v ondemand snapshot of the VM created using Trident Protect CLI on the new source cluster]
+====
+
+
+2c. Set up a replication relationship from the new source cluster (original destination) to the original source cluster, configuring values for the reverse direction.
+
+.Show example
+[%collapsible]
+====
+# application-mirror-relationship.yaml
+
+[source,yaml]
+----
+kind: AppMirrorRelationship
+metadata:
+  name: amr1
+spec:
+  desiredState: Established
+  destinationAppVaultRef: ontap-s3-appvault
+  destinationApplicationRef: dr-source-vm-failback
+  namespaceMapping:
+  - destination: test-dr-ns
+    source: test-dr-ns-dest
+  recurrenceRule: |-
+    DTSTART:20240901T000200Z
+    RRULE:FREQ=MINUTELY;INTERVAL=5
+  sourceAppVaultRef: ontap-s3-appvault
+  sourceApplicationName: test-dest-app
+  sourceApplicationUID: "uid of the app in the original source cluster"
+  storageClassName: "sc-nas"
+---- 
+
+image:osv-disaster-recovery-017.png[OCP-v AppMirror relationship created in the original source cluster to reverse the replication direction]
+image:osv-disaster-recovery-018.png[OCP-v AppMirror relationship created in the original destination cluster to reverse the replication direction]
+
+====
+
+
+
+3.Promote the replication relationship from the new source cluster (original destination) to the original source cluster by updating the desiredState field in the AppMirrorRelationship CR to "Promoted".
+
+.Show example
+[%collapsible]
+====
+image:osv-disaster-recovery-019.png[OCP-v AppMirror relationship in the original source cluster Promoted to complete failback]
+
+You will now see the VM running in the original source cluster. The failback process is now complete. You can now clean up the resources in the original destination cluster. You can also set up a new replication relationship if you want to maintain disaster recovery capabilities after the failback process.
+
+
+
+NOTE: Do not perform a normal resync operation, as this will discard data written to the destination cluster during the fail over procedure.
+====
+

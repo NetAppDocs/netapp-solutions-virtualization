@@ -20,9 +20,10 @@ Note: All the following steps are performed on the source cluster, which is the 
 
 This section shows how to set up an AppVault object in Trident Protect using ONTAP S3 object storage. The AppVault created in this step will be used to store replicated data from the source cluster, and that data will be used for recovery in the disaster recovery target cluster.
 
-Use oc commands and the yaml files are shown below to create a secret and the AppVault custom resource for ONTAP s3. Ensure that you create them in the trident protect namespace. 
+Use oc commands and the yaml files shown below to create a secret and the AppVault custom resource for ONTAP s3. Ensure that you create them in the trident-protect namespace. 
 
 [source,yaml]
+----
 apiVersion: v1
 # You can provide the keys either as stringData or base 64 encoded data
 stringData:
@@ -37,7 +38,9 @@ metadata:
   namespace: trident-protect
 type: Opaque
 
+----
 [source,yaml]
+----
 apiVersion: protect.trident.netapp.io/v1
 kind: AppVault
 metadata:
@@ -60,6 +63,7 @@ spec:
         key: secretAccessKey
         name: appvault-secret
   providerType: OntapS3
+----
 
 Ensure that ONTAP S3 vault is created and is in the Available state
 
@@ -69,7 +73,7 @@ oc create -f app-vault.yaml -n trident-protect
 
 image:osv-disaster-recovery-003.png[OCP-v AppVault in trident-protect namespace]
 
-= Create a Trident Protect App for the source VM
+== Create a Trident Protect App for the source VM
 
 Create an Application custom resource in the namespace where the source VM is located. 
 
@@ -92,11 +96,12 @@ tridentctl-protect create app <source-vm> -n <source-ns> --namespaces <source-ns
 
 image:osv-disaster-recovery-004.png[OCP-v app in source-ns namespace]
 
-The VM and its PVC in the namespace included in the APP custom resource is shown below.
+The VM and its PVC in the namespace included in the App custom resource is shown below.
 
 
-image:osv-disaster-recovery-005.png[VM and its PVC in the namespace included in the APP custom resource]    
+image:osv-disaster-recovery-005.png[VM and its PVC in the namespace included in the App custom resource]    
 
+== Create a snapshot of the VM using Trident Protect
 You can create an on-demand snapshot of the VM using Trident Protect CLI or API. This snapshot will be stored in the AppVault created in the previous step and can be used for recovery in the disaster recovery target cluster.
 
 [source, yaml]
@@ -116,30 +121,28 @@ spec:
 
 image:osv-disaster-recovery-006.png[OCP-v ondemand snapshot of the VM created using Trident Protect CLI]
 
+== Create a scheduled snapshot of the VM using Trident Protect
+
 You can also create a scheduled snapshot by creating a Schedule custom resource in the same namespace as the Application custom resource. The schedule will automatically create snapshots of the VM at the specified schedule and store them in the AppVault.
 
-[source, yaml]
-----
-# cat snapshot-schedule.yaml
+
+.Show example
+[%collapsible]
+====
 apiVersion: protect.trident.netapp.io/v1
 kind: Schedule
 metadata:
-  creationTimestamp: null
-  name: snapshot-schedule1
-  namespace: test-dr-ns
+  name: appmirror-sched1
 spec:
   appVaultRef: ontap-s3-appvault
-  applicationRef: demo-vm
+  applicationRef: test-source-app
   backupRetention: "0"
-  dayOfMonth: ""
-  dayOfWeek: ""
   enabled: true
-  granularity: Hourly
-  hour: ""
-  minute: "50"
-  recurrenceRule: ""
-  snapshotRetention: "1"
-
-----
+  granularity: Custom
+  recurrenceRule: |-
+    DTSTART:20240901T000200Z
+    RRULE:FREQ=MINUTELY;INTERVAL=5
+  snapshotRetention: "2"
+====
 
 
