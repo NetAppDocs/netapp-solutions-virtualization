@@ -31,7 +31,7 @@ NetApp's EUC solutions offer several benefits for organizations, including:
 * Scalability: NetApp's EUC solutions are designed to be scalable, allowing organizations to easily add or remove users as needed.
 * Flexibility: NetApp's EUC solutions can be deployed on-premises, in the cloud, or in a hybrid environment, providing organizations with the flexibility to choose the deployment model that best suits their needs.
 
-For more information, check out the [Benefits of End User Computing with NetApp](euc-benefits.html) page.
+For more information, check out the link:euc-benefits.html[Benefits of NetApp storage for End User Computing] page.
 
 == NetApp's EUC Solutions
 NetApp offers a range of EUC solutions, including:
