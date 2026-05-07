@@ -1,0 +1,73 @@
+---
+sidebar: sidebar
+permalink: euc/euc-benefits.html
+keywords: euc, digital workspace, virtual desktop, vdi, virtual desktop infrastructure, cloud desktop, virtual application, application virtualization, app virtualization, virtual desktop management, desktop management, application management,
+summary:
+---
+= Benefits of NetApp storage for End User Computing
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+NetApp storage solutions provide several benefits for End User Computing (EUC) environments, including improved performance, scalability, and security. With NetApp's storage solutions, organizations can optimize their EUC deployments and provide a better user experience for their end users.
+
+Here are some of the key benefits of NetApp storage for End User Computing:
+
+== Support for Windows and Linux virtual desktops
+
+NetApp storage solutions support both Windows and Linux virtual desktops, allowing organizations to choose the operating system that best suits their needs. This flexibility can help organizations optimize their EUC deployments and provide a better user experience for their end users. The same file share can be used for both Windows and Linux virtual desktops, providing a consistent experience for users regardless of the operating system they are using. SMB and NFS protocols are supported, allowing for seamless integration with existing infrastructure.
+
+== Secure multi-tenancy
+
+NetApp storage solutions provide secure multi-tenancy, allowing organizations to securely isolate data and resources for different users and groups. This can help organizations enhance security and reduce the risk of data breaches in their EUC environments. With NetApp's secure multi-tenancy features, organizations can ensure that data is stored securely and efficiently, while also providing users with access to their files and data from any device, anywhere. SVM acts like a virtual storage appliance, providing a secure and isolated environment for each tenant, while also allowing for efficient resource utilization and management.
+
+File shares and home directories can be securely isolated for different users and groups, providing a secure and efficient way to manage data in EUC environments. With NetApp's secure multi-tenancy features, organizations can ensure that data is stored securely and efficiently, while also providing users with access to their files and data from any device, anywhere. With NetApp's secure multi-tenancy features, organizations can easily manage and secure their data in their EUC environments, providing a better user experience for their end users.
+
+Self encrypting drives (SEDs) provide an additional layer of security for EUC environments, allowing organizations to protect their data at rest. With NetApp's SED technology, organizations can ensure that their data is protected even if the physical drives are lost or stolen. With NetApp's SED technology, organizations can easily encrypt their data at rest, providing a powerful tool for enhancing security in their EUC environments.
+
+Fpolicy is a framework that allows organizations to enforce file access policies in their EUC environments, providing a powerful tool for enhancing security and compliance. Vscan is an antivirus scanning solution developed by NetApp that allows customers to protect their data from being compromised by viruses or other malicious code. With NetApp's Fpolicy and Vscan technologies, organizations can easily enforce file access policies and protect their data from viruses and other malicious code, providing a powerful tool for enhancing security in their EUC environments.
+
+ONTAP enables to set quotas on file shares and home directories, allowing organizations to manage storage resources efficiently and prevent users from consuming excessive storage. Qtree quotas can be used to set limits on specific directories within a file share, providing a more granular level of control over storage resources in EUC environments. With NetApp's quota management features, organizations can easily manage and optimize their storage resources in their EUC environments, providing a better user experience for their end users.
+
+== High performance and scalability
+
+NetApp storage solutions are designed to provide high performance and scalability for EUC environments. With NetApp's storage solutions, organizations can optimize their EUC deployments and provide a better user experience for their end users. NetApp's storage solutions are designed to handle the demands of EUC environments, providing high performance and scalability to support a large number of users and applications. With NetApp's storage solutions, organizations can easily scale their EUC deployments as needed, ensuring that they can meet the needs of their users and applications as they grow. 
+
+FlexGroup volumes can grow up to petabytes in size, providing ample storage capacity for EUC environments. With NetApp's storage solutions, organizations can easily scale their EUC deployments as needed, ensuring that they can meet the needs of their users and applications as they grow.
+
+Support for SMB multichannel and NFS nConnect & session trunking allows for increased performance and reliability in EUC environments. With NetApp's storage solutions, organizations can optimize their EUC deployments and provide a better user experience for their end users.
+
+ONTAP widelink feature allows to create a global namespace that is accessible from SMB and NFS clients. The link target can be on local or remote ontap cluster or even on third party storage system. This allows to create a scale-out file share that can be accessed by the clients.
+
+== Data protection and disaster recovery
+
+NetApp Snapshots provide a powerful data protection and disaster recovery solution for EUC environments. With NetApp's Snapshot technology, organizations can create space efficient point-in-time copies of their data, allowing them to quickly recover from data loss or corruption. This can help organizations minimize downtime and ensure that their end users can continue to access their desktop and applications without interruption. With NetApp's Snapshot technology, organizations can easily create and manage snapshots of their data, providing a powerful tool for data protection and disaster recovery in their EUC environments.
+
+Users able to restore their own files from snapshots, providing a powerful tool for self-service data recovery in EUC environments. With NetApp's Snapshot technology, organizations can empower their end users to recover their own data, reducing the burden on IT staff and improving the overall user experience in their EUC environments.
+
+NetApp's Metrocluster provides a powerful disaster recovery solution for file shares, allowing organizations to replicate their data across multiple sites for added protection. With NetApp's Metrocluster technology, organizations can ensure that their data is always available and protected, even in the event of a site failure or disaster. With NetApp's Metrocluster technology, organizations can easily replicate their data across multiple sites, providing a powerful tool for disaster recovery in their EUC environments.
+
+FlexCache provides a powerful caching solution for EUC environments, allowing organizations to improve performance and reduce latency for their end users. With NetApp's FlexCache technology, organizations can cache frequently accessed data closer to their end users, providing a better user experience and improving overall performance in their EUC environments. With NetApp's FlexCache technology, organizations can easily cache data across multiple sites, providing a powerful tool for improving performance and reducing latency in their EUC environments. When used in conjunction with Microsoft DFS, users can access their data using same path regardless of their location, providing a seamless experience for users across multiple sites while keeping the data access local. 
+
+== vSphere Integration
+
+NetApp Storage supports VAAI (vStorage APIs for Array Integration) which allows for offloading certain storage operations to the storage array, improving performance and reducing the load on the vSphere hosts. With NetApp's VAAI support, organizations can optimize their EUC deployments and provide faster provisioning and better performance for their end users. VAAI support is available for both NFS and block protocols, allowing for seamless integration with existing infrastructure.
+
+ONTAP tools for VMware vSphere provides a powerful management solution for EUC environments, allowing organizations to easily manage their NetApp storage from within the vSphere environment. With support for VMware Cloud Foundation, a single instance deployed can manage multiple instances of vCenter across the VCF Domains. Users can provision and protect their datastores, monitor performance, and manage their storage resources all from within the vSphere environment. FlexGroup volume support is available for large scale EUC deployments, providing ample storage capacity and high performance for virtual desktops and applications. 
+
+NFS nConnect allows for multiple connections to be established between the vSphere host and the NetApp storage array, improving performance in EUC environments. With NetApp's NFS nConnect support, organizations can optimize their EUC deployments and provide a better user experience for their end users. 
+
+== Data services and management
+
+NetApp Console provides data services to discover, map and profile your data to meet governance and compliance requirements. With NetApp Console, organizations can easily tier their data to the appropriate storage class, ensuring that they can optimize their storage resources and meet their performance and cost requirements. Copy and Sync feature allows for efficient data mobility across the sites, providing a powerful tool for managing data in EUC environments. With NetApp Console, organizations can easily manage and optimize their data in their EUC environments, providing a better user experience for their end users.
+
+NetApp's Autonomous Ransomware Protection provides a powerful solution for protecting file shares from ransomware attacks. With NetApp's Autonomous Ransomware Protection, organizations can automatically detect and respond to ransomware threats, ensuring that their data is protected and their end users can continue to access their desktop and applications without interruption. With NetApp's Autonomous Ransomware Protection, organizations can easily protect their data from ransomware attacks, providing a powerful tool for enhancing security in their EUC environments.
+
+File system analytics provides insights into file usage and access patterns, allowing organizations to optimize their storage resources and improve performance in their EUC environments. With NetApp's file system analytics, organizations can easily identify top consumers of storage, monitor data growth, and make informed decisions about data management and optimization.
+
+XCP provides a powerful tool for copying and synchronizing data in EUC environments, allowing organizations to efficiently manage their data across multiple sites. With NetApp's XCP technology, organizations can multistream data transfers, improving performance and reducing the time required for data movement. The tool can also be used to ingest data from third party storage systems, providing a powerful tool for data migration and management in EUC environments. 
+
+ONTAP RESTful API, PowerShell Toolkit, and Ansible modules provide powerful management and automation tools for EUC environments. With NetApp's management and automation tools, organizations can easily automate routine tasks, such as provisioning and monitoring, allowing them to focus on more strategic initiatives in their EUC environments.
