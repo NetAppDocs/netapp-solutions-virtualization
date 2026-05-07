@@ -27,7 +27,7 @@ Ensuring compatibility with the latest Kubernetes storage features and standards
 **Declarative Configuration**
 Allowing users to define storage requirements in YAML files, which are then automatically managed by Trident.
 **Drivers**
-Trident supports drivers for NFS, CIFS/SMB, FC and NVMe/TCP protocols supported by ONTAP. 
+Trident supports drivers for NFS, CIFS/SMB, iSCSI, FC and NVMe/TCP protocols supported by ONTAP. 
 **Hybrid and multi cloud support**
 Trident supports drivers for ONTAP storage on-premises and managed storage service in the hyperscalers namely FSx for NetApp ONTAP in AWS, Azure NetApp Files in Azure and Google Cloud NetApp Volumes in Google Cloud. 
 **Advanced Data Management**

@@ -58,8 +58,7 @@ entries:
       - title: "Disaster Recovery - Manual DR"
         url: /openshift/osv-disaster-recovery-simulate-dr.html
       - title: "Failover and Failback- Realtime DR"
-        url: /openshift/osv-disaster-recovery-trident-protect.html
-
+        url: /openshift/osv-disaster-recovery-failback.html
 # Additional sections
 # Ransomware Resilience
 # ARP 

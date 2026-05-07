@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: openshift/osv-vm-dp-using-velero-overview.html
+permalink: openshift/osv-data-protection-third-party-tools.html
 keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, CNV, Container Native Virtualization, Red Hat OpenShift Virtualization, OADP operator, Openshift Data Protection Application operator, velero
 summary: Red Hat OpenShift Virtualization Data Protection with NetApp ONTAP
 ---
@@ -48,13 +48,7 @@ link:https://docs.openshift.com/container-platform/4.14/backup_and_restore/appli
 link:https://velero.io/[Velero]
 
 = Create on-demand backup for VMs in Red Hat OpenShift Virtualization using Velero
-:hardbreaks:
-:nofooter:
-:icons: font
-:linkattrs:
-:imagesdir: ../media/
 
-[.lead]
 Back up VMs in OpenShift Virtualization using Velero and NetApp ONTAP S3 or StorageGRID. This procedure includes creating Backup Custom Resources (CRs) for on-demand backups and Schedule CRs for scheduled backups. Each backup captures VM metadata and persistent volumes, storing them in the specified object storage location for recovery or compliance purposes.
 
 == Steps to create a backup of a VM

@@ -54,14 +54,17 @@ NOTE: The AppMirror relationship should be created from the cli of the destinati
 .Show example
 [%collapsible]
 ====
+[source, cli]
+----
 oc patch amr amr1 -n test-dr-ns-dest --type=merge -p '{"spec":{"desiredState":"Promoted"}}'
+----
 
 
 image:osv-disaster-recovery-012.png[OCP-v AppMirror relationship Promoted]
 
-[Source, cli]
+[source, cli]
 ----
-oc get pod, pvc,vm -n test-dr-ns-dest +
+oc get pod, pvc,vm -n test-dr-ns-dest
 oc get pod, pvc,vm -n test-dr-ns
 ----
 

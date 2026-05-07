@@ -301,7 +301,7 @@ Sample backend secret and backend configuration file using username and password
 
 [source,yaml]
 ----
-# tbc-nas.yaml
+# tbc-nas-economy.yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -319,9 +319,9 @@ spec:
   version: 1
   storageDriverName: ontap-nas-economy
   managementLIF: <ONTAP management LIF>
-  backendName: tbc-nas
-  svm: zoneb #<replace with your SVM name>
-  storagePrefix: testzoneb #<replace with your prefix>
+  backendName: tbc-nas-eco
+  svm: <replace with your SVM name>
+  storagePrefix: <replace with your prefix>
   defaults:
     nameTemplate: "{{ .config.StoragePrefix }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}"
   credentials:
@@ -594,9 +594,9 @@ allowVolumeExpansion: true
 
 --
 
-.iscsi SAN economy
+.iSCSI SAN economy
 --
-Create a TridentBackendConfig and StorageClass for ONTAP SAN economy with iscsi to enable iscsi-based block storage provisioning. The backend configuration uses the ontap-san driver with the iscsi protocol and includes credentials stored in a Kubernetes Secret.
+Create a TridentBackendConfig and StorageClass for ONTAP SAN economy with iSCSI to enable iSCSI-based block storage provisioning. The backend configuration uses the ontap-san-economy driver with the iSCSI protocol and includes credentials stored in a Kubernetes Secret.
 
 Backend secret and backend configuration file using client certificate authentication  (save as `tbc-san-eco.yaml`):
 
@@ -613,7 +613,7 @@ metadata:
 type: Opaque
 stringData:
   clientPrivateKey:
-    <client private key that you generated>
+  <client private key that you generated>
 ---
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -623,15 +623,14 @@ metadata:
 spec:
   version: 1
   storageDriverName: ontap-san-economy
-  managementLIF: "10.192.102.47"
-  #dataLIF: 10.61.180.32
+  managementLIF: "<ONTAP management LIF>"
   backendName: tbc_san_eco
-  svm: oc-automation-svm #<replace with your SVM name>
-  storagePrefix: oc_automation #<replace with your prefix>
+  svm: #<replace with your SVM name>
+  storagePrefix: #<replace with your prefix>
   credentials:
     name: ontap-san-cert-auth
   clientCertificate:
-    <client certificate that you generated>
+  <client certificate that you generated>
 
 ----
 

@@ -4,7 +4,7 @@ permalink: openshift/osv-disaster-recovery-requirements.html
 keywords: OpenShift, OCP, Trident, Trident Protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, Red Hat OpenShift Virtualization
 summary: Red Hat OpenShift Virtualization
 ---
-= Learn about Red Hat OpenShift Virtualization
+= Trident Protect/AppMirror prerequisites for OpenShift Virtualization Disaster Recovery
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -12,7 +12,7 @@ summary: Red Hat OpenShift Virtualization
 :imagesdir: ../media/
 
 [.lead]
-Review the requirements to install and deploy OpenShift virtualization with ONTAP storage systems.
+This section provides information about the prerequisites for using NetApp Trident Protect and AppMirror for disaster recovery of OpenShift Virtualization workloads. This includes the necessary cluster configurations, storage requirements, and installation steps to set up Trident Protect and AppMirror for effective disaster recovery of VMs running on OpenShift Virtualization.
 
 == Prerequisites
 1. A Red Hat OpenShift cluster with OpenShift Virtualization installed and configured. For installation instructions, see the link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/virtualization/installing-virtualization[documentation here].

@@ -14,19 +14,19 @@ This process starts from a relationship that has completed a failover to a desti
 1. Start with a failed over state.
 
 2. Reverse resync the replication relationship
-
++
 When you reverse resync a failed over replication relationship, the destination application becomes the source application, and the source becomes the destination. Changes made to the destination application during failover are kept.
-
++
 2a. On the original destination cluster, delete the AppMirrorRelationship CR. This causes the destination to become the source. If there are any protection schedules remaining on the new destination cluster, remove them.
-
++
 .Show example
 [%collapsible]
 ====
 image:osv-disaster-recovery-013.png[OCP-v AppMirror relationship deleted to start failback]
 ====
-
++
 2b. Create a Snapshot on the new source cluster (original destination) to capture any changes made during the failover period. This ensures that all changes are replicated back to the original source cluster during the resync process.
-
++
 .Show example
 [%collapsible]
 ====
@@ -48,10 +48,10 @@ image:osv-disaster-recovery-014.png[OCP-v ondemand snapshot of the VM created us
 image:osv-disaster-recovery-015.png[OCP-v ondemand snapshot of the VM getting created using Trident Protect CLI on the new source cluster]
 image:osv-disaster-recovery-016.png[OCP-v ondemand snapshot of the VM created using Trident Protect CLI on the new source cluster]
 ====
-
++
 
 2c. Set up a replication relationship from the new source cluster (original destination) to the original source cluster, configuring values for the reverse direction.
-
++
 .Show example
 [%collapsible]
 ====
@@ -84,9 +84,10 @@ image:osv-disaster-recovery-018.png[OCP-v AppMirror relationship created in the 
 ====
 
 
++
+3. Promote the replication relationship from the new source cluster (original destination) to the original source cluster by updating the desiredState field in the AppMirrorRelationship CR to "Promoted".
 
-3.Promote the replication relationship from the new source cluster (original destination) to the original source cluster by updating the desiredState field in the AppMirrorRelationship CR to "Promoted".
-
++
 .Show example
 [%collapsible]
 ====
