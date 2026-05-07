@@ -18,6 +18,10 @@ End User Computing (EUC) is a technology that allows users to access their deskt
 
 End User Computing (EUC) is a technology that allows users to access their desktop and applications from any device, anywhere. EUC solutions typically include virtual desktop infrastructure (VDI), application virtualization, and user profile management tools. With EUC, organizations can improve productivity, reduce costs, and enhance security for their end users. File shares and home directories are also part of the EUC solution, providing users with access to their files and data from any device.
 
+Users needs access to application to perform their work either with single application or with desktop. Some users might need high end graphics application for their desktop application or for specific application. EUC solution with NetApp can provide the right solution for each user based on their needs and requirements. With NetApp's EUC solutions, organizations can provide users with access to their desktop and applications from any device, anywhere, while also ensuring that data is stored securely and efficiently.
+
+Organization can choose to deploy EUC solution on-premises, in the cloud, or in a hybrid environment, providing them with the flexibility to choose the deployment model that best suits their needs. With NetApp's EUC solutions, organizations can improve productivity, reduce costs, and enhance security for their end users while also providing them with the flexibility to work from anywhere.
+
 == High level benefits of End User Computing with NetApp
 
 NetApp's EUC solutions offer several benefits for organizations, including:
@@ -26,6 +30,8 @@ NetApp's EUC solutions offer several benefits for organizations, including:
 * Enhanced security: EUC can help organizations enhance security by centralizing desktop and application management, which can reduce the risk of data breaches and other security incidents.
 * Scalability: NetApp's EUC solutions are designed to be scalable, allowing organizations to easily add or remove users as needed.
 * Flexibility: NetApp's EUC solutions can be deployed on-premises, in the cloud, or in a hybrid environment, providing organizations with the flexibility to choose the deployment model that best suits their needs.
+
+For more information, check out the [Benefits of End User Computing with NetApp](euc-benefits.html) page.
 
 == NetApp's EUC Solutions
 NetApp offers a range of EUC solutions, including:
