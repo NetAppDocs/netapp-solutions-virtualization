@@ -11,6 +11,9 @@ summary: Log of recent changes to the NetApp virtualization solutions collateral
 [.lead]
 Learn what's new in virtualization solutions.
 
+== 10 May 2026
+* Added End User Computing (EUC) solutions for NetApp ONTAP.
+
 == 15 January 2026
 * Updated Proxmox VE solution contents to reflect Proxmox VE 9 release.
 * Added instructions to enable Anti-Ransomware protection on volumes used for Proxmox VE storage.
