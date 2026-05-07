@@ -25,7 +25,7 @@ To perform a failover without a site outage, first ensure that the source and ta
 apiVersion: protect.trident.netapp.io/v1
 kind: AppMirrorRelationship
 metadata:
-  name: amr2
+  name: amr1
 spec:
   desiredState: Established
   destinationAppVaultRef: ontap-s3-appvault

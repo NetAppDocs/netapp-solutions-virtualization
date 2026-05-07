@@ -511,7 +511,12 @@ For more information about this limitation and information about the Super-subsy
 --
 Create a TridentBackendConfig and StorageClass for ONTAP SAN with Fibre Channel to enable FC-based block storage provisioning. The backend configuration uses the ontap-san driver with the FCP protocol specified and includes credentials stored in a Kubernetes Secret.
 
-Backend secret and backend configuration file using client certificate authentication  (save as `tbc-fc.yaml`):
+Use the username/password authentication method or client certificate authentication method to authenticate with ONTAP. For details about how to generate the client certificate, private key and CA certificate and their base64 version, please review link:https://docs.netapp.com/us-en/trident/trident-use/ontap-san-prep.html#enable-certificate-based-authentication[Trident documentation here]. Examples for both methods are provided below.
+
+.Show example
+[%collapsible]
+====
+Backend secret and backend configuration file using ONTAP username and password authentication  (save as `tbc-fc.yaml`):
 
 [source,yaml]
 ----
@@ -542,6 +547,11 @@ spec:
   credentials:
     name: tbc-fc-secret
 ----
+====
+
+.Show example
+[%collapsible]
+====
 Backend secret and backend configuration file using client certificate authentication 
 (save as `tbc-fc.yaml`):
 
@@ -574,6 +584,7 @@ spec:
     name: tbc-fc-secret
   clientCertificate: <base 64 encoded client certificate>
 ----
+====
 
 [source,yaml]
 ----
@@ -612,8 +623,7 @@ metadata:
   namespace: trident
 type: Opaque
 stringData:
-  clientPrivateKey:
-  <client private key that you generated>
+  clientPrivateKey: <client private key that you generated>
 ---
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -629,14 +639,13 @@ spec:
   storagePrefix: #<replace with your prefix>
   credentials:
     name: ontap-san-cert-auth
-  clientCertificate:
-  <client certificate that you generated>
+  clientCertificate: <client certificate that you generated>
 
 ----
 
 [source,yaml]
 ----
-# sc-san-eco.yaml
+# sc-san-eco.yaml 
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:

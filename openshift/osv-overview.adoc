@@ -12,7 +12,7 @@ summary: Red Hat OpenShift Virtualization
 :imagesdir: ../media/
 
 [.lead]
-Red Hat® OpenShift® Virtualization enables organizations to seamlessly migrate, run, and manage traditional virtual machines (VMs) alongside modern workloads on a unified, hybrid cloud application platform. OpenShift Virtualization is available as an operator included with any OpenShift subscription. This add-on to the OpenShift Container Platform provides a robust solution for integrating VMs with containerized applications. It uses Kernel-based Virtual Machine(KVM) the trusted Linux kernel hypervisor, known for robust performance, scalability, and stability to deliver enterprise-grade virtualization, for virtual machines, as native objects within OpenShift. 
+Red Hat® OpenShift® Virtualization enables organizations to seamlessly migrate, run, and manage traditional virtual machines (VMs) alongside modern workloads on a unified, hybrid cloud application platform. OpenShift Virtualization is available as an operator included with any OpenShift subscription. This add-on to the OpenShift Container Platform provides a robust solution for integrating VMs with containerized applications. It uses Kernel-based Virtual Machine (KVM) the trusted Linux kernel hypervisor, known for robust performance, scalability, and stability to deliver enterprise-grade virtualization, for virtual machines, as native objects within OpenShift. 
 
 image:redhat-openshift-044.png[OpenShift Virtualization]
 
@@ -21,7 +21,7 @@ image:redhat-openshift-044.png[OpenShift Virtualization]
 
 **Gradual Modernization:** Modernize at your own pace by adopting containers, implementing microservices, or integrating AI, without disrupting existing VMs.
 
-**Kubernetes Integration** Leverages Kubernetes custom resources to add virtualization capabilities to your OpenShift cluster.
+**Kubernetes Integration:** Leverages Kubernetes custom resources to add virtualization capabilities to your OpenShift cluster.
 
 == Capabilities of Red Hat OpenShift Virtualization
 **VM Management:** Create and manage both Linux and Windows VMs.
