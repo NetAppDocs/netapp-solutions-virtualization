@@ -250,7 +250,7 @@ metadata:
   name: ontap-nas-secret
   namespace: trident
 type: Opaque
-stringData:
+data:
   clientPrivateKey: <base 64 encoded client private key>
 ---
 apiVersion: trident.netapp.io/v1
@@ -326,6 +326,24 @@ spec:
     nameTemplate: "{{ .config.StoragePrefix }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}"
   credentials:
     name: tbc-nas-secret
+----
+
+StorageClass definition (save as `sc-nas-economy.yaml`):
+
+[source,yaml]
+----
+# sc-nas-economy.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: sc-nas-economy
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "ontap-nas-economy"
+  media: "ssd"
+  provisioningType: "thin"
+  snapshots: "true"
+allowVolumeExpansion: true
 ----
 
 NOTE: The following parameters can be included for NAS economy driver configuration:

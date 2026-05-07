@@ -37,7 +37,7 @@ OADP 1.3 is available from the operator hub of OpenShift cluster 4.12 and later.
 **The following are the versions of the various components used for the examples in this section**
 
 * OpenShift Cluster 4.14
-* OpenShift Virtualization installed via OperatorOpenShift Virtualization Operator provided by Red Hat
+* OpenShift Virtualization installed via OpenShift Virtualization Operator provided by Red Hat
 * OADP Operator 1.13 provided by Red Hat
 * Velero CLI 1.13 for Linux 
 * Trident 24.02
