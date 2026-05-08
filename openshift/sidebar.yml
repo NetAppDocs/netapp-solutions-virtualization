@@ -12,7 +12,7 @@ entries:
       - title: "Deployment models"
         url: /openshift/osv-deployment-models.html
 
-  - title: "Getting Started"
+  - title: "Getting Started with Storage and Virtualization"
     pdf-filename: "Red Hat OpenShift Storage and Virtualization"
     entries:
       - title: "Getting Started with Storage"
@@ -20,8 +20,21 @@ entries:
       - title: "Storage Provisioning"
         url: /openshift/osv-trident-install.html
         #url: /openshift/osv-storage-provisioning.html
-      - title: "Virtualization Layer"
+      - title: "Deploy Red Hat OpenShift Virtualization with ONTAP"
         url: /openshift/osv-deployment.html
+      - title: "Deployment of VMs"
+        url: /openshift/osv-vm-deployment.html
+      - title: "Other methods for Creating VMs"
+        url: /openshift/osv-vm-deployment-other-methods.html
+      #- title: "Connect a VM to a Linux bridge network"
+      #  url: /openshift/osv-connect-vm-to-bridge-network.html
+      - title: "Live migration of VMs between cluster nodes"
+        url: /openshift/osv-vm-live-migration.html
+      - title: "Storage migration of VMs between storage classes"
+        url: /openshift/osv-migration-vm-storage-.html
+      #- title: "Multi Cluster Management using Red Hat Advanced Cluster Management for Kubernetes"
+      #  url: /openshift/osv-multi-cluster-management.html
+
   - title: "Migration"
     pdf-filename: "Red Hat OpenShift Virtualization Migration"
     entries:

@@ -38,12 +38,13 @@ Optionally, you can also specify a subset of the OpenShift cluster nodes to host
 For the storage backing OpenShift Virtualization, NetApp recommends having a dedicated StorageClass that requests storage from a particular Trident backend, which in turn is backed by a dedicated SVM. This maintains a level of multitenancy with regard to the data being served for VM-based workloads on the OpenShift cluster.
 
 
-== NetApp Trident CSI for OpenShift Virtualization
+== NetApp Trident CSI, Storage Profiles, volume access modes for OpenShift Virtualization
 
 In OpenShift Virtualization, boot sources are disk images used to provision virtual machines (VMs) from templates. They are typically stored as DataVolumes or Persistent Volume Claims (PVCs) within the openshift-virtualization-os-images namespace. In order for OpenShift Virtualization to function correctly, there are two storage configuration tasks that are mandatory, prior to installing the OpenShift Virtualization using the operator: 
 
 1.	You must configure a default storage class for the cluster. Otherwise, OpenShift Virtualization cannot automatically import boot source images. 
-2.	You must configure storage profiles if your storage provider is not recognized by CDI. A storage profile provides recommended storage settings based on the associated storage class. One of the critical functions of StorageProfile is defining cloning strategies for a StorageClass. This determines how volumes are cloned (e.g., using snapshots, CSI clones, or host-assisted copies), optimizing performance and resource usage based on the capabilities of the underlying storage vendor. Trident CSI driver is recognized by CDI, and a default storage profile is automatically created for any Trident StorageClass created in the cluster. The cloning strategy for this default storage profile is set to snapshot, which is the recommended cloning strategy for Trident CSI driver.
+2.	You must configure storage profiles if your storage provider is not recognized by CDI. A storage profile provides recommended storage settings based on the associated storage class. One of the critical functions of StorageProfile is defining cloning strategies for a StorageClass. This determines how volumes are cloned (e.g., using snapshots, CSI clones, or host-assisted copies), optimizing performance and resource usage based on the capabilities of the underlying storage vendor. +
+Trident CSI driver is recognized by CDI, and a default storage profile is automatically created for any Trident StorageClass created in the cluster. The cloning strategy for this default storage profile is set to snapshot, which is the recommended cloning strategy for Trident CSI driver. You must create the VolumeSnapshotClass and StorageClass for Trident and set the StorageClass as default before installing OpenShift Virtualization. This ensures that the boot source images are available as VolumeSnapshots in the openshift-virtualization-os-images namespace, to be able to provision VMs efficiently without any errors.
 
 For certain supported operating systems (like RHEL, Fedora, or CentOS), OpenShift Virtualization automatically provides and updates boot sources.  These are downloaded when OpenShift Virtualization is installed and they are managed and updated to the latest OS version automatically. If an OS is not automatically provided, an administrator must manually prepare and attach a custom image.
 When you use NetApp Trident as the CSI, you get the following additional benefits:
@@ -54,7 +55,7 @@ When you use NetApp Trident as the CSI, you get the following additional benefit
 It is very critical that you create a Trident Storage class and Trident VolumeSnapshot class and set them as default prior to installing the OpenShift Virtualization in your cluster. This will ensure that the boot source images will be available as VolumeSnapshots in  openshift-virtualization-os-images namespace, to be able to provision VMs efficiently without any errors.
 
 Another advantage of using Trident CSI: 
-3.	In OpenShift Virtualization, the boot disks of the VMs need to have RWX  access modes to do Live migration of VMs. Trident supports ReadWriteMany access mode for volumes provisioned using NAS protocols as well as using SAN protocols (when volumeMode is set to Block and not FileSystem). You can use either protocol for the boot disk. The Storage profile object will be automatically configured based on the storage class settings and the boot disk access modes will be appropriately set when provisioning the VMs.
+3.	In OpenShift Virtualization, the boot disks of the VMs need to have RWX  access modes to do Live migration of VMs. Trident supports **ReadWriteMany** access mode for volumes provisioned using NAS protocols as well as using SAN protocols (when volumeMode is set to Block and not FileSystem). You can use either protocol for the boot disk. The Storage profile object will be automatically configured based on the storage class settings and the boot disk access modes will be appropriately set when provisioning the VMs.
 
 
 After you have set the Trident Storage Class as default for the cluster, you can create additional Storage Classes for Trident with different parameters and they will be automatically recognized by OpenShift Virtualization with appropriate storage profiles created for them. You can then specify the storage class to be used for the VM's boot disk and data disks in the VM definition.
@@ -64,8 +65,8 @@ Installing OpenShift Virtualization on the OpenShift cluster is a straightforwar
 
 Install OpenShift Virtualization on a Red Hat OpenShift bare-metal cluster. This procedure includes logging in with cluster-admin access, navigating to the OperatorHub, and installing the OpenShift Virtualization operator. 
 
-.	Log into the Red Hat OpenShift bare-metal cluster with cluster-admin access.
-.	Select Administrator from the Perspective drop down.
+. Log into the Red Hat OpenShift bare-metal cluster with cluster-admin access.
+. Select Administrator from the Perspective drop down.
 . Navigate to Operators > OperatorHub and search for OpenShift Virtualization.
 +
 

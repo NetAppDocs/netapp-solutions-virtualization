@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: openshift/osv-workflow-vm-live-migration.html
+permalink: openshift/osv-vm-live-migration.html
 keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, CNV, Container Native Virtualization, Red Hat OpenShift Virtualization
 summary: Red Hat OpenShift Virtualization with NetApp ONTAP
 ---
@@ -39,4 +39,4 @@ image:rh-os-n-use-case-vm-live-migrate-001.png[VM Live Migrate start]
 image:rh-os-n-use-case-vm-live-migrate-002.png[VM Live Migrate Succeeded]
 
 
-// NetApp Solutions restructuring (jul 2025) - renamed from containers/rh-os-n_use_case_openshift_virtualization_workflow_vm_live_migration.adoc
+// NetApp Solutions restructuring (jul 2025) - renamed from containers/rh-os-n_use_case_openshift_virtualization_workflow_vm_live_migration.adoc. Subsequently renamed to osv-vm-live-migration.adoc

@@ -15,6 +15,7 @@ summary: Red Hat OpenShift Virtualization
 +
 .Show example
 [%collapsible]
+
 ====
 [source,yaml]
 ----

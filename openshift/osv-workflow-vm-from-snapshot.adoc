@@ -61,4 +61,4 @@ image:redhat-openshift-063.png[Restore Snapshot to a new PVC]
 .	After the VM is created successfully, access and verify that the new VM has the same state as that of the VM whose PVC was used to create the snapshot at the time when the snapshot was created.
 
 
-// NetApp Solutions restructuring (jul 2025) - renamed from containers/rh-os-n_use_case_openshift_virtualization_workflow_vm_from_snapshot.adoc
+// NetApp Solutions restructuring (jul 2025) - renamed from containers/rh-os-n_use_case_openshift_virtualization_workflow_vm_from_snapshot.adoc THIS FILE CAN BE DELETED AFTER REVIEWING THE CHANGES IN osv-vm-deployment-other-methods.adoc
