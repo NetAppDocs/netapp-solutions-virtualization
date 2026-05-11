@@ -12,7 +12,7 @@ summary: Red Hat OpenShift Virtualization with NetApp ONTAP
 :imagesdir: ../media/
 
 [.lead]
-In addition to the method of creating a VM using the OpenShift Virtualization UI,  are other methods to create VMs on OpenShift Virtualization. This section provides an overview of some of those methods.
+In addition to the method of creating a VM using the OpenShift Virtualization UI, there are other methods to create VMs on OpenShift Virtualization. This section provides an overview of some of those methods.
 
 
 == Create a VM from a YAML file with Red Hat OpenShift Virtualization
@@ -158,7 +158,7 @@ This procedure includes leveraging Trident CSI volume cloning, allowing you to c
 [%collapsible]
 ====
 
-== VM cloning
+**VM cloning**
 
 Cloning an existing VM in OpenShift is achieved with the support of Trident's Volume CSI cloning feature. CSI volume cloning allows for creation of a new PVC using an existing PVC as the data source by duplicating its PV. After the new PVC is created, it functions as a separate entity and without any link to or dependency on the source PVC.
 
@@ -176,7 +176,7 @@ VMs in an OpenShift cluster can be cloned in two ways:
 .	By keeping the source VM live
 
 
-=== By Shutting down the source VM
+***By Shutting down the source VM***
 
 Cloning an existing VM by shutting down the VM is a native OpenShift feature that is implemented with support from Trident. Complete the following steps to clone a VM.
 
@@ -189,7 +189,7 @@ image:redhat-openshift-058.png[clone vm]
 .	Click Clone Virtual Machine; this shuts down the source VM and initiates the creation of the clone VM.
 .	After this step is completed, you can access and verify the content of the cloned VM.
 
-=== By keeping the source VM live
+***By keeping the source VM live***
 
 An existing VM can also be cloned by cloning the existing PVC of the source VM and then creating a new VM using the cloned PVC. This method does not require you to shut down the source VM. Complete the following steps to clone a VM without shutting it down.
 

@@ -32,7 +32,7 @@ Red Hat OpenShift has leveraged the solutions developed by the OpenSource commun
 image:redhat-openshift-oadp-002.png[OpenShift API for Data Protection]
 
 
-OADP 1.3 is available from the operator hub of OpenShift cluster 4.12 and later. It has a built-in Data Mover that can move CSI volume snapshots to a remote object store. This provides portability and durability by moving snapshots to an object storage location during  backup. The snapshots are then available for restoration after disasters. 
+OADP 1.13 is available from the operator hub of OpenShift cluster 4.12 and later. It has a built-in Data Mover that can move CSI volume snapshots to a remote object store. This provides portability and durability by moving snapshots to an object storage location during  backup. The snapshots are then available for restoration after disasters. 
 
 **The following are the versions of the various components used for the examples in this section**
 

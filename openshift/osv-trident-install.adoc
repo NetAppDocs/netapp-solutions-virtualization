@@ -109,7 +109,7 @@ Create a TridentBackendConfig and StorageClass for each protocol. The backend co
 [%collapsible]
 ====
 
-. The backend configuration files references your **ONTAP SVM** and **management LIF**. +
+. The backend configuration files reference your **ONTAP SVM** and **management LIF**. +
 . You can use **username and password** to authenticate with ONTAP. It can be cluster admin or vserver admin username and password. +
 . You can also use a **client certificate** for authentication with ONTAP. For details about how to generate the client certificate, private key and CA certificate and their base64 version, please review link:https://docs.netapp.com/us-en/trident/trident-use/ontap-san-prep.html#enable-certificate-based-authentication[Trident documentation here].
 
@@ -143,7 +143,7 @@ The following parameters can be included for **SAN driver** configuration:
 ====
 The following parameters can be included for **SAN economy driver** configuration:
 
-. **limitVolumePoolSize** The value is the maximum FlexVol size that you request when using SAN economy backend. No default value is set, and this parameter is not enforced by default. If you set this parameter, the Trident operator limits the maximum flexvol size that can be create for creating LUNs in the flexvol. This parameter can help you control capacity utilization in your cluster by restricting the size of FlexVols used for provisioning PVs. +
+. **limitVolumePoolSize** The value is the maximum FlexVol size that you request when using SAN economy backend. No default value is set, and this parameter is not enforced by default. If you set this parameter, the Trident operator limits the maximum flexvol size that can be created for creating LUNs in the flexvol. This parameter can help you control capacity utilization in your cluster by restricting the size of FlexVols used for provisioning PVs. +
 . **denyNewVolumePools** This parameter restricts SAN economy backends from creating new FlexVol volumes to contain their LUNs. Only preexisting Flexvols are used for provisioning new PVs.
 
 ====

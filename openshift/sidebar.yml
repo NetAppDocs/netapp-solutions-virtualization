@@ -70,7 +70,7 @@ entries:
         url: /openshift/osv-disaster-recovery-target-cluster-setup.html
       - title: "Disaster Recovery - Manual DR"
         url: /openshift/osv-disaster-recovery-simulate-dr.html
-      - title: "Failover and Failback- Realtime DR"
+      - title: "Failover and Failback - Realtime DR"
         url: /openshift/osv-disaster-recovery-failback.html
 # Additional sections
 # Ransomware Resilience
