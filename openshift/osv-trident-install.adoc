@@ -111,7 +111,7 @@ Create a TridentBackendConfig and StorageClass for each protocol. The backend co
 
 . The backend configuration files reference your **ONTAP SVM** and **management LIF**. +
 . You can use **username and password** to authenticate with ONTAP. It can be cluster admin or vserver admin username and password. +
-. You can also use a **client certificate** for authentication with ONTAP. For details about how to generate the client certificate, private key and CA certificate and their base64 version, please review link:https://docs.netapp.com/us-en/trident/trident-use/ontap-san-prep.html#enable-certificate-based-authentication[Trident documentation here].
+. You can also use a **client certificate** for authentication with ONTAP. For details about how to generate the client certificate, private key and CA certificate, please review link:https://docs.netapp.com/us-en/trident/trident-use/ontap-san-prep.html#enable-certificate-based-authentication[Trident documentation here].
 
 ====
 
@@ -251,7 +251,7 @@ metadata:
   namespace: trident
 type: Opaque
 data:
-  clientPrivateKey: <base 64 encoded client private key>
+  clientPrivateKey: <client private key that >
 ---
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -267,7 +267,7 @@ spec:
   storagePrefix: testzoneb #<replace with your prefix>
   credentials:
     name: ontap-nas-secret
-  clientCertificate: <base 64 encoded client certificate>
+  clientCertificate: <client certificate that you generated>
 ----
 
 
@@ -413,7 +413,7 @@ spec:
   svm: <SVM name>
   credentials:
     name: backend-tbc-ontap-iscsi-secret
-  clientCertificate: <base 64 encoded client certificate> 
+  clientCertificate: <client certificate that you generated>
 ----
 
 StorageClass definition (save as `sc-iscsi.yaml`):
@@ -497,7 +497,7 @@ spec:
   svm: <SVM name>
   credentials:
     name: backend-tbc-ontap-nvme-secret
-  clientCertificate: <base 64 encoded client certificate>
+  clientCertificate: <client certificate that you generated>
 ----
 
 StorageClass definition (save as `sc-nvme.yaml`):
@@ -529,7 +529,7 @@ For more information about this limitation and information about the Super-subsy
 --
 Create a TridentBackendConfig and StorageClass for ONTAP SAN with Fibre Channel to enable FC-based block storage provisioning. The backend configuration uses the ontap-san driver with the FCP protocol specified and includes credentials stored in a Kubernetes Secret.
 
-Use the username/password authentication method or client certificate authentication method to authenticate with ONTAP. For details about how to generate the client certificate, private key and CA certificate and their base64 version, please review link:https://docs.netapp.com/us-en/trident/trident-use/ontap-san-prep.html#enable-certificate-based-authentication[Trident documentation here]. Examples for both methods are provided below.
+Use the username/password authentication method or client certificate authentication method to authenticate with ONTAP. For details about how to generate the client certificate, private key and CA certificate, please review link:https://docs.netapp.com/us-en/trident/trident-use/ontap-san-prep.html#enable-certificate-based-authentication[Trident documentation here]. Examples for both methods are provided below.
 
 .Show example
 [%collapsible]
@@ -582,7 +582,7 @@ metadata:
   name: tbc-fc-secret
 type: Opaque
 stringData:
-  clientPrivateKey: <base 64 encoded client private key>
+  clientPrivateKey: <client private key>
 ---
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -600,7 +600,7 @@ spec:
     nameTemplate: "{{ .config.StoragePrefix }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}"
   credentials:
     name: tbc-fc-secret
-  clientCertificate: <base 64 encoded client certificate>
+  clientCertificate: <client certificate that you generated>
 ----
 ====
 

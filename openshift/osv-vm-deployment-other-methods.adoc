@@ -203,9 +203,11 @@ image:redhat-openshift-059.png[clone pvc]
 .	Navigate to Workloads > Virtualization > Virtual Machines and click Create > With YAML.
 .	In the spec > template > spec > volumes section, attach the cloned PVC instead of the container disk. Provide all other details for the new VM according to your requirements.
 [source, cli]
+----
 - name: rootdisk
   persistentVolumeClaim:
     claimName: rhel8-short-frog-rootdisk-28dvb-clone
+----
 
 .	Click Create to create the new VM.
 .	After the VM is created successfully, access and verify that the new VM is a clone of the source VM.

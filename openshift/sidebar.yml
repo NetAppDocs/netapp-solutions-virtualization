@@ -31,7 +31,7 @@ entries:
       - title: "Live migration of VMs between cluster nodes"
         url: /openshift/osv-vm-live-migration.html
       - title: "Storage migration of VMs between storage classes"
-        url: /openshift/osv-migration-vm-storage-.html
+        url: /openshift/osv-migration-vm-storage.html
       #- title: "Multi Cluster Management using Red Hat Advanced Cluster Management for Kubernetes"
       #  url: /openshift/osv-multi-cluster-management.html
 
