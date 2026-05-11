@@ -250,8 +250,8 @@ metadata:
   name: ontap-nas-secret
   namespace: trident
 type: Opaque
-data:
-  clientPrivateKey: <client private key that >
+stringData:
+  clientPrivateKey: <client private key that you generated>
 ---
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -305,7 +305,7 @@ Sample backend secret and backend configuration file using username and password
 apiVersion: v1
 kind: Secret
 metadata:
-  name: tbc-nas-secret
+  name: tbc-nas-economy-secret
 type: Opaque
 stringData:
   username: <cluster admin username>
@@ -325,7 +325,7 @@ spec:
   defaults:
     nameTemplate: "{{ .config.StoragePrefix }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}"
   credentials:
-    name: tbc-nas-secret
+    name: tbc-nas-economy-secret
 ----
 
 StorageClass definition (save as `sc-nas-economy.yaml`):
@@ -399,7 +399,7 @@ metadata:
   name: backend-tbc-ontap-iscsi-secret
 type: Opaque
 stringData:
-  clientPrivateKey: <base 64 encoded client private key>
+  clientPrivateKey: <client private key you generated>
 ---
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig

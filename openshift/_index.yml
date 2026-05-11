@@ -34,7 +34,7 @@ indexpage:
         - title: "Migrate VMs from VMware to an OpenShift cluster"
           url: osv-workflow-vm-migration-mtv.html
         - title: "Migrate VMs between two cluster nodes"
-          url: osv-workflow-vm-live-migration.html
+          url: osv-vm-live-migration.html
 #
     - title: "Protect VMs using Trident and Trident Protect"
       links:

@@ -13,7 +13,7 @@ summary: Red Hat OpenShift Virtualization with NetApp ONTAP
 
 [.lead]
 Create a VM with OpenShift Virtualization. This procedure includes selecting an operating system template, configuring storage classes, and customizing VM parameters to meet specific requirements.
-As a pre-requisite, you should have already created the trident backend, the storage class and the volume snapshot class objects. You can refer to the link:osv-trident-install.html[Trident installation section] for details. 
+As a prerequisite, you should have already created the trident backend, the storage class and the volume snapshot class objects. You can refer to the link:osv-trident-install.html[Trident installation section] for details. 
 
 == Create VM
 
