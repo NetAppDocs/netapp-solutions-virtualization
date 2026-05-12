@@ -251,7 +251,7 @@ metadata:
   namespace: trident
 type: Opaque
 stringData:
-  clientPrivateKey: <client private key that you generated>
+  clientPrivateKey: <client private>
 ---
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -267,7 +267,7 @@ spec:
   storagePrefix: testzoneb #<replace with your prefix>
   credentials:
     name: ontap-nas-secret
-  clientCertificate: <client certificate that you generated>
+  clientCertificate: <client certificate>
 ----
 
 
@@ -399,7 +399,7 @@ metadata:
   name: backend-tbc-ontap-iscsi-secret
 type: Opaque
 stringData:
-  clientPrivateKey: <client private key you generated>
+  clientPrivateKey: <client private key>
 ---
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -413,7 +413,7 @@ spec:
   svm: <SVM name>
   credentials:
     name: backend-tbc-ontap-iscsi-secret
-  clientCertificate: <client certificate that you generated>
+  clientCertificate: <client certificate>
 ----
 
 StorageClass definition (save as `sc-iscsi.yaml`):
@@ -482,7 +482,7 @@ metadata:
   name: backend-tbc-ontap-nvme-secret
 type: Opaque
 stringData:
-  clientPrivateKey: <base 64 encoded client private key>
+  clientPrivateKey: <client private key>
 ---
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -497,7 +497,7 @@ spec:
   svm: <SVM name>
   credentials:
     name: backend-tbc-ontap-nvme-secret
-  clientCertificate: <client certificate that you generated>
+  clientCertificate: <client certificate>
 ----
 
 StorageClass definition (save as `sc-nvme.yaml`):
@@ -600,7 +600,7 @@ spec:
     nameTemplate: "{{ .config.StoragePrefix }}_{{ .volume.Namespace }}_{{ .volume.RequestName }}"
   credentials:
     name: tbc-fc-secret
-  clientCertificate: <client certificate that you generated>
+  clientCertificate: <client certificate>
 ----
 ====
 
@@ -641,7 +641,7 @@ metadata:
   namespace: trident
 type: Opaque
 stringData:
-  clientPrivateKey: <client private key that you generated>
+  clientPrivateKey: <client private key>
 ---
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -657,7 +657,7 @@ spec:
   storagePrefix: #<replace with your prefix>
   credentials:
     name: ontap-san-cert-auth
-  clientCertificate: <client certificate that you generated>
+  clientCertificate: <client certificate>
 
 ----
 

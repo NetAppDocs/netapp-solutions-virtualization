@@ -4,7 +4,7 @@ permalink: openshift/osv-data-protection-third-party-tools.html
 keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, CNV, Container Native Virtualization, Red Hat OpenShift Virtualization, OADP operator, Openshift Data Protection Application operator, velero
 summary: Red Hat OpenShift Virtualization Data Protection with NetApp ONTAP
 ---
-= Learn about data protection for VMs in Red Hat OpenShift Virtualization using OpenShift API for Data Protection (OADP)
+= Data protection for VMs in Red Hat OpenShift Virtualization using OpenShift API for Data Protection (OADP)
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -47,11 +47,11 @@ link:https://docs.netapp.com/us-en/trident/[Trident CSI]
 link:https://docs.openshift.com/container-platform/4.14/backup_and_restore/application_backup_and_restore/installing/installing-oadp-ocs.html[OpenShift API for Data Protection (OADP)]
 link:https://velero.io/[Velero]
 
-= Create on-demand backup for VMs in Red Hat OpenShift Virtualization using Velero
+== Create on-demand backup for VMs in Red Hat OpenShift Virtualization using Velero
 
 Back up VMs in OpenShift Virtualization using Velero and NetApp ONTAP S3 or StorageGRID. This procedure includes creating Backup Custom Resources (CRs) for on-demand backups and Schedule CRs for scheduled backups. Each backup captures VM metadata and persistent volumes, storing them in the specified object storage location for recovery or compliance purposes.
 
-== Steps to create a backup of a VM
+=== Steps to create a backup of a VM
 
 To create an on-demand backup of the entire VM (VM metadata and VM disks), click on the **Backup** tab. This creates a Backup Custom Resource (CR). A sample yaml is provided to create the Backup CR. Using this yaml, the VM and its disks in the specified namespace will be backed up. Additional parameters can be set as shown in the link:https://docs.openshift.com/container-platform/4.14/backup_and_restore/application_backup_and_restore/backing_up_and_restoring/oadp-creating-backup-cr.html[documentation]. 
 
@@ -85,7 +85,7 @@ NOTE: In StorageGrid, you can also use the S3 console that is available from the
 
 image:redhat-openshift-oadp-backup-002.png[Backup Objects in S3]
 
-== Creating scheduled backups 
+=== Creating scheduled backups 
 
 To create backups on a schedule, you need to create a Schedule CR. The schedule is simply a Cron expression allowing you to specify the time at which you want to create the backup. A sample yaml to create a Schedule CR. 
 
@@ -118,12 +118,12 @@ Backups will be created according to this schedule, and can be viewed from the B
 
 image:redhat-openshift-oadp-backup-004.png[Schedule created]
 
-= Restore a VM from backup in Red Hat OpenShift Virtualization using Velero
+== Restore a VM from backup in Red Hat OpenShift Virtualization using Velero
 
 
 Restore VMs in OpenShift Virtualization using Velero and the OpenShift API for Data Protection (OADP). This procedure includes creating a Restore Custom Resource (CR) to recover VMs and their persistent volumes from backups, with options to restore to the original namespace, a different namespace, or using an alternative storage class. 
 
-== Prerequisites
+=== Prerequisites
 
 To restore from a backup, let us assume that the namespace where the virtual machine existed got accidentally deleted.
 
@@ -239,28 +239,22 @@ The VM is restored in the same namespace with the disks created using the storag
 image:redhat-openshift-oadp-restore-008.png[VM restore ontap-nas-eco]
 ====
 
-= Delete a backup CR or restore CR in Red Hat OpenShift Virtualization using Velero
-:hardbreaks:
-:nofooter:
-:icons: font
-:linkattrs:
-:imagesdir: ../media/
+== Delete a backup CR or restore CR in Red Hat OpenShift Virtualization using Velero
 
-[.lead]
 Delete backup and restore resources for VMs in OpenShift Virtualization using Velero. Use the OpenShift CLI to delete backups while retaining object storage data, or the Velero CLI to delete both the Backup Custom Resource (CR) and associated storage data.
 
-== Deleting a backup
+=== Deleting a backup
 
 You can delete a Backup CR without deleting the Object Storage data by using the OC CLI tool.
 
 [source,cli ]
-....
+----
 oc delete backup <backup_CR_name> -n <velero_namespace>
-....
+----
 
 If you want the delete the Backup CR and delete the associated object storage data, you can do so by using the Velero CLI tool.
 
-Download the CLI as given in the instructions in the link:https://velero.io/docs/v1.3.0/basic-install/#install-the-cli[Velero documentation].
+Download the latest version of the CLI as given in the instructions in the link:https://velero.io/docs/v1.3.0/basic-install/#install-the-cli[Velero documentation].
 
 Execute the following delete command using the Velero CLI
 [source,cli ]
@@ -268,7 +262,7 @@ Execute the following delete command using the Velero CLI
 velero backup delete <backup_CR_name> -n <velero_namespace>
 ....
 
-== Deleting a Restore
+=== Deleting a Restore
 You can delete the Restore CR using the Velero CLI
 [source,cli ]
 ....
@@ -278,7 +272,7 @@ velero restore delete restore --namespace openshift-adp
 You can use oc command as well as the UI to delete the restore CR
 [source,cli ]
 ....
-oc delete backup <backup_CR_name> -n <velero_namespace>
+oc delete restore <restore_CR_name> -n <velero_namespace>
 ....
 
 
