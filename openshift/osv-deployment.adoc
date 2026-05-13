@@ -23,7 +23,7 @@ Review the requirements to install and deploy OpenShift virtualization with ONTA
 *	A Trident backend configuration created
 *	A StorageClass configured on the OpenShift cluster with Trident as the provisioner
 *   A Trident VolumeSnapshotClass configured on the OpenShift cluster with Trident as the provisioner
-*   Trident StorageClass configured as defaults for the OpenShift cluster or OpenShift Virtualization. 
+*   Trident StorageClass configured as default for the OpenShift cluster or OpenShift Virtualization. 
 
 For the above Trident prerequisites, see  link:osv-trident-install.html[Trident installation section] for details.
 

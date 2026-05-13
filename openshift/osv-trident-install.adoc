@@ -653,8 +653,8 @@ spec:
   storageDriverName: ontap-san-economy
   managementLIF: "<ONTAP management LIF>"
   backendName: tbc_san_eco
-  svm: #<replace with your SVM name>
-  storagePrefix: #<replace with your prefix>
+  svm: <replace with your SVM name>
+  storagePrefix: <replace with your prefix>
   credentials:
     name: ontap-san-cert-auth
   clientCertificate: <client certificate>
