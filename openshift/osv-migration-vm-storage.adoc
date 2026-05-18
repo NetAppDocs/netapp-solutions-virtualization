@@ -1,0 +1,84 @@
+---
+sidebar: sidebar
+permalink: openshift/osv-migration-vm-storage.html
+keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, Red Hat OpenShift Virtualization, Storage Class migration, VM storage migration, OpenShift Virtualization storage migration
+summary: Red Hat OpenShift Virtualization
+---
+= Learn about Red Hat OpenShift Virtualization
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+In OpenShift Virtualization, you can migrate a virtual machine's (VM) disks to a different storage class directly through the web console without deleting the VM. This process allows you to move either the entire VM storage or specific volumes.
+
+The following steps outline how to migrate a VM's storage class:
+
+1. Ensure that the target storage class is properly configured and available in your OpenShift cluster. This includes having the necessary storage backend (e.g., NetApp ONTAP) set up and accessible.
++
+.Show example
+[%collapsible]
+====
+image:osv-sc-migration-015.png[tbe in OC CLI]
+
+image:osv-sc-migration-017.png[Storage Class in OC CLI]
+====
+
+2. In the OpenShift Container Platform web console, navigate to the Virtualization perspective and select the VM you want to migrate.
++
+.Show example
+[%collapsible]
+====
+
+image:osv-sc-migration-001.png[VM]
+
+image:osv-sc-migration-002.png[VM disks]
+
+image:osv-sc-migration-003.png[VM and disks from OC CLI]
+
+====
+
+3. click Actions->Migrate->Migrate Storage. Select the volumes to migrate and the target storage class, then click Migrate. The migration process will start and you can monitor the progress in the Events tab of the VM. Once the migration is complete, the VM's disks will be using the new storage class.
++
+.Show example
+[%collapsible]
+====
+
+image:osv-sc-migration-004.png[Migrate Storage]
+
+image:osv-sc-migration-005.png[Select Volumes]
+
+image:osv-sc-migration-006.png[Select Storage Class]
+
+image:osv-sc-migration-007.png[Migrate VM Storage]
+
+image:osv-sc-migration-008.png[Migration in progress]
+
+
+====
+4. After the migration is complete, you can verify that the VM's disks are now using the new storage class by checking the VM's details in the web console or using the OpenShift CLI.
++
+.Show example
+[%collapsible]
+====
+image:osv-sc-migration-009.png[Verify Storage Class]
+
+image:osv-sc-migration-010.png[Verify all objects in OC CLI]
+
+image:osv-sc-migration-012.png[ONTAP Volume name in OC CLI before migration]
+
+image:osv-sc-migration-011.png[Volume in ONTAP backend before migration]
+
+image:osv-sc-migration-018.png[nas-economy Volume after migration]
+
+image:osv-sc-migration-019.png[nas-economy qtree name in ONTAP backend after migration]
+
+image:osv-sc-migration-020.png[nas-economy qtree in ONTAP backend after migration]
+====
+
+
+
+
+
