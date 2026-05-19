@@ -1,7 +1,7 @@
 indexpage:
   title: End User Computing with NetApp
-  lead: ""
-  summary: ""
+  lead: "NetApp End User Computing solutions help organizations deliver secure, scalable virtual desktops and applications to users on any device."
+  summary: "NetApp End User Computing solutions help organizations deliver secure, scalable virtual desktops and applications to users on any device."
   tiles:
     - title: "Get started"
       links:
@@ -23,5 +23,3 @@ indexpage:
       links:
         - title: Omnissa Tech Zone
           url: https://techzone.omnissa.com
-  
-          
