@@ -33,7 +33,7 @@ To quickly create a virtual machine on the OpenShift cluster, complete the follo
 
 The virtual machine is created and started and comes to the *Running* state. It automatically creates a PVC and a corresponding PV for the boot disk using the default storage class. In order to be able to live migrate the VM in the future, you must ensure that the storage class used for the disks can support RWX volumes. This is a requirement for live migration. ontap-nas and ontap-san (volumeMode block for iSCSI and NVMe/TCP protocols) can support RWX access modes for the volumes created using the respective storage classes. 
 
-To configure ontap-san storage class on the cluster see the link:osv-workflow-vm-migration-mtv.html[Section for Migrating a VM from VMware to OpenShift Virtualization].
+To configure ontap-san storage class on the cluster see the link:osv-trident-install.html[Section for configuring storage class].
 
 NOTE: Clicking on Quick create VirtualMachine will use the default storage class to create the PVC and PV for the bootable root disk for the VM. You can select a different storage class for the disk, by selecting Customize VirtualMachine > Customize VirtualMachine parameters > Disks and then editing the disk to use the required storage class.  
 
@@ -51,15 +51,15 @@ NOTE: When a boot source is configured for a template or an operating system fro
 
 
 
-image:rh-os-n-use-case-vm-create-001.png["Figure showing input/output dialog or representing written content"]
+image:rh-os-n-use-case-vm-create-001.png["VM create - select template"]
 
-image:rh-os-n-use-case-vm-create-002.png["Figure showing input/output dialog or representing written content"]
+image:rh-os-n-use-case-vm-create-002.png["VM create - Select OS"]
 
-image:rh-os-n-use-case-vm-create-003.png["Figure showing input/output dialog or representing written content"]
+image:rh-os-n-use-case-vm-create-005.png["VM create - add disk"]
 
-image:rh-os-n-use-case-vm-create-004.png["Figure showing input/output dialog or representing written content"]
+image:rh-os-n-use-case-vm-create-004.png["VM create - review and create"]
 
-image:rh-os-n-use-case-vm-create-005.png["Figure showing input/output dialog or representing written content"]
+//image:rh-os-n-use-case-vm-create-003.png["VM create - final confirmation"]
 
 == Video Demonstration 
 

@@ -38,8 +38,8 @@ OADP 1.13 is available from the operator hub of OpenShift cluster 4.12 and later
 
 * OpenShift Cluster 4.14
 * OpenShift Virtualization installed via OpenShift Virtualization Operator provided by Red Hat
-* OADP Operator 1.13 provided by Red Hat
-* Velero CLI 1.3.0 for Linux 
+* OADP Operator 1.3 provided by Red Hat
+* Velero CLI 1.13.0 for Linux 
 * Trident 24.02 CSI driver for ONTAP
 * ONTAP 9.12 
 
@@ -254,9 +254,8 @@ oc delete backup <backup_CR_name> -n <velero_namespace>
 
 If you want to delete the Backup CR and delete the associated object storage data, you can do so by using the Velero CLI tool.
 
-Download the Velero CLI from link:https://velero.io/docs/v1.3.0/basic-install/#install-the-cli[Velero documentation]. 
+Download the Velero CLI from link:https://velero.io/docs/v1.3.0/basic-install/#install-the-cli[Velero]. Use the version that is compatible with your version of the OADP operator. You can find the compatible version from the documentation link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/backup_and_restore/index#velero-oadp-version-relationship_velero-cli-tool[here]. 
 
-NOTE: This above link points to the Velero CLI version used while testing.
 
 Execute the following delete command using the Velero CLI
 [source,cli ]
