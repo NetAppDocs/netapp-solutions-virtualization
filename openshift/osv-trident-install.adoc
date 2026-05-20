@@ -346,13 +346,7 @@ parameters:
 allowVolumeExpansion: true
 ----
 
-NOTE: The following parameters can be included for NAS economy driver configuration:
-**qtreesPerFlexvol** 
-The value must be in range 50-300, default value is 200. +
-**limitVolumePoolSize** 
-The value is the maximum FlexVol size that you request when using qtrees in ontap-nas-economy backend. No default value is set, and this parameter is not enforced by default. If you set this parameter, the Trident operator creates a new FlexVol when the current FlexVol reaches the specified size. This parameter can help you control capacity utilization in your cluster by restricting the size of FlexVols used for provisioning PVs. +
-**denyNewVolumePools** 
-This parameter restricts ontap-nas-economy backends from creating new FlexVol volumes to contain their qtrees. Only preexisting Flexvols are used for provisioning new PVs. 
+NOTE: Please see the Essential guidelines for backend configuration options for NAS economy driver section above for details about additional parameters that can be included in the backend configuration file for ontap-nas-economy driver.
 
 --
 

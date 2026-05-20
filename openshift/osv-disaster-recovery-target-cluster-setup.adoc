@@ -90,7 +90,7 @@ spec:
   - namespace: test-dr-ns-dest
 ----
 
-[source,CLI]
+[source,cli]
 ----
 tridentctl-protect create app <dest-app-name> -n <dest-ns> --namespaces <dest-ns> 
 ---- 

@@ -104,7 +104,7 @@ spec:
   - namespace: test-dr-ns
 ----
 
-[source,CLI]
+[source,cli]
 ----
 tridentctl-protect create app <source-vm> -n <source-ns> --namespaces <source-ns>   
 ----

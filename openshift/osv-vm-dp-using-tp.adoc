@@ -563,8 +563,7 @@ This single-file restore method applies only to NAS/file-based volumes that are 
 
 For supported NAS/file-based volumes, a simple way to restore a specific file is to make the snapshot directory on the backing volume visible to the client. This can be done by editing the Trident backend configuration to include the defaults section and set the `snapshotDir` parameter to `true`. This enables access to the `.snapshot` directory from the same mount location as the main volume. The `.snapshot` directory contains all snapshots. You can change to the required snapshot directory, find the file you want to restore, and copy it to the required location.
 
-NOTE: This method exposes historical data to workloads/users with mount access and may violate least-privilege/compliance expectations. Please consider the security/operational impact, and note that you should enable it temporarily and revert it after restoring a file. +
-If you are using NFS version 4, you cannot see the `.snapshot` directory when you list files with an `ls` command. However, you can `cd` to the `.snapshot` directory.
+NOTE: This method exposes historical data to workloads/users with mount access and may violate least-privilege/compliance expectations. Please consider the security/operational impact, and note that you should enable it temporarily and revert it after restoring a file. Also, if you are using NFS version 4, you cannot see the `.snapshot` directory when you list files with an `ls` command. However, you can `cd` to the `.snapshot` directory.
  
 
 .Example of single file restore by accessing the .snapshot directory and copying a file from a snapshot
