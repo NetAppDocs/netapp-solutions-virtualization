@@ -115,7 +115,7 @@ image:redhat-openshift-060.png[VM from Snapshot architecture]
 **Prerequisite**
 
 You must have an existing VM with a PVC attached to it that is provisioned on a Trident Storage Class, and the VM must be in a running state before you can take a snapshot of the PVC.
-You must have a VolumeSnapshotClass created that can then be used to create a VolumeSnapshot. This would have been create as part of the prerequisites for installing OpenShift Virtualization. You can refer to the link:osv-deployment.html[Section for installing OpenShift Virtualization] for details.
+You must have a VolumeSnapshotClass created that can then be used to create a VolumeSnapshot. This would have been created as part of the prerequisites for installing OpenShift Virtualization. You can refer to the link:osv-deployment.html[Section for installing OpenShift Virtualization] for details.
 
 **To create Snapshot of a VM, complete the following steps:**
 

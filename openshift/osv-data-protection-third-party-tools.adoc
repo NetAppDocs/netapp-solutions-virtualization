@@ -254,7 +254,7 @@ oc delete backup <backup_CR_name> -n <velero_namespace>
 
 If you want the delete the Backup CR and delete the associated object storage data, you can do so by using the Velero CLI tool.
 
-Download the latest version of the CLI as given in the instructions in the link:https://velero.io/docs/v1.3.0/basic-install/#install-the-cli[Velero documentation].
+Download the Velero CLI as given in the instructions in the link:https://velero.io/docs/v1.3.0/basic-install/#install-the-cli[Velero documentation].
 
 Execute the following delete command using the Velero CLI
 [source,cli ]

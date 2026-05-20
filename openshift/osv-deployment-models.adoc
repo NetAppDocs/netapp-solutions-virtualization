@@ -15,24 +15,24 @@ summary: Red Hat OpenShift Virtualization
 OpenShift Container Platform deployment models are categorized primarily by the infrastructure they run on (cloud vs. on-premises) and how they are managed (by Red Hat or the customer).  OpenShift Virtualization can be installed on the OpenShift Container platform. 
 
 == Key deployment models include
-a.	**Managed Services (Red Hat Managed)**: In this model, Red Hat manages the OpenShift Container Platform infrastructure and operations. The customer is responsible for managing their applications and workloads on top of the platform. Examples include:
-    1. **Red Hat OpenShift Service on AWS (ROSA)**: A managed service that allows for easy integration with AWS services. OpenShift Virtualization is installed on EC2 bare metal instances on AWS. 
-    2. **Azure Red Hat OpenShift (ARO)**:  This is a Managed Service on Azure Cloud. OpenShift Virtualization operates on top of Azure Virtual Machines.
-    3. **Red Hat OpenShift Dedicated (OSD)**: A fully managed service deployed on Google Cloud, managed by Red Hat. OpenShift Virtualization is deployed on Google Cloud bare metal instances.
+.	**Managed Services (Red Hat Managed)**: In this model, Red Hat manages the OpenShift Container Platform infrastructure and operations. The customer is responsible for managing their applications and workloads on top of the platform. Examples include:
+    .. **Red Hat OpenShift Service on AWS (ROSA)**: A managed service that allows for easy integration with AWS services. OpenShift Virtualization is installed on EC2 bare metal instances on AWS. 
+    .. **Azure Red Hat OpenShift (ARO)**:  This is a Managed Service on Azure Cloud. OpenShift Virtualization operates on top of Azure Virtual Machines.
+    .. **Red Hat OpenShift Dedicated (OSD)**: A fully managed service deployed on Google Cloud, managed by Red Hat. OpenShift Virtualization is deployed on Google Cloud bare metal instances.
 
-b.	**Self-Managed Services (Customer Managed)**: In this case, the OpenShift Container Platform is deployed and managed directly by the customer on their own infrastructure. The infrastructure could be on 
-    1. **Public Cloud:** Deployed on AWS, Azure or GCP using either Installer-Provisioned infrastructure (IPI) or User-Provisioned Infrastructure (UPI)
-    2. **Bare Metal:** Deployed directly on physical hardware.
-    3. **Virtualization:** Deployed on platforms like VMware vSphere.
+.	**Self-Managed Services (Customer Managed)**: In this case, the OpenShift Container Platform is deployed and managed directly by the customer on their own infrastructure. The infrastructure could be on 
+    .. **Public Cloud:** Deployed on AWS, Azure or GCP using either Installer-Provisioned infrastructure (IPI) or User-Provisioned Infrastructure (UPI)
+    .. **Bare Metal:** Deployed directly on physical hardware.
+    .. **Virtualization:** Deployed on platforms like VMware vSphere.
 
 === Infrastructure deployment Options
-1. **Installer-provisioned infrastructure (IPI):** The installation program automates the provisioning of infrastructure components, such as networking and machines.
-2. **User-provisioned infrastructure (UPI):** The user manually creates and manages the infrastructure, providing more control over the environment.
+. **Installer-provisioned infrastructure (IPI):** The installation program automates the provisioning of infrastructure components, such as networking and machines.
+. **User-provisioned infrastructure (UPI):** The user manually creates and manages the infrastructure, providing more control over the environment.
 
 == Specialized Deployment Models
-1. **Single-node OpenShift (SNO):** A full OpenShift cluster installed on a single physical or virtual machine, often used for edge computing.
-2. **Disconnected (Air-gapped) Deployment:**  Deployed in restricted network environments with no external internet access. 
-3. **Red Hat OpenShift Virtualization Engine:** A bare metal-only, virtualization infrastructure, purpose-built to provide enterprises with a reliable, enterprise-grade solution for deploying, managing, and scaling VMs. A subset of OpenShift functionality, this edition of OpenShift is targeted at virtual machine-only workloads. 
+. **Single-node OpenShift (SNO):** A full OpenShift cluster installed on a single physical or virtual machine, often used for edge computing.
+. **Disconnected (Air-gapped) Deployment:**  Deployed in restricted network environments with no external internet access. 
+. **Red Hat OpenShift Virtualization Engine:** A bare metal-only, virtualization infrastructure, purpose-built to provide enterprises with a reliable, enterprise-grade solution for deploying, managing, and scaling VMs. A subset of OpenShift functionality, this edition of OpenShift is targeted at virtual machine-only workloads. 
 
 == Additional Resources
 For complete details on OpenShift Container platform, refer to the Red Hat link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/overview/ocp-overview[documentation here.]
