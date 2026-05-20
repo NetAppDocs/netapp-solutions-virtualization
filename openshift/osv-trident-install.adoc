@@ -533,7 +533,7 @@ Use the username/password authentication method or client certificate authentica
 
 .Show example
 [%collapsible]
-====
+=====
 Backend secret and backend configuration file using ONTAP username and password authentication  (save as `tbc-fc.yaml`):
 
 [source,yaml]
@@ -565,11 +565,7 @@ spec:
   credentials:
     name: tbc-fc-secret
 ----
-====
 
-.Show example
-[%collapsible]
-====
 Backend secret and backend configuration file using client certificate authentication 
 (save as `tbc-fc.yaml`):
 
@@ -602,7 +598,7 @@ spec:
     name: tbc-fc-secret
   clientCertificate: <client certificate>
 ----
-====
+
 
 [source,yaml]
 ----
@@ -620,8 +616,10 @@ parameters:
   snapshots: "true"
 allowVolumeExpansion: true
 ----
+=====
 
 --
+
 
 .iSCSI SAN economy
 --
