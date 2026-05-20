@@ -12,6 +12,7 @@ summary: Red Hat OpenShift Virtualization
 :imagesdir: ../media/
 
 [.lead]
+This section describes how to perform a failover of a VM from a source cluster to a disaster recovery target cluster using NetApp Trident Protect and AppMirror. This is useful for testing the failover process, and for performing planned maintenance on the source cluster. By following these steps, you can ensure that your VM is running on the disaster recovery target cluster with all changes intact after a disaster recovery event.
 
 ==  Failover without site outage for OpenShift Virtualization
 This section describes how to perform a failover of a VM from a source cluster without a site outage. This is useful for testing the failover process, and for performing planned maintenance on the source cluster. +  

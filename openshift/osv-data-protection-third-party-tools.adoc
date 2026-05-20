@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: openshift/osv-data-protection-third-party-tools.html
-keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, CNV, Container Native Virtualization, Red Hat OpenShift Virtualization, OADP operator, Openshift Data Protection Application operator, velero
+keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, CNV, Container Native Virtualization, Red Hat OpenShift Virtualization, OADP operator, OpenShift Data Protection Application operator, velero
 summary: Red Hat OpenShift Virtualization Data Protection with NetApp ONTAP
 ---
 = Data protection for VMs in Red Hat OpenShift Virtualization using OpenShift API for Data Protection (OADP)
@@ -27,7 +27,7 @@ OADP enables backup, restore, and disaster recovery of applications on an OpenSh
 
 image:redhat-openshift-oadp-001.png[OpenShift API for Data Protection]
 
-Red Hat OpenShift has leveraged the solutions developed by the OpenSource communities for data protection. link:https://velero.io/[Velero] is an open-source tool to safely backup and restore, perform disaster recovery, and migrate Kubernetes cluster resources and persistent volumes. To use Velero easily, OpenShift has developed the OADP operator and the Velero plugin to integrate with the CSI storage drivers. The core of the OADP APIs that are exposed are based on the Velero APIs. After installing the OADP operator and configuring it, the backup/restore operations that can be performed are based on the operations exposed by the Velero API. 
+Red Hat OpenShift has leveraged the solutions developed by the open source communities for data protection. link:https://velero.io/[Velero] is an open-source tool to safely backup and restore, perform disaster recovery, and migrate Kubernetes cluster resources and persistent volumes. To use Velero easily, OpenShift has developed the OADP operator and the Velero plugin to integrate with the CSI storage drivers. The core of the OADP APIs that are exposed are based on the Velero APIs. After installing the OADP operator and configuring it, the backup/restore operations that can be performed are based on the operations exposed by the Velero API. 
 
 image:redhat-openshift-oadp-002.png[OpenShift API for Data Protection]
 
