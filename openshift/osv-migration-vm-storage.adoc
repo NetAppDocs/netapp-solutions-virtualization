@@ -16,7 +16,7 @@ In OpenShift Virtualization, you can migrate a virtual machine's (VM) disks to a
 
 The following steps outline how to migrate a VM's storage class:
 
-1. Ensure that the target storage class is properly configured and available in your OpenShift cluster. This includes having the necessary storage backend (e.g., NetApp ONTAP) set up and accessible.
+. Ensure that the target storage class is properly configured and available in your OpenShift cluster. This includes having the necessary storage backend (e.g., NetApp ONTAP) set up and accessible.
 +
 .Show example
 [%collapsible]
@@ -26,7 +26,7 @@ image:osv-sc-migration-015.png[trident backend configuration]
 image:osv-sc-migration-017.png[Storage Class configuration]
 ====
 
-2. In the OpenShift Container Platform web console, navigate to the Virtualization perspective and select the VM you want to migrate.
+. In the OpenShift Container Platform web console, navigate to the Virtualization perspective and select the VM you want to migrate.
 +
 .Show example
 [%collapsible]
@@ -40,7 +40,7 @@ image:osv-sc-migration-003.png[VM and disks using OC CLI]
 
 ====
 
-3. click Actions->Migrate->Migrate Storage. Select the volumes to migrate and the target storage class, then click Migrate. The migration process will start and you can monitor the progress in the Events tab of the VM. Once the migration is complete, the VM's disks will be using the new storage class.
+. Click Actions->Migrate->Migrate Storage. Select the volumes to migrate and the target storage class, then click Migrate. The migration process will start and you can monitor the progress in the Events tab of the VM. Once the migration is complete, the VM's disks will be using the new storage class.
 +
 .Show example
 [%collapsible]

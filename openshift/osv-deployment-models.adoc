@@ -20,7 +20,7 @@ OpenShift Container Platform deployment models are categorized primarily by the 
     .. **Azure Red Hat OpenShift (ARO)**:  This is a Managed Service on Azure Cloud. OpenShift Virtualization operates on top of Azure Virtual Machines.
     .. **Red Hat OpenShift Dedicated (OSD)**: A fully managed service deployed on Google Cloud, managed by Red Hat. OpenShift Virtualization is deployed on Google Cloud bare metal instances.
 
-.	**Self-Managed Services (Customer Managed)**: In this case, the OpenShift Container Platform is deployed and managed directly by the customer on their own infrastructure. The infrastructure could be on 
+.	**Self-Managed Services (Customer Managed)**: In this case, the OpenShift Container Platform is deployed and managed directly by the customer on their own infrastructure. The infrastructure could be on either public cloud or on-premises. 
     .. **Public Cloud:** Deployed on AWS, Azure or GCP using either Installer-Provisioned infrastructure (IPI) or User-Provisioned Infrastructure (UPI)
     .. **Bare Metal:** Deployed directly on physical hardware.
     .. **Virtualization:** Deployed on platforms like VMware vSphere.

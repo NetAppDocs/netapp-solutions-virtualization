@@ -12,6 +12,8 @@ summary: Red Hat OpenShift Virtualization
 :imagesdir: ../media/
 
 [.lead]
+This section provides information about setting up the source cluster for disaster recovery of OpenShift Virtualization workloads using NetApp Trident Protect and AppMirror. This includes creating an AppVault using ONTAP S3, creating a Trident Protect Application for the source VM, and creating on-demand and scheduled snapshots of the VM using Trident Protect. These steps are essential to ensure that the source cluster is properly configured to replicate data to the disaster recovery target cluster and enable recovery of VMs in case of a disaster.
+
 == Setup Disaster Recovery Source Cluster for OpenShift Virtualization
 
 All the following steps are performed on the source cluster, which is the cluster where the protected VM is currently running.

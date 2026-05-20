@@ -17,7 +17,7 @@ This section provides information about the prerequisites for using NetApp Tride
 == Prerequisites
 1. A Red Hat OpenShift cluster with OpenShift Virtualization installed and configured. For installation instructions, see the link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/virtualization/installing-virtualization[documentation here].
 
-2. Two NetApp ONTAP storage system with an SVM configured on each to provide storage for the active and the disaster recovery OpenShift cluster. The SVM must have at least one management LIF and one data LIF configured and accessible from the OpenShift cluster.
+2. Two NetApp ONTAP storage systems with an SVM configured on each, to provide storage for the active and the disaster recovery OpenShift clusters. Each SVM must have at least one management LIF and one data LIF configured and accessible from the corresponding OpenShift cluster.
 
 3. Cluster peering and SVM peering configured between the two ONTAP systems to allow replication of data from the source cluster's SVM to the target cluster's SVM. For instructions on how to set up cluster peering and SVM peering, see the link:https://docs.netapp.com/us-en/ontap/cluster_peering/index.html[ONTAP cluster peering documentation here]. 
 
@@ -38,7 +38,7 @@ This section provides information about the prerequisites for using NetApp Tride
 11. A VM must be available in OpenShift Virtualization. For details about deploying a new VM, or migrating an existing VM into OpenShift Virtualization, see the appropriate section in the documentation.
 
 == Install NetApp Trident Protect for OpenShift Virtualization  
-To enable disaster recovery capabilities for OpenShift Virtualization workloads using NetApp Trident Protect, you must have Trident Protect installed and configured on the OpenShift cluster. Trident Protect can be installed using helm chart. 
+To enable disaster recovery capabilities for OpenShift Virtualization workloads using NetApp Trident Protect, you must have Trident Protect installed and configured on the OpenShift cluster. Trident Protect can be installed using aHelm chart. 
 NOTE: Trident Protect installation must be done after installing Trident.
 
 For complete installation instructions, see the link:https://docs.netapp.com/us-en/trident/trident-protect/learn-about-trident-protect.html[Trident Protect documentation here].
