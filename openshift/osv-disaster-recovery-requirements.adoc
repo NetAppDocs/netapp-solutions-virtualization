@@ -38,7 +38,8 @@ This section provides information about the prerequisites for using NetApp Tride
 11. A VM must be available in OpenShift Virtualization. For details about deploying a new VM, or migrating an existing VM into OpenShift Virtualization, see the appropriate section in the documentation.
 
 == Install NetApp Trident Protect for OpenShift Virtualization  
-To enable disaster recovery capabilities for OpenShift Virtualization workloads using NetApp Trident Protect, you must have Trident Protect installed and configured on the OpenShift cluster. Trident Protect can be installed using aHelm chart. 
+To enable disaster recovery capabilities for OpenShift Virtualization workloads using NetApp Trident Protect, you must have Trident Protect installed and configured on the OpenShift cluster. Trident Protect can be installed using a Helm chart. 
+
 NOTE: Trident Protect installation must be done after installing Trident.
 
 For complete installation instructions, see the link:https://docs.netapp.com/us-en/trident/trident-protect/learn-about-trident-protect.html[Trident Protect documentation here].

@@ -56,8 +56,11 @@ entries:
       #  url: /openshift/osv-data-protection-console-br.html
       - title: "Backup and restore using Trident Protect"
         url: /openshift/osv-vm-dp-using-tp.html
+      - title: "Protect VMs using Volume Group Snapshots"
+        url: /openshift/osv-vm-dp-using-vgs.html
       - title: "Backup and restore using third party tools"
         url: /openshift/osv-data-protection-third-party-tools.html
+      
 
   - title: "Disaster Recovery"
     pdf-filename: "Red Hat OpenShift Virtualization Disaster Recovery"
@@ -72,6 +75,17 @@ entries:
         url: /openshift/osv-disaster-recovery-simulate-dr.html
       - title: "Failover and Failback - Realtime DR"
         url: /openshift/osv-disaster-recovery-failback.html
+
+  - title: "Monitor VMs with Data Infrastructure Insights"
+    pdf-filename: "Red Hat OpenShift Virtualization Monitor VMs with Data Infrastructure Insights"
+    entries:
+      - title: "About Data Infrastructure Insights"
+        url: /openshift/os-ci-overview.html
+      - title: "Configure Data Infrastructure Insights"
+        url: /openshift/os-ci-integration.html
+      - title: "Monitor VMs using Data Infrastructure Insights"
+        url: /openshift/os-ci-samples.html
+#
 # Additional sections
 # Ransomware Resilience
 # ARP 

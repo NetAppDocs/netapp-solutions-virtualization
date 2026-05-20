@@ -58,7 +58,7 @@ image:osv-sc-migration-008.png[Migration in progress]
 
 
 ====
-4. After the migration is complete, you can verify that the VM's disks are now using the new storage class by checking the VM's details in the web console or using the OpenShift CLI.
+. After the migration is complete, you can verify that the VM's disks are now using the new storage class by checking the VM's details in the web console or using the OpenShift CLI.
 +
 .Show example
 [%collapsible]

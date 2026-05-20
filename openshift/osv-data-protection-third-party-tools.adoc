@@ -34,13 +34,13 @@ image:redhat-openshift-oadp-002.png[OpenShift API for Data Protection]
 
 OADP 1.13 is available from the operator hub of OpenShift cluster 4.12 and later. It has a built-in Data Mover that can move CSI volume snapshots to a remote object store. This provides portability and durability by moving snapshots to an object storage location during  backup. The snapshots are then available for restoration after disasters. 
 
-**The following are the versions of the various components used for the examples in this section**
+**The following are the various components used for the examples in this section**
 
 * OpenShift Cluster 4.14
 * OpenShift Virtualization installed via OpenShift Virtualization Operator provided by Red Hat
 * OADP Operator 1.13 provided by Red Hat
 * Velero CLI 1.13 for Linux 
-* Trident 24.02
+* Trident 24.02 CSI driver for ONTAP
 * ONTAP 9.12 
 
 link:https://docs.netapp.com/us-en/trident/[Trident CSI]
@@ -254,7 +254,9 @@ oc delete backup <backup_CR_name> -n <velero_namespace>
 
 If you want to delete the Backup CR and delete the associated object storage data, you can do so by using the Velero CLI tool.
 
-Download the Velero CLI as given in the instructions in the link:https://velero.io/docs/v1.3.0/basic-install/#install-the-cli[Velero documentation].
+Download the Velero CLI from link:https://velero.io/docs/v1.3.0/basic-install/#install-the-cli[Velero documentation]. 
+
+NOTE: This above link points to the Velero CLI version used to test the functionality.
 
 Execute the following delete command using the Velero CLI
 [source,cli ]
