@@ -57,7 +57,7 @@ spec:
     s3:
       bucketName: oc-dr
       endpoint: <data lif to use to access S3>
-      secure: "false"
+      secure: "false" # Setting this to "false" will skip TLS certificate validation, which is not recommended for production environments.
       skipCertValidation: "true"
   providerCredentials:
     accessKeyID:

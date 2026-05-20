@@ -65,6 +65,7 @@ image:osv-disaster-recovery-016.png[OCP-v ondemand snapshot of the VM created us
 
 [source,yaml]
 ----
+apiVersion: protect.trident.netapp.io/v1
 kind: AppMirrorRelationship
 metadata:
   name: amr1

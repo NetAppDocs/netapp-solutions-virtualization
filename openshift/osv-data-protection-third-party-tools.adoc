@@ -207,13 +207,13 @@ Key: change-storage-class-config.yaml:
 Value:
 ....
 version: v1
-    resourceModifierRules:
-    - conditions:
-         groupResource: persistentvolumeclaims
-         resourceNameRegex: "^rhel*"
-         namespaces:
-         - virtual-machines-demo
-      patches:
+resourceModifierRules:
+  - conditions:
+      groupResource: persistentvolumeclaims
+      resourceNameRegex: "^rhel*"
+      namespaces:
+        - virtual-machines-demo
+    patches:
       - operation: replace
         path: "/spec/storageClassName"
         value: "ontap-nas-eco"
@@ -256,7 +256,7 @@ If you want to delete the Backup CR and delete the associated object storage dat
 
 Download the Velero CLI from link:https://velero.io/docs/v1.3.0/basic-install/#install-the-cli[Velero documentation]. 
 
-NOTE: This above link points to the Velero CLI version used to test the functionality.
+NOTE: This above link points to the Velero CLI version used while testing.
 
 Execute the following delete command using the Velero CLI
 [source,cli ]

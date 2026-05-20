@@ -18,7 +18,7 @@ In addition to the method of creating a VM using the OpenShift Virtualization UI
 == Create a VM from a YAML file with Red Hat OpenShift Virtualization
 A VM can also be created by applying a YAML file with the `oc apply` command. This method is useful for users who prefer using CLI or want to automate VM creation using scripts. To create a VM using this method, you can create a YAML file that defines the VM and its associated resources, such as PVCs for the VM disks. Then, you can apply the YAML file using the `oc apply -f <yaml-file>` command to create the VM on the OpenShift cluster.
 
-You can find automation scripts to create multiple VMs here.
+//You can find automation scripts to create multiple VMs here.
 // TO DO: link:automation-scripts.html[]
 
 .Show example
