@@ -162,7 +162,7 @@ image:rh-os-n-use-case-osv-trident-install-volumes-002.png[default values for vo
 
 Here is an example of a volume created using Trident backend configuration. It does not have any options set explicitly in the defaults section except the name template. 
 
-[source,yaml]
+[source,cli]
 ----
 oc describe tbc -n trident tbc-nas
 ### output truncated for brevity
@@ -673,7 +673,7 @@ parameters:
 
 Review the Trident documentation for additional samples of yaml files, and information on access modes and volume modes supported by SAN drivers and NAS drivers.
 
-. link:https://docs.netapp.com/us-en/trident/trident-use/ontap-nas.html[Samples using  NAS drivers ]
+. link:https://docs.netapp.com/us-en/trident/trident-use/ontap-nas.html[Samples using  NAS drivers]
 
 . link:https://docs.netapp.com/us-en/trident/trident-use/ontap-san.html[Samples using SAN drivers]
 

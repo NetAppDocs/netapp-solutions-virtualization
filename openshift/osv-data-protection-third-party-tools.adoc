@@ -247,7 +247,7 @@ Delete backup and restore resources for VMs in OpenShift Virtualization using Ve
 
 You can delete a Backup CR without deleting the Object Storage data by using the OC CLI tool.
 
-[source,cli ]
+[source,cli]
 ----
 oc delete backup <backup_CR_name> -n <velero_namespace>
 ----
