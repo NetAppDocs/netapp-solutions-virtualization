@@ -136,7 +136,7 @@ image:redhat-openshift-063.png[Restore Snapshot to a new PVC]
 . Next, create a new VM from this PVC. Navigate to Virtualization > Virtual Machines and click Create > With YAML.
 . In the spec > template > spec > volumes section, specify the new PVC created from Snapshot instead of from the container disk. Provide all other details for the new VM according to your requirements.
 
-[source, cli]
+[source, yaml]
 ----
 - name: rootdisk
   persistentVolumeClaim:
@@ -202,7 +202,7 @@ image:redhat-openshift-059.png[clone pvc]
 .	Then click Clone. This creates a PVC for the new VM.
 .	Navigate to Workloads > Virtualization > Virtual Machines and click Create > With YAML.
 .	In the spec > template > spec > volumes section, attach the cloned PVC instead of the container disk. Provide all other details for the new VM according to your requirements.
-[source, cli]
+[source, yaml]
 ----
 - name: rootdisk
   persistentVolumeClaim:
