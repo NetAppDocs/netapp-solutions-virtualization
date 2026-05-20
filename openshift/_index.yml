@@ -70,7 +70,7 @@ indexpage:
           url: osv-disaster-recovery-target-cluster-setup.html
         - title: "Disaster Recovery - Manual DR"
           url: osv-disaster-recovery-simulate-dr.html
-        - title: "Failover and Failback - Realtime DR"
+        - title: "Failback - Real-time DR"
           url: osv-disaster-recovery-failback.html
           
 #

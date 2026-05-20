@@ -70,7 +70,7 @@ entries:
         url: /openshift/osv-disaster-recovery-target-cluster-setup.html
       - title: "Disaster Recovery - Manual DR"
         url: /openshift/osv-disaster-recovery-simulate-dr.html
-      - title: "Failback - Realtime DR"
+      - title: "Failback - Real-time DR"
         url: /openshift/osv-disaster-recovery-failback.html
 
   - title: "Monitor VMs with Data Infrastructure Insights"
