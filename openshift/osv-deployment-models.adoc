@@ -4,7 +4,7 @@ permalink: openshift/osv-deployment-models.html
 keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, CNV, Container Native Virtualization, Red Hat OpenShift Virtualization
 summary: Red Hat OpenShift Virtualization
 ---
-= Learn about Red Hat OpenShift Virtualization
+= Deployment models for OpenShift/OpenShift Virtualization
 :hardbreaks:
 :nofooter:
 :icons: font

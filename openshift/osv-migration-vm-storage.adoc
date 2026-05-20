@@ -4,7 +4,7 @@ permalink: openshift/osv-migration-vm-storage.html
 keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, Red Hat OpenShift Virtualization, Storage Class migration, VM storage migration, OpenShift Virtualization storage migration
 summary: Red Hat OpenShift Virtualization
 ---
-= Learn about Red Hat OpenShift Virtualization
+= Storage migration of VMs between storage classes in OpenShift Virtualization
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -21,9 +21,9 @@ The following steps outline how to migrate a VM's storage class:
 .Show example
 [%collapsible]
 ====
-image:osv-sc-migration-015.png[tbe in OC CLI]
+image:osv-sc-migration-015.png[trident backend configuration]
 
-image:osv-sc-migration-017.png[Storage Class in OC CLI]
+image:osv-sc-migration-017.png[Storage Class configuration]
 ====
 
 2. In the OpenShift Container Platform web console, navigate to the Virtualization perspective and select the VM you want to migrate.
@@ -36,7 +36,7 @@ image:osv-sc-migration-001.png[VM]
 
 image:osv-sc-migration-002.png[VM disks]
 
-image:osv-sc-migration-003.png[VM and disks from OC CLI]
+image:osv-sc-migration-003.png[VM and disks using OC CLI]
 
 ====
 
@@ -65,9 +65,9 @@ image:osv-sc-migration-008.png[Migration in progress]
 ====
 image:osv-sc-migration-009.png[Verify Storage Class]
 
-image:osv-sc-migration-010.png[Verify all objects in OC CLI]
+image:osv-sc-migration-010.png[Verify all objects using OC CLI]
 
-image:osv-sc-migration-012.png[ONTAP Volume name in OC CLI before migration]
+image:osv-sc-migration-012.png[ONTAP Volume name using OC CLI before migration]
 
 image:osv-sc-migration-011.png[Volume in ONTAP backend before migration]
 

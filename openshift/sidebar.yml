@@ -35,25 +35,25 @@ entries:
       #- title: "Multi Cluster Management using Red Hat Advanced Cluster Management for Kubernetes"
       #  url: /openshift/osv-multi-cluster-management.html
 
-  - title: "Migration"
-    pdf-filename: "Red Hat OpenShift Virtualization Migration"
-    entries:
-      - title: "Migrate Virtual Machines from VMware into OpenShift Virtualization"
-        url: /openshift/osv-migration-vmware.html
-      - title: "Migrate Virtual Machines with VDDK"
-        url: /openshift/osv-migration-vddk.html
-      - title: "Migrate Virtual Machines with storage offload"
-        url: /openshift/osv-migration-storage-offload.html
-      - title: "Migrate Virtual Machines with Shift toolkit"
-        url: /openshift/osv-migration-shift-toolkit.html
-      - title: "Migrate Virtual Machines with MTV and Shift toolkit"
-        url: /openshift/osv-migration-mtv-shift-toolkit.html
+  #- title: "Migration"
+    #pdf-filename: "Red Hat OpenShift Virtualization Migration"
+    #entries:
+      #- title: "Migrate Virtual Machines from VMware into OpenShift Virtualization"
+      #  url: /openshift/osv-migration-vmware.html
+      #- title: "Migrate Virtual Machines with VDDK"
+      #  url: /openshift/osv-migration-vddk.html
+      #- title: "Migrate Virtual Machines with storage offload"
+      #  url: /openshift/osv-migration-storage-offload.html
+      #- title: "Migrate Virtual Machines with Shift toolkit"
+      #  url: /openshift/osv-migration-shift-toolkit.html
+      #- title: "Migrate Virtual Machines with MTV and Shift toolkit"
+      #  url: /openshift/osv-migration-mtv-shift-toolkit.html
 
   - title: "Data Protection"
     pdf-filename: "Red Hat OpenShift Virtualization Data Protection"
     entries:
-      - title: "Backup and restore using NetApp Console B/R"
-        url: /openshift/osv-data-protection-console-br.html
+      #- title: "Backup and restore using NetApp Console B/R"
+      #  url: /openshift/osv-data-protection-console-br.html
       - title: "Backup and restore using Trident Protect"
         url: /openshift/osv-vm-dp-using-tp.html
       - title: "Backup and restore using third party tools"

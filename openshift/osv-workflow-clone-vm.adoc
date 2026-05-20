@@ -68,4 +68,4 @@ image:redhat-openshift-059.png[clone pvc]
 
 // NetApp Solutions restructuring (jul 2025) - renamed from containers/rh-os-n_use_case_openshift_virtualization_workflow_clone_vm.adoc
 
-THIS FILE CAN BE DELETED AFTER REVIEWING THE CHANGES IN osv-vm-deployment-other-methods.adoc
+// TO DO: THIS FILE CAN BE DELETED AFTER REVIEWING THE CHANGES IN osv-vm-deployment-other-methods.adoc

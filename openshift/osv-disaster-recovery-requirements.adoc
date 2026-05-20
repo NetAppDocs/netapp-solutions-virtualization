@@ -51,4 +51,4 @@ image:osv-disaster-recovery-001.png[Trident Protect installation]
 image:osv-disaster-recovery-002.png[Trident Protect installation complete]
 ====
 
-For automation scripts to perform end-to-end disaster recovery tasks, see the link:automation-scripts.html[automation scripts here].
+// TO DO: For automation scripts to perform end-to-end disaster recovery tasks, see the link:automation-scripts.html[automation scripts here].
