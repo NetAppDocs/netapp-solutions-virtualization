@@ -5,12 +5,9 @@ entries:
   - title: "Overview"
     pdf-filename: "Red Hat OpenShift Virtualization overview"
     url: /openshift/osv-overview.html
-
-  - title: "Design and sizing considerations"
-    pdf-filename: "Red Hat OpenShift Virtualization Design and Sizing Considerations"
-    entries:
-      - title: "Deployment models"
-        url: /openshift/osv-deployment-models.html
+  - title: "Deployment models"
+    pdf-filename: "Red Hat OpenShift Virtualization Deployment Models"
+    url: /openshift/osv-deployment-models.html
 
   - title: "Getting Started with Storage and Virtualization"
     pdf-filename: "Red Hat OpenShift Storage and Virtualization"

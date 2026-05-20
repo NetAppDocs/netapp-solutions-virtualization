@@ -7,7 +7,7 @@ indexpage:
       links:
         - title: "About OpenShift Virtualization"
           url: osv-overview.html
-        - title: "Design and sizing considerations"
+        - title: "OpenShift Virtualization Deployment models"
           url: osv-deployment-models.html
         - title: "Blogs"
           url: ../blogs.html
@@ -35,7 +35,7 @@ indexpage:
         #- title: "Multi Cluster Management using Red Hat Advanced Cluster Management for Kubernetes"
         #  url: osv-multi-cluster-management.html
 #
-    - #title: "Migrate virtual machines"
+    #- title: "Migrate virtual machines"
       #links:
       # - title: "Migrate VMs from VMware to an OpenShift cluster"
       #   url: osv-migration-vmware.html
@@ -63,7 +63,7 @@ indexpage:
     - title: "Disaster Recovery"
       links:
         - title: "Requirements and considerations for DR"
-          url: osv-disaster-recovery-requirements.html"
+          url: osv-disaster-recovery-requirements.html
         - title: "Source cluster setup for DR"
           url: osv-disaster-recovery-source-cluster-setup.html
         - title: "Target cluster setup for DR"
