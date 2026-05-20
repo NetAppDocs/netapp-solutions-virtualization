@@ -254,24 +254,24 @@ oc delete backup <backup_CR_name> -n <velero_namespace>
 
 If you want to delete the Backup CR and delete the associated object storage data, you can do so by using the Velero CLI tool.
 
-Download the Velero CLI from link:https://velero.io/docs/v1.3.0/basic-install/#install-the-cli[Velero]. Use the version that is compatible with your version of the OADP operator. You can find the compatible version from the documentation link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/backup_and_restore/index#velero-oadp-version-relationship_velero-cli-tool[here]. 
+Download the Velero CLI from link:https://velero.io[velero.io]. Use the version that is compatible with your version of the OADP operator. You can find the compatible version from the documentation link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/backup_and_restore/index#velero-oadp-version-relationship_velero-cli-tool[here]. 
 
 
 Execute the following delete command using the Velero CLI
-[source,cli ]
+[source,cli]
 ....
 velero backup delete <backup_CR_name> -n <velero_namespace>
 ....
 
 === Deleting a Restore
 You can delete the Restore CR using the Velero CLI
-[source,cli ]
+[source,cli]
 ....
 velero restore delete restore --namespace openshift-adp
 ....
 
 You can use oc command as well as the UI to delete the restore CR
-[source,cli ]
+[source,cli]
 ....
 oc delete restore <restore_CR_name> -n <velero_namespace>
 ....
