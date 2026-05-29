@@ -292,3 +292,46 @@ The Shift Toolkit provides the option to cancel a running job at any step within
 * Deleting persistent volume claims (PVCs)
 
 Since the Shift Toolkit does not modify the source VM in any way, rollback is straightforward, simply power on the source VM. No other rollback actions are required.
+
+== Verify Migration
+
+Shift toolkit now provides a verify option against the blueprint level which is enabled after the migration status is marked as "Success" or "Partial Failure". Once succeeded, the verify option will start a new job and check the VM settings as specified in the blueprint mappings.  The status of the verify migration job will be listed in the Job Monitoring and the details can be viewed by clicking on the job and selecting "view logs".
+
+NOTE: The verify option can also be selected while creating the blueprint, in which case the verify job will be triggered after 5 mins once the migration job is complete.
+
+NOTE: If the verify is selected after the migration job, then a verification job is triggered on the fly and the wizard will list the job.
+
+image::shift-toolkit-471.png["Verify Migration job details"]
+
+image::shift-toolkit-472.png["Verify Migration job list"]
+
+== Split Workflow
+
+The split workflow (applicable only to OpenShift migration blueprints using the ONTAP NAS driver) automatically discovers the volumes associated with the VMs, as well as their corresponding FlexClone volumes.
+
+Based on the ONTAP version, the appropriate split strategy is selected automatically. The general guideline is as follows:
+
+* Split Clone for volumes on ONTAP 9.17.1 and later, with 20 parallel execution
+* Volume Move for ONTAP versions earlier than 9.17.1, using up to four parallel threads
+
+The split clone process continually monitors progress and manages job queueing accordingly. Once the split or volume move operation is complete, the associated snapshot is deleted.
+
+The status of the split steps job will appear in Job Monitoring. To view further details, click on the split job and select “View Logs.”
+
+NOTE: The Shift Toolkit currently does not resize volumes after snapshot deletion. This capability is planned for a future release.
+
+image::shift-toolkit-473.png["Split Workflow strategy selection"]
+
+image::shift-toolkit-474.png["Split Workflow job progress"]
+
+== Advanced Hypervisor Settings
+
+The Shift Toolkit includes advanced hypervisor settings for migration jobs to target hypervisors. These settings let migration administrators enable features for each VM migration wave as required. Shift Toolkit reads the settings at runtime, so each job applies the selected options when it starts.
+
+image::shift-toolkit-475.png["Advanced Hypervisor Settings overview"]
+
+image::shift-toolkit-476.png["Advanced Hypervisor Settings options"]
+
+image::shift-toolkit-477.png["Advanced Hypervisor Settings configuration"]
+
+image::shift-toolkit-478.png["Advanced Hypervisor Settings job details"]
