@@ -32,11 +32,11 @@ Verify that the following prerequisites are met before starting the migration.
 .VMware requirements
 
 * Account with minimal permissions. Refer to this section link:https://docs.netapp.com/us-en/netapp-solutions-virtualization/migration/shift-toolkit-summary.html#minimum-permissions-role-required-on-vmware[for the minimum privileges needed]
-* VMDKs must be placed on individual volumes (mimicking VMDK to a PVC/PV construct) using svmotion
-
-NOTE: This limitation will be removed in the next release where NAS-economy driver can be used for PVC provisioning.
-
-NOTE: Use the script available within the Script block (**Settings > Developer Access > Script block**) to enable PVC placement on a qtree, or allows importing the volume as-is, or cloning and importing the volume, eliminating the need for manual vMotion operations.
+* VMDKs can be configured in multiple ways: all VMDKs can reside on a single volume (eliminating the need for Storage vMotion), each VMDK can be placed on its own individual volume, or multiple VMDKs can be organized within a qtree inside a volume.
++
+NOTE: The Shift toolkit automatically detects the layout and selects the appropriate cloning method and NAS storage drivers.
++
+NOTE: When VMDKs are placed within a qtree, Shift Toolkit utilizes the ONTAP-NAS-economy driver.
 
 * VMware tools are running on guest VMs
 * The operating system of each VM is certified and supported as a guest operating system for conversions
@@ -269,8 +269,9 @@ NOTE: VMs are created under “Default” project for virtual machines, however 
 
 Shift Toolkit accelerates migration by simplifying the process, minimizing downtime, and eliminating the need for ESXi host access or VDDK-based approaches.
 
+After the migration is finished, the clone volume needs to be detached. The method used depends on the ONTAP version: use clone split for ONTAP 9.17.1 and later, or vol move for earlier versions. A script to initiate the detach process is available in the “Post migrate” folder within the provided ZIP package.
 
-NOTE: Before getting started with this specific integration, contact your Red Hat account team.
+
 
 
 
