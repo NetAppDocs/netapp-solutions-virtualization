@@ -34,14 +34,159 @@ Verify that the following prerequisites are met before starting the migration.
 
 .VMware requirements
 
-* VMDKs are placed on individual volumes (mimicking VMDK to a PVC/PV construct) using svmotion
+* VMDKs can be configured in multiple ways: all VMDKs can reside on a single NFSv3 volume (eliminating the need for Storage vMotion), each VMDK can be placed on its own individual volume, or multiple VMDKs can be organized within a qtree inside a volume.
 +
-NOTE: This limitation will be removed in the next release where NAS-economy driver can be used for PVC provisioning.
+NOTE: The Shift Toolkit automatically detects the layout and selects the appropriate cloning method and NAS storage drivers.
++
+NOTE: When VMDKs are placed within a qtree, Shift Toolkit utilizes the ONTAP-NAS-economy driver.
 
 * VMware tools are running on guest VMs
 * VMs to be migrated are in a RUNNING state for preparation
 * VMs must be powered off before triggering migration
 * VMware tools removal happens on the destination hypervisor once VMs are powered on
+
+.Trident know-how and mappings
+
+* *ONTAP-NAS*: VMDKs can all reside on a single volume or each VMDK can be on its own individual volume. VM selection can be at the datastore level or at the VM level.
+* *ONTAP-NAS-Economy*: VMDKs must reside on a single volume, and the volume name must adhere to the following naming convention: `trident_qtree_pool_<storage-prefix>_<10 random characters>`. VM selection within a resource group is at the datastore level only.
++
+NOTE: For ONTAP-NAS-Economy, the volume with the naming convention specified above must pre-exist and must be used as a datastore on VMware vCenter. This means the VM should be Storage vMotioned to this specific datastore, or an existing datastore should be renamed to match the naming convention: `trident_qtree_pool_<storage-prefix>_<10 random characters>`.
++
+NOTE: For ONTAP-NAS-Economy, the Trident backend configuration (TBC) should have the parameter `Deny New Volume Pools` set to `true`. The storage class used should also restrict the storagePools to `tbc name: <aggr name where the trident_qtree_pool_<storage-prefix>_<10 random characters> resides>`.
++
+.Sample TBC config for ONTAP-NAS-Economy driver
+[%collapsible]
+====
+[source,yaml]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+	name: nas-eco-data-1172-secret
+	namespace: trident
+type: Opaque
+stringData:
+	username: <svm-admin-username>
+	password: <svm-admin-password>
+---
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+	name: nas-eco-data-1172
+	namespace: trident
+spec:
+	backendName: nas-eco-data-1172
+	credentials:
+		name: nas-eco-data-1172-secret
+	dataLIF: "192.168.1.100"
+	denyNewVolumePools: "False"
+	managementLIF: "192.168.1.50"
+	storageDriverName: ontap-nas-economy
+	svm: data_1172
+	version: 1
+----
+====
++
+NOTE: The parameter `denyNewVolumePools` should be set to `true` right after `trident_qtree_pool_<storage-prefix>_<10 random characters>` is created as part of the initial PVC creation. Setting this value to `true` ensures Trident uses the existing qtree pool for placing qtree-based PVCs.
++
+The TBC can be patched using the following command:
++
+[source,bash]
+----
+oc patch tbc nas-eco-data-1172 -n trident --type=merge -p '{"spec":{"denyNewVolumePools":"true"}}'
+----
++
+.Sample YAML for storage class
+[%collapsible]
+====
+[source,yaml]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+	name: nas-eco-data-1172
+	annotations:
+		storageclass.kubernetes.io/is-default-class: "true"
+provisioner: csi.trident.netapp.io
+parameters:
+	backendType: ontap-nas-economy
+	fsType: nfs
+	storagePools: "nas-eco-data-1172:NSOL_NetApp_C800_T18U13_02_SSD_CAP_1"
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+----
+====
+* *ONTAP-SAN*: VMDKs should be placed on individual volumes (mimicking VMDK to a PVC/PV construct) using Storage vMotion. VM selection is at the VM level.
+* *ONTAP-SAN-Economy*: VMDKs must reside on a single NFSv3 volume, and the volume name must adhere to the following naming convention: `trident_lun_`. VM selection within a resource group is at the datastore level only.
++
+NOTE: For ONTAP-SAN-Economy, the volume with the naming convention `trident_lun_` must pre-exist and must be used as a datastore on VMware vCenter. This means the VM should be Storage vMotioned to this specific datastore, or an existing datastore should be renamed to match the naming convention `trident_lun_`.
++
+.Sample TBC config for ONTAP-SAN-Economy
+[%collapsible]
+====
+[source,yaml]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+	name: ontap-san800-eco-secret
+	namespace: trident
+type: Opaque
+stringData:
+	username: <svm-admin-username>
+	password: <svm-admin-password>
+---
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+	name: ontap-san800-eco
+	namespace: trident
+spec:
+	backendName: ontap-san800-eco
+	aggregate: NSOL_NetApp_C800_T18U13_01_SSD_CAP_1
+	credentials:
+		name: ontap-san800-eco-secret
+	dataLIF: "192.168.1.110"
+	defaults:
+		protocol: iSCSI
+		snapshotPolicy: none
+		spaceAllocate: "true"
+		spaceReserve: none
+		tieringPolicy: none
+	managementLIF: "192.168.1.60"
+	storage:
+		- labels:
+			backend: san800-eco
+	storageDriverName: ontap-san-economy
+	svm: data_1172
+	version: 1
+----
+====
++
+.Sample storage class config for ONTAP-SAN-Economy
+[%collapsible]
+====
+[source,yaml]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+	name: sc-ontap-san-eco
+provisioner: csi.trident.netapp.io
+parameters:
+	backendType: ontap-san-economy
+	selector: "backend=san800-eco"
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+----
+====
+
++
+NOTE: For ONTAP-SAN and ONTAP-SAN-Economy, VMs should be Storage vMotioned from any block-based datastores to ONTAP NFSv3 volumes first. The Shift Toolkit will then convert the VMDKs to LUNs and import them as PVCs to the respective namespace.
+
+VM selection for resource groups can be at the VM level or at the datastore level. Depending on the selection, the workflow selects the appropriate ONTAP NAS or SAN storage driver. For instance, if a single VM is selected, then the ONTAP-NAS driver is used. If multiple VMDKs reside on the same volume, then either the ONTAP-NAS or ONTAP-NAS-Economy driver is used based on the source volume and its SVM, along with the TBC and storage class configured on the OpenShift side.
 
 .Guest VM requirements
 
@@ -307,7 +452,7 @@ image::shift-toolkit-114.png["Migration steps"]
 +
 The Shift Toolkit automatically finds all VMDKs associated with each VM, including the primary boot disk.
 
-NOTE: If there are multiple VMDK files, each VMDK will be converted. In this release (v4.0), each VMDK should be placed on an individual volume/datastore.
+NOTE: If there are multiple VMDK files, each VMDK will be converted and placed in its own PVC based on the storage driver used.
 
 * Cleans up the volumes to have just the disk.img file
 +
@@ -339,7 +484,9 @@ Networks are assigned based on the blueprint selection.
 image::shift-toolkit-115.png["Red Hat OpenShift VM migration"]
 ====
 
-== Use Migration Toolkit for Virtualization with Shift Toolkit
+NOTE: The verify option can be exercised against the blueprint once the job is complete. For more information, refer to xref:shift-toolkit-settings.adoc#verify-migration[Verify Migration].
+
+== Use Migration Toolkit for Virtualization with Shift Toolkit (scripted approach)
 
 This section describes how to use Migration Toolkit for Virtualization (MTV) with NetApp Shift Toolkit for seamless migration to Red Hat OpenShift Virtualization.
 
@@ -354,15 +501,15 @@ Ensure the following prerequisites are met:
 NOTE: Since only Shift Toolkit API is used, there is no need to configure Shift Toolkit resource groups or blueprints.
 
 * Administrator level privileges on the OpenShift cluster
-* A Linux instance with tridentctl and OC command line tool installed
+* A Linux instance with OC command line tool installed
 ** Kubeconfig exported or OC login executed to connect to the cluster
-** Download the script named "OpenShift-MTV" from Shift Toolkit UI (*Settings > Developer Access > Script Blocker*)
-** Unzip the file: `unzip openshift-mtv.zip`
+** Download the script named "Shift-VM-to-OpenShift-MTV" from Shift Toolkit UI (*Settings > Developer Access > Script Blocker*)
+** Unzip the file: `unzip Shift-VM-to-OpenShift-MTV.zip`
 ** Ensure Python3 is installed: `dnf install python3`
 ** Install OpenJDK 8 or later: `yum install java-1.8.0-openjdk`
 ** Install requirements: `pip install -r requirements.txt`
 
-* *Virtual Machine requirements for MTV*: VMDKs for a VM must be placed on individual volumes. For a VM with 3 disks, each disk should be on its individual volume (mapping datastore to PVC construct). This must be done manually using storage vmotion.
+* *Virtual Machine requirements for MTV*: VMDKs can be organized in different ways: they may all be placed within a single volume (avoiding the need for Storage vMotion), assigned individually to separate volumes, or grouped together within a qtree inside a NFS volume. The script automatically detects the layout and selects the appropriate cloning method and NAS storage drivers based on the TBC UUID.
 
 .Steps
 
@@ -458,7 +605,17 @@ image::shift-toolkit-119.png["Migration history"]
 
 Migration completed in 6 minutes for a VM with 1.5TB data disk (spread across 3 PVCs). This showcases a streamlined, low-impact approach to re-homing VMs using ONTAP storage.
 +
-NOTE: Before getting started with this specific integration, contact your Red Hat account team.
+The script can be executed using a config file or by specifying parameters. An example of executing the script using parameters is shown below:
++
+NOTE: The script also supports cross-SVM cloning, enabling it to create PVCs across different SVMs based on the provided input parameters.
++
+[source,bash]
+----
+python3 main.py --mode params --ontap-server 10.192.102.56 --ontap-username admin --ontap-password 'correct password' --ontap-source-vserver manila --ontap-target-vserver manila --ontap-data-lif 10.63.172.249 --ontap-skip-ssl --vcenter-server 10.63.172.125 --vcenter-username administrator@demoenv.com --vcenter-password 'correct password' --vcenter-skip-ssl --shift-server 10.61.187.117 --shift-username admin --shift-password 'correct password' --trident-backend-name tbc-ontap-manila-nimo --trident-backend-uuid 778245f4-1f50-453c-b81c-3dd82e166bbc --trident-storage-class nimmanila --mtv-project openshift-mtv --mtv-plan casetst --ocp-server https://api.demomigsno.demoval.com:6443 --ocp-token sha256~co89ATebn-ktVyrMbNJUGByVWph_kjLamYtIOPmqfQM --ocp-project default --import-volume --execution-mode clone_shrink --snapshot-prefix ""
+----
++
+After the migration is finished, the clone volume needs to be detached. The method used depends on the ONTAP version: use clone split for ONTAP 9.17.1 and later, or vol move for earlier versions. A script to initiate the detach process is available in the “Post migrate” folder within the provided ZIP package.
+
 
 == Video demonstration
 
