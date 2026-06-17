@@ -12,18 +12,22 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-Use the Shift Toolkit  to convert VMware ESX virtual machine disks (VMDK) to Microsoft Hyper-V (VHDX) disk format or Red Hat KVM (QCOW2) disk format. This process includes setting up resource groups, creating conversion blueprints, and scheduling conversions.
+Use the Shift Toolkit  to convert VMware ESX virtual machine disks (VMDK) to Microsoft Hyper-V (VHDX) disk format or to RAW/ QCOW2 disk formats. This process includes setting up resource groups, creating conversion blueprints, and scheduling conversions.
 
 == Overview
 
-Shift toolkit supports disk-level conversions of virtual disks between hypervisors for the following disk formats:
+Shift Toolkit supports disk-level conversion of virtual disks between hypervisors for the following formats, with support for both FlexVol and FlexGroup volumes on ONTAP:
 
 * VMware ESX to Microsoft Hyper-V (VMDK to VHDX) 
 * Microsoft Hyper-V to VMware ESX (VHDX to VMDK) 
 * VMware ESX to Red Hat KVM (VMDK to QCOW2) 
 * VMware ESX to Red Hat KVM (VMDK to RAW) 
 
-The converted qcow2 files are compatible with any KVM hypervisors. For example, a qcow2 file can be utilized with RHEL-based KVM using virt-manager to create a VM, as well as with ubuntu KVM Rocky Linux based KVM and others. The same can be used with Oracle Linux virtualization manager with a tweak and with OpenShift virtualization after importing using NetApp Trident. The goal is to provide the disk (converted in secs to mins) which can then be integrated into existing automation scripts used by organizations to provision the VM and assign the network. This approach helps reduce overall migration times, with disk conversion handled by Shift toolkit APIs and the remaining script bringing up the VMs.
+The converted qcow2 files are compatible with any KVM hypervisors. For example, a qcow2 file can be utilized with RHEL-based KVM using virt-manager to create a VM, as well as with ubuntu KVM Rocky Linux based KVM and others. The same can be used with Oracle Linux virtualization manager, Proxmox, OpenNebula, HP VME and with OpenShift virtualization after importing using NetApp Trident. The goal is to provide the disk (converted in secs to mins) which can then be integrated into existing automation scripts used by organizations to provision the VM and assign the network. This approach helps reduce overall migration times, with disk conversion handled by Shift toolkit APIs and the remaining script bringing up the VMs.
+
+The NetApp Shift Toolkit also supports converting VMware VMDK disks stored on FlexGroup volumes into RAW disk format, enabling seamless migration to KVM-based platforms such as Proxmox or OLVM. 
+
+NOTE: When using FlexGroup storage, only RAW format conversions are supported. Additionally, Shift toolkit injects the VirtIO drivers during preparation when performing KVM-only conversions.
 
 Shift toolkit supports end-to-end migration from VMware to other compatible KVM hypervisors. However, convert option provides ability to migration administrators to run these conversion and migration APIs.
 
