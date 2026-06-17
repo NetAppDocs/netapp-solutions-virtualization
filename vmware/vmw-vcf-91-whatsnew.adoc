@@ -18,6 +18,7 @@ Here are some of the key new features and enhancements in VCF 9.1:
 
 * Zero Touch Provisioning (ZTP) for vSphere clusters, allowing for automated deployment and configuration of vSphere clusters.
 ** Remember to include NFS VAAI plugin to image if you plan to utilize VAAI with ONTAP NFS datastores. https://mysupport.netapp.com/site/products/all/details/nfsplugin-vmware-vaai/about-tab[NFS VAAI plugin] can be downloaded from NetApp Support Site and added to the image used for vSphere cluster deployment.
+* UNMAP support for NFS 4.1 datastores, allowing for improved storage efficiency and space reclamation.
 * NVMe over RDMA support for improved storage performance and reduced latency.
 ** Tools (pktcap-uw,rdmaperf-uw,rdmaperf) for packet analysis and troubleshooting RoCEv2 connections are now available with hypervisor.
 * Automated discovery, configuration and management of iSCSI connections with the Internet Storage Name Service (iSNS) protocol. For more info check https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/9-1/vsphere-storage/configuring-iscsi-and-iser-adapters-and-storage-with-esxi/using-isns-with-esx.html[Using iSNS with ESXi].
