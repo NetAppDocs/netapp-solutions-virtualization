@@ -367,7 +367,7 @@ NOTE: If there are multiple VMDK files, each VMDK will be converted.
 
 With the virtual machine disk image converted to qcow2 or RAW format, Shift toolkit places the file to appropriate storage pool and adds each disk within the respective VM ID folder.
 
-image::shift-toolkit-469.png[]
+image::shift-toolkit-469.png[VM disk image uploaded to Proxmox VE NFS storage pool]
 
 .Create Virtual Machine
 
