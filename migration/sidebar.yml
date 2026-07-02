@@ -31,6 +31,9 @@ entries:
             url: /migration/shift-toolkit-migrate-esxi2osv.html
           - title: "Migrate VMs from VMware ESXi to Red Hat OpenShift Virtualization using Migration Toolkit for Virtualization"
             url: /migration/shift-toolkit-migrate-esxi2osvmtv.html
+            entries:
+              - title: "Manually deploy the Shift operator"
+                url: /migration/shift-toolkit-deploy-operator.html
           - title: "Migrate VMs from VMware ESXi to Oracle Linux Virtualization Manager (OLVM)"
             url: /migration/shift-toolkit-migrate-esxi2olvm.html
           - title: "Migrate VMs from VMware ESXi to Proxmox VE"
