@@ -1,0 +1,180 @@
+---
+sidebar: sidebar
+permalink: migration/shift-toolkit-deploy-operator.html
+keywords: netapp, shift, operator, openshift, trident, mtv, migration toolkit for virtualization
+summary: "Manually deploy the Shift operator in standard mode as a containerized service with NetApp Trident CSI and Migration Toolkit for Virtualization."
+---
+= Manually deploy the Shift operator (Standard mode)
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Manually deploy the NetApp Shift toolkit as a containerized service with NetApp Trident CSI and Migration Toolkit for Virtualization (MTV). This process enables automated storage provisioning and virtual machine disk migration, leveraging annotations and labels to route requests appropriately between components.
+
+== Architecture components
+
+Understand how NetApp Shift toolkit, Trident CSI, and Migration Toolkit for Virtualization work together to enable automated storage provisioning and VM disk migration in your OpenShift environment.
+
+image::shift_operator_architecture.png[Shift operator architecture diagram]
+
+*NetApp Shift toolkit*
+
+* Deployed as a containerized service via an image registry
+* Exposes an endpoint that listens for Persistent Volume Claim (PVC) requests originating from MTV with specific annotation
+* Responsible for processing VM disk migration tasks, including format conversions
+
+*NetApp Trident CSI (Version 26.06 or later)*
+
+* Acts as the Container Storage Interface (CSI) provisioner
+* Receives PVC import requests from Shift toolkit
+* Applies logic based on PVC annotations and labels to determine whether to process the request directly or redirect it to Shift
+
+*Migration Toolkit for Virtualization (MTV 2.12 or later)*
+
+* Orchestrates virtual machine migration plans
+* Issues PVC requests required for storage provisioning during VM migration
+* Adds annotations to guide downstream processing
+
+== Before you begin
+
+Verify that your OpenShift environment has the required components installed and configured before deploying the Shift operator.
+
+* Migration Toolkit for Virtualization Operator is running 2.12 or later
+* Trident is installed via OpenShift OperatorHub - link:https://docs.netapp.com/us-en/trident/trident-install/openshift-operator-deploy.html[Trident installation guide]
+* NetApp Shift is deployed as a container with the Shift endpoint accessible to NetApp Trident
+* A Storage Class is created and labeled specifically for Shift toolkit usage
+* The label identifies Shift toolkit as the intended handler
+* MTV includes the following annotation on PVCs: `forklift.konveyor.io/netapp-shift: "true"`
+
+== Step 1: Download and extract the Shift installer
+
+The Shift installer package contains everything required to deploy the Shift operator and install Shift.
+
+.Steps
+
+. Download the latest version of the Shift installer from link:https://mysupport.netapp.com/site/tools/tool-eula/netapp-shift-toolkit[NetApp Support Site Toolchest].
+
+. Extract the installer package:
++
+[source,bash]
+----
+tar -xf Shift-installer-1.0.0.tar.gz
+----
+
+. Change to the installer directory:
++
+[source,bash]
+----
+cd shift-installer
+----
+
+== Step 2: Create the Shift namespace and API credentials
+
+Set up a dedicated namespace for the Shift operator and create the credentials needed for secure API access.
+
+.Steps
+
+. Create the Shift namespace:
++
+[source,bash]
+----
+oc create ns shift
+----
+
+. Create the secret for Shift API access within the Shift namespace:
++
+[source,bash]
+----
+oc create secret generic shift-credentials -n shift \
+  --from-literal=username='admin' \
+  --from-literal=password='admin'
+----
+
+== Step 3: Deploy the Shift operator
+
+Apply the Shift operator configuration to your OpenShift cluster and verify that the required pods are running successfully.
+
+.Steps
+
+. From the shift-installer directory, run the deploy command:
++
+[source,bash]
+----
+oc apply -f deploy/shift-bundle.yaml
+----
+
+. Verify the installation using the pod creation status:
++
+[source,bash]
+----
+oc get pods -n shift
+----
++
+Example output:
++
+[source,console]
+----
+NAME                                     READY   STATUS    RESTARTS   AGE
+shift-68ccd597c-dtsj7                    1/1     Running   0          18s
+shift-pvc-listener-57d546f6b8-r9mgc      1/1     Running   0          18s
+----
+
+== Step 4: Configure the Storage Class for Shift integration
+
+Create a new Storage Class or update an existing Storage Class with the required annotations for Shift integration.
+
+.About this task
+
+The Storage Class must include the following annotations:
+
+* `shift.netapp.io/storage-class-type`
+* `shift.netapp.io/trident-backend-uuid`
+
+.Steps
+
+. Verify the existing storage classes:
++
+[source,bash]
+----
+oc get sc
+----
++
+Example output:
++
+[source,console]
+----
+nimnas1172 (default)   csi.trident.netapp.io   Delete          Immediate         true
+----
+
+. Patch the storage class with the required annotations:
++
+[source,bash]
+----
+oc patch storageclass nimnas1172 \
+  --type=merge \
+  -p '{
+    "metadata": {
+      "annotations": {
+        "shift.netapp.io/storage-class-type": "shift",
+        "shift.netapp.io/trident-backend-uuid": "facc3aad-83bb-423a-b6a1-ba0fb8811217"
+      }
+    }
+  }'
+----
++
+Example output:
++
+[source,console]
+----
+storageclass.storage.k8s.io/nimnas1172 patched
+----
++
+NOTE: The backend UUID can be fetched by running `oc get tbc -n trident`
+
+== What's next
+
+After completing the Shift operator deployment and storage class configuration, you can create and trigger the MTV plan.
+
+For detailed information about creating the MTV plan, refer to the link:https://docs.redhat.com/en/documentation/migration_toolkit_for_virtualization/2.3/html/installing_and_using_the_migration_toolkit_for_virtualization/migrating-vms-web-console[Migration Toolkit for Virtualization documentation].
