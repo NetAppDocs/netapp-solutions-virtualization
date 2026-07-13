@@ -22,7 +22,7 @@ image::shift_operator_architecture.png[Shift operator architecture diagram]
 *NetApp Shift toolkit*
 
 * Deployed as a containerized service via an image registry
-* Exposes an endpoint that listens for Persistent Volume Claim (PVC) requests originating from MTV with specific annotation
+* Exposes an endpoint that listens for Persistent Volume Claim (PVC) requests originating from MTV with a specific annotation
 * Responsible for processing VM disk migration tasks, including format conversions
 
 *NetApp Trident CSI (Version 26.06 or later)*
@@ -44,8 +44,8 @@ Verify that your OpenShift environment has the required components installed and
 * Migration Toolkit for Virtualization Operator is running 2.12 or later
 * Trident is installed via OpenShift OperatorHub - link:https://docs.netapp.com/us-en/trident/trident-install/openshift-operator-deploy.html[Trident installation guide]
 * NetApp Shift is deployed as a container with the Shift endpoint accessible to NetApp Trident
-* A Storage Class is created and labeled specifically for Shift toolkit usage
-* The label identifies Shift toolkit as the intended handler
+* A Storage Class is created and annotated specifically for Shift toolkit usage
+* The annotations identify Shift toolkit as the intended handler and specify the target Trident backend
 * MTV includes the following annotation on PVCs: `forklift.konveyor.io/netapp-shift: "true"`
 
 == Step 1: Download and extract the Shift installer
@@ -87,7 +87,7 @@ Set up a dedicated namespace for the Shift operator and create the credentials n
 oc create ns shift
 ----
 
-. Create the secret for Shift API access within the Shift namespace:
+. Create the secret for Shift API access within the Shift namespace. Replace the example values with a unique username and a strong password for your environment:
 +
 [source,bash]
 ----
