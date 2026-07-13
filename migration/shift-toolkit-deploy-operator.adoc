@@ -96,6 +96,8 @@ oc create secret generic shift-credentials -n shift \
   --from-literal=password='admin'
 ----
 
+NOTE: Replace the password with a preferred value.
+
 == Step 3: Create TLS certificate ConfigMaps
 
 Create the ConfigMaps that provide the TLS certificate and private key the Shift service uses to serve HTTPS traffic.
