@@ -11,6 +11,10 @@ summary: Red Hat OpenShift Virtualization
 :linkattrs:
 :imagesdir: ../media/
 
+[.lead]
+This section provides information about setting up the target cluster for disaster recovery of OpenShift Virtualization workloads using NetApp Trident Protect and AppMirror. This includes creating an AppVault using ONTAP S3 and creating a new namespace for the destination VM. These steps are essential to ensure that the destination cluster is properly configured to receive replicated data from the source cluster and enable recovery of VMs in case of a disaster.
+
+
 1. Create an AppVault Object in the destination cluster. This should point to the same S3 as the source so that it can get the snapshot from the S3 where the source cluster placed it.
 +
 .Show example

@@ -15,15 +15,15 @@ summary: Red Hat OpenShift Virtualization
 This section provides information about the prerequisites for using NetApp Trident Protect and AppMirror for disaster recovery of OpenShift Virtualization workloads. This includes the necessary cluster configurations, storage requirements, and installation steps to set up Trident Protect and AppMirror for effective disaster recovery of VMs running on OpenShift Virtualization.
 
 == Prerequisites
-1. A Red Hat OpenShift cluster with OpenShift Virtualization installed and configured. For installation instructions, see the link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/virtualization/installing-virtualization[documentation here].
+1. A Red Hat OpenShift cluster with OpenShift Virtualization installed and configured. For installation instructions, see the link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/installation_overview/index[documentation here].
 
 2. Two NetApp ONTAP storage systems with an SVM configured on each, to provide storage for the active and the disaster recovery OpenShift clusters. Each SVM must have at least one management LIF and one data LIF configured and accessible from the corresponding OpenShift cluster.
 
-3. Cluster peering and SVM peering configured between the two ONTAP systems to allow replication of data from the source cluster's SVM to the target cluster's SVM. For instructions on how to set up cluster peering and SVM peering, see the link:https://docs.netapp.com/us-en/ontap/cluster_peering/index.html[ONTAP cluster peering documentation here]. 
+3. Cluster peering and SVM peering configured between the two ONTAP systems to allow replication of data from the source cluster's SVM to the target cluster's SVM. For instructions on how to set up cluster peering and SVM peering, see the link:https://docs.netapp.com/us-en/ontap/peering/index.html[ONTAP cluster peering documentation here]. 
 
 4. NetApp Trident installed and configured on the OpenShift cluster to provision persistent storage from the ONTAP SVM. For installation instructions, see the link:https://docs.netapp.com/us-en/trident/[Trident documentation here].
 
-5. Trident backend configuration created for the ONTAP SVM and a StorageClass configured on the OpenShift cluster to use that Trident backend as the provisioner. For instructions on how to create a Trident backend configuration and StorageClass, see the link:https://docs.netapp.com/us-en/trident/trident-installation/installing-trident-on-kubernetes.html[Trident installation documentation here].
+5. Trident backend configuration created for the ONTAP SVM and a StorageClass configured on the OpenShift cluster to use that Trident backend as the provisioner. For instructions on how to create a Trident backend configuration and StorageClass, see the link:https://docs.netapp.com/us-en/trident/trident-use/backends.html[Trident backend configuration documentation here].
 
 6. Cluster-admin access to the OpenShift cluster and admin access to the ONTAP storage system to perform the necessary configurations.
 

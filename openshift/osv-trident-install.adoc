@@ -29,7 +29,7 @@ oc delete dv,VolumeSnapshot -n openshift-virtualization-os-images --selector=cdi
 
 The Red Hat Certified Trident Operator is supported by NetApp for OpenShift on-premises, in public clouds, and in managed services such as ROSA. Starting with Trident 25.02, the operator can also prepare worker nodes for iSCSI when you use Amazon FSx for NetApp ONTAP and plan to run OpenShift Virtualization VM workloads.
 
-For other installation options, see link:https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html[the Trident documentation].
+For other installation options, see link:https://docs.netapp.com/us-en/trident/trident-get-started/quickstart.html[the Trident documentation].
 
 .Steps
 . In *OperatorHub*, select *Certified NetApp Trident*.
