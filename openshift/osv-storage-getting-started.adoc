@@ -1,0 +1,105 @@
+---
+sidebar: sidebar
+permalink: openshift/osv-storage-getting-started.html
+keywords: Trident, persistent storage
+summary: NetApp provides a number of products that assist customers with orchestrating and managing persistent data in container-based environments such as Red Hat OpenShift.
+---
+
+= Learn about NetApp Trident integration with Red Hat OpenShift
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Storage is crucial in containerized applications, ensuring data is persistently available and efficiently managed across dynamic and often ephemeral environments. Modern storage solutions for containers are designed to scale seamlessly with applications, providing the flexibility to dynamically allocate storage resources based on application needs, supporting both growth and varying workloads. Since OpenShift Virtualization enables the VMs to run as containers, they use the same storage as other applications in the OpenShift Clusters. 
+
+NetApp ONTAP is a robust and highly scalable data management software that serves as the backbone for NetApp's enterprise-grade storage solutions. It provides a unified storage architecture that integrates seamlessly with various storage environments, including on-premises, cloud, and hybrid setups. ONTAP supports a variety of protocols such as NFS, CIFS/SMB, iSCSI, FC, and NVMe over TCP, allowing for seamless integration with different applications and workloads. It enables the consolidation of SAN, NAS, and object storage into a single platform, simplifying management and reducing costs. NetApp ONTAP is available on-premises as well as managed services in the cloud. 
+
+== NetApp Trident 
+Trident is an open-source storage orchestrator developed by NetApp, designed to facilitate the use of ONTAP storage in containerized environments. It enables dynamic provisioning and management of persistent storage for containerized applications.
+
+=== Key features of Trident
+
+**CSI Compliance**
+Ensuring compatibility with the latest Kubernetes storage features and standards.
+**Declarative Configuration**
+Allowing users to define storage requirements in YAML files, which are then automatically managed by Trident.
+**Drivers**
+Trident supports drivers for NFS, CIFS/SMB, iSCSI, FC and NVMe/TCP protocols supported by ONTAP. 
+**Hybrid and multi cloud support**
+Trident supports drivers for ONTAP storage on-premises and managed storage service in the hyperscalers namely FSx for NetApp ONTAP in AWS, Azure NetApp Files in Azure and Google Cloud NetApp Volumes in Google Cloud. 
+**Advanced Data Management**
+Leveraging ONTAP's snapshot and cloning capabilities for efficient data protection and rapid provisioning of test and development environments.
+
+For complete details on Trident, refer to NetApp Trident link:https://docs.netapp.com/us-en/trident/[documentation here]
+
+== Trident Protect
+
+Trident Protect is an advanced feature of Trident that provides enhanced data protection and security for containerized environments. It is designed to ensure that critical data is safeguarded against potential threats and data loss scenarios. It is available free of cost for all Trident users and can be easily enabled in any OpenShift cluster with Trident installed.
+
+=== Key features of Trident Protect
+
+**Automated Backups**
+Trident Protect enables automated, policy-driven backups of container applications and VMs, ensuring that they are regularly backed up without manual intervention.
+
+**Snapshot Management**
+It leverages ONTAP's snapshot capabilities to create frequent, point-in-time copies container applications and VMs, providing a reliable mechanism for recovery.
+
+**Data Encryption**
+Ensures that data is encrypted both at rest and in transit, meeting stringent security requirements and protecting sensitive information.
+
+**Compliance and Auditing**
+Provides tools and features that help organizations meet compliance requirements and conduct regular audits of their data protection practices.
+
+**Disaster Recovery**
+Integrates with ONTAP's replication features to provide robust disaster recovery solutions, ensuring business continuity even in the face of catastrophic events.
+
+For complete details on Trident Protect, refer to NetApp Trident Protect link:https://docs.netapp.com/us-en/trident/trident-protect/learn-about-trident-protect.html[documentation here].
+
+== NetApp ONTAP hardware models and Protocols supported
+NetApp ONTAP software runs on a variety of hardware models, each designed to cater to different performance and capacity requirements. Trident extends its robust capabilities to support various NetApp ONTAP systems, including All Flash FAS (AFF), All SAN Array (ASA), and ASA R2 systems. This support ensures that organizations can leverage the full potential of their high-performance storage solutions in containerized environments.
+
+**All Flash FAS (AFF) Systems**
+AFF systems deliver exceptional performance and low latency, making them ideal for high-demand applications. 
+
+**All SAN Array (ASA) Systems**
+ASA systems are designed for dedicated SAN environments, offering robust performance and reliability. 
+
+**ASA R2 Systems**
+ASA R2 systems provide enhanced features and capabilities for SAN environments. 
+
+**AFX**
+NetApp AFX is a purpose-built, disaggregated, all-flash storage architecture designed for enterprise AI workloads. It offers high-performance NAS, allowing independent scaling of compute and capacity. NetApp AFX storage systems differ from other ONTAP-based systems (ASA, AFF, and FAS) in the implementation of their storage layer. AFX uses a distributed file system that allows for high performance and scalability, while other ONTAP-based systems use a traditional storage architecture.
+
+.   Protocols supported for AFF: NFS, CIFS/SMB, iSCSI, FC, NVMe/TCP
+.   Protocols supported for ASA: iSCSI, FC, NVMe/TCP
+.   Protocols supported for ASA R2: iSCSI, FC, NVMe/TCP
+.   Protocols supported for AFX: Starting with Trident 25.10, only NFS protocol is supported; SMB protocol is not supported.
+
+== Trident drivers for ONTAP storage
+Trident includes the following CSI drivers, each capable of provisioning a volume in the backend storage 
+
+=== For NAS protocols on supported hardware models
+
+1.	ontap-nas: One pvc maps to 1 pv which is a dedicated flexvolume
+
+2.	ontap-nas-economy: Each PV provisioned is a qtree, with a configurable number of qtrees per FlexVolume (default is 200, configurable between 50 and 300).
+One pvc maps to 1 pv which is a qtree on a shared flexvolume
+
+NOTE: You can place all the disks of the VMs as qtrees in a single volume. However, please be aware that Snapshots, Clones and Replication features are not supported by Trident. When those features are managed by the Storage administrator, they are not PV granular. 
+
+3.  ontap-nas-flexgroup: Each PV provisioned is a full ONTAP FlexGroup, and all aggregates assigned to a SVM are used.
+
+=== For SAN protocols on supported hardware models
+
+1.	ontap-san: One pvc maps to 1 pv which is a LUN on dedicated flexvolume
+
+2.	ontap-san-economy: One pvc maps to 1 pv which is a  LUN on shared flexvolume. You can have multiple LUNs in the shared flexvolume.(default is 100, configurable between 50 and 200 LUNs/PVs per flexvol volume)
+
+NOTE: You can place all the disks of the VMs as LUNs in a single volume. However, this driver, while it supports Snapshots and Clones, it does not support Replication. When Replication is managed by Storage administrator, it is not PV granular.
+
+image:redhat-openshift-osv-storage-001.png[Trident Drivers for ONTAP storage]
+
+For the complete list of capabilities exposed through Trident drivers and those that must be applied by the storage Administrator, see  link:https://docs.netapp.com/us-en/trident/trident-reco/integrate-trident.html#ontap-backend-drivers[ONTAP backend drivers] section in the Trident documentation. 
