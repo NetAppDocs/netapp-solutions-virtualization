@@ -49,7 +49,7 @@ image:rh-os-n-use-case-vm-migration-using-mtv.png["Figure showing input/output d
 * After the VM was ready, PostgreSQL server was installed.
 ** PostgreSQL server was started and enabled to start on boot
 [source,console]
-systemctl start postgresql.service`
+systemctl start postgresql.service
 systemctl enable postgresql.service 
 The above command ensures that the server can start in the VM in OpenShift Virtualization after migration
 
@@ -116,7 +116,7 @@ image:rh-os-n-use-case-vm-migration-mtv-plan-complete.png["Figure showing input/
 When all steps are completed, you can see the migrated VMs by clicking on the *virtual machines* under *Virtualization* in the left-side navigation menu.
 Instructions to manage the virtual machines are provided link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/virtualization/managing-vms[here].
 
-You can log into the virtual machine and verify the contents of the posgresql databases. The databases, tables and the entries in the table should be the same as what was created on the source VM. 
+You can log into the virtual machine and verify the contents of the PostgreSQL databases. The databases, tables and the entries in the table should be the same as what was created on the source VM. 
 
 === Perform Warm Migration 
 

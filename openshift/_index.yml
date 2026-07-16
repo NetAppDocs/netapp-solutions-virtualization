@@ -51,7 +51,7 @@ indexpage:
 #
     - title: "Protect VMs with NetApp storage"
       links:
-        - title: "Backup and restore using NetApp Console B/R"
+        - title: "Backup and restore using NetApp Console"
           url: osv-data-protection-console-br.html
         - title: "Backup and restore using Trident Protect"
           url: osv-vm-dp-using-tp.html
