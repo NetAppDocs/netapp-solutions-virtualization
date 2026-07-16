@@ -63,7 +63,7 @@ The following installations were completed before installing MTV:
 * OpenShift Cluster 4.17 or later
 * Multipath on the cluster nodes enabled for iSCSI (for ontap-san storage class). Multi-pathing can be enabled easily if you install Trident 25.02 using the node-prep flag. You can refer to the link:osv-trident-install.html[Trident installation section] for details. 
 * Install the required backend and storage classes and the snapshot class. Refer to the link:osv-trident-install.html[Trident installation section] for details. 
-* link:https://docs.openshift.com/container-platform/4.13/virt/install/installing-virt-web.html[OpenShift Virtualization] 
+
 
 === Install MTV
 Now you can install the Migration Toolkit for virtualization (MTV). Refer to the instructions provided link:https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/installing-the-operator[here] for help with the installation.
@@ -113,7 +113,7 @@ Clicking on *Start* will run through a sequence of steps to complete the migrati
 image:rh-os-n-use-case-vm-migration-mtv-plan-complete.png["Figure showing input/output dialog or representing written content"]
 
 When all steps are completed, you can see the migrated VMs by clicking on the *virtual machines* under *Virtualization* in the left-side  navigation menu.
-Instructions to access the virtual machines are provided link:https://docs.openshift.com/container-platform/4.13/virt/virtual_machines/virt-accessing-vm-consoles.html[here].
+Instructions to manage the virtual machines are provided link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/virtualization/managing-vms[here].
 
 You can log into the virtual machine and verify the contents of the posgresql databases. The databases, tables and the entries in the table should be the same as what was created on the source VM. 
 

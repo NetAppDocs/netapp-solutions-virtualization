@@ -136,7 +136,7 @@ NOTE: For additional details about Best Practices for Storage Configuration and 
 
 == **OpenShift Virtualization - Tuning & Scaling Guide**
 
-Red Hat has documented link:https://docs.openshift.com/container-platform/latest/scalability_and_performance/recommended-performance-scale-practices/recommended-control-plane-practices.html[OpenShift Cluster Scaling Recommendations and limitations].
+Red Hat has documented link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/scalability_and_performance/recommended-performance-and-scalability-practices-2[OpenShift Cluster Scaling Recommendations and limitations].
 
 In addition, they have also documented link:https://access.redhat.com/articles/6994974][OpenShift Virtualization tuning guide] and link:https://access.redhat.com/articles/6571671[Supported Limits for OpenShift Virtualization 4.x]. 
 
@@ -146,7 +146,7 @@ The tuning guide contains information about many tuning parameters including:
 
 * Tuning parameters to create many VMs at once or in large batches
 * Live migration of VMs
-* link:https://docs.openshift.com/container-platform/latest/virt/vm_networking/virt-dedicated-network-live-migration.html[Configuring a dedicated network for live migration]
+* link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/virtualization/live-migration#virt-configuring-secondary-network-vm-live-migration_virt-configuring-cross-cluster-live-migration-network[Configuring a dedicated network for live migration]
 * Customizing a VM template by including a workload type
 
 The supported limits document the tested object maximums when running VMs on OpenShift

@@ -90,7 +90,7 @@ indexpage:
         - title: "OpenShift Virtualization: Unleashing the power of virtual environments"
           url: https://www.redhat.com/en/blog/openshift-virtualization-unleashing-the-power-of-cloud-native-virtual-environments
         - title: "Red Hat OpenShift documentation"
-          url: https://docs.openshift.com/container-platform/4.15/virt/about_virt/about-virt.html
+          url: https://docs.openshift.com/container-platform/4.22
         - title: "Red Hat blogs"
           url: https://www.redhat.com/en/blog/products
 #

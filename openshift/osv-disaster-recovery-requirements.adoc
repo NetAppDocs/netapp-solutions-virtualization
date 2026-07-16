@@ -31,7 +31,7 @@ This section provides information about the prerequisites for using NetApp Tride
 
 8. Adequate hardware resources on the OpenShift cluster to support the OpenShift Virtualization operator and the VMs that will be provisioned. For more details on resource requirements, see the link:https://docs.openshift.com/container-platform/4.7/virt/install/preparing-cluster-for-virt.html#virt-cluster-resource-requirements_preparing-cluster-for-virt[documentation here].
 
-9. Optionally, configure node placement rules for OpenShift Virtualization to specify a subset of cluster nodes to host the OpenShift Virtualization operators, controllers, and VMs. For instructions on how to configure node placement rules, see the link:https://docs.openshift.com/container-platform/4.7/virt/install/virt-specifying-nodes-for-virtualization-components.html[documentation here].
+9. Optionally, configure node placement rules for OpenShift Virtualization to specify a subset of cluster nodes to host the OpenShift Virtualization operators, controllers, and VMs. For instructions on how to configure node placement rules, see the link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/virtualization/installing[documentation here].
 
 10. For the storage backing OpenShift Virtualization, it is recommended to have a dedicated StorageClass that requests storage from a particular Trident backend, which in turn is backed by a dedicated SVM. This maintains a level of multitenancy with regard to the data being served for VM-based workloads on the OpenShift cluster.
 
