@@ -14,7 +14,7 @@ summary: Red Hat OpenShift Virtualization with NetApp ONTAP
 [.lead]
 Back up and restore VMs in Red Hat OpenShift Virtualization using NetApp Console. This procedure covers creating and managing backup and restore operations through Backup and Recovery Services via NetApp Console, using Azure Blob Container as the backup target.
 
-NetApp Console provides a centralized management of storage and data services across on-premises and cloud environments. It delivers unified control, operational simplicity, and secure management. There are several data services and management features that can be accessed from the user interface at console.netapp.com. For complete details about NetApp Console, please refer to link:https://docs.netapp.com/us-en/console-family/[NetApp Console Documentation].
+NetApp Console provides centralized management of storage and data services across on-premises and cloud environments. It delivers unified control, operational simplicity, and secure management. There are several data services and management features that can be accessed from the user interface at console.netapp.com. For complete details about NetApp Console, please refer to link:https://docs.netapp.com/us-en/console-family/[NetApp Console Documentation].
 
 In this section, we will focus on the NetApp Backup and Recovery data service for Kubernetes workloads, specifically, OpenShift Virtual Machines. NetApp Backup and Recovery Service enables you to discover, manage, create and associate protection policies with your Kubernetes applications and VMs all using a single interface. For a complete guide, please refer to the documentation here. link:https://docs.netapp.com/us-en/data-services-backup-recovery/br-use-kubernetes-protect-overview.html[NetApp Backup and Recovery Documentation].
 
@@ -58,7 +58,7 @@ To get these values, you need to do the following in Azure portal
 +
 [loweralpha]
 .. Create a Storage blob Container. 
-.. Create an Enterprise application, assign the required access for this application to the Storage blob container.  Get the  Application ID, Directory ID  and Client Secret for this application to be used in the NetApp Console to discover the Azure blob container as the backup target.
+.. Create an Enterprise application, assign the required access for this application to the storage blob container. Get the Application ID, Directory ID, and Client Secret for this application to use in NetApp Console to discover the Azure blob container as the backup target.
 + 
 .Show Example
 [%collapsible]
@@ -201,12 +201,12 @@ image:osv-data-protection-console-037.png[Protecting 1 VM with 2 disks]
 
 image:osv-data-protection-console-038.png[Protecting 5 VMs with 2 disks each]
 
-NOTE: If your application/VMs have more than one disk, and your backup fails with the error shown in the screenshot below, you must edit the volumegroupsnapshots and volumegroupsnapshotcontents api to update so they contain the verbs as shown 
+If your application/VMs have more than one disk and your backup fails with the error shown below, edit the `volumegroupsnapshots` and `volumegroupsnapshotcontents` API rules so they include the verbs shown.
 
 *Show fix*
 [%collapsible]
 =====
-image:osv-data-protection-console-037.png[Error while protecting VMs each with more than 1 disk]
+image:osv-data-protection-console-043.png[Error while protecting VMs each with more than 1 disk]
 
 [source,yaml]
 ----
