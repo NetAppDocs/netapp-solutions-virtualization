@@ -126,7 +126,17 @@ image:osv-data-protection-console-017.png[Create Client Secret for the Applicati
 .Show Example
 [%collapsible]
 ====
-#image:osv-data-protection-console-003.png[Discover OpenShift Cluster]
+This step requires the OpenShift Cluster to be running and the Console agent to be deployed in the same environment.
+Here are the steps to discover the OpenShift Cluster in NetApp Console. 
+
+. In NetApp Console, select *Inventory > Kubernetes* and provide the details of the OpenShift cluster.
+. Select the agent deployed in the same environment where the OpenShift cluster is located.
+. Copy the provided commands to install Trident Protect and run them from a machine used to execute `oc` commands on your OpenShift cluster.
+. After Trident Protect is successfully installed, click *Discover*. NetApp Console discovers the OpenShift cluster and all its resources via the agent and populates them in the UI. 
+
+image:osv-data-protection-console-018.png[Discover OpenShift Cluster]
+
+image:osv-data-protection-console-019.png[Install Trident Protect and then Click Discover]
 ====
 
 . *In NetApp Console, discover the Azure Blob Storage.* 
@@ -134,30 +144,136 @@ image:osv-data-protection-console-017.png[Create Client Secret for the Applicati
 .Show Example
 [%collapsible]
 ====
-#image:osv-data-protection-console-004.png[Discover Azure Blob Storage]
+To discover the Azure blob storage in NetApp Console, you will need the Application (Client) Id, Client Secret and Directory (tenant) Id for the Enterprise Application created in Azure portal that you previously created. +
+
+When you provide these details in NetApp Console, it will discover the Azure blob storage and populate it in the UI. +
+
+The Azure credentials are stored in NetApp Console and used to access the Azure blob storage for backup and restore operations.
+
+
+
+image:osv-data-protection-console-020.png[Discover Backup Target]
+
+image:osv-data-protection-console-021.png[Add Azure credentials]
+
+image:osv-data-protection-console-022.png[Credential Information required]
+
+image:osv-data-protection-console-023.png[Provide the Azure credentials]
+
+image:osv-data-protection-console-024.png[Choose Azure Subscription and Marketplace Subscription]
+
+image:osv-data-protection-console-025.png[Review and Add]
+
+image:osv-data-protection-console-026.png[Azure Credentials are added and Azure Blob Storage is discovered]
 ====
 
 
-. *In NetApp Console, create an Application for the VMs that need to be protected.* 
+. *In NetApp Console, create an Application for the VMs and Protect them using Backups* 
 +
 .Show Example
 [%collapsible]
 ====
-#image:osv-data-protection-console-008.png[Create Application for VMs]
+In this step, you will create an Application in NetApp Console for the VMs that need to be protected. You can create an application for a single VM or multiple VMs. You can also use namespaces to create an application to protect all the VMs in a namespace in the OpenShift Cluster.
+
+You will also need a protection policy to associate with the application. You can create a new protection policy or use an existing one. In this example, we will create a new protection policy when we create a new application to associate it with the application. Backups will be created for the application based on the protection policy associated with it. The number of backups retained will be based on the retention policy defined in the protection policy.
+
+image:osv-data-protection-console-027.png[Create Application for VMs]
+
+image:osv-data-protection-console-028.png[Provide details]
+
+image:osv-data-protection-console-029.png[Protect all VMs in a namespace]
+
+image:osv-data-protection-console-030.png[Create a new Protection Policy]
+
+image:osv-data-protection-console-031.png[Provide a name]
+
+image:osv-data-protection-console-032.png[Provide Policy details]
+
+image:osv-data-protection-console-033.png[Choose local snapshot settings and Azure blob storage as the backup target]
+
+image:osv-data-protection-console-034.png[Protection Policy is created]
+
+image:osv-data-protection-console-035.png[The application protection using this policy is started]
+
+image:osv-data-protection-console-036.png[Application is Protected and is Healthy]
+
+image:osv-data-protection-console-037.png[Protecting 1 VM with 2 disks]
+
+image:osv-data-protection-console-038.png[Protecting 5 VMs with 2 disks each]
+
+NOTE: If your application/VMs have more than one disk, and your backup fails with the error shown in the screenshot below, you must edit the volumegroupsnapshots and volumegroupsnapshotcontents api to update so they contain the verbs as shown 
+
+.Show fix
+[%collapsible]
+=====
+image:osv-data-protection-console-037.png[Error while protecting VMs each with more than 1 disk]
+
+[source,yaml]
+----
+- apiGroups:
+  - groupsnapshot.storage.k8s.io
+  resources:
+  - volumegroupsnapshots
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+  - patch
+- apiGroups:
+  - groupsnapshot.storage.k8s.io
+  resources:
+  - volumegroupsnapshotcontents
+  - volumegroupsnapshotcontents/status
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+  - patch
+- apiGroups:
+  - groupsnapshot.storage.k8s.io
+  resources:
+  - volumegroupsnapshotclasses
+  verbs:
+  - get
+  - list
+  - watch
+
+----
+=====
+
 ====
 
-. *Protect the Application using backups*
+// . *Protect the Application using backups*
+// +
+// .Show Example
+// [%collapsible]
+// ====
+// #image:osv-data-protection-console-006.png[Protect Application Using Backups]
+// ====
+
+. *Restore the Application from a backup*
 +
 .Show Example
 [%collapsible]
-====
-#image:osv-data-protection-console-006.png[Protect Application Using Backups]
-====
 
-. *Restore the Application from the backup*
-+
-.Show Example
-[%collapsible]
+* You can choose one of the many backups available to restore your VM based on your need.
+* You can restore to the original namespace or to a different namespace.
+* You can select what resources need to be restored.
+* You can choose the storage class to use when restoring the VMs.
+
 ====
-#image:osv-data-protection-console-007.png[Restore Application from Backup]
+image:osv-data-protection-console-039.png[Choose a Restore point]
+
+image:osv-data-protection-console-040.png[Restore Application from Backup]
+
+image:osv-data-protection-console-041.png[Restore Application from Backup]
+
+image:osv-data-protection-console-042.png[Restore Application from Backup]
+
 ====
