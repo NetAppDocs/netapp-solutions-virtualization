@@ -4,7 +4,7 @@ permalink: openshift/osv-data-protection-console-br.html
 keywords: OpenShift, OCP, Trident, Trident Protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, Red Hat OpenShift Virtualization
 summary: Back up and restore OpenShift Virtualization VMs using NetApp Console Backup and Recovery Services
 ---
-= Protect VMs using NetApp Console Backup and Recovery Services
+= Back up and restore VMs using NetApp Console Backup and Recovery Services
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -14,22 +14,22 @@ summary: Back up and restore OpenShift Virtualization VMs using NetApp Console B
 [.lead]
 Back up and restore VMs in Red Hat OpenShift Virtualization using NetApp Console. This procedure covers creating and managing backup and restore operations through Backup and Recovery Services via NetApp Console, using Azure Blob Container as the backup target.
 
-NetApp Console provides centralized management of storage and data services across on-premises and cloud environments. It delivers unified control, operational simplicity, and secure management. There are several data services and management features that can be accessed from the user interface at console.netapp.com. For complete details about NetApp Console, please refer to link:https://docs.netapp.com/us-en/console-family/[NetApp Console Documentation].
+NetApp Console provides centralized management of storage and data services across on-premises and cloud environments. It delivers unified control, operational simplicity, and secure management. There are several data services and management features that can be accessed from the user interface at link:https://console.netapp.com[console.netapp.com^]. For complete details about NetApp Console, see link:https://docs.netapp.com/us-en/console-family/[NetApp Console documentation].
 
-In this section, we will focus on the NetApp Backup and Recovery data service for Kubernetes workloads, specifically, OpenShift Virtual Machines. NetApp Backup and Recovery Service enables you to discover, manage, create and associate protection policies with your Kubernetes applications and VMs all using a single interface. For a complete guide, please refer to the documentation here. link:https://docs.netapp.com/us-en/data-services-backup-recovery/br-use-kubernetes-protect-overview.html[NetApp Backup and Recovery Documentation].
+This section focuses on the NetApp Backup and Recovery data service for Kubernetes workloads, specifically OpenShift virtual machines. NetApp Backup and Recovery Service enables you to discover, manage, create, and associate protection policies with your Kubernetes applications and VMs using a single interface. For a complete guide, see link:https://docs.netapp.com/us-en/data-services-backup-recovery/br-use-kubernetes-protect-overview.html[NetApp Backup and Recovery documentation].
 
-Backup and Recovery of OpenShift VMs workflow 
+== Backup and recovery workflow
 
 . *Ensure you have a Console Agent* 
 +
-Ensure you have a console agent deployed in the environment where your OpenShift cluster is running. For details about Installing a console agent, please refer to the NetApp Console Setup documentation link:https://docs.netapp.com/us-en/console-setup-admin/concept-agent-install-options.html#agent-console-deploy[NetApp Console Setup documentation].
+Ensure you have a console agent deployed in the environment where your OpenShift cluster is running. For details about installing a console agent, see the link:https://docs.netapp.com/us-en/console-setup-admin/concept-agent-install-options.html#agent-console-deploy[NetApp Console Setup documentation].
 +
 .Show Example
 [%collapsible]
 ====
-In NetApp Console, click Deploy Agent as shown in the screenshot, and deploy the agent in the environment where the OpenShift cluster is running. + 
+In NetApp Console, click Deploy Agent as shown in the screenshot, and deploy the agent in the environment where the OpenShift cluster is running.
 
-In this example, we chose on-premises. Copy the agent installer URL, use the curl command to download the agent installer on the Ubuntu machine running on vSphere, and run the installer to deploy the Console agent +
+In this example, we chose on-premises. Copy the agent installer URL, use the curl command to download the agent installer on the Ubuntu machine running on vSphere, and run the installer to deploy the Console agent.
 
 Register it using the IP address of the agent in the URL. See link:https://docs.netapp.com/us-en/console-setup-admin/task-install-agent-on-prem-ova.html[the documentation] for detailed instructions. After the agent is registered, you can see it in NetApp Console as shown in the screenshot below.
 
@@ -54,7 +54,7 @@ Client Secret:
 Directory (tenant) ID:
 ----
 +
-To get these values, you need to do the following in Azure portal
+To get these values, do the following in the Azure portal
 +
 [loweralpha]
 .. Create a Storage blob Container. 
@@ -81,7 +81,7 @@ image:osv-data-protection-console-007.png[Blob Container is created]
 
 [loweralpha,start=2]
 . *Create an Enterprise Application with appropriate permissions.*
-This consists of several steps as listed below. You will need to do this in Azure portal.
+This consists of several steps. You will need to do this in the Azure portal.
 +
 [lowerroman,start=i]
 .. Create an Enterprise Application in your Azure subscription. 
@@ -89,7 +89,7 @@ This consists of several steps as listed below. You will need to do this in Azur
 .. Register the Application. Get the Application ID and the Directory ID for the application you just registered. 
 +
 .. Assign Roles to provide access to the Storage blob container for the application. 
-    To do this, go to IAM for the storage blob created earlier, click on Add role Assignments. Select Storage Account Contributor role, click Next. Select Assign access to User, group or Service Principal and in Select members section, select the Enterprise Application you created. Complete the assignment by clicking on Review + assign. 
+    To do this, go to IAM for the storage blob created earlier, click *Add Role Assignment*. Select Storage Account Contributor role, click Next. Select Assign access to User, group, or Service Principal and in the Select members section, select the Enterprise Application you created. Complete the assignment by clicking *Review + assign*. 
 Repeat this process to add the other roles listed below. All these roles are required for the application to access the blob container.
 +
 [loweralpha]
@@ -126,8 +126,8 @@ image:osv-data-protection-console-017.png[Create Client Secret for the Applicati
 .Show Example
 [%collapsible]
 ====
-This step requires the OpenShift Cluster to be running and the Console agent to be deployed in the same environment.
-Here are the steps to discover the OpenShift Cluster in NetApp Console. 
+This step requires the OpenShift cluster to be running and the Console agent to be deployed in the same environment.
+Follow these steps to discover the OpenShift cluster in NetApp Console. 
 
 . In NetApp Console, select *Inventory > Kubernetes* and provide the details of the OpenShift cluster.
 . Select the agent deployed in the same environment where the OpenShift cluster is located.
@@ -144,13 +144,11 @@ image:osv-data-protection-console-019.png[Install Trident Protect and then Click
 .Show Example
 [%collapsible]
 ====
-To discover the Azure blob storage in NetApp Console, you will need the Application (Client) ID, Client Secret and Directory (tenant) ID for the Enterprise Application created in Azure portal that you previously created. +
+To discover the Azure blob storage in NetApp Console, you will need the Application (Client) ID, Client Secret, and Directory (tenant) ID for the Enterprise application you previously created in the Azure portal.
 
-When you provide these details in NetApp Console, it will discover the Azure blob storage and populate it in the UI. +
+When you provide these details in NetApp Console, NetApp Console discovers the Azure blob storage and populates it in the UI.
 
 The Azure credentials are stored in NetApp Console and used to access the Azure blob storage for backup and restore operations.
-
-
 
 image:osv-data-protection-console-020.png[Discover Backup Target]
 
@@ -173,7 +171,7 @@ image:osv-data-protection-console-026.png[Azure Credentials are added and Azure 
 .Show Example
 [%collapsible]
 ====
-In this step, you will create an Application in NetApp Console for the VMs that need to be protected. You can create an application for a single VM or multiple VMs. You can also use namespaces to create an application to protect all the VMs in a namespace in the OpenShift Cluster.
+In this step, create an application in NetApp Console for the VMs that need to be protected. You can create an application for a single VM or multiple VMs. You can also use namespaces to create an application to protect all the VMs in a namespace in the OpenShift cluster.
 
 You will also need a protection policy to associate with the application. You can create a new protection policy or use an existing one. In this example, we will create a new protection policy when we create a new application to associate it with the application. Backups will be created for the application based on the protection policy associated with it. The number of backups retained will be based on the retention policy defined in the protection policy.
 
@@ -203,7 +201,7 @@ image:osv-data-protection-console-038.png[Protecting 5 VMs with 2 disks each]
 
 If your application/VMs have more than one disk and your backup fails with the error shown below, edit the `volumegroupsnapshots` and `volumegroupsnapshotcontents` API rules so they include the verbs shown.
 
-*Show fix*
+.*Show fix*
 [%collapsible]
 =====
 image:osv-data-protection-console-043.png[Error while protecting VMs each with more than 1 disk]
@@ -265,7 +263,6 @@ image:osv-data-protection-console-043.png[Error while protecting VMs each with m
 .Show Example
 [%collapsible]
 ====
-
 * You can choose one of the many backups available to restore your VM based on your need.
 * You can restore to the original namespace or to a different namespace.
 * You can select what resources need to be restored.
