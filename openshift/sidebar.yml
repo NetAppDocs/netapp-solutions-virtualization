@@ -49,7 +49,7 @@ entries:
   - title: "Data Protection"
     pdf-filename: "Red Hat OpenShift Virtualization Data Protection"
     entries:
-      - title: "Backup and restore using NetApp Console B/R"
+      - title: "Backup and restore using NetApp Console"
         url: /openshift/osv-data-protection-console-br.html
       - title: "Backup and restore using Trident Protect"
         url: /openshift/osv-vm-dp-using-tp.html

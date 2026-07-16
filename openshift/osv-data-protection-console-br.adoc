@@ -89,7 +89,7 @@ This consists of several steps as listed below. You will need to do this in Azur
 .. Register the Application. Get the Application ID and the Directory ID for the application you just registered. 
 +
 .. Assign Roles to provide access to the Storage blob container for the application. 
-    To do this, go to IAM for the storage blob created earlier, click on Add role Assignments. Select Storage Account Contributor role, click Next. Select Assign access to User, group or Service Principal and in Select members section, select the  Enterprise Application you created. Complete the assignment by clicking on Review + assign. 
+    To do this, go to IAM for the storage blob created earlier, click on Add role Assignments. Select Storage Account Contributor role, click Next. Select Assign access to User, group or Service Principal and in Select members section, select the Enterprise Application you created. Complete the assignment by clicking on Review + assign. 
 Repeat this process to add the other roles listed below. All these roles are required for the application to access the blob container.
 +
 [loweralpha]
@@ -260,7 +260,6 @@ image:osv-data-protection-console-043.png[Error while protecting VMs each with m
 
 
 [start=6]
-
 . *Restore the Application from a backup*
 +
 .Show Example

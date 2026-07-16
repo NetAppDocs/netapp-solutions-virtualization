@@ -46,8 +46,8 @@ image:rh-os-n-use-case-vm-migration-using-mtv.png["Figure showing input/output d
 * A RHEL 9 VM using rhel 9.3 with the following configurations were installed:
 ** CPU: 2, Memory: 20 GB, Hard disk: 20 GB 
 ** user credentials: root user and an admin user credentials 
-* After the VM was ready, postgresql server was installed.
-** postgresql server was started and enabled to start on boot
+* After the VM was ready, PostgreSQL server was installed.
+** PostgreSQL server was started and enabled to start on boot
 [source,console]
 systemctl start postgresql.service`
 systemctl enable postgresql.service 
@@ -55,7 +55,7 @@ The above command ensures that the server can start in the VM in OpenShift Virtu
 
 ** Added 2 databases, 1 table and 1 row in the table were added. Refer link:https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_and_using_database_servers/using-postgresql_configuring-and-using-database-servers#configuring-postgresql_using-postgresql[here] for the instructions for installing postgresql server on RHEL and creating database and table entries.
 
-NOTE: Ensure that you start the postgresql server and enable the service to start at boot.
+NOTE: Ensure that you start the PostgreSQL server and enable the service to start at boot.
 
 === **On OpenShift Cluster**
 The following installations were completed before installing MTV:
@@ -113,7 +113,7 @@ Clicking on *Start* will run through a sequence of steps to complete the migrati
 
 image:rh-os-n-use-case-vm-migration-mtv-plan-complete.png["Figure showing input/output dialog or representing written content"]
 
-When all steps are completed, you can see the migrated VMs by clicking on the *virtual machines* under *Virtualization* in the left-side  navigation menu.
+When all steps are completed, you can see the migrated VMs by clicking on the *virtual machines* under *Virtualization* in the left-side navigation menu.
 Instructions to manage the virtual machines are provided link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/virtualization/managing-vms[here].
 
 You can log into the virtual machine and verify the contents of the posgresql databases. The databases, tables and the entries in the table should be the same as what was created on the source VM. 

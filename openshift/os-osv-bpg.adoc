@@ -138,7 +138,7 @@ NOTE: For additional details about Best Practices for Storage Configuration and 
 
 Red Hat has documented link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/scalability_and_performance/recommended-performance-and-scalability-practices-2[OpenShift Cluster Scaling Recommendations and limitations].
 
-In addition, they have also documented link:https://access.redhat.com/articles/6994974][OpenShift Virtualization tuning guide] and link:https://access.redhat.com/articles/6571671[Supported Limits for OpenShift Virtualization 4.x]. 
+In addition, they have also documented link:https://access.redhat.com/articles/6994974[OpenShift Virtualization tuning guide] and link:https://access.redhat.com/articles/6571671[Supported Limits for OpenShift Virtualization 4.x]. 
 
 NOTE: An active Red Hat subscription is required to access the above content.
 
