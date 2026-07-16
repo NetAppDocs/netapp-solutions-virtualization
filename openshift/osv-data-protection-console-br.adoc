@@ -1,0 +1,163 @@
+---
+sidebar: sidebar
+permalink: openshift/osv-data-protection-console-.html
+keywords: OpenShift, OCP, Trident, Trident Protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, Red Hat OpenShift Virtualization
+summary: Red Hat OpenShift Virtualization with NetApp ONTAP
+---
+= Protect VMs using NetApp Console Backup and Recovery Services
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Back up and restore VMs in Red Hat OpenShift Virtualization using NetApp Console. This procedure covers creating and managing backup and restore operations through Backup and Recovery Services via NetApp Console, using Azure Blob Container as the backup target.
+
+NetApp Console provides a centralized management of storage and data services across on-premises and cloud environments. It delivers unified control, operational simplicity, and secure management. There are several data services and management features  that can be accessed from the user interface at console.netapp.com. For complete details about NetApp Console, please refer to link:https://docs.netapp.com/us-en/console-family/[NetApp Console Documentation].
+
+In this section, we will focus on the NetApp Backup and Recovery data service for Kubernetes workloads, specifically, OpenShift Virtual Machines. NetApp Backup and Recovery Service enable you to discover, manage, create and associate protection policies with your Kubernetes applications and VMs all using a single interface. For a complete guide, please refer to the documentation here. link:https://docs.netapp.com/us-en/data-services-backup-recovery/br-use-kubernetes-protect-overview.html[NetApp Backup and Recovery Documentation].
+
+Backup and Recovery of OpenShift VMs workflow 
+
+. *Ensure you have a Console Agent* 
++
+Ensure you have a console agent deployed in the environment where your OpenShift cluster is running. For details about Installing a console agent, please refer to the NetApp Console Setup documentation link:https://docs.netapp.com/us-en/console-setup-admin/concept-agent-install-options.html#agent-console-deploy[NetApp Console Setup documentation].
++
+.Show Example
+[%collapsible]
+====
+In NetApp Console, click Deploy Agent as shown in the screenshot, and deploy the agent in the environment where the OpenShift cluster is running. + 
+
+In this example, we chose on-premises. Copy the agent installer URL, use the curl command to download the agent installer on the Ubuntu machine running on vSphere, and run the installer to deploy the Console agent +
+
+Register it using the IP address of the agent in the URL. See link:https://docs.netapp.com/us-en/console-setup-admin/task-install-agent-on-prem-ova.html[the documentation] for detailed instructions. After the agent is registered, you can see it in NetApp Console as shown in the screenshot below.
+
+image:osv-data-protection-console-001.png[Console Agent Installation]
+
+image:osv-data-protection-console-002.png[Using the agent installer URL]
+
+image:osv-data-protection-console-003.png[Console Agent connected with NetApp Console]
+====
+
+. *Set up Azure blob Container Storage as backup target for Backup and Restore scenario for the OpenShift VMs.*
++
+In this example, we use Azure blob as the backup target. You can also use AWS S3, Google Cloud Storage, StorageGRID, or ONTAP object storage as backup targets. 
++
+For additional details, review link:https://docs.netapp.com/us-en/data-services-backup-recovery/br-start-setup.html#prepare-the-backup-destination[NetApp Console documentation].
++
+To discover the Azure blob container as the backup target in NetApp Console, you will need the following information from the Azure portal. 
++
+----
+Application (Client) Id:
+Client Secret: 
+Directory (tenant) Id:
+----
++
+To get these values, you need to do the following in Azure portal
++
+[loweralpha]
+.. Create a Storage blob Container. 
+.. Create an Enterprise application, assign the required access for this application to the Storage blob container.  Get the  Application ID, Directory ID  and Client Secret for this application to be used in the NetApp Console to discover the Azure blob container as the backup target.
++ 
+.Show Example
+[%collapsible]
+====
+[loweralpha]
+. *Create a Storage blob Container*
++
+[lowerroman]
+.. Create a Resource Group in your subscription.
+.. Create a storage account and then create a blob container.
+
+
+image:osv-data-protection-console-004.png[Storage Account]
+
+image:osv-data-protection-console-005.png[Blob Storage]
+
+image:osv-data-protection-console-006.png[Container]
+
+image:osv-data-protection-console-007.png[Blob Container is created]
+
+[loweralpha,start=2]
+. *Create an Enterprise Application with appropriate permissions.*
+This consists of several steps as listed below. You will need to do this in Azure portal.
++
+[lowerroman,start=i]
+.. Create an Enterprise Application in your Azure subscription. 
++
+.. Register the Application. Get the Application ID and the Directory ID for the application you just registered. 
++
+.. Assign Roles to provide access to the Storage blob container for the application. 
+    To do this, go to IAM for the storage blob created earlier, click on Add role Assignments. Select Storage Account Contributor role, click Next. Select Assign access to User, group or Service Principal and in Select members section, select the  Enterprise Application you created. Complete the assignment by clicking on Review + assign. 
+Repeat this process to add the other roles listed below. All these roles are required for the application to access the blob container.
++
+[loweralpha]
+.... Storage Blob Data Reader 
+.... Storage Blob Data Contributor 
+.... Storage Account Contributor
++
+.. Finally, Create a Client Secret for this application.
+
+image:osv-data-protection-console-008.png[Creating Enterprise Application]
+
+image:osv-data-protection-console-009.png[Create Enterprise Application]
+
+image:osv-data-protection-console-010.png[Register Enterprise Application]
+
+image:osv-data-protection-console-011.png[Get App Id, Directory Id]
+
+image:osv-data-protection-console-012.png[Storage Account IAM]
+
+image:osv-data-protection-console-013.png[Add Role Assignments]
+
+image:osv-data-protection-console-014.png[Choose the Service Principal]
+
+image:osv-data-protection-console-015.png[Review and Assign]
+
+image:osv-data-protection-console-016.png[Creating Client Secret for the Application]
+
+image:osv-data-protection-console-017.png[Create Client Secret for the Application]
+
+====
+
+. *In NetApp Console, discover the OpenShift Cluster.*
++
+.Show Example
+[%collapsible]
+====
+#image:osv-data-protection-console-003.png[Discover OpenShift Cluster]
+====
+
+. *In NetApp Console, discover the Azure Blob Storage.* 
++
+.Show Example
+[%collapsible]
+====
+#image:osv-data-protection-console-004.png[Discover Azure Blob Storage]
+====
+
+
+. *In NetApp Console, create an Application for the VMs that need to be protected.* 
++
+.Show Example
+[%collapsible]
+====
+#image:osv-data-protection-console-008.png[Create Application for VMs]
+====
+
+. *Protect the Application using backups*
++
+.Show Example
+[%collapsible]
+====
+#image:osv-data-protection-console-006.png[Protect Application Using Backups]
+====
+
+. *Restore the Application from the backup*
++
+.Show Example
+[%collapsible]
+====
+#image:osv-data-protection-console-007.png[Restore Application from Backup]
+====
