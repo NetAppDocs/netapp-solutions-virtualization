@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: openshift/osv-data-protection-console-.html
+permalink: openshift/osv-data-protection-console-br.html
 keywords: OpenShift, OCP, Trident, Trident Protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, Red Hat OpenShift Virtualization
 summary: Red Hat OpenShift Virtualization with NetApp ONTAP
 ---
@@ -14,9 +14,9 @@ summary: Red Hat OpenShift Virtualization with NetApp ONTAP
 [.lead]
 Back up and restore VMs in Red Hat OpenShift Virtualization using NetApp Console. This procedure covers creating and managing backup and restore operations through Backup and Recovery Services via NetApp Console, using Azure Blob Container as the backup target.
 
-NetApp Console provides a centralized management of storage and data services across on-premises and cloud environments. It delivers unified control, operational simplicity, and secure management. There are several data services and management features  that can be accessed from the user interface at console.netapp.com. For complete details about NetApp Console, please refer to link:https://docs.netapp.com/us-en/console-family/[NetApp Console Documentation].
+NetApp Console provides a centralized management of storage and data services across on-premises and cloud environments. It delivers unified control, operational simplicity, and secure management. There are several data services and management features that can be accessed from the user interface at console.netapp.com. For complete details about NetApp Console, please refer to link:https://docs.netapp.com/us-en/console-family/[NetApp Console Documentation].
 
-In this section, we will focus on the NetApp Backup and Recovery data service for Kubernetes workloads, specifically, OpenShift Virtual Machines. NetApp Backup and Recovery Service enable you to discover, manage, create and associate protection policies with your Kubernetes applications and VMs all using a single interface. For a complete guide, please refer to the documentation here. link:https://docs.netapp.com/us-en/data-services-backup-recovery/br-use-kubernetes-protect-overview.html[NetApp Backup and Recovery Documentation].
+In this section, we will focus on the NetApp Backup and Recovery data service for Kubernetes workloads, specifically, OpenShift Virtual Machines. NetApp Backup and Recovery Service enables you to discover, manage, create and associate protection policies with your Kubernetes applications and VMs all using a single interface. For a complete guide, please refer to the documentation here. link:https://docs.netapp.com/us-en/data-services-backup-recovery/br-use-kubernetes-protect-overview.html[NetApp Backup and Recovery Documentation].
 
 Backup and Recovery of OpenShift VMs workflow 
 
@@ -203,7 +203,7 @@ image:osv-data-protection-console-038.png[Protecting 5 VMs with 2 disks each]
 
 NOTE: If your application/VMs have more than one disk, and your backup fails with the error shown in the screenshot below, you must edit the volumegroupsnapshots and volumegroupsnapshotcontents api to update so they contain the verbs as shown 
 
-.Show fix
+*Show fix*
 [%collapsible]
 =====
 image:osv-data-protection-console-037.png[Error while protecting VMs each with more than 1 disk]
@@ -245,6 +245,7 @@ image:osv-data-protection-console-037.png[Error while protecting VMs each with m
   - watch
 
 ----
+
 =====
 
 ====
@@ -257,17 +258,20 @@ image:osv-data-protection-console-037.png[Error while protecting VMs each with m
 // #image:osv-data-protection-console-006.png[Protect Application Using Backups]
 // ====
 
+
+[start=6]
+
 . *Restore the Application from a backup*
 +
 .Show Example
 [%collapsible]
+====
 
 * You can choose one of the many backups available to restore your VM based on your need.
 * You can restore to the original namespace or to a different namespace.
 * You can select what resources need to be restored.
 * You can choose the storage class to use when restoring the VMs.
 
-====
 image:osv-data-protection-console-039.png[Choose a Restore point]
 
 image:osv-data-protection-console-040.png[Restore Application from Backup]
