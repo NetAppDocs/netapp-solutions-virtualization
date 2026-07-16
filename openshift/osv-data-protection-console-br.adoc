@@ -40,9 +40,9 @@ image:osv-data-protection-console-002.png[Using the agent installer URL]
 image:osv-data-protection-console-003.png[Console Agent connected with NetApp Console]
 ====
 
-. *Set up Azure blob Container Storage as backup target for Backup and Restore scenario for the OpenShift VMs.*
+. *Set up Azure blob container storage as a backup target for a backup and restore scenario for the OpenShift VMs.*
 +
-In this example, we use Azure blob as the backup target. You can also use AWS S3, Google Cloud Storage, StorageGRID, or ONTAP object storage as backup targets. 
+In this example, we use Azure Blob Storage as the backup target. You can also use AWS S3, Google Cloud Storage, StorageGRID, or ONTAP object storage as backup targets.
 +
 For additional details, review link:https://docs.netapp.com/us-en/data-services-backup-recovery/br-start-setup.html#prepare-the-backup-destination[NetApp Console documentation].
 +
@@ -54,7 +54,7 @@ Client Secret:
 Directory (tenant) ID:
 ----
 +
-To get these values, do the following in the Azure portal
+To get these values, do the following in the Azure portal.
 +
 [loweralpha]
 .. Create a Storage blob Container. 
@@ -81,15 +81,17 @@ image:osv-data-protection-console-007.png[Blob Container is created]
 
 [loweralpha,start=2]
 . *Create an Enterprise Application with appropriate permissions.*
-This consists of several steps. You will need to do this in the Azure portal.
+Complete these steps in the Azure portal.
 +
 [lowerroman,start=i]
 .. Create an Enterprise Application in your Azure subscription. 
 +
 .. Register the Application. Get the Application ID and the Directory ID for the application you just registered. 
 +
-.. Assign Roles to provide access to the Storage blob container for the application. 
-    To do this, go to IAM for the storage blob created earlier, click *Add Role Assignment*. Select Storage Account Contributor role, click Next. Select Assign access to User, group, or Service Principal and in the Select members section, select the Enterprise Application you created. Complete the assignment by clicking *Review + assign*. 
+.. Assign roles to provide access to the storage blob container for the application. +
+To do this, go to IAM for the storage blob created earlier, click *Add Role Assignment*. +
+Select Storage Account Contributor role, click Next. Select Assign access to User, group, or Service Principal and in the Select members section, select the Enterprise Application you created. +
+Complete the assignment by clicking *Review + assign*. +
 Repeat this process to add the other roles listed below. All these roles are required for the application to access the blob container.
 +
 [loweralpha]
@@ -97,7 +99,7 @@ Repeat this process to add the other roles listed below. All these roles are req
 .... Storage Blob Data Contributor 
 .... Storage Account Contributor
 +
-.. Finally, Create a Client Secret for this application.
+.. Finally, create a client secret for this application.
 
 image:osv-data-protection-console-008.png[Creating Enterprise Application]
 
@@ -105,7 +107,7 @@ image:osv-data-protection-console-009.png[Create Enterprise Application]
 
 image:osv-data-protection-console-010.png[Register Enterprise Application]
 
-image:osv-data-protection-console-011.png[Get App Id, Directory Id]
+image:osv-data-protection-console-011.png[Get App ID, Directory ID]
 
 image:osv-data-protection-console-012.png[Storage Account IAM]
 
@@ -121,7 +123,7 @@ image:osv-data-protection-console-017.png[Create Client Secret for the Applicati
 
 ====
 
-. *In NetApp Console, discover the OpenShift Cluster.*
+. *In NetApp Console, discover the OpenShift cluster.*
 +
 .Show Example
 [%collapsible]
@@ -173,7 +175,7 @@ image:osv-data-protection-console-026.png[Azure Credentials are added and Azure 
 ====
 In this step, create an application in NetApp Console for the VMs that need to be protected. You can create an application for a single VM or multiple VMs. You can also use namespaces to create an application to protect all the VMs in a namespace in the OpenShift cluster.
 
-You will also need a protection policy to associate with the application. You can create a new protection policy or use an existing one. In this example, we will create a new protection policy when we create a new application to associate it with the application. Backups will be created for the application based on the protection policy associated with it. The number of backups retained will be based on the retention policy defined in the protection policy.
+You will also need a protection policy to associate with the application. You can create a new protection policy or use an existing one. In this example, a new protection policy is created with the application and associated with it. Backups are created for the application based on the protection policy associated with it. The number of backups retained is based on the retention policy defined in the protection policy.
 
 image:osv-data-protection-console-027.png[Create Application for VMs]
 
