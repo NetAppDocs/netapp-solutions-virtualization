@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: openshift/osv-data-protection-console-br.html
 keywords: OpenShift, OCP, Trident, Trident Protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, Red Hat OpenShift Virtualization
-summary: Red Hat OpenShift Virtualization with NetApp ONTAP
+summary: Back up and restore OpenShift Virtualization VMs using NetApp Console Backup and Recovery Services
 ---
 = Protect VMs using NetApp Console Backup and Recovery Services
 :hardbreaks:
@@ -49,9 +49,9 @@ For additional details, review link:https://docs.netapp.com/us-en/data-services-
 To discover the Azure blob container as the backup target in NetApp Console, you will need the following information from the Azure portal. 
 +
 ----
-Application (Client) Id:
+Application (Client) ID:
 Client Secret: 
-Directory (tenant) Id:
+Directory (tenant) ID:
 ----
 +
 To get these values, you need to do the following in Azure portal
@@ -144,7 +144,7 @@ image:osv-data-protection-console-019.png[Install Trident Protect and then Click
 .Show Example
 [%collapsible]
 ====
-To discover the Azure blob storage in NetApp Console, you will need the Application (Client) Id, Client Secret and Directory (tenant) Id for the Enterprise Application created in Azure portal that you previously created. +
+To discover the Azure blob storage in NetApp Console, you will need the Application (Client) ID, Client Secret and Directory (tenant) ID for the Enterprise Application created in Azure portal that you previously created. +
 
 When you provide these details in NetApp Console, it will discover the Azure blob storage and populate it in the UI. +
 
