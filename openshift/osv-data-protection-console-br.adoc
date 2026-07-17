@@ -2,9 +2,9 @@
 sidebar: sidebar
 permalink: openshift/osv-data-protection-console-br.html
 keywords: OpenShift, OCP, Trident, Trident Protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, Red Hat OpenShift Virtualization
-summary: Back up and restore OpenShift Virtualization VMs using NetApp Console Backup and Recovery Services
+summary: Back up and restore OpenShift Virtualization VMs using NetApp Console Backup and Recovery Service
 ---
-= Back up and restore VMs using NetApp Console Backup and Recovery Services
+= Back up and restore VMs using NetApp Console Backup and Recovery Service
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -12,13 +12,13 @@ summary: Back up and restore OpenShift Virtualization VMs using NetApp Console B
 :imagesdir: ../media/
 
 [.lead]
-Back up and restore VMs in Red Hat OpenShift Virtualization using NetApp Console. This procedure covers creating and managing backup and restore operations through Backup and Recovery Services via NetApp Console, using Azure Blob Storage container as the backup target.
+Back up and restore VMs in Red Hat OpenShift Virtualization using NetApp Console. This procedure covers creating and managing backup and restore operations through Backup and Recovery Service via NetApp Console, using Azure Blob Storage container as the backup target.
 
 NetApp Console provides centralized management of storage and data services across on-premises and cloud environments. It delivers unified control, operational simplicity, and secure management. There are several data services and management features that can be accessed from the user interface at link:https://console.netapp.com[console.netapp.com^]. For complete details about NetApp Console, see link:https://docs.netapp.com/us-en/console-family/[NetApp Console documentation].
 
 This section focuses on the NetApp Backup and Recovery data service for Kubernetes workloads, specifically OpenShift virtual machines. NetApp Backup and Recovery Service enables you to discover, manage, create, and associate protection policies with your Kubernetes applications and VMs using a single interface. For a complete guide, see link:https://docs.netapp.com/us-en/data-services-backup-recovery/br-use-kubernetes-protect-overview.html[NetApp Backup and Recovery documentation].
 
-== Backup and recovery workflow
+== Backup and Recovery workflow
 
 . *Ensure you have a Console Agent* 
 +
