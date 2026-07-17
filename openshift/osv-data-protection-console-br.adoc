@@ -64,7 +64,7 @@ To get these values, do the following in the Azure portal.
 [%collapsible]
 ====
 [loweralpha]
-. *Create a Storage blob Container*
+. *Create a storage account and blob container*
 +
 [lowerroman]
 .. Create a Resource Group in your subscription.
