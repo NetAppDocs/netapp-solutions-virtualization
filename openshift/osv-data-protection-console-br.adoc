@@ -12,7 +12,7 @@ summary: Back up and restore OpenShift Virtualization VMs using NetApp Console B
 :imagesdir: ../media/
 
 [.lead]
-Back up and restore VMs in Red Hat OpenShift Virtualization using NetApp Console. This procedure covers creating and managing backup and restore operations through Backup and Recovery Services via NetApp Console, using Azure Blob Container as the backup target.
+Back up and restore VMs in Red Hat OpenShift Virtualization using NetApp Console. This procedure covers creating and managing backup and restore operations through Backup and Recovery Services via NetApp Console, using Azure Blob Storage container as the backup target.
 
 NetApp Console provides centralized management of storage and data services across on-premises and cloud environments. It delivers unified control, operational simplicity, and secure management. There are several data services and management features that can be accessed from the user interface at link:https://console.netapp.com[console.netapp.com^]. For complete details about NetApp Console, see link:https://docs.netapp.com/us-en/console-family/[NetApp Console documentation].
 
@@ -40,13 +40,13 @@ image:osv-data-protection-console-002.png[Using the agent installer URL]
 image:osv-data-protection-console-003.png[Console Agent connected with NetApp Console]
 ====
 
-. *Set up Azure blob container storage as a backup target for a backup and restore scenario for the OpenShift VMs.*
+. *Set up Azure Blob Storage container as a backup target for a backup and restore scenario for the OpenShift VMs.*
 +
 In this example, we use Azure Blob Storage as the backup target. You can also use AWS S3, Google Cloud Storage, StorageGRID, or ONTAP object storage as backup targets.
 +
 For additional details, review link:https://docs.netapp.com/us-en/data-services-backup-recovery/br-start-setup.html#prepare-the-backup-destination[NetApp Console documentation].
 +
-To discover the Azure blob container as the backup target in NetApp Console, you will need the following information from the Azure portal. 
+To discover the Azure Blob Storage container as the backup target in NetApp Console, you will need the following information from the Azure portal.
 +
 ----
 Application (Client) ID:
@@ -57,8 +57,8 @@ Directory (tenant) ID:
 To get these values, do the following in the Azure portal.
 +
 [loweralpha]
-.. Create a Storage blob Container. 
-.. Create an Enterprise application, assign the required access for this application to the storage blob container. Get the Application ID, Directory ID, and Client Secret for this application to use in NetApp Console to discover the Azure blob container as the backup target.
+.. Create a Blob Storage container.
+.. Create an Enterprise application, assign the required access for this application to the Blob Storage container. Get the Application ID, Directory ID, and Client Secret for this application to use in NetApp Console to discover the Azure Blob Storage container as the backup target.
 + 
 .Show Example
 [%collapsible]
@@ -141,16 +141,16 @@ image:osv-data-protection-console-018.png[Discover OpenShift Cluster]
 image:osv-data-protection-console-019.png[Install Trident Protect and then Click Discover]
 ====
 
-. *In NetApp Console, discover the Azure Blob Storage.* 
+. *In NetApp Console, discover the Azure Blob Storage.*
 +
 .Show Example
 [%collapsible]
 ====
-To discover the Azure blob storage in NetApp Console, you will need the Application (Client) ID, Client Secret, and Directory (tenant) ID for the Enterprise application you previously created in the Azure portal.
+To discover the Azure Blob Storage in NetApp Console, you will need the Application (Client) ID, Client Secret, and Directory (tenant) ID for the Enterprise application you previously created in the Azure portal.
 
-When you provide these details in NetApp Console, NetApp Console discovers the Azure blob storage and populates it in the UI.
+When you provide these details in NetApp Console, NetApp Console discovers the Azure Blob Storage and populates it in the UI.
 
-The Azure credentials are stored in NetApp Console and used to access the Azure blob storage for backup and restore operations.
+The Azure credentials are stored in NetApp Console and used to access the Azure Blob Storage for backup and restore operations.
 
 image:osv-data-protection-console-020.png[Discover Backup Target]
 
@@ -189,7 +189,7 @@ image:osv-data-protection-console-031.png[Provide a name]
 
 image:osv-data-protection-console-032.png[Provide Policy details]
 
-image:osv-data-protection-console-033.png[Choose local snapshot settings and Azure blob storage as the backup target]
+image:osv-data-protection-console-033.png[Choose local snapshot settings and Azure Blob Storage as the backup target]
 
 image:osv-data-protection-console-034.png[Protection Policy is created]
 
