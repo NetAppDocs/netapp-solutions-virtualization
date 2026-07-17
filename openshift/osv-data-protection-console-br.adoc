@@ -12,7 +12,7 @@ summary: Back up and restore OpenShift Virtualization VMs using NetApp Console B
 :imagesdir: ../media/
 
 [.lead]
-Back up and restore VMs in Red Hat OpenShift Virtualization using NetApp Console. This procedure covers creating and managing backup and restore operations through Backup and Recovery Service via NetApp Console, using Azure Blob Storage container as the backup target.
+Back up and restore VMs in Red Hat OpenShift Virtualization using NetApp Console. This procedure covers creating and managing backup and restore operations through Backup and Recovery Service via NetApp Console, using an Azure Blob Storage container as the backup target.
 
 NetApp Console provides centralized management of storage and data services across on-premises and cloud environments. It delivers unified control, operational simplicity, and secure management. There are several data services and management features that can be accessed from the user interface at link:https://console.netapp.com[console.netapp.com^]. For complete details about NetApp Console, see link:https://docs.netapp.com/us-en/console-family/[NetApp Console documentation].
 

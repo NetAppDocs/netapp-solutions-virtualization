@@ -126,7 +126,7 @@ You can log into the virtual machine and verify the contents of the PostgreSQL d
 
 To perform a warm migration, after creating a migration plan as shown above, you need to edit the plan settings to change the default migration type. Click on the edit icon next to the cold migration and toggle the button to set it to warm migration. Click on *Save*. Now click on *Start* to start the migration.
 
-NOTE: Ensure that when you are moving from block storage in VMware, you have block storage class selected for the OpenShift Virtualization VM. Additionally, the volumeMode should be set to block and access mode should be rwx so that you can perform live migration of the VM at a later time.
+NOTE: Ensure that when you are moving from block storage in VMware, you have block storage class selected for the OpenShift Virtualization VM. Additionally, the volumeMode should be set to Block and access mode should be ReadWriteMany (RWX) so that you can perform live migration of the VM at a later time.
 
 image:rh-os-n-use-case-vm-migration-mtv-plan-warm-001.png["1"]
 
