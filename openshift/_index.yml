@@ -51,8 +51,8 @@ indexpage:
 #
     - title: "Protect VMs with NetApp storage"
       links:
-        #- title: "Backup and restore using NetApp Console B/R"
-        #  url: osv-data-protection-console-br.html
+        - title: "Backup and restore using NetApp Console"
+          url: osv-data-protection-console-br.html
         - title: "Backup and restore using Trident Protect"
           url: osv-vm-dp-using-tp.html
         - title: "Protect VMs using Volume Group Snapshots"
@@ -90,7 +90,7 @@ indexpage:
         - title: "OpenShift Virtualization: Unleashing the power of virtual environments"
           url: https://www.redhat.com/en/blog/openshift-virtualization-unleashing-the-power-of-cloud-native-virtual-environments
         - title: "Red Hat OpenShift documentation"
-          url: https://docs.openshift.com/container-platform/4.15/virt/about_virt/about-virt.html
+          url: https://docs.openshift.com/container-platform/4.22
         - title: "Red Hat blogs"
           url: https://www.redhat.com/en/blog/products
 #

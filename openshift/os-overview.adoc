@@ -69,7 +69,7 @@ image:redhat-openshift-008.png["Figure showing input/output dialog or representi
 +
 image:redhat-openshift-009.png["Figure showing input/output dialog or representing written content"]
 
-. Follow the link:https://docs.openshift.com/container-platform/4.7/installing/index.html[installation instructions] provided by Red Hat to deploy to your environment of choice.
+. Follow the link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.22#Install[installation instructions] provided by Red Hat to deploy to your environment of choice.
 
 === NetApp validated OpenShift deployments
 
