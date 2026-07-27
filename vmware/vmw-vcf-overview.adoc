@@ -70,39 +70,47 @@ There are two primary types of storage with VCF:
 [width=100%,cols="25%, 25%, 50%"]
 |===
 | *Domain Type* | *Principal Storage* | *Supplemental Storage*
-| Management Domain |  vSAN
-                       FC 
+| Management Domain |   vSAN
+                        FC 
                         NFS 3
-                        iSCSI **
-                        NVMe/TCP **
-                        NVMe/FC **
-                        NVMe/RDMA **
+                        NFS 4.1 ^2^
+                        iSCSI ^2^
+                        NVMe/TCP ^2^
+                        NVMe/FC ^2^
+                        NVMe/RDMA ^2^
 
                                                 
-                         | vVols (FC, iSCSI, or NFS)*
-                            FC
-                            NFS 3
-                            NFS 4.1
-                            iSCSI
-                            NVMe/TCP
-                            NVMe/FC
-                            NVMe/RDMA
+                    |   vVols (FC, iSCSI, or NFS) ^1^
+                        FC
+                        NFS 3
+                        NFS 4.1
+                        iSCSI
+                        NVMe/TCP
+                        NVMe/FC
+                        NVMe/RDMA
 
-| Virtual Infrastructure Workload Domain | vSAN 
-                                            vVols (FC, iSCSI, or NFS)*
-                                            FC
-                                            NFS 3
-                                            | vVols (FC, iSCSI, or NFS)*
-                                                FC
-                                                NFS 3
-                                                NFS 4.1
-                                                iSCSI
-                                                NVMe/TCP
-                                                NVMe/FC
-                                                NVMe/RDMA
+| Workload Domain  | vSAN 
+                     vVols (FC, iSCSI, or NFS) ^1^
+                     FC
+                     NFS 3
+                     NFS 4.1 ^2^
+                     iSCSI ^2^
+                     NVMe/TCP ^2^
+                     NVMe/FC ^2^
+                     NVMe/RDMA ^2^
+
+                   | vVols (FC, iSCSI, or NFS) ^1^
+                     FC
+                     NFS 3
+                     NFS 4.1
+                     iSCSI
+                     NVMe/TCP
+                     NVMe/FC
+                     NVMe/RDMA
 
 |===
-Note: * vVol support is deprecated in vSphere environments.  ** With Converge or import option
+
+NOTE: ^1^ vVol support is deprecated in vSphere environments.  ^2^ With Converge or import option
 
 == Why ONTAP for VCF 
 
