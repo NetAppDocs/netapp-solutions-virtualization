@@ -105,7 +105,7 @@ You can manage Disaster Recovery for VMs with VMware Protect and Recovery or Net
 | ASA A-Series and C-Series | Yes                    | No                     | Yes
 | AFX                   | No                     | Yes                     | NA
 | AFF A-Series and C-Series | Yes                    | Yes                     | Yes
-| FAS                  | No                     | Yes                     | Yes
+| FAS                  | No                     | No                     | Yes
 |===
 
 image::vmw-vcf-design-004.png[VCF Fleet with Multiple Sites across Multiple Regions]

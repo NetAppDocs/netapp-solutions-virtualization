@@ -109,7 +109,7 @@ Upgrade an earlier VCF deployment to version 9.1 using the standard upgrade proc
 
 .Prerequisites
 * Back up the management domain and workload domains.
-* Verify compatibility of ONTAP tools and SnapCenter Plug-in with VCF 9.0. Follow the link:https://imt.netapp.com/imt/#welcome[Interoperability Matrix] to link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/upgrade/upgrade-ontap-tools.html[upgrade ONTAP tools] and link:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_upgrade.html[SnapCenter Plugin for VMware vSphere] that are supported for VCF 9. 
+* Verify compatibility of ONTAP tools and SnapCenter Plug-in with VCF 9.1. Follow the link:https://imt.netapp.com/imt/#welcome[Interoperability Matrix] to link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/upgrade/upgrade-ontap-tools.html[upgrade ONTAP tools] and link:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_upgrade.html[SnapCenter Plugin for VMware vSphere] that are supported for VCF 9.1.
 
 
 .Steps
