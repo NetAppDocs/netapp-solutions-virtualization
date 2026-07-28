@@ -99,7 +99,7 @@ This design is for customers spread globally, providing services in close proxim
 
 You can manage Disaster Recovery for VMs with VMware Protect and Recovery or NetApp Console Disaster Recovery. ONTAP tools offer the SRA (Storage Replication Adapter) to orchestrate storage operations with ONTAP.
 
-[cols="4,2,2", options="header"]
+[cols="4,2,2,2", options="header"]
 |===
 | Product Family       | SnapMirror active sync | SnapMirror active sync for NAS | MetroCluster
 | ASA A-Series and C-Series | Yes                    | No                     | Yes
