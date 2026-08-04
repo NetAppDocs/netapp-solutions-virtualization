@@ -39,7 +39,7 @@ Workload domain can be created either by import or creation using the VCF Ops to
 .Supplemental storage on Workload Domain
 [%collapsible%open]
 ==== 
-Once the workload domain is up and running, additional datastores can be created and protected using ONTAP tools.
+Once the workload domain is up and running, additional datastores can be created and protected using ONTAP tools. For more details on SnapMirror active sync, refer https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html#benefits[Learn about ONTAP SnapMirror active sync]
 
 TIP: With ONTAP tools 10.6 and later, you can protect the datastores on the workload domain with SnapMirror active sync. Refer the video demo below for the steps to protect the datastores on the workload domain with SnapMirror active sync.
 ====
@@ -53,3 +53,5 @@ For information on configuring VCF refer to link:https://techdocs.broadcom.com/u
 == Video demo for this solution
 
 video::f85530ec-ff24-4c7d-abb4-b49b0176402c[panopto, title="Stretch cluster for VCF with SnapMirror active sync NVMe/TCP", width=360]
+
+video::76549cac-a1e3-4471-acf5-b49c00eebcf7[panopto, title="Stretch cluster for VCF with SnapMirror active sync NAS", width=360]
