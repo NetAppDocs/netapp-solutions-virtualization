@@ -21,13 +21,13 @@ VCF enables organizations to deploy and manage a private cloud environment with 
 
 == Introduction to NetApp ONTAP
 
-NetApp ONTAP is a comprehensive data management software that delivers advanced storage features across a wide product line. ONTAP is available as software defined storage, as a first party service through the major cloud providers and as the storage OS for NetApp ASA (Block Optimized), AFX (File Optimized), AFF & FAS (Unified)  platforms. ONTAP delivers high-performance and low-latency for a variety of use cases including VMware virtualization, without creating silos. Similar to how a VM was created on compute, ONTAP allows for the creation of storage virtual machines (SVMs) that can be used to create and manage storage resources. ONTAP provides a unified storage solution that supports multiple protocols, including NFS, SMB, iSCSI, FC, NVMe/TCP, NVMe/FC and NVMe/RDMA. This flexibility allows organizations to consolidate workloads and simplify management while providing enterprise-grade data protection and availability.
+NetApp ONTAP is a comprehensive data management software that delivers advanced storage features across a wide product line. ONTAP is available as software defined storage, as a first party service through the major cloud providers and as the storage OS for NetApp ASA (Disaggregated for Block Optimized), AFX (Disaggregated for unstructured data), AFF & FAS (Unified)  platforms. ONTAP delivers high-performance and low-latency for a variety of use cases including VMware virtualization, without creating silos. Similar to how a VM was created on compute, ONTAP allows for the creation of storage virtual machines (SVMs) that can be used to create and manage storage resources. ONTAP provides a unified storage solution that supports multiple protocols, including NFS, SMB, iSCSI, FC, NVMe/TCP, NVMe/FC and NVMe/RDMA. This flexibility allows organizations to consolidate workloads and simplify management while providing enterprise-grade data protection and availability.
 
 == Introduction to VMware Cloud Foundation
 
 VMware Cloud Foundation (VCF) enables organizations to create virtual private clouds where they can consume VMs, KKubernetes clusters, Containers, networks, and storage as a service whether it is for AI workloads, DevOps, or traditional VM-based workloads. 
 
-VCF is deployed to greenfield environments or to expand an existing vSphere environment to a full private cloud. A set of compute hosts form a vSphere cluster, a group of vSphere clusters form a VCF domain, and a group of VCF domains form a VCF instance. A fleet consists of one or more VCF instances. VCF private cloud environments are created using one or more fleets. Operation and Automation is handled at a fleet level, while the VCF instance is the unit of deployment. A VCF instance can be deployed in a single region or across multiple regions.
+VCF is deployed to greenfield environments or to expand an existing vSphere environment to a full private cloud. A set of compute hosts form a vSphere cluster, a group of vSphere clusters form a VCF domain, and a group of VCF domains form a VCF instance. A fleet consists of one or more VCF instances. VCF private cloud environments are created using one or more fleets. Operation and Automation is handled at a fleet level, while the VCF instance is the unit of deployment. 
 
 A vSphere namespace is utilized to set resource limits for workloads. A vSphere Zone is a collection of vSphere clusters that can be used to provide high availability and disaster recovery capabilities for workloads running in the zone. 
 
@@ -37,10 +37,26 @@ In VCF Automation, a region is a collection of vSphere zones from one or more VC
 
 Namespaces are the fundamental unit for resource allocation within a project. Each namespace maps to a virtual private cloud (VPC) and can be used to provide isolation and resource allocation for workloads running in the namespace. 
 
-Namespaces are created with a dedicated VPC or shared VPC. A dedicated VPC is a VPC that is dedicated to a single namespace, while a shared VPC is a VPC that can be used by multiple namespaces. Subnets are created within a VPC where the workloads are deployed. Kubernetes clusters are created with its own namespace.
+Namespaces are created with a dedicated VPC or shared VPC. A dedicated VPC is a VPC that is dedicated to a single namespace, while a shared VPC is a VPC that can be used by multiple namespaces. Subnets are created within a VPC where the workloads are deployed. 
+
+[width=100%,cols="25%, 25%, 50%"]
+|===
+| *Component* | *Contains* | *Notes*
+| vSphere Cluster | vSphere hosts | A cluster is a collection of vSphere hosts that share the same resources and can be used to provide high availability and disaster recovery capabilities for workloads running in the cluster.
+| VCF Domain | vSphere cluster(s) | A domain is a collection of vSphere clusters. It can be part of dedicated NSX instance or share an existing NSX instance with other domains.
+| VCF Instance | VCF domain(s) | An instance is a collection of VCF domains. 
+| VCF Fleet | VCF instance(s) | A fleet is a collection of VCF instances managed centrally by the VCF Operations Manager.
+| vSphere Zone | vSphere clusters | A zone is a collection of vSphere clusters that can be used to provide high availability and disaster recovery capabilities for workloads running in the zone.
+| VCF Automation Region | vSphere zones | A region is a collection of vSphere zones from one or more VCF domains which shares the same NSX infrastructure.
+| VCF Automation Organization | VCF Automation Project(s) | An organization maps to a NSX project.
+| VCF Automation Project | vSphere namespace(s) | A project maps to NSX transist gateway and external connection.
+| VCF Automation Namespace | vSphere Zone(s) |  Each namespace maps to a virtual private cloud (VPC) and can be used to provide isolation and resource allocation for workloads running in the namespace.
+| Virtual Private Cloud (VPC) | Subnet(s) | A VPC is a virtual network that can be used to provide isolation and resource allocation for workloads running in the VPC. A VPC can be dedicated to a single namespace or shared by multiple namespaces.
+|===
 
 Storage is consumed by Storage Policy Based Management (SPBM) policies that are defined in vCenter. SPBM can be created with a set of rules that define the storage requirements for a workload. The datastores are typically tagged and utilized to create storage policies that match the specific needs of different workloads.
 
+Workloads that requires affinity and anti-affinity rules are managed by Infrastructure Policies which use vCenter compute policies to define the placement of workloads on specific hosts or clusters. Infrastructure policies can be used to ensure that workloads are placed on specific hosts or clusters based on their requirements.
 
 
 == VCF Domains
