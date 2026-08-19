@@ -46,8 +46,8 @@ Namespaces are created with a dedicated VPC or shared VPC. A dedicated VPC is a 
 | VCF Domain | vSphere cluster(s) | A domain is a collection of vSphere clusters. It can be part of dedicated NSX instance or share an existing NSX instance with other domains.
 | VCF Instance | VCF domain(s) | An instance is a collection of VCF domains. 
 | VCF Fleet | VCF instance(s) | A fleet is a collection of VCF instances managed centrally by the VCF Operations Manager.
-| vSphere Zone | vSphere clusters | A zone is a collection of vSphere clusters that can be used to provide high availability and disaster recovery capabilities for workloads running in the zone.
-| VCF Automation Region | vSphere zones | A region is a collection of vSphere zones from one or more VCF domains which shares the same NSX infrastructure.
+| vSphere Zone | vSphere cluster(s) | A zone is a collection of vSphere clusters that can be used to provide high availability and disaster recovery capabilities for workloads running in the zone.
+| VCF Automation Region | vSphere zone(s) | A region is a collection of vSphere zones from one or more VCF domains which shares the same NSX infrastructure.
 | VCF Automation Organization | VCF Automation Project(s) | An organization maps to a NSX project.
 | VCF Automation Project | vSphere namespace(s) | A project maps to NSX transist gateway and external connection.
 | VCF Automation Namespace | vSphere Zone(s) |  Each namespace maps to a virtual private cloud (VPC) and can be used to provide isolation and resource allocation for workloads running in the namespace.

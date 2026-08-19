@@ -23,7 +23,7 @@ In this step, ONTAP tools are deployed in a non-HA configuration. For additional
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-import-nfs-001.png[Deploy OVF template]
+image::vmw-vcf-mgmt-nfs-deploy-001.png[Deploy OVF template]
 ====
 +
 . In the *Deploy OVF Template* complete the steps to:
@@ -38,7 +38,7 @@ image::vmware-vcf-import-nfs-001.png[Deploy OVF template]
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-import-nfs-002.png[configuration - deployment type]
+image::vmw-vcf-mgmt-nfs-deploy-002.png[configuration - deployment type]
 ====
 +
 . On the *Select storage* page, choose the datastore on which to install the VM, and click  *Next*.
@@ -57,7 +57,7 @@ image::vmware-vcf-import-nfs-002.png[configuration - deployment type]
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-import-nfs-003.png[Customize template]
+image::vmw-vcf-mgmt-nfs-deploy-003.png[Customize template]
 ====
 +
 . Click *Next* to continue, and then click *Finish* to begin the deployment.
@@ -74,7 +74,7 @@ After the ONTAP tools VM is installed and powered up, add the vCenter servers an
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-import-nfs-004.png[open ONTAP tools]
+image::vmw-vcf-mgmt-nfs-deploy-004.png[open ONTAP tools]
 ====
 +
 . Navigate to *Storage Backends* in the left hand menu and click *Add* to access the *Add Storage Backend* window.
@@ -84,7 +84,7 @@ image::vmware-vcf-import-nfs-004.png[open ONTAP tools]
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-import-nfs-005.png[Add storage backend]
+image::vmw-vcf-mgmt-nfs-deploy-005.png[Add storage backend]
 ====
 +
 TIP: To allow full management over all SVMs in the storage system, add the storage backend in the vSphere client UI using the cluster IP address. Alternately, the storage backend can be added and associated with a vCenter instance using ONTAP tools Manager at `https://loadBalanceIP:8443/virtualization/ui/`. This alternate method allows you to add only SVM credentials at the vSphere client UI, which provides more granular control over storage access.
@@ -101,7 +101,7 @@ ONTAP tools integrates functionality throughout the vSphere client UI. In this s
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-import-nfs-006.png[Create datastore]
+image::vmw-vcf-mgmt-nfs-deploy-006.png[Create datastore]
 ====
 +
 . In the *Create Datastore* wizard, select the type of datastore to create. Options are NFS or VMFS.
@@ -111,7 +111,7 @@ image::vmware-vcf-import-nfs-006.png[Create datastore]
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-import-nfs-007.png[Name and protocol]
+image::vmw-vcf-mgmt-nfs-deploy-007.png[Name and protocol]
 ====
 +
 . On the *Storage* page, select the ONTAP storage platform and the storage virtual machine (SVM). You can also select any available custom export policies here. Click *Next* to continue.
@@ -119,7 +119,7 @@ image::vmware-vcf-import-nfs-007.png[Name and protocol]
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-import-nfs-008.png[Storage page]
+image::vmw-vcf-mgmt-nfs-deploy-008.png[Storage page]
 ====
 +
 . On the *Storage Attributes* page, select the storage aggregate to be used. Click on *Next* to continue.
@@ -131,7 +131,7 @@ ONTAP tools creates a volume on the ONTAP storage system and mounts it as an NFS
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-import-nfs-009.png[Summary page]
+image::vmw-vcf-mgmt-nfs-deploy-009.png[Summary page]
 ====
 
 == What's next?
