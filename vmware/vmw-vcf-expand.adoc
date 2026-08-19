@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar
 permalink: vmware/vmw-vcf-expand.html
-keywords: vmware, vcf, expand, supplemental, storage
-summary: "VMware Cloud Foundation (VCF) supports a wide range of supplemental storage options to expand storage on VCF management domains and Virtual Infrastructure (VI) workload domains."
+keywords: vmware, vcf, expand, supplemental, storage, workload
+summary: "VMware Cloud Foundation (VCF) supports a wide range of supplemental storage options to expand storage on VCF management domains and workload domains."
 ---
 = Learn about expanding storage for a VCF environment using supplemental storage
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: "VMware Cloud Foundation (VCF) supports a wide range of supplemental st
 :imagesdir: ../media/
 
 [.lead]
-VMware Cloud Foundation (VCF) supports a wide range of supplemental storage options to expand storage on VCF management domains and Virtual Infrastructure (VI) workload domains.
+VMware Cloud Foundation (VCF) supports a wide range of supplemental storage options to expand storage on VCF management domains and workload domains.
 
 NetApp's ONTAP tools for VMware vSphere provide an efficient solution for this expansion by integrating NetApp storage seamlessly into the VCF environment. 
 
@@ -22,12 +22,12 @@ ONTAP tools simplifies the setup and management of datastores, allowing administ
 
 VCF environments can be expanded using several storage protocols, each offering unique benefits and use cases. 
 
-You can use the following protocols to expand storage in VCF management domains and VI workload domains. Choose the best option for your environment to seamlessly integrate supplemental storage into your VCF deployment.
+You can use the following protocols to expand storage in VCF management domains and workload domains. Choose the best option for your environment to seamlessly integrate supplemental storage into your VCF deployment.
 
 .iSCSI 
 Block-based protocol that uses standard Ethernet networks. Ideal for environments that require high performance, flexibility, and cost-effective scaling. 
 
-iSCSI is widely used for VMFS datastores and supports advanced ONTAP features, such as snapshots and cloning.
+iSCSI is widely used for VMFS datastores and supports advanced ONTAP features, such as snapshots and cloning. ONTAP 9.19.1 and later supports symmetric active-active configuration on AFF systems too. Initially that feature was only available on ASA systems.
 
 * *High Performance:* Offers high performance to deliver fast, efficient data transfer rates and low latency. Ideal for demanding enterprise applications and virtualized environments.
 
@@ -39,6 +39,8 @@ For more information on using iSCSI with NetApp storage systems, refer to https:
 
 .Fibre Channel (FC)
 High-speed, low-latency protocol that uses dedicated FC networks. FC is preferred for mission-critical workloads that demand reliability, dedicated bandwidth, and robust error correction. It is commonly used for VMFS datastores in enterprise environments.
+
+ONTAP 9.19.1 and later supports symmetric active-active configuration on AFF systems too. Initially that feature was only available on ASA systems.
 
 * *High Performance:* FC provides high-speed data transfer rates, making it ideal for applications requiring fast and reliable access to large amounts of data.
 
@@ -57,20 +59,22 @@ NFS datastores are supported by ONTAP and vSphere for both management and worklo
 
 * *Simplicity and ease of use:* NFS is straightforward to set up and manage, making it an excellent choice for environments that require quick and easy file sharing.
 
-* *Scalability:* ONTAP's architecture allows NFS to scale efficiently, supporting growing data needs without significant changes to the infrastructure.
+* *Scalability:* ONTAP's architecture allows NFS to scale efficiently, supporting growing data needs without significant changes to the infrastructure. FlexGroup along with pNFS can be used to scale NFS datastores to petabyte levels.
 
 * *Flexibility:* NFS supports a wide range of applications and workloads, making it versatile for various use cases, including virtualized environments.
 
 For more information, refer to the link:vmw-vvf-overview.html[NFS v3 Reference Guide for vSphere 8].
 
-.NVMe/TCP
-Modern protocol that delivers high performance and low latency over standard Ethernet networks using TCP/IP. NVMe/TCP is ideal for demanding applications and large-scale data operations, providing scalability and cost efficiency without requiring specialized hardware.
+.NVMe-oF
+Modern protocol that delivers high performance and low latency over standard Ethernet networks using TCP/IP. NVMe-oF (NVMe over Fabrics) is ideal for demanding applications and large-scale data operations, providing scalability and cost efficiency without requiring specialized hardware.
+
+ONTAP 9.19.1 and later supports symmetric active-active configuration on AFF systems too. Initially that feature was only available on ASA systems.
 
 * *High Performance:* Delivers exceptional performance with low latency and high data transfer rates. This is crucial for demanding applications and large-scale data operations.
 
 * *Scalability:* Supports scalable configurations, allowing IT administrators to expand their infrastructure seamlessly as data requirements grow.
 
-* *Cost Effective:* Runs over standard Ethernet switches and is encapsulated inside TCP datagrams. No special equipment required to implement.
+* *Cost Effective:* Runs over standard Ethernet switches and is encapsulated inside TCP datagrams. No special equipment required to implement. NVMe-oF over TCP is commonly used.
 
 For more information on the benefits of NVMe, refer to https://www.netapp.com/data-storage/nvme/what-is-nvme/[What is NVME?].
 
