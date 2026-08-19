@@ -17,6 +17,13 @@ In this use case we outline the procedure to configure a stretch cluster for a w
 
 image:vmw-vcf-vmsc-viwld-smas-001.png[Stretch cluster for VCF with SnapMirror active sync]
 
+Both Uniform and Non-uniform stretched cluster configurations are supported for SAN. In case of NAS, it is active-passive configuration with ONTAP 9.19.1.
+
+[NOTE]
+====
+Host proximity settings are used with multipath configuration to ensure the optimal path selection for the storage traffic. The host proximity settings are configured on igroup in case of SCSI and subsystem in case of NVMe-oF. For example, in Uniform host access configuration, host has access to both storage systems in the stretched cluster. In multipath configuration, the optimal and non-optimal paths are configured based on the host proximity settings.
+====
+
 == Scenario Overview
 
 The datastores on VCF Workload domain can be protected with SnapMirror active sync to provide stretch cluster solution. The protection is enabled at datastore level (consistency group) for SAN and protected at SVM level for NAS.
