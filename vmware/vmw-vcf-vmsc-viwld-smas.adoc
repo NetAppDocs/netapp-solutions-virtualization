@@ -5,7 +5,7 @@ keywords: netapp, vmware, cloud, foundation, vcf, asa, all-flash, array, ontap t
 summary:
 ---
 
-= Configure a stretch cluster for a workload domain using SnapMirror active sync
+= Configure a stretch cluster for a workload domain using SnapMirror active sync (SAN and NAS)
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -13,13 +13,13 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-In this use case we outline the procedure to configure a stretch cluster for a workload domain using SnapMirror active sync with ONTAP tools for VMware vSphere. ONTAP supports SnapMirror active sync both for SAN (with iSCSI, Fibre Channel, and NVMe over Fabrics) and NAS (NFSv4 and NFSv4.1).
+In this use case we outline the procedure to configure a stretch cluster for a workload domain using SnapMirror active sync with ONTAP tools for VMware vSphere (ONTAP tools 10.6 supports FC and iSCSI). ONTAP supports SnapMirror active sync both for SAN (with iSCSI, Fibre Channel, and NVMe over Fabrics) and NAS (NFSv3 and NFSv4.1).
 
-image:vmware-vcf-asa-mgmt-stretchcluster-001.png[Single Instance - Multiple Availablity Zones]
+image:vmw-vcf-vmsc-viwld-smas-001.png[Stretch cluster for VCF with SnapMirror active sync]
 
 == Scenario Overview
 
-The datastores on VCF Workload domain can be protected with SnapMirror active sync to provide stretch cluster solution. The protection is enabled at datastore level for SAN and protected at SVM level for NAS.
+The datastores on VCF Workload domain can be protected with SnapMirror active sync to provide stretch cluster solution. The protection is enabled at datastore level (consistency group) for SAN and protected at SVM level for NAS.
 
 // == Prerequisites
 
@@ -31,7 +31,8 @@ Workload domain can be created either by import or creation using the VCF Ops to
 . Create Workload domain with any supported protocol.
 . link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-vcenter.html[Register workload domain vCenter to ONTAP tools manager to deploy vCenter plugin]
 . link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-storage-backend.html[Register storage systems on ONTAP tools]
-. link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/protect/protect-multiple-ds.html[Protect the vSphere datastore with ONTAP tools]
+. For iSCSI and FC Datastores, Refer link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/protect/protect-multiple-ds.html[Protect the vSphere datastore with ONTAP tools]
+. For NVMe-oF and NFS datastores, check the video demo below for the steps to protect the datastores on the workload domain with SnapMirror active sync.
 
 
 ====

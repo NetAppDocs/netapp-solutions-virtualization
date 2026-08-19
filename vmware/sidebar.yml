@@ -147,9 +147,9 @@ entries:
             url: /vmware/vmw-vcf-vmsc-mgmt-mcc.html
           - title: "Configure VI workload domains with MetroCluster"
             url: /vmware/vmw-vcf-vmsc-viwld-mcc.html
-          - title: "Configure management domains with SnapMirror Active Sync"
+          - title: "Configure management domains with SnapMirror Active Sync (SAN and NAS)"
             url: /vmware/vmw-vcf-vmsc-mgmt-smas.html
-          - title: "Configure VI workload domains with SnapMirror Active Sync"
+          - title: "Configure VI workload domains with SnapMirror Active Sync (SAN and NAS)"
             url: /vmware/vmw-vcf-vmsc-viwld-smas.html
 
       - title: "Migrate VMs from vSphere"
