@@ -31,3 +31,8 @@ Create distributed port groups and vmkernel adapters on the ESXi hosts for the V
 Deploy the NVMe/TCP datastore.
 
 // NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-vcf-viwld-supplemental-nvme.adoc
+== Video demo for this solution
+
+video::f85530ec-ff24-4c7d-abb4-b49b0176402c[panopto, title="Supplemental Datastore with NVMe/TCP", width=360]
+
+video::b2b16a35-05cd-49c9-a91a-b4ac0127813d[panopto, title="Supplemental Datastore with NVMe/FC", width=360]

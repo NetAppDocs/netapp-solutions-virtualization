@@ -134,5 +134,8 @@ ONTAP tools will create a volume on the ONTAP storage system and mount it as a V
 image::vmw-vcf-mgmt-vmfs-deploy-010.png[Summary page]
 ====
 
+== Reference Video: 
+video::62c2a66c-1a07-4284-bc7b-b4ac00e9aeea[panopto, title="iSCSI Multipath with AFF and ASA r2"]
+
 == What's next?
 After you deploy ONTAP tools and provision the VMFS datastore, link:vmw-vcf-mgmt-vmfs-converge.html[Converge the vSphere cluster to a VCF management domain].

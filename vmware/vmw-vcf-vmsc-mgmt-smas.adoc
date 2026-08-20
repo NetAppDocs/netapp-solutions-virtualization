@@ -61,6 +61,8 @@ For information on configuring VCF refer to link:https://techdocs.broadcom.com/u
 
 == Video demo for this solution
 
+video::4c21ee83-dc11-43bf-a9af-b4ac014aaa0e[panopto, title="Stretch cluster for VCF with SnapMirror active sync iSCSI using ONTAP tools", width=360]
+
 video::f85530ec-ff24-4c7d-abb4-b49b0176402c[panopto, title="Stretch cluster for VCF with SnapMirror active sync NVMe/TCP", width=360]
 
 video::76549cac-a1e3-4471-acf5-b49c00eebcf7[panopto, title="Stretch cluster for VCF with SnapMirror active sync NAS", width=360]

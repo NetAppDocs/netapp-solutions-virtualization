@@ -103,6 +103,9 @@ TIP: Two iSCSI network interfaces per node are recommended.
 
 . link:++https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/7-0/vsphere-storage-7-0/storage-hardware-acceleration-in-vsphere/vsphere-hardware-acceleration-on-block-storage/managing-hardware-acceleration-filter-and-plug-ins/verify-hardware-acceleration-support-status.html++[Verify hardware acceleration support.]
 
+== Reference Video: 
+video::62c2a66c-1a07-4284-bc7b-b4ac00e9aeea[panopto, title="iSCSI Multipath with AFF and ASA r2"]
+
 == What's next?
 
 After these the tasks are completed, the VMFS datastore is ready to consume for provisioning virtual machines.

@@ -29,3 +29,9 @@ Deploy ONTAP tools for VMware vSphere and provision an NFS datastore.
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three]link:vmw-vcf-mgmt-nfs-converge.html[Converge vSphere cluster to VCF management domain]
 [role="quick-margin-para"]
 Use the VCF Installer Tool to validate, reuse existing components and deploy new ones that make up the VCF management domain.
+
+== Reference Video demo for this solution
+
+The following video demonstrates NFS datastore creation with ONTAP tools utilizing nConnect feature.
+
+video::76549cac-a1e3-4471-acf5-b49c00eebcf7[panopto, title="Stretch cluster for VCF with SnapMirror active sync NAS", width=360]
