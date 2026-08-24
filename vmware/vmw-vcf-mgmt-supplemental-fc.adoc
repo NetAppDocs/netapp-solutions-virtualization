@@ -41,6 +41,11 @@ Adding a storage backend enables you to onboard an ONTAP cluster.
 
 . Provision VMFS on FC by following the instructions in the ONTAP tools for VMware vSphere documentation: link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/create-datastore.html[Provision VMFS on FC^].
 
+
+== Reference Video
+
+video::96311abf-aa45-4ce9-984b-b4b001005bab[panopto, title="Supplemental Datastore with FC", width=360]
+
 == Additional information
 * For information about configuring ONTAP storage systems, refer to link:https://docs.netapp.com/us-en/ontap[ONTAP 9 documentation].
 

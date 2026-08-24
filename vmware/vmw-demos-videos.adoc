@@ -78,9 +78,29 @@ video::255640f5-4dff-438c-8d50-b01200f017d1[panopto, title="Bulk Migration Demon
 .VMware Cloud Foundation with NetApp ONTAP
 [%collapsible%open]
 ====
-video::9b66ac8d-d2b1-4ac4-a33c-b16900f67df6[panopto, title="NFS Datastores as Principal Storage for VCF Workload Domains"]
-video::1d0e1af1-40ae-483a-be6f-b156015507cc[panopto, title="iSCSI Datastores as Supplemental Storage for VCF Management Domains"]
+video::9b66ac8d-d2b1-4ac4-a33c-b16900f67df6[panopto, title="NFS datastores as principal storage for VCF Workload Domains"]
+
+video::1d0e1af1-40ae-483a-be6f-b156015507cc[panopto, title="iSCSI datastores as supplemental storage for VCF Management Domains"]
+
+video::b2b16a35-05cd-49c9-a91a-b4ac0127813d[panopto, title="Supplemental Datastore with NVMe/FC", width=360]
+
+video::96311abf-aa45-4ce9-984b-b4b001005bab[panopto, title="Supplemental Datastore with FC", width=360]
+
+video::4c21ee83-dc11-43bf-a9af-b4ac014aaa0e[panopto, title="Stretch cluster for VCF with SnapMirror active sync iSCSI using ONTAP tools", width=360]
+
+video::f85530ec-ff24-4c7d-abb4-b49b0176402c[panopto, title="Stretch cluster for VCF with SnapMirror active sync NVMe/TCP", width=360]
+
+video::76549cac-a1e3-4471-acf5-b49c00eebcf7[panopto, title="Stretch cluster for VCF with SnapMirror active sync NAS", width=360]
+
+video::62c2a66c-1a07-4284-bc7b-b4ac00e9aeea[panopto, title="iSCSI Multipath with AFF and ASA r2", width=360]
 ====
+
+.VKS with ONTAP
+[%collapsible%open]
+====
+video::4ef64b3c-7a68-41d5-bacf-b4a8012b49f8[panopto, title="VKS with Supervisor on Virtual Distributed Switch", width=360]
+====
+
 
 .NetApp Cloud Insights
 [%collapsible%open]
