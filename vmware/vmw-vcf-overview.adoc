@@ -132,9 +132,9 @@ NOTE: ^1^ vVol support is deprecated in vSphere environments.  ^2^ With Converge
 
 In addition to use cases involving investment protection and multi-protocol support, there are many additional reasons to take advantage of external shared storage within a VCF workload domain. It may be assumed that storage provisioned for a workload domain is merely a repository to host VMs and container. However, organization needs often outgrow the capabilities of the licensed-capacity and require enterprise storage. Storage provided by ONTAP, allocated to domains within VCF, is easy to deploy and offers a future-proof shared storage solution.  
 
-image:why-ontap-for-vmware-002.png[Why ONTAP for VCF]
+image:why-ONTAP-for-vmware-002.png[Why ONTAP for VCF]
 
-For more information regarding the top ONTAP Benefits for VMware VCF identified below see link:vmw-getting-started-overview.html#why-ontap-for-vmware[Why ONTAP for VMware].
+For more information regarding the top ONTAP Benefits for VMware VCF identified below see link:vmw-getting-started-overview.html#why-ONTAP-for-vmware[Why ONTAP for VMware].
 
 * Flexibility on day 1 and as you scale
 * Offload storage tasks to ONTAP
@@ -174,7 +174,7 @@ For detailed information on NetApp offerings for VMware Cloud Foundation, refer 
 
 * link:https://www.netapp.com/blog/netapp-vmware-cloud-foundation-getting-started/[NetApp and VMware Cloud Foundation made easy Part 1: Getting started]
 
-* link:https://www.netapp.com/blog/netapp-vmware-cloud-foundation-ontap-principal-storage/[NetApp and VMware Cloud Foundation made easy Part 2: VCF and ONTAP principal storage]
+* link:https://www.netapp.com/blog/netapp-vmware-cloud-foundation-ONTAP-principal-storage/[NetApp and VMware Cloud Foundation made easy Part 2: VCF and ONTAP principal storage]
 
 * link:https://www.netapp.com/blog/netapp-vmware-cloud-foundation-element-principal-storage/[NetApp and VMware Cloud Foundation made easy Part 3: VCF and Element principal storage]
 
@@ -186,29 +186,40 @@ For detailed information on NetApp offerings for VMware Cloud Foundation, refer 
 
 * link:vmw-vcf-mgmt-principal-fc.html[Use ONTAP with FC as principal storage for management domains]
 
-* link:vmw-vcf-viwld-principal-fc.html[Use ONTAP with FC as principal storage for VI workload domains domains]
+* link:vmw-vcf-viwld-principal-fc.html[Use ONTAP with FC as principal storage for workload domains]
 
-* link:vmw-vcf-mgmt-supplemental-iscsi.html[Use Ontap Tools to deploy iSCSI datastores in a VCF management domain]
+* link:vmw-vcf-mgmt-supplemental-iscsi.html[Use ONTAP Tools to deploy iSCSI datastores in a VCF management domain]
 
-* link:vmw-vcf-mgmt-supplemental-fc.html[Use Ontap Tools to deploy FC datastores in a VCF management domain]
+* link:vmw-vcf-mgmt-vmfs.html[Use ONTAP tools to deploy NVMe-oF datastores as principal storage in a VCF management domain]
 
-* link:vmw-vcf-viwld-supp-iscsi-vvols.html[Use Ontap Tools to deploy vVols (iSCSI) datastores in a VI workload domain]
+* link:vmw-vcf-mgmt-supplemental-fc.html[Use ONTAP Tools to deploy supplemental FC datastores in a VCF management domain]
 
-* link:vmw-vcf-viwld-supp-nvme.html[Configure NVMe over TCP datastores for use in a VI workload domain]
+* link:vmw-vcf-viwld-vmsc-viwld-smas.html[Use ONTAP tools to deploy supplemental iSCSI datastores in a workload domain]
 
-* link:vmw-vcf-scv-viwld.html[Deploy and use the SnapCenter Plug-in for VMware vSphere to protect and restore VMs in a VI workload domain]
+* link:vmw-vcf-viwld-supp-iscsi-vvols.html[Use ONTAP Tools to deploy vVols (iSCSI) datastores in a workload domain]
 
-* link:vmw-vcf-scv-nvme.html[Deploy and use the SnapCenter Plug-in for VMware vSphere to protect and restore VMs in a VI workload domain (NVMe/TCP datastores)]
+* link:vmw-vcf-viwld-supp-nvme.html[Configure NVMe-oF datastores for use in a workload domain]
+
+* link:vmw-vcf-scv-viwld.html[Deploy and use the SnapCenter Plug-in for VMware vSphere to protect and restore VMs in a workload domain]
+
+* link:vmw-vcf-scv-nvme.html[Deploy and use the SnapCenter Plug-in for VMware vSphere to protect and restore VMs in a workload domain (NVMe/TCP datastores)]
+
 
 *VMware Cloud Foundation with NetApp All-Flash AFF Arrays*
 
+Links for the ASA are mostly applicable to AFF arrays, but the following links are specific to AFF arrays and their capabilities.
+
 * link:vmw-getting-started-ntap-options.html#netapp-aff-all-flash-fas-benefits[VCF with NetApp AFF arrays, Introduction and Technology Overview]
 
-* link:vmw-vcf-mgmt-principal-nfs.html[Use ONTAP with NFS as principal storage for management domains]
+* link:vmw-vcf-mgmt-principal-nfs.html[Use ONTAP with NFSv3 as principal storage for management domains]
 
-* link:vmw-vcf-viwld-principal-nfs.html[Use ONTAP with NFS as principal storage for VI workload domains]
+* link:vmw-vcf-mgmt-nfs.html[Use ONTAP tools to deploy NFSv3/NFSv4.1 datastores in a VCF management domain]
 
-* link:vmw-vcf-viwld-supp-nfs-vvols.html[Use ONTAP Tools to deploy vVols (NFS) datastores in a VI workload domain]
+* link:vmw-vcf-viwld-principal-nfs.html[Use ONTAP with NFS as principal storage for workload domains]
+
+* link:vmw-vcf-viwld-vmsc-viwld-smas.html[Use ONTAP tools to deploy NFSv3/NFSv4.1 datastores in a workload domain]
+
+* link:vmw-vcf-viwld-supp-nfs-vvols.html[Use ONTAP tools to deploy vVols (NFS) datastores in a workload domain]
 
 *NetApp FlexPod solutions for VMware Cloud Foundation*
 
