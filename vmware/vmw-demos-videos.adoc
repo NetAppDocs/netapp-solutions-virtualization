@@ -99,6 +99,8 @@ video::62c2a66c-1a07-4284-bc7b-b4ac00e9aeea[panopto, title="iSCSI Multipath with
 [%collapsible%open]
 ====
 video::4ef64b3c-7a68-41d5-bacf-b4a8012b49f8[panopto, title="VKS with Supervisor on Virtual Distributed Switch", width=360]
+
+video::571ced1a-58e8-4bf4-9c24-b4b10118bc22[panopto, title="VKS with VCF Automation", width=360]
 ====
 
 

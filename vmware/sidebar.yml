@@ -62,9 +62,9 @@ entries:
         entries:
           - title: "About provisioning principal storage"
             url: /vmware/vmw-vcf-provision.html
-          - title: "Provision management domains with FC"
+          - title: "Provision management domain with FC"
             url: /vmware/vmw-vcf-mgmt-principal-fc.html
-          - title: "Provision management domains with NFS"
+          - title: "Provision management domain with NFS"
             url: /vmware/vmw-vcf-mgmt-principal-nfs.html
           - title: "Provision workload domains with FC"
             url: /vmware/vmw-vcf-viwld-principal-fc.html     
@@ -75,7 +75,7 @@ entries:
         entries:
           - title: "Learn about expanding storage"
             url: /vmware/vmw-vcf-expand.html
-          - title: "Expand management domains with iSCSI"
+          - title: "Expand management domain with iSCSI"
             entries:
             - title: Deployment workflow
               url: /vmware/vmw-vcf-mgmt-supplemental-iscsi.html
@@ -87,7 +87,7 @@ entries:
               url: /vmware/vmw-vcf-mgmt-supplemental-iscsi-network.html
             - title: Configure storage
               url: /vmware/vmw-vcf-mgmt-supplemental-iscsi-storage.html
-          - title: "Expand management domains with FC"
+          - title: "Expand management domain with FC"
             url: /vmware/vmw-vcf-mgmt-supplemental-fc.html
           - title: "Expand VCF workload domains with vVols iSCSI"
             entries:
