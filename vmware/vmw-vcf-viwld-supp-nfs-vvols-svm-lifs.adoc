@@ -2,10 +2,10 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-viwld-supp-nfs-vvols-svm-lifs.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc
-summary: "Create a Storage Virtual Machine (SVM) and multiple logical interfaces (LIFs) on an ONTAP system to support NFS traffic for vVols datastores in a VMware Cloud Foundation VI workload domain."
+summary: "Create a Storage Virtual Machine (SVM) and multiple logical interfaces (LIFs) on an ONTAP system to support NFS traffic for vVols datastores in a VMware Cloud Foundation workload domain."
 ---
 
-= Create SVM and LIFs for NFS vVols datastores in a VCF VI workload domain
+== Create SVM and LIFs for NFS vVols datastores in a VCF workload domain
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -13,7 +13,7 @@ summary: "Create a Storage Virtual Machine (SVM) and multiple logical interfaces
 :imagesdir: ../media/
 
 [.lead]
-Create a Storage Virtual Machine (SVM) and multiple logical interfaces (LIFs) on an ONTAP system to support NFS traffic for vVols datastores in a VMware Cloud Foundation VI workload domain.
+Create a Storage Virtual Machine (SVM) and multiple logical interfaces (LIFs) on an ONTAP system to support NFS traffic for vVols datastores in a VMware Cloud Foundation workload domain.
 
 To add new LIFs to an existing SVM, refer to the ONTAP documentation: link:https://docs.netapp.com/us-en/ontap/networking/create_a_lif.html[Create ONTAP LIFs^].
 
@@ -35,7 +35,7 @@ image:vmware-vcf-asa-001.png[Click Add to start creating SVM]
 image:vmware-vcf-aff-035.png[Add storage VM wizard - enable NFS]
 ====
 +
-TIP: You don't need to check the *Allow NFS client access* checkbox. ONTAP tools for VMware vSphere will be used to automate the datastore deployment process, which includes providing client access for the ESXi hosts.
+TIP: You don't need to check the *Allow NFS client access* checkbox. ONTAP tools for VMware vSphere will be used to automate the datastore deployment process, which includes providing client access for the vSphere hosts.
 
 . In the *Network Interface* section, fill in the *IP address*, *Subnet Mask*, and *Broadcast Domain and Port* for the first LIF. For subsequent LIFs, you can either use individual settings or enable the checkbox to use common settings across all remaining LIFs.
 +
@@ -53,8 +53,8 @@ image:vmware-vcf-aff-036.png[Fill out network info for LIFs]
 image:vmware-vcf-asa-004.png[Enable SVM account and Finish]
 ====
 
-== What's next?
-After creating the SVM and LIFs, link:vmw-vcf-viwld-supp-nfs-vvols-network.html[configure networking for NFS on ESXi hosts].
+=== What's next?
+After creating the SVM and LIFs, link:vmw-vcf-viwld-supp-nfs-vvols-network.html[configure networking for NFS on vSphere hosts].
 
 
 // NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-vcf-viwld-supplemental-nfs-vvols.adoc

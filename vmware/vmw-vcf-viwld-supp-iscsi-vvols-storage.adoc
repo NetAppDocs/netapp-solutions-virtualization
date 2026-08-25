@@ -2,10 +2,10 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-viwld-supp-iscsi-vvols-storage.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi
-summary: "Configure iSCSI vVols storage in a VI workload domain using ONTAP tools. You'll deploy ONTAP tools for VMware vSphere, register a storage system, create a storage capability profile, and provision a vVols datastore in the vSphere client."
+summary: "Configure iSCSI vVols storage in a workload domain using ONTAP tools. You'll deploy ONTAP tools for VMware vSphere, register a storage system, create a storage capability profile, and provision a vVols datastore in the vSphere client."
 ---
 
-= Configure iSCSI vVols storage in a VCF VI workload domain using ONTAP tools
+== Configure iSCSI vVols storage in a VCF workload domain using ONTAP tools
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -13,17 +13,17 @@ summary: "Configure iSCSI vVols storage in a VI workload domain using ONTAP tool
 :imagesdir: ../media/
 
 [.lead]
-Configure iSCSI vVols storage in a VI workload domain using ONTAP tools. You'll deploy ONTAP tools for VMware vSphere, register a storage system, create a storage capability profile, and provision a vVols datastore in the vSphere client.
+Configure iSCSI vVols storage in a workload domain using ONTAP tools. You'll deploy ONTAP tools for VMware vSphere, register a storage system, create a storage capability profile, and provision a vVols datastore in the vSphere client.
 
-== Step 1: Deploy ONTAP tools for VMware vSphere
-For VI workload domains, ONTAP tools is installed to the VCF Management Cluster but registered with the vCenter associated with the VI workload domain. 
+=== Step 1: Deploy ONTAP tools for VMware vSphere
+For workload domains, ONTAP tools is installed to the VCF Management Cluster but registered with the vCenter associated with the workload domain.
 
 ONTAP tools for VMware vSphere is deployed as a VM appliance and provides an integrated vCenter UI for managing ONTAP storage. 
 
 .Steps
 include::../_include/deploy-ontap-tools.adoc[]
 
-== Step 2: Add a storage system
+=== Step 2: Add a storage system
 Perform the following steps to add a storage system using ONTAP tools.
 
 NOTE: vVol requires ONTAP cluster credentials rather than SVM credentials. For more information, refer to the ONTAP tools for VMware vSphere documentation: https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere/configure/task_add_storage_systems.html[Add storage systems^].
@@ -32,7 +32,7 @@ NOTE: vVol requires ONTAP cluster credentials rather than SVM credentials. For m
 .Steps
 include::../_include/add-storage-ontap-tools.adoc[]
 
-== Step 3: Create a storage capability profile in ONTAP tools
+=== Step 3: Create a storage capability profile in ONTAP tools
 Storage capability profiles describe the features provided by a storage array or storage system. They include quality of service definitions and are used to select storage systems that meet the parameters defined in the profile. One of the provided profiles can be used or new ones can be created.
 
 .Steps
@@ -95,7 +95,7 @@ image:vmware-asa-014.png[Attributes for SCP]
 image:vmware-vcf-asa-040.png[Summary for SCP]
 ====
 
-== Step 4: Create a vVols datastore in ONTAP tools
+=== Step 4: Create a vVols datastore in ONTAP tools
 To create a vVols datastore in ONTAP tools complete the following steps.
 
 .Steps

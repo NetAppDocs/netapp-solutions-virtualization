@@ -4,7 +4,7 @@ permalink: vmware/vmw-vcf-viwld-supp-nvme-network.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi
 summary: "Configure networking for NVMe over TCP (NVMe/TCP) storage on vSphere hosts in a workload domain. You'll create distributed port groups for NVMe traffic, set up VMkernel adapters on each vSphere host, and add an NVMe/TCP adapter to enable reliable connectivity and multipathing."
 ---
-= Configure networking for NVMe/TCP on vSphere hosts in a VCF workload domain
+== Configure networking for NVMe/TCP on vSphere hosts in a VCF workload domain
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -16,7 +16,7 @@ Configure networking for NVMe over TCP (NVMe/TCP) storage on vSphere hosts in a 
 
 Perform the following steps on the workload domain cluster using the vSphere client. In this case vCenter Single Sign-On is being used so the vSphere client is common to both the management and workload domains.
 
-== Step 1: Create distributed port groups for NVMe/TCP traffic
+=== Step 1: Create distributed port groups for NVMe/TCP traffic
 Complete the following steps to create a new distributed port group for each NVMe/TCP network.
 
 .Steps
@@ -70,7 +70,7 @@ image:vmware-vcf-asa-078.png[move uplink2 to unused]
 image:vmware-vcf-asa-079.png[move uplink 1 to unused]
 ====
 
-== Step 2: Create the VMkernel adapters on each vSphere host
+=== Step 2: Create the VMkernel adapters on each vSphere host
 Create the VMkernel adapters on each vSphere host in the workload domain.
 
 .Steps
@@ -125,7 +125,7 @@ image:vmware-vcf-asa-098.png[Review VMkernel selections]
 +
 . Repeat this process to create a VMkernel adapter for the second iSCSI network.
 
-== Step 3: Add NVMe/TCP adapter
+=== Step 3: Add NVMe/TCP adapter
 Each vSphere host in the workload domain cluster must have an NVMe/TCP software adapter installed for every established NVMe/TCP network dedicated to storage traffic.
 
 To install NVMe/TCP adapters and discover the NVMe controllers, complete the following steps.
@@ -181,7 +181,7 @@ image:vmware-vcf-asa-103.png[NVMe namespace listed under devices]
 +
 . Repeat this procedure to create an NVMe/TCP adapter for the second network established for NVMe/TCP traffic.
 
-== What's next?
+=== What's next?
 After configuring networking, link:vmw-vcf-viwld-supp-nvme-storage.html[configure storage for NVMe vVols].
 
 // NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-vcf-viwld-supplemental-nvme.adoc

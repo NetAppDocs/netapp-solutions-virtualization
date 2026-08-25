@@ -2,9 +2,9 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-viwld-supp-nfs-vvols.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc
-summary: "Get started with adding NFS and vVols as supplemental storage to VI workload domains using ONTAP tools for VMware vSphere. You'll deploy ONTAP tools for VMware vSphere, configure a Storage Virtual Machine (SVM) with NFS logical interfaces, and provision both NFS and vVols datastores."
+summary: "Get started with adding NFS and vVols as supplemental storage to VCF workload domains using ONTAP tools for VMware vSphere. You'll deploy ONTAP tools for VMware vSphere, configure a Storage Virtual Machine (SVM) with NFS logical interfaces, and provision both NFS and vVols datastores."
 ---
-= Deployment workflow for adding NFS vVols datastores as supplemental storage in a VI workload domain
+== Deployment workflow for adding NFS vVols datastores as supplemental storage in a VCF workload domain
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -12,7 +12,7 @@ summary: "Get started with adding NFS and vVols as supplemental storage to VI wo
 :imagesdir: ../media/
 
 [.lead]
-Get started with adding NFS vVols datastores as supplemental storage in a VI workload domains using ONTAP tools for VMware vSphere. You'll review the deployment requirements, deploy ONTAP tools for VMware vSphere, configure the SVM with logical interfaces, and configure storage.
+Get started with adding NFS vVols datastores as supplemental storage in a VCF workload domain using ONTAP tools for VMware vSphere. You'll review the deployment requirements, deploy ONTAP tools for VMware vSphere, configure the SVM with logical interfaces, and configure storage.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One]link:vmw-vcf-viwld-supp-nfs-vvols-requirements.html[Review the deployment requirements]
 [role="quick-margin-para"]
@@ -24,7 +24,7 @@ Create an SVM with multiple LIFs for NFS traffic.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three]link:vmw-vcf-viwld-supp-nfs-vvols-network.html[Configure networking]
 [role="quick-margin-para"]
-Set up networking for NFS on ESXi hosts.
+Set up networking for NFS on vSphere hosts.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png[Four]link:vmw-vcf-viwld-supp-nfs-vvols-storage.html[Configure storage]
 [role="quick-margin-para"]

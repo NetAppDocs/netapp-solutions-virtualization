@@ -2,10 +2,10 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-viwld-supp-nfs-vvols-network.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc
-summary: "Configure NFS networking on ESXi hosts in VMware Cloud Foundation management domains to enable connectivity to ONTAP storage systems. You'll create distributed port groups with VLAN separation, configure uplink teaming for redundancy, and set up VMkernel adapters on each ESXi host to establish dedicated NFS paths for failover capabilities."
+summary: "Configure NFS networking on vSphere hosts in VMware Cloud Foundation workload domains to enable connectivity to ONTAP storage systems. You'll create distributed port groups with VLAN separation, configure uplink teaming for redundancy, and set up VMkernel adapters on each vSphere host to establish dedicated NFS paths for failover capabilities."
 ---
 
-= Configure networking for NFS on ESXi hosts in a VCF VI workload domain
+== Configure networking for NFS on vSphere hosts in a VCF workload domain
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -13,9 +13,9 @@ summary: "Configure NFS networking on ESXi hosts in VMware Cloud Foundation mana
 :imagesdir: ../media/
 
 [.lead]
-Configure NFS networking on ESXi hosts in VMware Cloud Foundation management domains to enable connectivity to ONTAP storage systems. You'll create distributed port groups with VLAN separation, configure uplink teaming for redundancy, and set up VMkernel adapters on each ESXi host to establish dedicated NFS paths for failover capabilities.
+Configure NFS networking on vSphere hosts in VMware Cloud Foundation workload domains to enable connectivity to ONTAP storage systems. You'll create distributed port groups with VLAN separation, configure uplink teaming for redundancy, and set up VMkernel adapters on each vSphere host to establish dedicated NFS paths for failover capabilities.
 
-Perform the following steps on the VI Workload Domain cluster using the vSphere client. In this case vCenter Single Sign-On is being used so the vSphere client is common across the management and workload domains.
+Perform the following steps on the workload domain cluster using the vSphere client. In this case vCenter Single Sign-On is being used so the vSphere client is common across the management and workload domains.
 
 == Step 1: Create a distributed port group for NFS traffic
 Complete the following steps to create a new distributed port group for the network to carry NFS traffic.
@@ -58,14 +58,14 @@ image:vmware-vcf-aff-037.png[DPG - edit settings]
 image:vmware-vcf-aff-038.png[DPG - team uplinks]
 ====
 +
-. Repeat this process for each ESXi host in the cluster.
+. Repeat this process for each vSphere host in the cluster.
 
-== Step 2: Create a VMkernel adapter on each ESXi host
-Create a VMkernel adapter on each ESXi host in the workload domain.
+== Step 2: Create a VMkernel adapter on each vSphere host
+Create a VMkernel adapter on each vSphere host in the workload domain.
 
 .Steps
 
-. From the vSphere client navigate to one of the ESXi hosts in the workload domain inventory. From the *Configure* tab select *VMkernel adapters* and click *Add Networking...* to start.
+. From the vSphere client navigate to one of the vSphere hosts in the workload domain inventory. From the *Configure* tab select *VMkernel adapters* and click *Add Networking...* to start.
 +
 .Show example
 [%collapsible]
@@ -108,4 +108,4 @@ image:vmware-vcf-aff-041.png[Review VMkernel selections]
 ====
 
 == What's next?
-After you configure networking for NFS on all ESXi hosts in the workload domain, link:vmw-vcf-viwld-supp-nfs-vvols-storage.html[configure storage for NFS vVols].
+After you configure networking for NFS on all vSphere hosts in the workload domain, link:vmw-vcf-viwld-supp-nfs-vvols-storage.html[configure storage for NFS vVols].

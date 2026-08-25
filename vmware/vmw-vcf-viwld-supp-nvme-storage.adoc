@@ -4,7 +4,7 @@ permalink: vmware/vmw-vcf-viwld-supp-nvme-storage.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi
 summary: "Configure NVMe over TCP (NVMe/TCP) datastore in a VMware Cloud Foundation workload domain. You'll deploy ONTAP tools, register a storage system, create a storage capability profile, and provision a NVMe/TCP datastore in the vSphere client."
 ---
-= Configure NVMe/TCP datastore in a VCF workload domain
+== Configure NVMe/TCP datastore in a VCF workload domain
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -54,7 +54,7 @@ image:vmware-vcf-asa-106.png[NVMe partition configuration]
 image:vmware-vcf-asa-107.png[Hosts connected to datastore]
 ====
 
-== Additional information
+=== Additional information
 
 * For more information on configuring SAN for redundancy, refer to the link:https://docs.netapp.com/us-en/ontap/san-config/index.html[NetApp SAN configuration reference^]. 
 

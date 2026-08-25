@@ -5,7 +5,7 @@ keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, array, on
 summary:
 ---
 
-= Configure a stretch cluster for a VI workload domain using MetroCluster
+== Configure a stretch cluster for a VCF workload domain using MetroCluster
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -13,15 +13,15 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-In this use case we outline the procedure to configure a stretch cluster for the VMware Cloud Foundation (VCF) management domain using ONTAP MetroCluster with FC or iSCSI or NVMe-oF or NFSv3 or NFSv4.1 as the primary datastore. VCF provides flexibility on deployment options based on your needs. VCF Ops tool is used to either deploy a new VCF workload domain or import an existing vSphere environment to a VCF workload domain. In this document, we will focus on MetroCluster portion and point to other documentation based on the deployment steps.
+In this use case we outline the procedure to configure a stretch cluster for the VMware Cloud Foundation (VCF) workload domain using ONTAP MetroCluster with FC or iSCSI or NVMe-oF or NFSv3 or NFSv4.1 as the primary datastore. VCF provides flexibility on deployment options based on your needs. VCF Ops tool is used to either deploy a new VCF workload domain or import an existing vSphere environment to a VCF workload domain. In this document, we will focus on MetroCluster portion and point to other documentation based on the deployment steps.
 
-image:vmw-vcf-vmsc-viwld-mcc-001.png[VCF VI Workload Domain with vMSC,width=500]
+image:vmw-vcf-vmsc-viwld-mcc-001.png[VCF Workload Domain with vMSC,width=500]
 
-== Introduction
+=== Introduction
 
 In this solution we will demonstrate how to implement Stretched VCF Workload Domain with ONTAP MetroCluster as Principal Datastore. MetroCluster allows to deploy high availablility solution for all workloads running on the ONTAP cluster. If need to deploy high availability solution specific to workloads, consider using SnapMirror active sync (SAN and NAS). SnapMirror active sync (SAN) works at consistency group level while SnapMirror active sync (NAS) works at SVM level. For more information, refer to link:vmw-vcf-vmsc-viwld-smas.html[Configure a stretch cluster for a VCF workload domain using SnapMirror Active Sync (SAN and NAS)].
 
-== Prerequisites
+=== Prerequisites
 
 This scenario requires the following components and configurations:
 
@@ -30,7 +30,7 @@ This scenario requires the following components and configurations:
 * Logical interface (LIF) has been created to carry storage traffic and is associated with the SVM.
 
 
-== High-Level Overview
+=== High-Level Overview
 
 MetroCluster provides a high availability solution for workloads handled at aggregate level. SVM will be active on one of the fault domains in MetroCluster. 
 
@@ -57,19 +57,19 @@ For information on configuring ONTAP storage systems refer to the link:https://d
 
 For information on configuring VCF, refer to the link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1.html[VMware Cloud Foundation 9.1 documentation].
 
-== Deployment Steps for Greenfield VCF Workload Domain with MetroCluster
+=== Deployment Steps for Greenfield VCF Workload Domain with MetroCluster
 
 For Greenfield deployment (new deployment without any existing VCF components), VCF Ops tool is used to deploy the workload domain. VMFS on FC and NFSv3 are supported in this scenario.
 
 In case of VMFS on FC, refer link:vmw-vcf-viwld-principal-fc.html[VCF workload domain with FC-based VMFS datastore on ONTAP as principal storage] for more information. For NFSv3, refer link:vmw-vcf-viwld-principal-nfs.html[VCF workload domain with NFSv3 datastore on ONTAP as principal storage] for more information.
 
-== Deployment Steps for Brownfield VCF Workload Domain with MetroCluster
+=== Deployment Steps for Brownfield VCF Workload Domain with MetroCluster
 
 A brownfield deployment is a scenario where you have an existing vSphere environment and you want to import it as a VCF workload domain.
 
 For iSCSI, NVMe-oF, and NFSv4.1, it needs to be setup with vCenter (preferably with ONTAP tools) and later use VCF Ops tool to import it as a workload domain. For more info, refer link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1/building-your-private-cloud-infrastructure/working-with-workload-domains/import-an-existing-vcenter-to-create-a-workload-domain.html[Import an existing vCenter to create a Workload Domain].
 
-== Supplemental Datastores with MetroCluster
+=== Supplemental Datastores with MetroCluster
 
 When using ONTAP tools, register both the ONTAP clusters. Refer link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere/concepts/reference_metrocluster_configurations_supported_by_ontap_tools_for_vmware_vsphere.html#metrocluster-configurations-and-ontap-tools[MetroCluster configurations supported by ONTAP Tools for VMware vSphere] for more information.
 

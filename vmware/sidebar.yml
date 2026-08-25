@@ -66,9 +66,9 @@ entries:
             url: /vmware/vmw-vcf-mgmt-principal-fc.html
           - title: "Provision management domains with NFS"
             url: /vmware/vmw-vcf-mgmt-principal-nfs.html
-          - title: "Provision VI workload domains with FC"
+          - title: "Provision workload domains with FC"
             url: /vmware/vmw-vcf-viwld-principal-fc.html     
-          - title: "Provision VI workload domains with NFS"
+          - title: "Provision workload domains with NFS"
             url: /vmware/vmw-vcf-viwld-principal-nfs.html      
 #
       - title: "Expand VCF with supplemental storage"
@@ -89,7 +89,7 @@ entries:
               url: /vmware/vmw-vcf-mgmt-supplemental-iscsi-storage.html
           - title: "Expand management domains with FC"
             url: /vmware/vmw-vcf-mgmt-supplemental-fc.html
-          - title: "Expand VI workload domains with vVols iSCSI"
+          - title: "Expand workload domains with vVols iSCSI"
             entries:
             - title: Deployment workflow
               url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols.html
@@ -125,7 +125,7 @@ entries:
               url: /vmware/vmw-vcf-viwld-supp-nvme-network.html
             - title: Configure storage 
               url: /vmware/vmw-vcf-viwld-supp-nvme-storage.html
-          - title: "Expand VI workload domains with FC"
+          - title: "Expand workload domains with FC"
             url: /vmware/vmw-vcf-viwld-supp-fc.html
 #      
       - title: "Protect VCF with SnapCenter"      
@@ -145,11 +145,11 @@ entries:
             url: /vmware/vmw-vcf-protect-vmsc.html
           - title: "Configure management domains with MetroCluster"
             url: /vmware/vmw-vcf-vmsc-mgmt-mcc.html
-          - title: "Configure VI workload domains with MetroCluster"
+          - title: "Configure workload domains with MetroCluster"
             url: /vmware/vmw-vcf-vmsc-viwld-mcc.html
           - title: "Configure management domains with SnapMirror Active Sync (SAN and NAS)"
             url: /vmware/vmw-vcf-vmsc-mgmt-smas.html
-          - title: "Configure VI workload domains with SnapMirror Active Sync (SAN and NAS)"
+          - title: "Configure workload domains with SnapMirror Active Sync (SAN and NAS)"
             url: /vmware/vmw-vcf-vmsc-viwld-smas.html
 
       - title: "Migrate VMs from vSphere"

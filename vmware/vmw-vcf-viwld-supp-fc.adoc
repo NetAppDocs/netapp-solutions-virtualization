@@ -29,10 +29,10 @@ Make sure the following components and configurations are in place.
 ====
 
 .Steps
-. Register the VI workload vCenter by following the instructions in the ONTAP tools for VMware vSphere documentation: 
-link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-vcenter.html[Register VI workload vCenter].
+. Register the workload domain vCenter by following the instructions in the ONTAP tools for VMware vSphere documentation: 
+link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-vcenter.html[Register workload vCenter].
 +
-Registering the VI workload vCenter enables the vCenter plugin.
+Registering the workload domain vCenter server enables the vCenter plugin.
 
 . Add a storage backend using the vSphere client interface by following the instructions in the ONTAP tools for VMware vSphere documentation: link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-storage-backend.html[Define Storage backend using vSphere client interface].
 +

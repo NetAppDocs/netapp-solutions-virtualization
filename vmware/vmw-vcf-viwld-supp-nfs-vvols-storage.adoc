@@ -2,10 +2,10 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-viwld-supp-nfs-vvols-storage.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc
-summary: "Configure NFS vVols storage in a VI workload domain. After you deploy ONTAP tools for VMware vSphere, you'll use the vSphere client interface to add the storage system, create a storage capability profile, and provision a vVols datastore."
+summary: "Configure NFS vVols storage in a workload domain. After you deploy ONTAP tools for VMware vSphere, you'll use the vSphere client interface to add the storage system, create a storage capability profile, and provision a vVols datastore."
 ---
 
-= Configure NFS vVols storage in a VCF VI workload domain using ONTAP tools
+== Configure NFS vVols storage in a VCF workload domain using ONTAP tools
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -13,17 +13,17 @@ summary: "Configure NFS vVols storage in a VI workload domain. After you deploy 
 :imagesdir: ../media/
 
 [.lead]
-Configure NFS vVols storage in a VI workload domain. After you deploy ONTAP tools for VMware vSphere, you'll use the vSphere client interface to add the storage system, create a storage capability profile, and provision a vVols datastore.
+Configure NFS vVols storage in a workload domain. After you deploy ONTAP tools for VMware vSphere, you'll use the vSphere client interface to add the storage system, create a storage capability profile, and provision a vVols datastore.
 
-== Step 1: Deploy ONTAP tools for VMware vSphere
-For VI workload domains, ONTAP tools is installed to the VCF Management Cluster but registered with the vCenter associated with the VI workload domain. 
+=== Step 1: Deploy ONTAP tools for VMware vSphere
+For workload domains, ONTAP tools is installed to the VCF Management Cluster but registered with the vCenter associated with the workload domain. 
 
 ONTAP tools for VMware vSphere is deployed as a VM appliance and provides an integrated vCenter UI for managing ONTAP storage. 
 
 .Steps
 include::../_include/deploy-ontap-tools.adoc[] 
 
-== Step 2: Add a storage system
+=== Step 2: Add a storage system
 Perform the following steps to add a storage system using ONTAP tools.
 
 NOTE: vVol requires ONTAP cluster credentials rather than SVM credentials. For more information, refer to the ONTAP tools for VMware vSphere documentation: https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere/configure/task_add_storage_systems.html[Add storage systems^].
@@ -31,7 +31,7 @@ NOTE: vVol requires ONTAP cluster credentials rather than SVM credentials. For m
 .Steps
 include::../_include/add-storage-ontap-tools.adoc[]
 
-== Step 3: Create an NFS datastore in ONTAP tools
+=== Step 3: Create an NFS datastore in ONTAP tools
 Complete the following steps to deploy an ONTAP datastore running on NFS. Use ONTAP tools.
 
 .Steps
@@ -84,7 +84,7 @@ image:vmware-vcf-aff-044.png[Storage attributes]
 image:vmware-vcf-aff-045.png[Review summary and finish]
 ====
 
-== Step 4: Create a vVols datastore in ONTAP tools
+=== Step 4: Create a vVols datastore in ONTAP tools
 To create a vVols datastore in ONTAP tools, complete the following steps.
 
 .Steps
@@ -142,7 +142,7 @@ image:vmware-vcf-aff-048.png[Storage attributes - Next]
 image:vmware-vcf-aff-049.png[Summary page]
 ====
 
-== Additional information
+=== Additional information
 * For information on configuring ONTAP storage systems, refer to the link:https://docs.netapp.com/us-en/ontap[ONTAP 9 documentation^].
 
 * For information on configuring VCF, refer to the link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf.html[VMware Cloud Foundation documentation^].

@@ -12,7 +12,7 @@ summary: Converging a vSphere environment with existing Fibre Channel or NFS dat
 :imagesdir: ../media/
 
 [.lead]
-Any supported vSphere environment can be made as part of a VCF private cloud environment. It can be converged to a VCF management domain or imported as a VI workload domain. This solution demonstrates how existing VMFS or NFS datastores in vSphere become principal storage when the cluster is converted to a VCF management domain.
+Any supported vSphere environment can be made as part of a VCF private cloud environment. It can be converged to a VCF management domain or imported as a workload domain. This solution demonstrates how existing VMFS or NFS datastores in vSphere become principal storage when the cluster is converted to a VCF management domain.
 
 == Solution overview
 This solution demonstrates how existing VMFS or NFS datastores in vSphere become principal storage when the cluster is converged to a VCF management domain.
