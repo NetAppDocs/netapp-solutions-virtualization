@@ -49,7 +49,7 @@ image:vmw-vcf-vmsc-mgmt-mcc-016.png[SVM on Fault Domain 1]
 
 image:vmw-vcf-vmsc-mgmt-mcc-017.png[SVM on Fault Domain 2]
 
-Refer https://knowledge.broadcom.com/external/article/312183/vmware-vsphere-support-with-netapp-metro.html[vMSC with MetroCluster].
+Refer https://support.broadcom.com/web/ecx/search?searchString=vMSC%20with%20MetroCluster[vMSC with MetroCluster].
 
 For an overview of the convergence process, refer to the VMware documentation: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1/deployment/converging-your-existing-vsphere-infrastructure-to-a-vcf-or-vvf-platform-.html[Converging Existing Virtual Infrastructure to a VCF].
 

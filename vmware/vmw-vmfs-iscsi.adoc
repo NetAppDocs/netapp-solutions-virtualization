@@ -91,7 +91,7 @@ TIP: Two iSCSI network interfaces per node are recommended.
 
 . link:++https://techdocs.broadcom.com/us/en/vmware-cis/vsan/vsan/8-0/vsan-network-design/ip-network-transport-configuration/vsphere-tcp-ip-stacks.html++[Verify that the TCPIP stack for iSCSI is available].
 
-. link:++https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/assign-a-port-group-or-network-to-a-network-protocol-profile.html++[Verify that iSCSI portgroups are available].
+. link:++https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-networking/basic-networking-with-vnetwork-distributed-switches/dvport-groups.html++[Verify that iSCSI portgroups are available].
 ** We typically use a single virtual switch with multiple uplink ports.
 ** Use 1:1 adapter mapping.
 

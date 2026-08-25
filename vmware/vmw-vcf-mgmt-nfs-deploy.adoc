@@ -135,4 +135,4 @@ image::vmw-vcf-mgmt-nfs-deploy-009.png[Summary page]
 ====
 
 == What's next?
-After you've deployed ONTAP tools and provisioned the NFS datastore, link:vmw-vcf-mgmt-nfs-conversion.html[convert the vSphere cluster to VCF management domain].
+After you've deployed ONTAP tools and provisioned the NFS datastore, link:vmw-vcf-mgmt-nfs-converge.html[convert the vSphere cluster to VCF management domain].
