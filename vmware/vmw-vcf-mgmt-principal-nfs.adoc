@@ -33,8 +33,12 @@ The following components and configurations are used in this scenario:
 
 * NetApp storage system with a storage virtual machine (SVM) configured to allow NFS traffic.
 * Logical interface (LIF) has been created on the IP network that is to carry NFS traffic and is associated with the SVM.
-* A vSphere cluster with at least 2 x ESXi hosts.
-* NFS datastore mounted on one of the vSphere hosts with same NFS server and export path that will be used for the management domain. Better to have the NFS subnet accessible on management VLAN during the deployment of management domain.
+* A vSphere cluster with at least 2 x vSphere hosts.
+* NFS datastore mounted on one of the vSphere hosts with same NFS server and export path that will be used for the management domain. 
+
+[NOTE]
+When deploying a VCF Domain, VCF validates connectivity to the NFS Server. This is done using the management adapter on the vSphere hosts before any additional vmkernel adapter is added with the NFS IP address. Therefore, it is necessary to ensure that either 1) the management network is routable to the NFS Server, or 2) a LIF for the management network has been added to the SVM hosting the NFS datastore volume, to ensure that the validation can proceed.
+
 * Ensure ONTAP NFS VAAI tool is installed on one of the vSphere hosts which can be selected as template for the cluster image.
 * Deploy VCF Installer tool.
 

@@ -29,7 +29,7 @@ This scenario covers the following high level steps:
 
 * Create a storage virtual machine (SVM) with logical interface (LIFs) for NFS straffic
 * Verify networking for the ONTAP storage virtual machine (SVM) and that a logical interface (LIF) is present to carry NFS traffic.
-* Create an export policy to allow the ESXi hosts access to the NFS volume.
+* Create an export policy to allow the vSphere hosts access to the NFS volume.
 * Create an NFS volume on the ONTAP storage system.
 * Create a Network Pool for NFS and vMotion traffic in SDDC Manager.
 * Commission hosts in vCenter for use in a VCF Workload Domain.
@@ -46,11 +46,11 @@ The following components and configurations are used in this scenario:
 * NetApp AFF, AFX, or FAS storage system with a storage virtual machine (SVM) configured to allow NFS traffic.
 * Logical interface (LIF) has been created on the IP network that is to carry NFS traffic and is associated with the SVM.
 * VCF management domain deployment is complete and the VCF Operations Manager interface is accessible.
-* At least 2 x ESXi hosts configured for communication on the VCF management network.
+* At least 2 x vSphere hosts configured for communication on the VCF management network.
 * IP addresses reserved for vMotion and NFS storage traffic on the VLAN or network segment established for this purpose.
 
 [NOTE]
-When deploying a VCF Workload Domain, VCF validates connectivity to the NFS Server. This is done using the management adapter on the ESXi hosts before any additional vmkernel adapter is added with the NFS IP address. Therefore, it is necessary to ensure that either 1) the management network is routable to the NFS Server, or 2) a LIF for the management network has been added to the SVM hosting the NFS datastore volume, to ensure that the validation can proceed.
+When deploying a VCF Workload Domain, VCF validates connectivity to the NFS Server. This is done using the management adapter on the vSphere hosts before any additional vmkernel adapter is added with the NFS IP address. Therefore, it is necessary to ensure that either 1) the management network is routable to the NFS Server, or 2) a LIF for the management network has been added to the SVM hosting the NFS datastore volume, to ensure that the validation can proceed.
 
 For information on configuring ONTAP storage systems refer to the link:https://docs.netapp.com/us-en/ontap[ONTAP 9 Documentation] center.
 
@@ -71,22 +71,22 @@ To deploy a VCF Workload Domain with an NFSv3 datastore as principal storage, co
 ==== 
 Verify that the required logical interfaces have been established for the network that will carry NFS traffic between the ONTAP storage cluster and Workload Domain.
 
-. From ONTAP System Manager navigate to *Storage VMs* in the left-hand menu and click on the SVM to be used for NFS traffic. On the *Overview* tab, under *NETWORK IP INTERFACES*, click on the numeric to the right of *NFS*. In the list verify that the required LIF IP addresses are listed.
+. From ONTAP System Manager navigate to *Storage VMs* in the left-hand menu and click on the SVM to be used for NFS traffic. On the *Overview* tab, under *Network interfaces*, click on the numeric above the *NFS* label. In the list verify that the required LIF IP addresses are listed.
 +
-image:vmware-vcf-aff-003.png[Verify LIFs for SVM]
+image:vmw-vcf-viwld-principal-nfs-001.png[Verify NFS LIFs for SVM]
 
 Alternately, verify the LIFs associated with an SVM from the ONTAP CLI with the following command:
 
 [source, cli]
 network interface show -vserver <SVM_NAME>
 
-. Verify that the ESXi hosts can communicate to the ONTAP NFS Server. Log into the ESXi host via SSH and ping the SVM LIF:
+. Verify that the vSphere hosts can communicate to the ONTAP NFS Server. Log into the vSphere host via SSH and ping the SVM LIF:
 
 [source, cli]
 vmkping <IP Address>
 
 [NOTE]
-When deploying a Workload Domain, VCF validates connectivity to the NFS Server. This is done using the management adapter on the ESXi hosts before any additional vmkernel adapter is added with the NFS IP address. Therefore, it is necessary to ensure that either 1) the management network is routable to the NFS Server, or 2) a LIF for the management network has been added to the SVM hosting the NFS datastore volume, to ensure that the validation can proceed.
+When deploying a Workload Domain, VCF validates connectivity to the NFS Server. This is done using the management adapter on the vSphere hosts before any additional vmkernel adapter is added with the NFS IP address. Therefore, it is necessary to ensure that either 1) the management network is routable to the NFS Server, or 2) a LIF for the management network has been added to the SVM hosting the NFS datastore volume, to ensure that the validation can proceed.
 ====
 
 .Create Export Policy for sharing NFS volume
@@ -98,20 +98,20 @@ Create an export policy in ONTAP System Manager to define access control for NFS
 
 . On the *Settings* tab locate *Export Policies* and click on the arrow to access.
 +
-image:vmware-vcf-aff-006.png[Access Export Policies]
+image:vmw-vcf-viwld-principal-nfs-002.png[Access Export Policies]
 +
 {nbsp}
-. In the *New export policy* window add a name for the policy, click on the *Add new rules* button and then on the *+Add* button to begin adding a new rule.
+. After you click on Add, *New export policy* window will open. Add a name for the policy, click on the *Add new rules* button and then on the *+Add* button to begin adding a new rule.
 +
-image:vmware-vcf-aff-007.png[New export policy]
+image:vmw-vcf-viwld-principal-nfs-003.png[New export policy]
 +
 {nbsp}
-. Fill in the IP Addresses, IP address range, or network that you wish to include in the rule. Uncheck the *SMB/Cifs* and *FlexCache* boxes and make selections for the access details below. Selecting the UNIX boxes is sufficient for ESXi host access.
+. Fill in the IP Addresses, IP address range, or network that you wish to include in the rule. Uncheck the *SMB/CIFS* and *FlexCache* boxes and make selections for the access details below. Selecting the UNIX boxes is sufficient for vSphere host access.
 +
-image:vmware-vcf-aff-008.png[Save new rule]
+image:vmw-vcf-viwld-principal-nfs-004.png[Save new rule]
 +
 [NOTE]
-When deploying a Workload Domain, VCF validates connectivity to the NFS Server. This is done using the management adapter on the ESXi hosts before any additional vmkernel adapter is added with the NFS IP address. Therefore, it is necessary to ensure that the export policy includes the VCF management network in order to allow the validation to proceed.
+When deploying a Workload Domain, VCF validates connectivity to the NFS Server. This is done using the management adapter on the vSphere hosts before any additional vmkernel adapter is added with the NFS IP address. Therefore, it is necessary to ensure that the export policy includes the VCF management network in order to allow the validation to proceed.
 
 . Once all rules have been entered click on the *Save* button to save the new Export Policy.
 
@@ -127,22 +127,22 @@ Create an NFS volume on the ONTAP storage system to be used as a datastore in th
 
 . From ONTAP System Manager navigate to *Storage > Volumes*  in the left-hand menu and click on *+Add* to create a new volume.
 +
-image:vmware-vcf-aff-009.png[Add new volume]
+image:vmw-vcf-viwld-principal-nfs-005.png[Add new volume]
 +
 {nbsp}
 . Add a name for the volume, fill out the desired capacity and selection the storage VM that will host the volume. Click on *More Options*  to continue.
 +
-image:vmware-vcf-aff-010.png[Add volume details]
+image:vmw-vcf-viwld-principal-nfs-006.png[Add volume details]
 +
 {nbsp}
 . Under Access Permissions, select the Export Policy which includes the VCF management network or IP address and NFS network IP addresses that will be used for both validation of the NFS Server and NFS traffic.
 +
-image:vmware-vcf-aff-011.png[Add volume details]
+image:vmw-vcf-viwld-principal-nfs-007.png[Add volume details]
 +
 +
 {nbsp}
 [NOTE]
-When deploying a VCF Workload Domain, VCF validates connectivity to the NFS Server. This is done using the management adapter on the ESXi hosts before any additional vmkernel adapter is added with the NFS IP address. Therefore, it is necessary to ensure that either 1) the management network is routable to the NFS Server, or 2) a LIF for the management network has been added to the SVM hosting the NFS datastore volume, to ensure that the validation can proceed.
+When deploying a VCF Workload Domain, VCF validates connectivity to the NFS Server. This is done using the management adapter on the vSphere hosts before any additional vmkernel adapter is added with the NFS IP address. Therefore, it is necessary to ensure that either 1) the management network is routable to the NFS Server, or 2) a LIF for the management network has been added to the SVM hosting the NFS datastore volume, to ensure that the validation can proceed.
 
 . Alternately, NFS volumes can be created in the ONTAP CLI. For more information refer to the link:https://docs.netapp.com/us-en/ontap-cli/volume-create.html[nfs volume create] command in the ONTAP commands documentation.
 ====

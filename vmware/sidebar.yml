@@ -89,7 +89,7 @@ entries:
               url: /vmware/vmw-vcf-mgmt-supplemental-iscsi-storage.html
           - title: "Expand management domains with FC"
             url: /vmware/vmw-vcf-mgmt-supplemental-fc.html
-          - title: "Expand workload domains with vVols iSCSI"
+          - title: "Expand VCF workload domains with vVols iSCSI"
             entries:
             - title: Deployment workflow
               url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols.html
@@ -101,7 +101,7 @@ entries:
               url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols-network.html
             - title: Configure storage
               url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols-storage.html
-          - title: "Expand VI workload domains with vVols NFS"
+          - title: "Expand VCF workload domains with vVols NFS"
             entries:
             - title: Deployment workflow
               url: /vmware/vmw-vcf-viwld-supp-nfs-vvols.html
@@ -113,7 +113,7 @@ entries:
               url: /vmware/vmw-vcf-viwld-supp-nfs-vvols-network.html
             - title: Configure storage
               url: /vmware/vmw-vcf-viwld-supp-nfs-vvols-storage.html
-          - title: "Expand VI workload domains with NVMe/TCP"
+          - title: "Expand VCF workload domains with NVMe/TCP"
             entries:
             - title: Deployment workflow
               url: /vmware/vmw-vcf-viwld-supp-nvme.html
@@ -125,7 +125,7 @@ entries:
               url: /vmware/vmw-vcf-viwld-supp-nvme-network.html
             - title: Configure storage 
               url: /vmware/vmw-vcf-viwld-supp-nvme-storage.html
-          - title: "Expand workload domains with FC"
+          - title: "Expand VCF workload domains with FC"
             url: /vmware/vmw-vcf-viwld-supp-fc.html
 #      
       - title: "Protect VCF with SnapCenter"      
