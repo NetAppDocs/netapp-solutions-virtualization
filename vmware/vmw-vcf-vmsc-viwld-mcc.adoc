@@ -5,7 +5,7 @@ keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, array, on
 summary:
 ---
 
-== Configure a stretch cluster for a VCF workload domain using MetroCluster
+= Configure a stretch cluster for a VCF workload domain using MetroCluster
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -74,13 +74,13 @@ For iSCSI, NVMe-oF, and NFSv4.1, it needs to be setup with vCenter (preferably w
 When using ONTAP tools, register both the ONTAP clusters. Refer link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere/concepts/reference_metrocluster_configurations_supported_by_ontap_tools_for_vmware_vsphere.html#metrocluster-configurations-and-ontap-tools[MetroCluster configurations supported by ONTAP Tools for VMware vSphere] for more information.
 
 
-* link:vmw-vcf-viwld-vmsc-smas.html[Use ONTAP tools to deploy supplemental iSCSI datastores in a VI workload domain]
+* link:vmw-vcf-vmsc-viwld-smas.html[Use ONTAP tools to deploy supplemental iSCSI datastores in a VI workload domain]
 
 * link:vmw-vcf-viwld-supp-iscsi-vvols.html[Use ONTAP Tools to deploy vVols (iSCSI) datastores in a VI workload domain - Deprecated Option]
 
 * link:vmw-vcf-viwld-supp-nvme.html[Configure NVMe-oF datastores for use in a VI workload domain]
 
-* link:vmw-vcf-viwld-vmsc-smas.html[Use ONTAP tools to deploy NFSv3/NFSv4.1 datastores in a VI workload domain]
+* link:vmw-vcf-vmsc-viwld-smas.html[Use ONTAP tools to deploy NFSv3/NFSv4.1 datastores in a VI workload domain]
 
 * link:vmw-vcf-viwld-supp-nfs-vvols.html[Use ONTAP tools to deploy vVols (NFS) datastores in a VI workload domain - Deprecated Option]
 

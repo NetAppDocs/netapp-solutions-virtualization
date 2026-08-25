@@ -5,7 +5,7 @@ keywords: netapp, vmware, cloud, foundation, vcf, asa, all-flash, array, ontap t
 summary:
 ---
 
-== Configure a stretch cluster for a VCF management domain using SnapMirror Active Sync (SAN and NAS)
+= Configure a stretch cluster for a VCF management domain using SnapMirror Active Sync (SAN and NAS)
 :hardbreaks:
 :nofooter:
 :icons: font

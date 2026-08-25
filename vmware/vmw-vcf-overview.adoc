@@ -5,7 +5,7 @@ keywords: netapp, vmware, cloud, foundation, vcf, flexpod
 summary:
 ---
 
-== Enhance private cloud experience with VMware Cloud Foundation and ONTAP
+= Enhance private cloud experience with VMware Cloud Foundation and ONTAP
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -25,7 +25,7 @@ NetApp ONTAP is a comprehensive data management software that delivers advanced 
 
 == Introduction to VMware Cloud Foundation
 
-VMware Cloud Foundation (VCF) enables organizations to create virtual private clouds where they can consume VMs, KKubernetes clusters, Containers, networks, and storage as a service whether it is for AI workloads, DevOps, or traditional VM-based workloads. 
+VMware Cloud Foundation (VCF) enables organizations to create virtual private clouds where they can consume VMs, Kubernetes clusters, Containers, networks, and storage as a service whether it is for AI workloads, DevOps, or traditional VM-based workloads. 
 
 VCF is deployed to greenfield environments or to expand an existing vSphere environment to a full private cloud. A set of compute hosts form a vSphere cluster, a group of vSphere clusters form a VCF domain, and a group of VCF domains form a VCF instance. A fleet consists of one or more VCF instances. VCF private cloud environments are created using one or more fleets. Operation and Automation is handled at a fleet level, while the VCF instance is the unit of deployment. 
 
@@ -49,7 +49,7 @@ Namespaces are created with a dedicated VPC or shared VPC. A dedicated VPC is a 
 | vSphere Zone | vSphere cluster(s) | A zone is a collection of vSphere clusters that can be used to provide high availability and disaster recovery capabilities for workloads running in the zone.
 | VCF Automation Region | vSphere zone(s) | A region is a collection of vSphere zones from one or more VCF domains which shares the same NSX infrastructure.
 | VCF Automation Organization | VCF Automation Project(s) | An organization maps to a NSX project.
-| VCF Automation Project | vSphere namespace(s) | A project maps to NSX transist gateway and external connection.
+| VCF Automation Project | vSphere namespace(s) | A project maps to NSX transit gateway and external connection.
 | VCF Automation Namespace | vSphere Zone(s) |  Each namespace maps to a virtual private cloud (VPC) and can be used to provide isolation and resource allocation for workloads running in the namespace.
 | Virtual Private Cloud (VPC) | Subnet(s) | A VPC is a virtual network that can be used to provide isolation and resource allocation for workloads running in the VPC. A VPC can be dedicated to a single namespace or shared by multiple namespaces.
 |===

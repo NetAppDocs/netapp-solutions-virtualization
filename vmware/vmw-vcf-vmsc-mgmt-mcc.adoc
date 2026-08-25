@@ -5,7 +5,7 @@ keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, array, on
 summary:
 ---
 
-== Configure a stretch cluster for a VCF management domain using MetroCluster
+= Configure a stretch cluster for a VCF management domain using MetroCluster
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -19,7 +19,7 @@ image:vmw-vcf-vmsc-mgmt-mcc-001.png[VCF Management Domain with vMSC,width=500]
 
 === Introduction
 
-In this solution we will demonstrate how to implement Stretched VCF Management Domain with ONTAP MetroCluster as Principal Datastore. MetroCluster allows to deploy high availablility solution for all workloads running on the ONTAP cluster. If need to deploy high availability solution specific to workloads, consider using SnapMirror active sync (SAN and NAS). SnapMirror active sync (SAN) works at consistency group level while SnapMirror active sync (NAS) works at SVM level. For more information, refer to link:vmw-vcf-vmsc-mgmt-smas.html[Configure a stretch cluster for a VCF management domain using SnapMirror Active Sync (SAN and NAS)].
+In this solution we will demonstrate how to implement Stretched VCF Management Domain with ONTAP MetroCluster as Principal Datastore. MetroCluster allows to deploy high availability solution for all workloads running on the ONTAP cluster. If need to deploy high availability solution specific to workloads, consider using SnapMirror active sync (SAN and NAS). SnapMirror active sync (SAN) works at consistency group level while SnapMirror active sync (NAS) works at SVM level. For more information, refer to link:vmw-vcf-vmsc-mgmt-smas.html[Configure a stretch cluster for a VCF management domain using SnapMirror Active Sync (SAN and NAS)].
 
 === Prerequisites
 
@@ -81,7 +81,6 @@ When using ONTAP tools, register both the ONTAP clusters. Refer link:https://doc
 * link:vmw-vcf-viwld-supp-nvme.html[Configure NVMe-oF datastores for use in a VCF management domain]
 
 * link:vmw-vcf-mgmt-nfs.html[Use ONTAP tools to deploy NFSv3/NFSv4.1 datastores in a VCF management domain]
-
 
 
 
