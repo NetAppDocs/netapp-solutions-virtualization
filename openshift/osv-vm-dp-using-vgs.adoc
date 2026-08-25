@@ -39,7 +39,7 @@ Install OpenShift 4.19 cluster with Kubernetes version 1.32. This version elevat
 
 .Steps
 
-. Install OpenShift Cluster version 4.19 by following the instructions in the Red Hat documentation: https://docs.openshift.com/container-platform/4.19/installing/index.html[Installing OpenShift Container Platform].
+. Install OpenShift Cluster version 4.19 by following the instructions in the Red Hat documentation: https://docs.redhat.com/en/documentation/openshift_container_platform/4.19#Install[Installing OpenShift Container Platform].
 
 . Verify the Kubernetes version in the OpenShift cluster.
 +

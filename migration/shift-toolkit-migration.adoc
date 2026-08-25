@@ -115,3 +115,48 @@ image::shift-toolkit-033.png["Disk conversion progress"]
 Once the job completes, the blueprint status changes to "Migration Complete".
 
 image::shift-toolkit-034.png["Migration completed status"]
+
+== Delete a blueprint
+
+A blueprint that has never been executed can be deleted directly from the UI. However, after a blueprint has been triggered, it creates job history records that must be removed before the blueprint itself can be deleted. Use the PowerShell removal script to clean up these job records, after which you can delete the blueprint and its associated resource group.
+
+.Steps
+. Download the removal script from the Shift Toolkit UI by navigating to *Settings > Developer Access > Script block*.
++
+image::shift-toolkit-082.png["Remove jobs based on blueprint name"]
++
+. Extract the zip folder. The package contains two files:
+** `removeBpJobs.json` - Configuration file
+** `removeBpJobs.ps1` - PowerShell script
++
+. Edit the `removeBpJobs.json` file to specify:
+** Execution name for this operation
+** Shift Toolkit IP address
+** Admin credentials
+** Blueprint name to remove
++
+Example configuration:
++
+[source,json]
+----
+"executions": [
+  {
+    "execution_name": "reslore",
+    "shift_server_ip": "https://10.63.184.75",
+    "shift_username": "admin",
+    "shift_password": "Admin",
+    "blueprint_details": [{"BPTHIMFAT": "True"}]
+  }
+]
+----
++
+. Open PowerShell and navigate to the folder containing the extracted files.
++
+. Run the script:
++
+----
+pwsh
+.\removeBpJobs.ps1
+----
+
+After the script completes successfully, you can delete the blueprint and its associated resource group from the Shift Toolkit UI.

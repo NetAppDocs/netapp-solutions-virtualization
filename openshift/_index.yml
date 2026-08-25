@@ -7,60 +7,72 @@ indexpage:
       links:
         - title: "About OpenShift Virtualization"
           url: osv-overview.html
-        - title: "Storage provisioning for OpenShift"
-          url: os-netapp-overview.html
-        - title: "NetApp Trident storage integration"
-          url: os-storint-overview.html
-        - title: "Best practices for deployment"
-          url: os-osv-bpg.html
+        - title: "OpenShift Virtualization Deployment models"
+          url: osv-deployment-models.html
         - title: "Blogs"
           url: ../blogs.html
         - title: "Videos"
           url: ../videos/openshift-videos.html  
 #
-    - title: "Deploy on premises"
+    - title: "Getting Started with Storage and Virtualization"
       links:
-        - title: "Deployment requirements"
-          url: osv-deployment-prerequisites.html
+        - title: "Getting Started with Storage"
+          url: osv-storage-getting-started.html
+        - title: "Storage Provisioning"
+          url: osv-trident-install.html
         - title: "Deploy Red Hat OpenShift Virtualization with ONTAP"
           url: osv-deployment.html
-        - title: "Create VMs"
-          url: osv-workflow-create-vm.html
-        - title: "Clone VMs"
-          url: osv-workflow-clone-vm.html
-        - title: "Create VMs from a snapshot"
-          url: osv-workflow-vm-from-snapshot.html
+        - title: "Deployment of VMs"
+          url: osv-vm-deployment.html
+        - title: "Other methods for Creating VMs"
+          url: osv-vm-deployment-other-methods.html
+        #- title: "Connect a VM to a Linux bridge network"
+        #  url: osv-connect-vm-to-bridge-network.html
+        - title: "Live migration of VMs between cluster nodes"
+          url: osv-vm-live-migration.html
+        - title: "Storage migration of VMs between storage classes"
+          url: osv-migration-vm-storage.html
+        #- title: "Multi Cluster Management using Red Hat Advanced Cluster Management for Kubernetes"
+        #  url: osv-multi-cluster-management.html
 #
-    - title: "Migrate virtual machines"
-      links:
-        - title: "Migrate VMs from VMware to an OpenShift cluster"
-          url: osv-workflow-vm-migration-mtv.html
-        - title: "Migrate VMs between two cluster nodes"
-          url: osv-workflow-vm-live-migration.html
+    #- title: "Migrate virtual machines"
+      #links:
+      # - title: "Migrate VMs from VMware to an OpenShift cluster"
+      #   url: osv-migration-vmware.html
+      # - title: "Migrate VMs with VDDK"
+      #   url: osv-migration-vddk.html
+      # - title: "Migrate VMs with storage offload"
+      #   url: osv-migration-storage-offload.html
+      # - title: "Migrate VMs with Shift toolkit"
+      #   url: osv-migration-shift-toolkit.html
+      # - title: "Migrate VMs with MTV and Shift toolkit"
+      #   url: osv-migration-mtv-shift-toolkit.html
+
 #
-    - title: "Protect VMs using Trident and Trident Protect"
+    - title: "Protect VMs with NetApp storage"
       links:
-        - title: "Install Trident"
-          url: osv-trident-install.html
+        - title: "Backup and restore using NetApp Console"
+          url: osv-data-protection-console-br.html
+        - title: "Backup and restore using Trident Protect"
+          url: osv-vm-dp-using-tp.html
         - title: "Protect VMs using Volume Group Snapshots"
           url: osv-vm-dp-using-vgs.html
-        - title: "Protect VMs with snapshots and backups"
-          url: osv-vm-dp-using-tp.html
-        - title: "Set up failover and failback"
-          url: osv-vm-dr-using-tp.html
+        - title: "Backup and restore using third party tools"
+          url: osv-data-protection-third-party-tools.html
 #
-    - title: "Protect VMs using third-party tools"
+    - title: "Disaster Recovery"
       links:
-        - title: "Protect VMs using OADP and Velero"
-          url: osv-vm-dp-using-velero-overview.html
-        - title: "Install OADP"
-          url: osv-oadp-installation.html
-        - title: "Backup VMs using Velero"
-          url: osv-vm-dp-using-velero.html
-        - title: "Restore VMs using Velero"
-          url: osv-vm-restore-using-velero.html
-        - title: "Delete backups and restores"
-          url: osv-vm-dp-delete-using-velero.html
+        - title: "Requirements and considerations for DR"
+          url: osv-disaster-recovery-requirements.html
+        - title: "Source cluster setup for DR"
+          url: osv-disaster-recovery-source-cluster-setup.html
+        - title: "Target cluster setup for DR"
+          url: osv-disaster-recovery-target-cluster-setup.html
+        - title: "Disaster Recovery - Manual DR"
+          url: osv-disaster-recovery-simulate-dr.html
+        - title: "Failback - Real-time DR"
+          url: osv-disaster-recovery-failback.html
+          
 #
     - title: "Monitor VMs with Data Infrastructure Insights"
       links:
@@ -78,7 +90,7 @@ indexpage:
         - title: "OpenShift Virtualization: Unleashing the power of virtual environments"
           url: https://www.redhat.com/en/blog/openshift-virtualization-unleashing-the-power-of-cloud-native-virtual-environments
         - title: "Red Hat OpenShift documentation"
-          url: https://docs.openshift.com/container-platform/4.15/virt/about_virt/about-virt.html
+          url: https://docs.openshift.com/container-platform/4.22
         - title: "Red Hat blogs"
           url: https://www.redhat.com/en/blog/products
 #

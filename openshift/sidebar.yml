@@ -2,83 +2,95 @@ section: osv
 title: "OpenShift virtualization"
 url: /openshift/index.html
 entries:
-  - title: "Get started"
+  - title: "Overview"
     pdf-filename: "Red Hat OpenShift Virtualization overview"
+    url: /openshift/osv-overview.html
+  - title: "Deployment models"
+    pdf-filename: "Red Hat OpenShift Virtualization Deployment Models"
+    url: /openshift/osv-deployment-models.html
+
+  - title: "Getting Started with Storage and Virtualization"
+    pdf-filename: "Red Hat OpenShift Storage and Virtualization"
     entries:
-      - title: "About OpenShift Virtualization"
-        url: /openshift/osv-overview.html
-      - title: "Storage provisioning for OpenShift"
-        url: /openshift/os-netapp-overview.html
-      - title: "NetApp Trident storage integration"
-        url: /openshift/os-storint-overview.html
-  
-  - title: "Best practices for deployment"
-    pdf-filename: "Best Practices for Red Hat OpenShift Virtualization on NetApp"
-    url: /openshift/os-osv-bpg.html
-#
-  - title: "Install Trident"
-    pdf-filename: "Install Trident"
-    url: /openshift/osv-trident-install.html
-    
-  - title: "Deploy on premises"
-    pdf-filename: "Deploy Red Hat OpenShift Virtualization on premises"
-    entries:
-      - title: "Deployment requirements"
-        url: /openshift/osv-deployment-prerequisites.html
-      - title: "Deploy OpenShift Virtualization"
+      - title: "Getting Started with Storage"
+        url: /openshift/osv-storage-getting-started.html
+      - title: "Storage Provisioning"
+        url: /openshift/osv-trident-install.html
+        #url: /openshift/osv-storage-provisioning.html
+      - title: "Deploy Red Hat OpenShift Virtualization with ONTAP"
         url: /openshift/osv-deployment.html
-      - title: "Create VMs"
-        url: /openshift/osv-workflow-create-vm.html
-      - title: "Migrate VMs from VMware"
-        url: /openshift/osv-workflow-vm-migration-mtv.html
-      - title: "Migrate VMs between two cluster nodes"
-        url: /openshift/osv-workflow-vm-live-migration.html
-      - title: "Clone VMs"
-        url: /openshift/osv-workflow-clone-vm.html
-      - title: "Create VMs from a snapshot"
-        url: /openshift/osv-workflow-vm-from-snapshot.html
-#
-  - title: "Deploy on ROSA with FSxN"
-    pdf-filename: "Deploy Red Hat OpenShift Virtuzluation on ROSA with Amazon FSx for ONTAP"
-    entries:
-      - title: "Deploy OpenShift on ROSA"
-        url: /openshift/osv-rosa-overview.html
-      - title: "Restart or live migrate VMs"
-        url: /openshift/osv-rosa-vm-workflows.html
-#
-  - title: "Protect VMs using Trident and Trident Protect"
-    entries:
-      - title: "Protect VMs using Volume Group Snapshots "
-        url: /openshift/osv-vm-dp-using-vgs.html
-      - title: "Protect VMs with snapshots and backups"
-        url: /openshift/osv-vm-dp-using-tp.html
-      - title: "Set up failover and failback"
-        url: /openshift/osv-vm-dr-using-tp.html
-#
-  - title: "Protect VMs using third-party tools"
+      - title: "Deployment of VMs"
+        url: /openshift/osv-vm-deployment.html
+      - title: "Other methods for Creating VMs"
+        url: /openshift/osv-vm-deployment-other-methods.html
+      #- title: "Connect a VM to a Linux bridge network"
+      #  url: /openshift/osv-connect-vm-to-bridge-network.html
+      - title: "Live migration of VMs between cluster nodes"
+        url: /openshift/osv-vm-live-migration.html
+      - title: "Storage migration of VMs between storage classes"
+        url: /openshift/osv-migration-vm-storage.html
+      #- title: "Multi Cluster Management using Red Hat Advanced Cluster Management for Kubernetes"
+      #  url: /openshift/osv-multi-cluster-management.html
+
+  #- title: "Migration"
+    #pdf-filename: "Red Hat OpenShift Virtualization Migration"
+    #entries:
+      #- title: "Migrate Virtual Machines from VMware into OpenShift Virtualization"
+      #  url: /openshift/osv-migration-vmware.html
+      #- title: "Migrate Virtual Machines with VDDK"
+      #  url: /openshift/osv-migration-vddk.html
+      #- title: "Migrate Virtual Machines with storage offload"
+      #  url: /openshift/osv-migration-storage-offload.html
+      #- title: "Migrate Virtual Machines with Shift toolkit"
+      #  url: /openshift/osv-migration-shift-toolkit.html
+      #- title: "Migrate Virtual Machines with MTV and Shift toolkit"
+      #  url: /openshift/osv-migration-mtv-shift-toolkit.html
+
+  - title: "Data Protection"
     pdf-filename: "Red Hat OpenShift Virtualization Data Protection"
     entries:
-      - title: "Protect VMs using OADP and Velero"
-        url: /openshift/osv-vm-dp-using-velero-overview.html
-      - title: "Install OADP"
-        url: /openshift/osv-oadp-installation.html
-      - title: "Backup VMs using Velero"
-        url: /openshift/osv-vm-dp-using-velero.html
-      - title: "Restore VMs using Velero"
-        url: /openshift/osv-vm-restore-using-velero.html
-      - title: "Delete backups and restores"
-        url: /openshift/osv-vm-dp-delete-using-velero.html
-#
-  - title: "Monitor VMs with DII"
-    pdf-filename: "Red Hat OpenShift Virtualization Monitoring"
+      - title: "Backup and restore using NetApp Console"
+        url: /openshift/osv-data-protection-console-br.html
+      - title: "Backup and restore using Trident Protect"
+        url: /openshift/osv-vm-dp-using-tp.html
+      - title: "Protect VMs using Volume Group Snapshots"
+        url: /openshift/osv-vm-dp-using-vgs.html
+      - title: "Backup and restore using third party tools"
+        url: /openshift/osv-data-protection-third-party-tools.html
+      
+
+  - title: "Disaster Recovery"
+    pdf-filename: "Red Hat OpenShift Virtualization Disaster Recovery"
     entries:
-      - title: "About DII"
+      - title: "Requirements"
+        url: /openshift/osv-disaster-recovery-requirements.html
+      - title: "Source Cluster Setup"
+        url: /openshift/osv-disaster-recovery-source-cluster-setup.html
+      - title: "Target Cluster Setup"
+        url: /openshift/osv-disaster-recovery-target-cluster-setup.html
+      - title: "Disaster Recovery - Manual DR"
+        url: /openshift/osv-disaster-recovery-simulate-dr.html
+      - title: "Failback - Real-time DR"
+        url: /openshift/osv-disaster-recovery-failback.html
+
+  - title: "Monitor VMs with Data Infrastructure Insights"
+    pdf-filename: "Red Hat OpenShift Virtualization Monitor VMs with Data Infrastructure Insights"
+    entries:
+      - title: "About Data Infrastructure Insights"
         url: /openshift/os-ci-overview.html
-      - title: "Configure D    II"
+      - title: "Configure Data Infrastructure Insights"
         url: /openshift/os-ci-integration.html
-      - title: "Monitor VMs using DII"
-        url: /openshift/os-ci-samples.html 
+      - title: "Monitor VMs using Data Infrastructure Insights"
+        url: /openshift/os-ci-samples.html
 #
-  - title: "Additional resources"
-    url: /openshift/os-additional-information.html
-#
+# Additional sections
+# Ransomware Resilience
+# ARP 
+# NAS
+# Solution Design:
+# Realtime deployment samples
+#Solution implementation and validation – use cases
+
+#--------------------------------
+
+
