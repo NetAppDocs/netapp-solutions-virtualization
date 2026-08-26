@@ -194,7 +194,7 @@ For detailed information on NetApp offerings for VMware Cloud Foundation, refer 
 
 * link:vmw-vcf-mgmt-supplemental-fc.html[Use ONTAP Tools to deploy supplemental FC datastores in a VCF management domain]
 
-* link:vmw-vcf-viwld-vmsc-smas.html[Use ONTAP tools to deploy supplemental iSCSI datastores in a workload domain]
+* link:vmw-vcf-vmsc-viwld-smas.html[Use ONTAP tools to deploy supplemental iSCSI datastores in a workload domain]
 
 * link:vmw-vcf-viwld-supp-iscsi-vvols.html[Use ONTAP Tools to deploy vVols (iSCSI) datastores in a workload domain]
 
@@ -217,7 +217,7 @@ Links for the ASA are mostly applicable to AFF arrays, but the following links a
 
 * link:vmw-vcf-viwld-principal-nfs.html[Use ONTAP with NFS as principal storage for workload domains]
 
-* link:vmw-vcf-viwld-vmsc-smas.html[Use ONTAP tools to deploy NFSv3/NFSv4.1 datastores in a workload domain]
+* link:vmw-vcf-vmsc-viwld-smas.html[Use ONTAP tools to deploy NFSv3/NFSv4.1 datastores in a workload domain]
 
 * link:vmw-vcf-viwld-supp-nfs-vvols.html[Use ONTAP tools to deploy vVols (NFS) datastores in a workload domain]
 
