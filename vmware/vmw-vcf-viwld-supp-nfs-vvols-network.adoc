@@ -5,7 +5,7 @@ keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvo
 summary: "Configure NFS networking on vSphere hosts in VMware Cloud Foundation workload domains to enable connectivity to ONTAP storage systems. You'll create distributed port groups with VLAN separation, configure uplink teaming for redundancy, and set up VMkernel adapters on each vSphere host to establish dedicated NFS paths for failover capabilities."
 ---
 
-== Configure networking for NFS on vSphere hosts in a VCF workload domain
+= Configure networking for NFS on vSphere hosts in a VCF workload domain
 :hardbreaks:
 :nofooter:
 :icons: font

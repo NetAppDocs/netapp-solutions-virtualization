@@ -12,7 +12,7 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-NetApp offers single platform for any workload,anywhere. There are specific models like AFF for Unified Storage options, Disaggregated architectures like ASA for dedicated SAN deployments and AFX for unstructured data, and cloud solutions for hybrid and multicloud architectures. Powered by ONTAP, these platforms support various workloads including VMware Cloud Foundation and VMware vSphere.
+NetApp offers single platform for any workload, anywhere. There are specific models like AFF for Unified Storage options, Disaggregated architectures like ASA for dedicated SAN deployments and AFX for unstructured data, and cloud solutions for hybrid and multicloud architectures. Powered by ONTAP, these platforms support various workloads including VMware Cloud Foundation and VMware vSphere.
 
 == Introduction
 

@@ -4,7 +4,7 @@ permalink: vmware/vmw-vcf-mgmt-nfs-converge.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, array, ontap tools, otv, sddc, sddc manager, ontap tools, ontap tools 10
 summary: "Converge an existing vSphere cluster to a VCF management domain using the VCF Installer Tool. You'll validate the vCenter appliance, deploy the VCF Installer, reuse existing components and install new ones to complete the VCF management domain."
 ---
-= Convert vSphere cluster to VCF management domain using the VCF Installer Tool
+= Converge vSphere cluster to VCF management domain using the VCF Installer Tool
 :icons: font
 :imagesdir: ../media/
 

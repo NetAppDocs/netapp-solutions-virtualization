@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-mgmt-nfs-requirements.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, array, ontap tools, otv, sddc, sddc manager, ontap tools, ontap tools 10
-summary: "Review the requirements for converging a vSphere 8 cluster with NetApp ONTAP NFS datastores to a VMware Cloud Foundation management domain."
+summary: "Review the requirements for converging a vSphere cluster with NetApp ONTAP NFS datastores to a VMware Cloud Foundation management domain."
 ---
 = Deployment requirements for converging vCenter server instance to VCF management domain using NFS datastores
 :icons: font

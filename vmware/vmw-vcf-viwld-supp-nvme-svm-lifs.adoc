@@ -4,7 +4,7 @@ permalink: vmware/vmw-vcf-viwld-supp-nvme-svm-lifs.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi
 summary: "Create a Storage Virtual Machine (SVM) with multiple Logical Interfaces (LIFs) to provide NVMe/TCP connectivity for VMware Cloud Foundation workload domains. You'll configure the SVM with NVMe protocol support and set up multiple LIFs across separate Ethernet networks to enable multipathing and failover for optimal performance and availability."
 ---
-== Create SVM and LIFs and the NVMe namespace for NVMe/TCP datastores in a VMware Cloud Foundation workload domain
+= Create SVM and LIFs and the NVMe namespace for NVMe/TCP datastores in a VMware Cloud Foundation workload domain
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -14,7 +14,7 @@ summary: "Create a Storage Virtual Machine (SVM) with multiple Logical Interface
 [.lead]
 Create a Storage Virtual Machine (SVM) with multiple Logical Interfaces (LIFs) to provide NVMe connectivity for VMware Cloud Foundation workload domains. This procedure summarizes setting up an NVMe/TCP-enabled SVM and LIFs and creating the NVMe namespaces.
 
-=== Step 1: Create the SVMs and LIFs
+== Step 1: Create the SVMs and LIFs
 Complete the following steps to create an SVM with multiple LIFs for NVMe/TCP traffic.
 
 To add new LIFs to an existing SVM, refer to the ONTAP documentation: link:https://docs.netapp.com/us-en/ontap/networking/create_a_lif.html[Create ONTAP LIFs^].
@@ -49,7 +49,7 @@ NOTE: For multipathing and failover across multiple paths, create a minimum of t
 image:vmware-vcf-asa-004.png[Enable SVM account and Finish]
 ====
 
-=== Step 2: Create the NVMe Namespace
+== Step 2: Create the NVMe Namespace
 NVMe namespaces are analogous to LUNs for iSCSi or FC. You must create the NVMe Namespace before a VMFS datastore can be deployed from the vSphere Client. 
 
 To create the NVMe namespace, get the NVMe Qualified Name (NQN) from each vSphere host in the cluster. ONTAP uses the NQN to provide access control for the namespace. 
@@ -90,7 +90,7 @@ image:vmware-vcf-asa-093.png[Click +Add to create NVMe Namespace]
 image:vmware-vcf-asa-093.png[Click +Add to create NVMe Namespace]
 ====
 
-=== What's next?
+== What's next?
 After creating the SVM and LIFs, link:vmw-vcf-viwld-supp-nvme-network.html[configure networking for NVMe/TCP (NVMe/TCP)].
 
 // NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-vcf-viwld-supplemental-nvme.adoc

@@ -5,7 +5,7 @@ keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvo
 summary: "Create a Storage Virtual Machine (SVM) and multiple logical interfaces (LIFs) on an ONTAP system to support NFS traffic for vVols datastores in a VMware Cloud Foundation workload domain."
 ---
 
-== Create SVM and LIFs for NFS vVols datastores in a VCF workload domain
+= Create SVM and LIFs for NFS vVols datastores in a VCF workload domain
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -53,7 +53,7 @@ image:vmware-vcf-aff-036.png[Fill out network info for LIFs]
 image:vmware-vcf-asa-004.png[Enable SVM account and Finish]
 ====
 
-=== What's next?
+== What's next?
 After creating the SVM and LIFs, link:vmw-vcf-viwld-supp-nfs-vvols-network.html[configure networking for NFS on vSphere hosts].
 
 

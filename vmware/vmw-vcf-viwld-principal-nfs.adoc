@@ -144,7 +144,7 @@ image:vmw-vcf-viwld-principal-nfs-007.png[Add volume details]
 [NOTE]
 When deploying a VCF Workload Domain, VCF validates connectivity to the NFS Server. This is done using the management adapter on the vSphere hosts before any additional vmkernel adapter is added with the NFS IP address. Therefore, it is necessary to ensure that either 1) the management network is routable to the NFS Server, or 2) a LIF for the management network has been added to the SVM hosting the NFS datastore volume, to ensure that the validation can proceed.
 
-. Alternately, NFS volumes can be created in the ONTAP CLI. For more information refer to the link:https://docs.netapp.com/us-en/ontap-cli/volume-create.html[nfs volume create] command in the ONTAP commands documentation.
+. Alternately, NFS volumes can be created in the ONTAP CLI. For more information refer to the link:https://docs.netapp.com/us-en/ontap-cli/volume-create.html[volume create] command in the ONTAP commands documentation.
 ====
 
 === VCF Workload Domain - Default Cluster

@@ -4,7 +4,7 @@ permalink: vmware/vmw-vcf-viwld-supp-nfs-vvols.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc
 summary: "Get started with adding NFS and vVols as supplemental storage to VCF workload domains using ONTAP tools for VMware vSphere. You'll deploy ONTAP tools for VMware vSphere, configure a Storage Virtual Machine (SVM) with NFS logical interfaces, and provision both NFS and vVols datastores."
 ---
-== Deployment workflow for adding NFS vVols datastores as supplemental storage in a VCF workload domain
+= Deployment workflow for adding NFS vVols datastores as supplemental storage in a VCF workload domain
 :hardbreaks:
 :nofooter:
 :icons: font

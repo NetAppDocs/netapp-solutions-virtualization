@@ -29,7 +29,7 @@ Here are some of the key new features and enhancements in VCF 9.1:
 * Distributed Transit Gateway support VKS Supervisor and VCF Automation using Virtual Network Appliance (VNA). Layer 4 Load Balancer support is also available from VNA.
 * VPC Transit Gateway, Traceflow and live traffic analysis is now available from vSphere client.
 * VLAN extension for VPC subnets enables on-boarding of workloads from distributed vswitch port groups to VPC subnets.
-* Ability to define network span for Transit Gateway and VPC to be restricted to spefic clusters or have them span across all the vCenter instances of the networking domain. 
+* Ability to define network span for Transit Gateway and VPC to be restricted to specific clusters or have them span across all the vCenter instances of the networking domain. 
 * Improved vMotion speed for bulk migrations.
 * VPC connectivity policies for improved security and control over network traffic between VPCs.
 * VKS Multi-Interface networking support for isolated management and workload traffic.

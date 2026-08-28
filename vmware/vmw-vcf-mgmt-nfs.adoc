@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-mgmt-nfs.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, array, ontap tools, otv, sddc, sddc manager, ontap tools, ontap tools 10
-summary: "Converge an existing vSphere cluster with NetApp ONTAP NFS datastores to a VMware Cloud Foundation management domain. You'll review configuration requirements, deploy ONTAP tools and provision NFS datastores, and use the VCF Installer Tool to to validate and use your existing components, deploy required new components, and configure the platform."
+summary: "Converge an existing vSphere cluster with NetApp ONTAP NFS datastores to a VMware Cloud Foundation management domain. You'll review configuration requirements, deploy ONTAP tools and provision NFS datastores, and use the VCF Installer Tool to to validate and use your existing components, deploy required new components, and configure the platform"
 ---
 = Deployment workflow for converging vCenter server instance to VCF management domain with NFS datastores
 :hardbreaks:

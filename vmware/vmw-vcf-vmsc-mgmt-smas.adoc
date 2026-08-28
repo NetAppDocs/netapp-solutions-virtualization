@@ -24,7 +24,7 @@ Both Uniform and Non-uniform stretched cluster configurations are supported for 
 Host proximity settings are used with multipath configuration to ensure the optimal path selection for the storage traffic. The host proximity settings are configured on igroup in case of SCSI and subsystem in case of NVMe-oF. For example, in Uniform host access configuration, host has access to both storage systems in the stretched cluster. In multipath configuration, the optimal and non-optimal paths are configured based on the host proximity settings.
 ====
 
-=== Scenario Overview
+== Scenario Overview
 
 The stretch cluster solution can be implemented on default cluster or on additional cluster in VCF management or workload domains. ONTAP tools 10.6 supports datastore protection with SnapMirror active sync for VMFS datastores on iSCSI and FC protocols. ONTAP supports SnapMirror active sync for SAN (with iSCSI,FC, NVMe-oF) and NAS (NFS v3 and NFSv4.1). For SAN protocols the protection is performed at consistency group level while for NAS is performed at SVM level. The following diagram illustrates the stretch cluster solution for a VCF management domain with ONTAP tools for VMFS with FC.
 
@@ -53,13 +53,13 @@ Once the management domain is up and running, additional datastores can be creat
 
 ====
 
-=== Additional information
+== Additional information
 
 For information on configuring ONTAP storage systems refer to the link:https://docs.netapp.com/us-en/ontap[ONTAP 9 Documentation] center.
 
 For information on configuring VCF refer to link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1.html[VMware Cloud Foundation Documentation].
 
-=== Video demo for this solution
+== Video demo for this solution
 
 video::4c21ee83-dc11-43bf-a9af-b4ac014aaa0e[panopto, title="Stretch cluster for VCF with SnapMirror active sync iSCSI using ONTAP tools", width=360]
 

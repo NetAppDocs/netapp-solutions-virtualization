@@ -5,7 +5,7 @@ keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvo
 summary: "Create a Storage Virtual Machine (SVM) and multiple logical interfaces (LIFs) on an ONTAP system to support iSCSI traffic for vVols datastores in a VMware Cloud Foundation  workload domain. You'll add a new SVM, enable iSCSI, configure LIFs, and optionally enable the Storage VM Administration account."
 ---
 
-== Create SVM and LIFs for iSCSI vVols datastores in a VCF workload domain
+= Create SVM and LIFs for iSCSI vVols datastores in a VCF workload domain
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -20,7 +20,7 @@ To add new LIFs to an existing SVM, refer to the ONTAP documentation: link:https
 .Steps  
 include::../_include/create-svm-lifs-isci.adoc[]
 
-=== What's next?
+== What's next?
 After you create the SVM and LIFs, link:vmw-vcf-viwld-supp-iscsi-vvols-network.html[configure networking for iSCSI on vSphere hosts].
 
 
