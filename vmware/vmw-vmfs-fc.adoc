@@ -72,3 +72,7 @@ Check `System node hardware unified-connect show`. May need to change the type t
 
 
 // NetApp Solutions restructuring (jul 2025) - renamed from vmware/vsphere_ontap_auto_block_fc.adoc
+
+== Reference Video
+
+video::96311abf-aa45-4ce9-984b-b4b001005bab[panopto, title="Supplemental Datastore with FC", width=360]

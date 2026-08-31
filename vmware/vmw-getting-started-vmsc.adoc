@@ -22,9 +22,9 @@ In addition to availabilities built into the products, VMware and NetApp offer a
 
 NetApp MetroCluster uses NetApp's high-availability (HA) capability to protect against controller failures. MetroCluster also includes SyncMirror technology, cluster failover on demand (CFOD), hardware redundancy, and geographical separation for high availability. SyncMirror synchronously mirrors data across two plexes: the local plex actively serving data and the remote plex as a standby. All MetroCluster components, such as controllers, storage, cables, switches, and adapters, have hardware redundancy.
 
-== NetApp SnapMirror active sync
+== NetApp SnapMirror active sync (SAN and NAS protocols)
 
-NetApp SnapMirror active sync provides datastore-granular protection with FCP and iSCSI SAN protocols, selectively protecting high-priority workloads topology. It offers active-active access to both local and remote sites, unlike the active-standby MetroCluster. Starting with ONTAP 9.15.1, SnapMirror active sync supports symmetric active/active capability, allowing read and write I/O operations from both copies of a protected LUN with bidirectional synchronous replication. 
+NetApp SnapMirror active sync provides datastore-granular (consistency group) protection with SAN protocols, selectively protecting high-priority workloads topology. It offers active-active access to both local and remote sites, unlike the active-standby MetroCluster. Starting with ONTAP 9.15.1, SnapMirror active sync supports symmetric active/active capability, allowing read and write I/O operations from both copies of a protected LUN/namespace with bidirectional synchronous replication. With ONTAP 9.19.1 onwards, SnapMirror active sync supports NAS protocols, protecting at SVM level. SVM will be active at one site and standby at the other site, with bidirectional synchronous replication. 
 
 == VMware vSphere Metro Storage Cluster
 

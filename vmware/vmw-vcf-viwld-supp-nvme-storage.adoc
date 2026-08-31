@@ -2,9 +2,9 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-viwld-supp-nvme-storage.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi
-summary: "Configure NVMe over TCP (NVMe/TCP) vVols storage in a VI workload domain. You'll deploy ONTAP tools, register a storage system, create a storage capability profile, and provision a vVols datastore in the vSphere client."
+summary: "Configure NVMe over TCP (NVMe/TCP) datastore in a VMware Cloud Foundation workload domain. You'll deploy ONTAP tools, register a storage system, create a storage capability profile, and provision a NVMe/TCP datastore in the vSphere client."
 ---
-= Configure NVMe/TCP vVols storage in a VCF VI workload domain
+= Configure NVMe/TCP datastore in a VCF workload domain
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -12,7 +12,7 @@ summary: "Configure NVMe over TCP (NVMe/TCP) vVols storage in a VI workload doma
 :imagesdir: ../media/
 
 [.lead]
-Configure NVMe/TCP vVols storage in a VMware Cloud Foundation VI workload domain. You'll deploy ONTAP tools, register a storage system, create a storage capability profile, and provision a vVols datastore in the vSphere client.
+Configure NVMe/TCP datastore in a VMware Cloud Foundation workload domain. You'll deploy ONTAP tools, register a storage system, create a storage capability profile, and provision a NVMe/TCP datastore in the vSphere client.
 
 .Steps
 
@@ -21,12 +21,12 @@ Configure NVMe/TCP vVols storage in a VMware Cloud Foundation VI workload domain
 .Show example
 [%collapsible]
 ====
-image:vmware-vcf-asa-104.png[Add NVMe/TCP adapter]
+image:vmware-vcf-asa-104.png[Add NVMe/TCP datastore]
 ====
 +
 . In the *New Datastore* wizard, select *VMFS* as the type. Click *Next* to continue.
 +
-. On the *Name and device selection* page, provide a name for the datastore and select the NVMe namespace from the list of available devices.
+. On the *Name and device selection* page, provide a name for the datastore and select the NVMe/TCP namespace from the list of available devices.
 +
 .Show example
 [%collapsible]
@@ -62,6 +62,6 @@ image:vmware-vcf-asa-107.png[Hosts connected to datastore]
 
 * For information on configuring ONTAP storage systems, refer to the link:https://docs.netapp.com/us-en/ontap[ONTAP 9 documentation^].
 
-* For information on configuring VCF, refer to the link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf.html[VMware Cloud Foundation documentation^].
+* For information on configuring VCF, refer to the link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1.html[VMware Cloud Foundation documentation^].
 
 // NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-vcf-viwld-supplemental-nvme.adoc

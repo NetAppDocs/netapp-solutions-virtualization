@@ -1,15 +1,15 @@
 ---
 sidebar: sidebar
-permalink: vmware/vmw-vcf-mgmt-fc-deploy.html
+permalink: vmware/vmw-vcf-mgmt-vmfs-deploy.html
 keywords: netapp, vmware, cloud, foundation, vcf, asa, aff, all-flash, fc, array, ontap tools, otv, sddc, sddc manager, ontap tools, ontap tools 10
-summary: "Deploy ONTAP tools for VMware vSphere 10 and provision a Fibre Channel (FC) datastore to enable seamless integration with VMware Cloud Foundation. You'll deploy ONTAP tools, configure storage backends, and create a FC datastore to support the conversion of a vSphere 8 cluster to a VCF management domain."
+summary: "Deploy ONTAP tools for VMware vSphere 10 and provision a VMFS datastore to enable seamless integration with VMware Cloud Foundation. You'll deploy ONTAP tools, configure storage backends, and create a VMFS datastore to support the convergence of a vSphere cluster to a VCF management domain."
 ---
-= Deploy ONTAP tools and provision the Fibre Channel datastore for VCF management domain conversion
+= Deploy ONTAP tools and provision the VMFS datastore for VCF management domain convergence
 :icons: font
 :imagesdir: ../media/
 
 [.lead]
-Deploy ONTAP tools for VMware vSphere 10 and provision a Fibre Channel (FC) datastore to enable seamless integration with VMware Cloud Foundation. You'll deploy ONTAP tools, configure storage backends, and create a FC datastore to support the conversion of a vSphere 8 cluster to a VCF management domain.
+Deploy ONTAP tools for VMware vSphere 10 and provision a supported VMFS datastore to enable seamless integration with VMware Cloud Foundation. You'll deploy ONTAP tools, configure storage backends, and create a VMFS datastore to support the convergence of a vSphere cluster to a VCF management domain.
 
 == Step 1: Deploy ONTAP tools for VMware vSphere
 
@@ -22,7 +22,7 @@ In this step ONTAP tools 10 is deployed in a non-HA configuration. For additiona
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-import-nfs-001.png[Deploy OVF template]
+image::vmw-vcf-mgmt-vmfs-deploy-001.png[Deploy OVF template]
 ====
 
 . In the *Deploy OVF Template* complete the steps to:
@@ -37,7 +37,7 @@ image::vmware-vcf-import-nfs-001.png[Deploy OVF template]
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-import-nfs-002.png[configuration - deployment type]
+image::vmw-vcf-mgmt-vmfs-deploy-002.png[configuration - deployment type]
 ====
 
 . On the *Select storage* page, choose the datastore on which to install the VM, and click *Next*.
@@ -56,7 +56,7 @@ image::vmware-vcf-import-nfs-002.png[configuration - deployment type]
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-import-nfs-003.png[Customize template]
+image::vmw-vcf-mgmt-vmfs-deploy-003.png[Customize template]
 ====
 
 . Click *Next* to continue and then click *Finish* to begin the deployment.
@@ -71,7 +71,7 @@ After the ONTAP tools VM is installed and powered up, add the vCenter servers an
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-import-nfs-004.png[open ONTAP tools]
+image::vmw-vcf-mgmt-vmfs-deploy-004.png[open ONTAP tools]
 ====
 
 . Navigate to *Storage Backends* in the left hand menu and click *Add* to access the *Add Storage Backend* window.
@@ -80,14 +80,14 @@ image::vmware-vcf-import-nfs-004.png[open ONTAP tools]
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-import-nfs-005.png[Add storage backend]
+image::vmw-vcf-mgmt-vmfs-deploy-005.png[Add storage backend]
 ====
 
 NOTE: The storage backend is added in the vSphere client UI using the cluster IP address. This allows full management over all SVMs in the storage system. Alternately, the storage backend can be added and associated with a vCenter instance using ONTAP tools Manager at `https://loadBalanceIP:8443/virtualization/ui/`. With this method only SVM credentials can be added at the vSphere client UI, providing more granular control over storage access.
 
-== Step 3: Provision the FC datastore with ONTAP tools
+== Step 3: Provision the VMFS datastore with ONTAP tools
 
-ONTAP tools integrates functionality throughout the vSphere client UI. In this step, an FC datastore is provisioned from the hosts inventory page.
+ONTAP tools integrates functionality throughout the vSphere client UI. In this step, a VMFS datastore is provisioned from the hosts inventory page.
 
 .Steps
 . In the vSphere client, navigate to the hosts (or storage) inventory.
@@ -96,7 +96,7 @@ ONTAP tools integrates functionality throughout the vSphere client UI. In this s
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-convert-fc-001.png[Create datastore]
+image::vmw-vcf-mgmt-vmfs-deploy-006.png[Create datastore]
 ====
 
 . In the *Create Datastore* wizard, select VMFS for the type of datastore to create.
@@ -104,15 +104,15 @@ image::vmware-vcf-convert-fc-001.png[Create datastore]
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-convert-fc-002.png[Datastore type]
+image::vmw-vcf-mgmt-vmfs-deploy-007.png[Datastore type]
 ====
 
-. On the *Name and Protocol* page, enter the name for the datastore, the size, and the FC protocol to be used.
+. On the *Name and Protocol* page, enter the name for the datastore, the size, and the desired protocol to be used.
 +
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-convert-fc-003.png[Name and protocol]
+image::vmw-vcf-mgmt-vmfs-deploy-008.png[Name and protocol]
 ====
 
 . On the *Storage* page, select the ONTAP storage platform and the storage virtual machine (SVM). You can also select any available custom export policies here. Click *Next* to continue.
@@ -120,19 +120,22 @@ image::vmware-vcf-convert-fc-003.png[Name and protocol]
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-convert-fc-004.png[Storage page]
+image::vmw-vcf-mgmt-vmfs-deploy-009.png[Storage page]
 ====
 
 . On the *Storage Attributes* page, select the storage aggregate to be used. Click *Next* to continue.
 . On the *Summary* page, review the information and click *Finish* to begin the provisioning process. 
 +
-ONTAP tools will create a volume on the ONTAP storage system and mount it as a FC datastore to all ESXi hosts in the cluster.
+ONTAP tools will create a volume on the ONTAP storage system and mount it as a VMFS datastore to all vSphere hosts in the cluster.
 +
 .Show example
 [%collapsible]
 ====
-image::vmware-vcf-convert-fc-005.png[Summary page]
+image::vmw-vcf-mgmt-vmfs-deploy-010.png[Summary page]
 ====
 
+== Reference Video: 
+video::62c2a66c-1a07-4284-bc7b-b4ac00e9aeea[panopto, title="iSCSI Multipath with AFF and ASA r2"]
+
 == What's next?
-After you deploy ONTAP tools and provision the FC datastore, link:vmw-vcf-mgmt-fc-conversion.html[convert the vSphere cluster to a VCF management domain].
+After you deploy ONTAP tools and provision the VMFS datastore, link:vmw-vcf-mgmt-vmfs-converge.html[Converge the vSphere cluster to a VCF management domain].
