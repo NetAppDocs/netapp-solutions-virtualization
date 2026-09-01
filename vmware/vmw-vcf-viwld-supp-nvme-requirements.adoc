@@ -2,9 +2,9 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-viwld-supp-nvme-requirements.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi
-summary: "To deploy NVMe vVols in a VMware Cloud Foundation VI workload domain, you need a fully configured ONTAP AFF or ASA storage system, a completed VCF management domain, and an existing VI workload domain. Review the recommended network design and infrastructure requirements to ensure reliable, high-performance storage integration."
+summary: "To deploy NVMe/TCP datastore in a VMware Cloud Foundation workload domain, you need a fully configured ONTAP AFF or ASA storage system, a completed VCF management domain, and an existing workload domain. Review the recommended network design and infrastructure requirements to ensure reliable, high-performance storage integration."
 ---
-= Deployment requirements for NVMe vVols in a VI workload domain
+= Deployment requirements for NVMe/TCP datastore in a VMware Cloud Foundation workload domain
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -12,12 +12,12 @@ summary: "To deploy NVMe vVols in a VMware Cloud Foundation VI workload domain, 
 :imagesdir: ../media/
 
 [.lead]
-Review the recommended network design and infrastructure requirements to deploy NVMe vVols in a VMware Cloud Foundation VI workload domain. You need a fully configured ONTAP AFF or ASA storage system, a deployed VCF management domain, and an existing VI workload domain.
+Review the recommended network design and infrastructure requirements to deploy NVMe/TCP datastore in a VMware Cloud Foundation workload domain. You need a fully configured ONTAP AFF or ASA storage system, a deployed VCF management domain, and an existing workload domain.
 
 == Infrastructure requirements
 * An ONTAP AFF or ASA storage system with physical data ports on Ethernet switches dedicated to storage traffic.
 * VCF management domain deployment is complete and the vSphere client is accessible.
-* A VI workload domain has been previously deployed.
+* A workload domain has been previously deployed.
 
 == Recommended NVMe/TCP network design
 NetApp recommends fully redundant network designs for NVMe/TCP. The following diagram illustrates an example of a redundant configuration, providing fault tolerance for storage systems, switches, networks adapters and host systems. 

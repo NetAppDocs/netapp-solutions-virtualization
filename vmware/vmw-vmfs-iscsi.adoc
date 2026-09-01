@@ -91,7 +91,7 @@ TIP: Two iSCSI network interfaces per node are recommended.
 
 . link:++https://techdocs.broadcom.com/us/en/vmware-cis/vsan/vsan/8-0/vsan-network-design/ip-network-transport-configuration/vsphere-tcp-ip-stacks.html++[Verify that the TCPIP stack for iSCSI is available].
 
-. link:++https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/assign-a-port-group-or-network-to-a-network-protocol-profile.html++[Verify that iSCSI portgroups are available].
+. link:++https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-networking/basic-networking-with-vnetwork-distributed-switches/dvport-groups.html++[Verify that iSCSI portgroups are available].
 ** We typically use a single virtual switch with multiple uplink ports.
 ** Use 1:1 adapter mapping.
 
@@ -102,6 +102,9 @@ TIP: Two iSCSI network interfaces per node are recommended.
 . link:++https://docs.netapp.com/vapp-98/topic/com.netapp.doc.vsc-iag/GUID-D7CAD8AF-E722-40C2-A4CB-5B4089A14B00.html++[Provision the VMFS datastore with ONTAP Tools]. Repeat this step for all datastores.
 
 . link:++https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/7-0/vsphere-storage-7-0/storage-hardware-acceleration-in-vsphere/vsphere-hardware-acceleration-on-block-storage/managing-hardware-acceleration-filter-and-plug-ins/verify-hardware-acceleration-support-status.html++[Verify hardware acceleration support.]
+
+== Reference Video: 
+video::62c2a66c-1a07-4284-bc7b-b4ac00e9aeea[panopto, title="iSCSI Multipath with AFF and ASA r2"]
 
 == What's next?
 

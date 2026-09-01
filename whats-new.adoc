@@ -11,6 +11,9 @@ summary: Log of recent changes to the NetApp virtualization solutions collateral
 [.lead]
 Learn what's new in virtualization solutions.
 
+== 21 August 2026
+* Updated VCF documentation to reflect VCF 9.1 release and ONTAP 9.19.1 features.
+
 == 10 May 2026
 * Added End User Computing (EUC) solutions for NetApp ONTAP.
 

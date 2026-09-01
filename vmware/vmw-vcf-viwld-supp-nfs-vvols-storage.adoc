@@ -2,10 +2,10 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-viwld-supp-nfs-vvols-storage.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc
-summary: "Configure NFS vVols storage in a VI workload domain. After you deploy ONTAP tools for VMware vSphere, you'll use the vSphere client interface to add the storage system, create a storage capability profile, and provision a vVols datastore."
+summary: "Configure NFS vVols storage in a workload domain. After you deploy ONTAP tools for VMware vSphere, you'll use the vSphere client interface to add the storage system, create a storage capability profile, and provision a vVols datastore."
 ---
 
-= Configure NFS vVols storage in a VCF VI workload domain using ONTAP tools
+= Configure NFS vVols storage in a VCF workload domain using ONTAP tools
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -13,10 +13,10 @@ summary: "Configure NFS vVols storage in a VI workload domain. After you deploy 
 :imagesdir: ../media/
 
 [.lead]
-Configure NFS vVols storage in a VI workload domain. After you deploy ONTAP tools for VMware vSphere, you'll use the vSphere client interface to add the storage system, create a storage capability profile, and provision a vVols datastore.
+Configure NFS vVols storage in a workload domain. After you deploy ONTAP tools for VMware vSphere, you'll use the vSphere client interface to add the storage system, create a storage capability profile, and provision a vVols datastore.
 
 == Step 1: Deploy ONTAP tools for VMware vSphere
-For VI workload domains, ONTAP tools is installed to the VCF Management Cluster but registered with the vCenter associated with the VI workload domain. 
+For workload domains, ONTAP tools is installed to the VCF Management Cluster but registered with the vCenter associated with the workload domain. 
 
 ONTAP tools for VMware vSphere is deployed as a VM appliance and provides an integrated vCenter UI for managing ONTAP storage. 
 

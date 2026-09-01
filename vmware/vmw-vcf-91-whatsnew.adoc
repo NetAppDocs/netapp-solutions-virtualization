@@ -1,0 +1,40 @@
+---
+sidebar: sidebar
+permalink: vmware/vmw-vcf-91-whatsnew.html
+keywords: netapp, vmware, cloud, foundation, vcf, flexpod
+summary: VCF 9.1 adds new features and enhancements.
+---
+= What's New in VMware Cloud Foundation 9.1
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+VCF 9.1 introduces several new features and enhancements that improve the overall functionality and performance of your private cloud environment. Learn about the latest updates and how NetApp products continue to add value.
+
+Here are some of the key new features and enhancements in VCF 9.1:
+
+* Zero Touch Provisioning (ZTP) for vSphere clusters, allowing for automated deployment and configuration of vSphere clusters.
+** Remember to include NFS VAAI plugin to image if you plan to utilize VAAI with ONTAP NFS datastores. https://mysupport.netapp.com/site/products/all/details/nfsplugin-vmware-vaai/about-tab[NFS VAAI plugin] can be downloaded from NetApp Support Site and added to the image used for vSphere cluster deployment.
+* UNMAP support for NFS 4.1 datastores, allowing for improved storage efficiency and space reclamation.
+* NVMe over RDMA support for improved storage performance and reduced latency.
+** Tools (pktcap-uw,rdmaperf-uw,rdmaperf) for packet analysis and troubleshooting RoCEv2 connections are now available with hypervisor.
+* Automated discovery, configuration and management of iSCSI connections with the Internet Storage Name Service (iSNS) protocol. For more info check https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/9-1/vsphere-storage/configuring-iscsi-and-iser-adapters-and-storage-with-esxi/using-isns-with-esx.html[Using iSNS with ESXi].
+* Memory Tiering support includes support for all VM types and simplified deployment.
+* Expanded guest OS support, including Ubuntu 26.04 LTS, Debian 13 and SUSE Linux Enterprise Server 16.
+* vSphere Host Web Client updated to provide similar experience as vCenter Server Web Client, with full feature parity with previous versions.
+* Linked Clones of First Class Disks (FCD) for fast provisioning of container storage volumes in VMware Kubernetes Service (VKS).
+* Distributed Transit Gateway support VKS Supervisor and VCF Automation using Virtual Network Appliance (VNA). Layer 4 Load Balancer support is also available from VNA.
+* VPC Transit Gateway, Traceflow and live traffic analysis is now available from vSphere client.
+* VLAN extension for VPC subnets enables on-boarding of workloads from distributed vswitch port groups to VPC subnets.
+* Ability to define network span for Transit Gateway and VPC to be restricted to specific clusters or have them span across all the vCenter instances of the networking domain. 
+* Improved vMotion speed for bulk migrations.
+* VPC connectivity policies for improved security and control over network traffic between VPCs.
+* VKS Multi-Interface networking support for isolated management and workload traffic.
+* Migration tool included for in-place migration from vCloud Director to VCF Automation.
+
+For more details on these features and enhancements, refer to the link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1/release-notes/vmware-cloud-foundation-9-1-0-0-release-notes/what-s-new.html[Broadcom Technical Documentation on What's New in VCF 9.1].
+
+Most of our document still applies to VCF 9.1 unless otherwise noted. Before using it on production use, always remember to check https://imt.netapp.com/matrix/#search[Interoperability Matrix Tool] and https://www.vmware.com/resources/compatibility/search.php?deviceCategory=san[VMware Compatibility Guide] for details related to specific releases.

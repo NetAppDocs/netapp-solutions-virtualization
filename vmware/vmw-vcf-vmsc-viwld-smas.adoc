@@ -5,7 +5,7 @@ keywords: netapp, vmware, cloud, foundation, vcf, asa, all-flash, array, ontap t
 summary:
 ---
 
-= Configure a stretch cluster for a VI workload domain using SnapMirror Active Sync
+= Configure a stretch cluster for a workload domain using SnapMirror active sync (SAN and NAS)
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -13,35 +13,43 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-In this use case we outline the procedure to configure a stretch cluster for a Virtual Infrastructure (VI) workload domain using SnapMirror Active Sync with ONTAP tools for VMware vSphere. This procedure includes creating a VCF Workload Domain with VMFS on Fibre Channel, registering the vCenter with ONTAP tools, registering storage systems, and protecting the vSphere cluster.
+In this use case we outline the procedure to configure a stretch cluster for a workload domain using SnapMirror active sync with ONTAP tools for VMware vSphere (ONTAP tools 10.6 supports FC and iSCSI). ONTAP supports SnapMirror active sync both for SAN (with iSCSI, Fibre Channel, and NVMe over Fabrics) and NAS (NFSv3 and NFSv4.1).
 
-image:vmware-vcf-asa-mgmt-stretchcluster-001.png[Single Instance - Multiple Availablity Zones]
+image:vmw-vcf-vmsc-viwld-smas-001.png[Stretch cluster for VCF with SnapMirror active sync]
+
+Both Uniform and Non-uniform stretched cluster configurations are supported for SAN. In case of NAS, it is active-passive configuration with ONTAP 9.19.1.
+
+[NOTE]
+====
+Host proximity settings are used with multipath configuration to ensure the optimal path selection for the storage traffic. The host proximity settings are configured on igroup in case of SCSI and subsystem in case of NVMe-oF. For example, in Uniform host access configuration, host has access to both storage systems in the stretched cluster. In multipath configuration, the optimal and non-optimal paths are configured based on the host proximity settings.
+====
 
 == Scenario Overview
 
-The datastores on VCF Workload domain can be protected with SnapMirror active sync to provide stretch cluster solution. The protection is enabled at vSphere cluster level and all ONTAP block datastores in the cluster will be protected.
+The datastores on VCF Workload domain can be protected with SnapMirror active sync to provide stretch cluster solution. The protection is enabled at datastore level (consistency group) for SAN and protected at SVM level for NAS.
 
-// == Prerequisites
+== Prerequisites
 
 .Principal storage on Workload Domain
 [%collapsible%open]
 ==== 
-Workload domain can be created either importing using the VCF import tool or deploy using the SDDC manager. Deploying with SDDC manager will provide more networking options than importing an existing environment.
+Workload domain can be created either by import or creation using the VCF Ops tool. 
 
-. Create Workload domain with VMFS on FC
+. Create Workload domain with any supported protocol.
 . link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-vcenter.html[Register workload domain vCenter to ONTAP tools manager to deploy vCenter plugin]
 . link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-storage-backend.html[Register storage systems on ONTAP tools]
-. link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/protect-cluster.html[Protect the vSphere cluster]
+. For iSCSI and FC Datastores, Refer link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/protect/protect-multiple-ds.html[Protect the vSphere datastore with ONTAP tools]
+. For NVMe-oF and NFS datastores, check the video demo below for the steps to protect the datastores on the workload domain with SnapMirror active sync.
 
-NOTE: Whenever the cluster is expanded or shrank, need to update the Host Cluster relationship on ONTAP tools for the cluster to indicate the changes made to source or target.
+
 ====
 
 .Supplemental storage on Workload Domain
 [%collapsible%open]
 ==== 
-Once the workload domain is up and running, additional datastores can be created using ONTAP tools which will trigger the consistency group expansion. 
+Once the workload domain is up and running, additional datastores can be created and protected using ONTAP tools. For more details on SnapMirror active sync, refer https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html#benefits[Learn about ONTAP SnapMirror active sync]
 
-TIP: If a vSphere cluster is protected, all the datastores in the cluster will be protected.
+TIP: With ONTAP tools 10.6 and later, you can protect the datastores on the workload domain with SnapMirror active sync. Refer the video demo below for the steps to protect the datastores on the workload domain with SnapMirror active sync.
 ====
 
 == Additional information
@@ -52,4 +60,8 @@ For information on configuring VCF refer to link:https://techdocs.broadcom.com/u
 
 == Video demo for this solution
 
-video::569a91a9-2679-4414-b6dc-b25d00ff0c5a[panopto, title="Stretch cluster for VCF with ONTAP tools", width=360]
+video::4c21ee83-dc11-43bf-a9af-b4ac014aaa0e[panopto, title="Stretch cluster for VCF with SnapMirror active sync iSCSI using ONTAP tools", width=360]
+
+video::f85530ec-ff24-4c7d-abb4-b49b0176402c[panopto, title="Stretch cluster for VCF with SnapMirror active sync NVMe/TCP", width=360]
+
+video::76549cac-a1e3-4471-acf5-b49c00eebcf7[panopto, title="Stretch cluster for VCF with SnapMirror active sync NAS", width=360]

@@ -4,7 +4,7 @@ permalink: vmware/vmw-vcf-viwld-principal-fc.html
 keywords: netapp, vmware, cloud, foundation, vcf, asa, all-flash, array, ontap tools, otv, sddc, fc
 summary:
 ---
-= Use an FC-based VMFS datastore on ONTAP as principal storage for a VI workload domain
+= Use an FC-based VMFS datastore on ONTAP as principal storage for a VCF workload domain
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -12,7 +12,7 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-In this use case we outline the procedure to set up a Fibre Channel (FC) VMFS datastore on ONTAP as the primary storage solution for a VMware Cloud Foundation (VCF) Virtual Infrastructure (VI) workload domain. This procedure summarizes the required components, configuration steps, and deployment process.
+In this use case we outline the procedure to set up a Fibre Channel (FC) VMFS datastore on ONTAP as the primary storage solution for a VMware Cloud Foundation (VCF) workload domain. This procedure summarizes the required components, configuration steps, and deployment process.
 
 == Benefits of Fibre Channel
 
@@ -33,59 +33,52 @@ This scenario covers the following high level steps:
 * Create a storage virtual machine (SVM) with logical interfaces (LIFs) for FC traffic.
 * Collect WWPN information of hosts to be deployed and create corresponding initiator groups on the ONTAP storage system.
 * Create an FC volume on the ONTAP storage system.
-* Map initiator groups to create FC volume
+* Map initiator groups to FC volume created.
 * Utilize single initiator-target zoning on FC switches. Create one zone for each initiator (single initiator zone).
 ** For each zone, include a target that is the ONTAP FC logical interface (WWPN) for the SVMs. There should be at least two logical interfaces per node per SVM. Do not use the WWPN of the physical ports.
-* Create a Network Pool for vMotion traffic in SDDC Manager.
-* Commission hosts in VCF for use in a VI Workload Domain.
-* Deploy a VI Workload Domain in VCF using an FC datastore as principal storage.
+* Create a Network Pool for vMotion traffic in vCenter.
+* Commission hosts in vCenter for use in a Workload Domain.
+* Deploy a Workload Domain in VCF Ops using an VMFS on FC datastore as principal storage.
 
 [NOTE]
-This solution is applicable for ONTAP platforms supporting NFS storage including NetApp AFF and FAS.
+This solution is applicable for ONTAP platforms supporting FC storage including NetApp ASAr2, AFF and FAS.
 
 == Prerequisites
 
 The following components and configurations are used in this scenario:
 
-* An ONTAP AFF or ASA storage system with FC ports connected to FC switches.
+* An ONTAP AFF, ASA, or FAS storage system with FC ports connected to FC switches.
 * SVM created with FC lifs.
 * vSphere with FC HBAs connected to FC switches.
 * Single initiator-target zoning is configured on FC switches.
+* Ensure SVM multipathing policy is set to active-active.
 
 [NOTE]
 NetApp recommends multipath for FC LUNs. 
 
 == Deployment Steps
 
-=== Management Domain - Default Cluster
 
-FC Principal storage on initial cluster is only supported with the VCF brownfield import tool. If VCF is deployed with the cloudbuilder tool (till version 5.2.x), only VSAN is supported. Refer https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/map-for-administering-vcf-5-2/importing-existing-vsphere-environments-admin/convert-or-import-a-vsphere-environment-into-vmware-cloud-foundation-admin.html[converting existing vSphere environment to management domain] for more info.
 
-=== Management Domain - Additional Cluster
+=== VCF Workload Domain - Default Cluster
 
-The additional vSphere cluster on management domain can be deployed with following options:
-* Have additional cluster in vSphere environment and use the VCF brownfield import tool to convert the vSphere environment to Management domain. https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/create-datastore.html[ONTAP tools for VMware vSphere], https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html[System Manager or ONTAP API] can be used to deploy the VMFS datastore to vSphere cluster.
-* Use SDDC API to deploy additional cluster. The vSphere hosts should have the VMFS datastore configured. Use https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html[System Manager or ONTAP API] to deploy LUN to vSphere hosts.
-* Use SDDC Manager UI to deploy additional cluster. But this option only creates VSAN datastore till version 5.2.x.
+After the management domain is up and running, VCF Workload domain can be created:
 
-=== VI Workload Domain - Default Cluster
+* Using VCF Ops UI. The vSphere hosts are commissioned in vCenter and network pool is configured. Use System Manager or ONTAP API to deploy LUN to vSphere hosts.
 
-After the management domain is up and running, VI Workload domain can be created:
+* Import an existing vSphere environment as new workload domain. ONTAP tools for VMware vSphere or System Manager or ONTAP API can be used to deploy the VMFS datastore to vSphere cluster.
 
-* Using SDDC Manager UI. The vSphere hosts should have the VMFS datastore configured. Use System Manager or ONTAP API to deploy LUN to vSphere hosts.
+=== VCF Workload Domain - Additional Cluster
 
-* Import an existing vSphere environment as new VI workload domain. ONTAP tools for VMware vSphere, System Manager or ONTAP API can be used to deploy the VMFS datastore to vSphere cluster.
+To Expand the workload domain with an additional cluster, refer to https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1/building-your-private-cloud-infrastructure/working-with-workload-domains/expand-a-workload-domain/add-a-cluster-to-a-workload-domain-using-the-sddc-manager-ui.html[Add an SDDC Cluster to a VCF Domain].
 
-=== VI Workload Domain - Additional Cluster
-
-Once VI workload is up and running, additional clusters can be deployed with VMFS on FC LUN using the following options.
-
-* Additional clusters in vSphere environment imported using VCF brownfield import tool. ONTAP tools for VMware vSphere, System Manager or ONTAP API can be used to deploy the VMFS datastore to vSphere cluster.
-
-* Using SDDC Manager UI or API to deploy additional cluster. The vSphere hosts should have the VMFS datastore configured. Use System Manager or ONTAP API to deploy LUN to vSphere hosts.
+On a high level, the steps to add an additional cluster to the workload domain are as follows:
+* Ensure the hosts are commissioned and network pools are configured in vCenter.
+* LUN is provisioned on the ONTAP storage system and presented to the hosts in the additional cluster.
+* Create new SDDC Cluster creation on the Workload Domain on vCenter and follow the wizard to add the additional cluster to the workload domain.
 
 == Additional information
 
 For information on configuring ONTAP storage systems refer to the link:https://docs.netapp.com/us-en/ontap[ONTAP 9 Documentation] center.
 
-For information on configuring VCF refer to link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2.html[VMware Cloud Foundation Documentation].
+For information on configuring VCF refer to link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1.html[VMware Cloud Foundation Documentation].

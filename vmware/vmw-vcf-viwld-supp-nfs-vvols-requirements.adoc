@@ -2,9 +2,9 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-viwld-supp-nfs-vvols-requirements.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc
-summary: "To deploy NFS vVols in a VMware Cloud Foundation VI workload domain, you need a fully configured ONTAP AFF or ASA storage system, a completed VCF management domain, and an existing VI workload domain. Review the recommended network design and infrastructure requirements to ensure reliable, high-performance storage integration."
+summary: "To deploy NFS vVols in a VMware Cloud Foundation workload domain, you need a fully configured ONTAP AFF or ASA storage system, a completed VCF management domain, and an existing VI workload domain. Review the recommended network design and infrastructure requirements to ensure reliable, high-performance storage integration."
 ---
-= Deployment requirements for adding NFS vVols in a VI workload domain
+= Deployment requirements for adding NFS vVols in a workload domain
 
 :hardbreaks:
 :nofooter:
@@ -13,14 +13,14 @@ summary: "To deploy NFS vVols in a VMware Cloud Foundation VI workload domain, y
 :imagesdir: ../media/
 
 [.lead]
-Review the recommended network design and infrastructure requirements to deploy NFS vVols in a VMware Cloud Foundation VI workload domain. You need a fully configured ONTAP AFF or ASA storage system, a completed VCF management domain, and an existing VI workload domain. 
+Review the recommended network design and infrastructure requirements to deploy NFS vVols in a VMware Cloud Foundation workload domain. You need a fully configured ONTAP AFF or ASA storage system, a completed VCF management domain, and an existing workload domain. 
 
 == Infrastructure requirements
 Make sure the following components and configurations are in place.
 
 * An ONTAP AFF or FAS storage system with physical data ports on Ethernet switches dedicated to storage traffic.
 * VCF management domain deployment is complete and the vSphere client is accessible.
-* A VI workload domain has been previously deployed.
+* A workload domain has been previously deployed.
 
 == Recommended NFS network design
 Configure redundant network designs for NFS to provide fault tolerance for storage systems, switches, networks adapters and host systems. It's common to deploy NFS with a single subnet or multiple subnets depending on the architectural requirements.

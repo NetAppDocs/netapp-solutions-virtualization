@@ -12,16 +12,16 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-In this use case we outline the procedure to use an existing FC-based VMFS datastore on ONTAP as the primary storage for VMware Cloud Foundation (VCF) management domains. This procedure summarizes the required components, configurations, and deployment steps.
+In this use case we outline the procedure to create a FC-based VMFS datastore on ONTAP as the primary storage for VMware Cloud Foundation (VCF) management domain. This procedure summarizes the required components, configurations, and deployment steps.
 
 == Introduction
 
-Where appropriate we will refer to external documentation for the steps that must be performed in VCF's SDDC Manager, and reference those steps that are specific to the storage configuration portion.
+Where appropriate we will refer to external documentation for the steps that must be performed in vCenter, and reference those steps that are specific to the storage configuration portion.
 
-For information on converting an existing FC-based vSphere environment with ONTAP, refer to link:vmw-vcf-mgmt-fc.html[Convert vSphere Environment (FC datastore) to VCF Management Domain].
+For information on converting an existing VMFS datastore (includes iSCSI and NVMe-oF) in vSphere environment with ONTAP, refer to link:vmw-vcf-mgmt-vmfs.html[Converge vSphere Environment (VMFS datastore) to VCF Management Domain].
 
 [NOTE]
-VCF release 5.2 introduced the the capability to convert an existing vSphere 8 environment to a VCF management domain or import as VCF VI workload domains. Prior to this release, VMware vSAN was the only option for principal storage for the VCF management domain. 
+VCF release 5.2 introduced the the capability to convert an existing vSphere 8 environment to a VCF management domain or import as VCF VI workload domains. Prior to this release, VMware vSAN was the only option for principal storage for the VCF management domain. NSX controller VMs are better to deploy on FC-based VMFS datastore or use dual network switch to avoid single point of failure. If those options are not available, consider using vSAN to host those VMs.
 
 [NOTE]
 This solution is applicable for ONTAP platforms supporting FC storage including NetApp ASA, AFF and FAS. 
@@ -36,28 +36,29 @@ The following components and configurations are used in this scenario:
 
 For information on configuring ONTAP storage systems refer to the link:https://docs.netapp.com/us-en/ontap[ONTAP 9 Documentation] center.
 
-For information on configuring VCF refer to link:https://docs.vmware.com/en/VMware-Cloud-Foundation/index.html[VMware Cloud Foundation Documentation].
+For information on configuring VCF refer to link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1.html[VMware Cloud Foundation Documentation].
 
 == Deployment Steps
 
 === Management Domain - Default Cluster
 
-FC Principal storage on the initial cluster is only supported with VCF brownfield import tool. If VCF is deployed with Cloud Builder tool (priort to release version 5.2.x), only vSAN is supported. 
+VCF Installer tool supports VMFS on FC, NFS v3, and vSAN datastores for the management domain. The following steps outline the procedure to deploy a management domain with an FC-based VMFS datastore on ONTAP as the principal storage.
 
-For more information on using an existing vSphere environment, refer to https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/map-for-administering-vcf-5-2/importing-existing-vsphere-environments-admin/convert-or-import-a-vsphere-environment-into-vmware-cloud-foundation-admin.html[converting existing vSphere environment to management domain] for more info.
+For more information on using an existing vSphere environment, refer to link:vmw-vcf-mgmt-vmfs.html[Converge vSphere Environment (VMFS datastore) to VCF Management Domain].
 
 === Management Domain - Additional Cluster
 
-The additional vSphere cluster on management domain can be deployed with following options:
+To Expand the management domain with an additional cluster, refer to https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1/building-your-private-cloud-infrastructure/working-with-workload-domains/expand-a-workload-domain/add-a-cluster-to-a-workload-domain-using-the-sddc-manager-ui.html[Add an SDDC Cluster to a VCF Domain].
 
-* Have additional cluster in vSphere environment and use the VCF brownfield import tool to convert the vSphere environment to Management domain. https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/create-datastore.html[ONTAP tools for VMware vSphere] https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html[System Manager or ONTAP API] can be used to deploy the VMFS datastore to vSphere cluster.
-* Use SDDC API to deploy additional cluster. The vSphere hosts should have the VMFS datastore configured. Use https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html[System Manager or ONTAP API] to deploy LUN to vSphere hosts.
-* Use SDDC Manager UI to deploy additional cluster. But this option only creates VSAN datastore till version 5.2.x.
+On High-level, the steps to add an additional cluster to the management domain are as follows:
+* Ensure the hosts are commissioned and network pools are configured in vCenter.
+* LUN is provisioned on the ONTAP storage system and presented to the hosts in the additional cluster.
+* Create new SDDC Cluster creation on the Management Domain on vCenter and follow the wizard to add the additional cluster to the management domain.
 
 == Additional information
 
 For information on configuring ONTAP storage systems refer to the link:https://docs.netapp.com/us-en/ontap[ONTAP 9 Documentation] center.
 
-For information on configuring VCF refer to link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2.html[VMware Cloud Foundation Documentation].
+For information on configuring VCF refer to link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1.html[VMware Cloud Foundation Documentation].
 
 
