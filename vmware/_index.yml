@@ -61,6 +61,8 @@ indexpage:
 #
     - title: "Additional resources"
       links:
+        - title: "What's New in VMware Cloud Foundation 9.1"
+          url: vmw-vcf-91-whatsnew.html
         - title: "VMware vSphere with ONTAP best practices"
           url: https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vsphere-overview.html
         - title: "VMware vSphere Virtual Volumes (vVols) with NetApp ONTAP"

@@ -18,7 +18,7 @@ indexpage:
 #
     - title: "NetApp solutions for virtualization"
       links:
-        - title: "VMware on-premises and cloud"
+        - title: "Private Cloud with VMware"
           url: /vmware/index.html
         - title: "Microsoft Hyper-V"
           url: hyperv/index.html

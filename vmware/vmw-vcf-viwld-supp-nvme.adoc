@@ -2,9 +2,9 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-viwld-supp-nvme.html
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi
-summary: "Get started with adding an NVMe over TCP (NVMe/TCP) datastore as supplemental storage for a VMware Cloud Foundation (VCF) Virtual Infrastructure (VI) workload domain. You'll set up an NVMe/TCP-enabled Storage Virtual Machine (SVM) and LIFs, create NVMe namespaces, configure ESXi host networking, and deploy a VMFS datastore."
+summary: "Get started with adding an NVMe over TCP (NVMe/TCP) datastore as supplemental storage for a VMware Cloud Foundation (VCF) workload domain. You'll set up an NVMe/TCP-enabled Storage Virtual Machine (SVM) and LIFs, create NVMe namespaces, configure vSphere host networking, and deploy a VMFS datastore."
 ---
-= Deployment workflow for adding vVols NVMe datastores as supplemental storage in a VI workload domain
+= Deployment workflow for adding vVols NVMe datastores as supplemental storage in a workload domain
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -12,11 +12,11 @@ summary: "Get started with adding an NVMe over TCP (NVMe/TCP) datastore as suppl
 :imagesdir: ../media/
 
 [.lead]
-Get started with adding NVMe/TCP vVols datastores as supplemental storage for a VMware Cloud Foundation (VCF) Virtual Infrastructure (VI) workload domain. You'll review the deployment requirements, set up an NVMe/TCP-enabled SVMs and LIFs, configure ESXi host networking, and deploy the NVMe/TCP datastore.
+Get started with adding NVMe/TCP vVols datastores as supplemental storage for a VMware Cloud Foundation (VCF) workload domain. You'll review the deployment requirements, set up an NVMe/TCP-enabled SVMs and LIFs, configure vSphere host networking, and deploy the NVMe/TCP vVol datastore.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One]link:vmw-vcf-viwld-supp-nvme-requirements.html[Review the deployment requirements]
 [role="quick-margin-para"]
-Review the requirements to deploy NVMe/TCP datastore in a VMware Cloud Foundation VI workload domain.
+Review the requirements to deploy NVMe/TCP datastore in a VMware Cloud Foundation workload domain.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two]link:vmw-vcf-viwld-supp-nvme-svm-lifs.html[Create the SVM and LIFs and the NVMe namespace]
 [role="quick-margin-para"]
@@ -24,10 +24,15 @@ Create a storage virtual machine with logical interfaces and the NVMe namespace 
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three]link:vmw-vcf-viwld-supp-nvme-network.html[Configure networking]
 [role="quick-margin-para"]
-Create distributed port groups and vmkernel adapters on the ESXi hosts for the VI workload domain.
+Create distributed port groups and vmkernel adapters on the vSphere hosts for the VCF workload domain.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png[Four]link:vmw-vcf-viwld-supp-nvme-storage.html[Configure storage]
 [role="quick-margin-para"]
 Deploy the NVMe/TCP datastore.
 
 // NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-vcf-viwld-supplemental-nvme.adoc
+== Video demo for this solution
+
+video::f85530ec-ff24-4c7d-abb4-b49b0176402c[panopto, title="Supplemental Datastore with NVMe/TCP", width=360]
+
+video::b2b16a35-05cd-49c9-a91a-b4ac0127813d[panopto, title="Supplemental Datastore with NVMe/FC", width=360]

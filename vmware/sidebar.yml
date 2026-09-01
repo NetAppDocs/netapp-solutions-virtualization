@@ -49,83 +49,83 @@ entries:
         url: /vmware/vmw-vcf-deployment.html
       - title: "VCF 9 DR with NetApp Disaster Recovery"
         url: /vmware/vmw-vcf-disaster-recovery-nfs.html
-      - title: "Convert existing vSphere clusters to VCF"
+      - title: "Converge existing vSphere clusters to VCF"
         entries:
-          - title: "About converting existing vSphere clusters to VCF"
+          - title: "About converging existing vSphere clusters to VCF"
             url: /vmware/vmw-vcf-migrate.html
-          - title: "Convert existing vSphere cluster with NFS datastores"
+          - title: "Converge existing vSphere cluster with NFS datastores"
             url: /vmware/vmw-vcf-mgmt-nfs.html
-          - title: "Convert existing vSphere cluster with FC datastores"
-            url: /vmware/vmw-vcf-mgmt-fc.html
+          - title: "Converge existing vSphere cluster with VMFS datastores"
+            url: /vmware/vmw-vcf-mgmt-vmfs.html
 #
       - title: "Provision VCF with principal storage"
         entries:
           - title: "About provisioning principal storage"
             url: /vmware/vmw-vcf-provision.html
-          - title: "Provision management domains with FC"
+          - title: "Provision management domain with FC"
             url: /vmware/vmw-vcf-mgmt-principal-fc.html
-          - title: "Provision management domains with NFS"
+          - title: "Provision management domain with NFS"
             url: /vmware/vmw-vcf-mgmt-principal-nfs.html
-          - title: "Provision VI workload domains with FC"
+          - title: "Provision workload domains with FC"
             url: /vmware/vmw-vcf-viwld-principal-fc.html     
-          - title: "Provision VI workload domains with NFS"
+          - title: "Provision workload domains with NFS"
             url: /vmware/vmw-vcf-viwld-principal-nfs.html      
 #
       - title: "Expand VCF with supplemental storage"
         entries:
           - title: "Learn about expanding storage"
             url: /vmware/vmw-vcf-expand.html
-          - title: "Expand management domains with iSCSI"
+          - title: "Expand management domain with iSCSI"
             entries:
-            - title: Deployment workflow
-              url: /vmware/vmw-vcf-mgmt-supplemental-iscsi.html
-            - title: Review requirements
-              url: /vmware/vmw-vcf-mgmt-supplemental-iscsi-requirements.html
-            - title: Create SVM and LIFs
-              url: /vmware/vmw-vcf-mgmt-supplemental-iscsi-svm-lifs.html
-            - title: Configure networking
-              url: /vmware/vmw-vcf-mgmt-supplemental-iscsi-network.html
-            - title: Configure storage
-              url: /vmware/vmw-vcf-mgmt-supplemental-iscsi-storage.html
-          - title: "Expand management domains with FC"
+              - title: Deployment workflow
+                url: /vmware/vmw-vcf-mgmt-supplemental-iscsi.html
+              - title: Review requirements
+                url: /vmware/vmw-vcf-mgmt-supplemental-iscsi-requirements.html
+              - title: Create SVM and LIFs
+                url: /vmware/vmw-vcf-mgmt-supplemental-iscsi-svm-lifs.html
+              - title: Configure networking
+                url: /vmware/vmw-vcf-mgmt-supplemental-iscsi-network.html
+              - title: Configure storage
+                url: /vmware/vmw-vcf-mgmt-supplemental-iscsi-storage.html
+          - title: "Expand management domain with FC"
             url: /vmware/vmw-vcf-mgmt-supplemental-fc.html
-          - title: "Expand VI workload domains with vVols iSCSI"
+          - title: "Expand VCF workload domains with vVols iSCSI"
             entries:
-            - title: Deployment workflow
-              url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols.html
-            - title: Review requirements
-              url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols-requirements.html
-            - title: Create SVM and LIFs 
-              url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols-svm-lifs.html
-            - title: Configure networking
-              url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols-network.html
-            - title: Configure storage
-              url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols-storage.html
-          - title: "Expand VI workload domains with vVols NFS"
+              - title: Deployment workflow
+                url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols.html
+              - title: Review requirements
+                url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols-requirements.html
+              - title: Create SVM and LIFs 
+                url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols-svm-lifs.html
+              - title: Configure networking
+                url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols-network.html
+              - title: Configure storage
+                url: /vmware/vmw-vcf-viwld-supp-iscsi-vvols-storage.html
+          - title: "Expand VCF workload domains with vVols NFS"
             entries:
-            - title: Deployment workflow
-              url: /vmware/vmw-vcf-viwld-supp-nfs-vvols.html
-            - title: Review requirements
-              url: /vmware/vmw-vcf-viwld-supp-nfs-vvols-requirements.html
-            - title: Create SVM and LIFs
-              url: /vmware/vmw-vcf-viwld-supp-nfs-vvols-svm-lifs.html
-            - title: Configure networking
-              url: /vmware/vmw-vcf-viwld-supp-nfs-vvols-network.html
-            - title: Configure storage
-              url: /vmware/vmw-vcf-viwld-supp-nfs-vvols-storage.html
-          - title: "Expand VI workload domains with NVMe/TCP"
+              - title: Deployment workflow
+                url: /vmware/vmw-vcf-viwld-supp-nfs-vvols.html
+              - title: Review requirements
+                url: /vmware/vmw-vcf-viwld-supp-nfs-vvols-requirements.html
+              - title: Create SVM and LIFs
+                url: /vmware/vmw-vcf-viwld-supp-nfs-vvols-svm-lifs.html
+              - title: Configure networking
+                url: /vmware/vmw-vcf-viwld-supp-nfs-vvols-network.html
+              - title: Configure storage
+                url: /vmware/vmw-vcf-viwld-supp-nfs-vvols-storage.html
+          - title: "Expand VCF workload domains with NVMe/TCP"
             entries:
-            - title: Deployment workflow
-              url: /vmware/vmw-vcf-viwld-supp-nvme.html
-            - title: Review requirements
-              url: /vmware/vmw-vcf-viwld-supp-nvme-requirements.html
-            - title: Create SVM and LIFs
-              url: /vmware/vmw-vcf-viwld-supp-nvme-svm-lifs.html
-            - title: Configure networking
-              url: /vmware/vmw-vcf-viwld-supp-nvme-network.html
-            - title: Configure storage 
-              url: /vmware/vmw-vcf-viwld-supp-nvme-storage.html
-          - title: "Expand VI workload domains with FC"
+              - title: Deployment workflow
+                url: /vmware/vmw-vcf-viwld-supp-nvme.html
+              - title: Review requirements
+                url: /vmware/vmw-vcf-viwld-supp-nvme-requirements.html
+              - title: Create SVM and LIFs
+                url: /vmware/vmw-vcf-viwld-supp-nvme-svm-lifs.html
+              - title: Configure networking
+                url: /vmware/vmw-vcf-viwld-supp-nvme-network.html
+              - title: Configure storage 
+                url: /vmware/vmw-vcf-viwld-supp-nvme-storage.html
+          - title: "Expand VCF workload domains with FC"
             url: /vmware/vmw-vcf-viwld-supp-fc.html
 #      
       - title: "Protect VCF with SnapCenter"      
@@ -145,11 +145,11 @@ entries:
             url: /vmware/vmw-vcf-protect-vmsc.html
           - title: "Configure management domains with MetroCluster"
             url: /vmware/vmw-vcf-vmsc-mgmt-mcc.html
-          - title: "Configure VI workload domains with MetroCluster"
+          - title: "Configure workload domains with MetroCluster"
             url: /vmware/vmw-vcf-vmsc-viwld-mcc.html
-          - title: "Configure management domains with SnapMirror Active Sync"
+          - title: "Configure management domains with SnapMirror Active Sync (SAN and NAS)"
             url: /vmware/vmw-vcf-vmsc-mgmt-smas.html
-          - title: "Configure VI workload domains with SnapMirror Active Sync"
+          - title: "Configure workload domains with SnapMirror Active Sync (SAN and NAS)"
             url: /vmware/vmw-vcf-vmsc-viwld-smas.html
 
       - title: "Migrate VMs from vSphere"

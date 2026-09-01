@@ -4,7 +4,7 @@ permalink: vmware/vmw-vcf-viwld-supp-fc.html
 keywords: netapp, vmware, cloud, foundation, vcf, asa, all-flash, array, ontap tools, otv, sddc, fc
 summary:
 ---
-= Add an FC-based VMFS datastore as supplemental storage to a VI workload domains
+= Add an FC-based VMFS datastore as a supplemental storage to workload domains
 :hardbreaks:
 :nofooter:
 :icons: font
@@ -12,7 +12,7 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-In this use case we outline the procedure to configure a VMFS datastore using Fiber Channel (FC) as supplemental storage for a VMware Cloud Foundation (VCF) Virtual Infrastructure (VI) workload domain. This procedure summarizes deploying ONTAP Tools for VMware vSphere, registering the VI workload vCenter server, defining the storage backend, and provisioning the FC datastore.
+In this use case we outline the procedure to configure a VMFS datastore using Fiber Channel (FC) as supplemental storage for a VMware Cloud Foundation (VCF) workload domain. This procedure summarizes deploying ONTAP Tools for VMware vSphere, registering the workload vCenter server, defining the storage backend, and provisioning the FC datastore.
 
 .Before you begin
 Make sure the following components and configurations are in place.
@@ -29,10 +29,10 @@ Make sure the following components and configurations are in place.
 ====
 
 .Steps
-. Register the VI workload vCenter by following the instructions in the ONTAP tools for VMware vSphere documentation: 
-link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-vcenter.html[Register VI workload vCenter].
+. Register the workload domain vCenter by following the instructions in the ONTAP tools for VMware vSphere documentation: 
+link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-vcenter.html[Register workload vCenter].
 +
-Registering the VI workload vCenter enables the vCenter plugin.
+Registering the workload domain vCenter server enables the vCenter plugin.
 
 . Add a storage backend using the vSphere client interface by following the instructions in the ONTAP tools for VMware vSphere documentation: link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-storage-backend.html[Define Storage backend using vSphere client interface].
 +
@@ -40,11 +40,16 @@ Adding a storage backend enables you to onboard an ONTAP cluster.
 
 . Provision VMFS on Fibre Channel (FC)by following the instructions in the ONTAP tools for VMware vSphere documentation: link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/create-datastore.html[Provision VMFS on FC].
 
+== Reference Video
+
+video::96311abf-aa45-4ce9-984b-b4b001005bab[panopto, title="Supplemental Datastore with FC", width=360]
+
+
 == Additional information
 
 * For information on configuring ONTAP storage systems, refer to the  link:https://docs.netapp.com/us-en/ontap[ONTAP 9 documentation^].
 
-* For information on configuring VCF, refer to the link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2.html[VMware Cloud Foundation documentation^].
+* For information on configuring VCF, refer to the link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1.html[VMware Cloud Foundation documentation^].
 
 * For information on configuring Fibre Channel on ONTAP storage systems, refer to the https://docs.netapp.com/us-en/ontap/san-management/index.html[SAN storage management^] in the ONTAP 9 documentation.
 

@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: vmware/vmw-vcf-mgmt-supplemental-iscsi.html
 keywords: netapp, vmware, cloud, foundation, vcf, iscsi, information
-summary: "Get started with adding an iSCSI datastore as supplemental storage for a VMware Cloud Foundation (VCF) management domain. You'll set up a Storage Virtual Machine (SVM) with logical interfaces (LIFs) for iSCSI, configure iSCSI networking on ESXi hosts, deploy ONTAP tools for VMware vSphere, and create a VMFS datastore."
+summary: "Get started with adding an iSCSI datastore as supplemental storage for a VMware Cloud Foundation (VCF) management domain. You'll set up a Storage Virtual Machine (SVM) with logical interfaces (LIFs) for iSCSI, configure iSCSI networking on vSphere hosts, deploy ONTAP tools for VMware vSphere, and create a VMFS datastore."
 ---
 = Deployment workflow for adding an iSCSI datastore as supplemental storage in a VCF management domain 
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: "Get started with adding an iSCSI datastore as supplemental storage for
 :imagesdir: ../media/
 
 [.lead]
-Get started with adding an iSCSI datastore as supplemental storage for a VMware Cloud Foundation (VCF) management domain. You'll set up a Storage Virtual Machine (SVM) with logical interfaces (LIFs) for iSCSI, configure iSCSI networking on ESXi hosts, deploy ONTAP tools for VMware vSphere, and create a VMFS datastore.
+Get started with adding an iSCSI datastore as supplemental storage for a VMware Cloud Foundation (VCF) management domain. You'll set up a Storage Virtual Machine (SVM) with logical interfaces (LIFs) for iSCSI, configure iSCSI networking on vSphere hosts, deploy ONTAP tools for VMware vSphere, and create a VMFS datastore.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One]link:vmw-vcf-mgmt-supplemental-iscsi-requirements.html[Review the deployment requirements]
 [role="quick-margin-para"]
@@ -24,10 +24,14 @@ Create an SVM with multiple LIFs for iSCSI traffic.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three]link:vmw-vcf-mgmt-supplemental-iscsi-network.html[Configure networking]
 [role="quick-margin-para"]
-Set up networking for iSCSI on ESXi hosts.
+Set up networking for iSCSI on vSphere hosts.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png[Four]link:vmw-vcf-mgmt-supplemental-iscsi-storage.html[Configure storage]
 [role="quick-margin-para"]
 Deploy and use ONTAP tools to configure storage.
+
+== Reference Video: 
+video::62c2a66c-1a07-4284-bc7b-b4ac00e9aeea[panopto, title="iSCSI Multipath with AFF and ASA r2"]
+
 
 
