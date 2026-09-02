@@ -214,6 +214,6 @@ To learn more about the technologies presented in this solution refer to the fol
 
 * https://www.netapp.com/console/[NetApp Console landing page]
 * https://www.netapp.com/data-infrastructure-insights/[NetApp Data Infrastructure Insights landing page]
-* https://docs.netapp.com/us-en/data-infrastructure-insights/index.html/[NetApp Data Infrastructure Insights documentation]
+* https://docs.netapp.com/us-en/data-infrastructure-insights/index.html[NetApp Data Infrastructure Insights documentation]
 
 
