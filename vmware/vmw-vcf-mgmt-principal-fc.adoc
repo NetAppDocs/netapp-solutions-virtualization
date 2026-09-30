@@ -33,6 +33,7 @@ The following components and configurations are used in this scenario:
 * NetApp storage system with a storage virtual machine (SVM) configured to allow FC traffic.
 * Logical interfaces (LIF) have been created on the FC fabric that is to carry FC traffic and is associated with the SVM.
 * Zoning has been configured to use single initiator-target zoning on FC switches for host HBAs and storage targets.
+* Create VMFS Datastore (with FC LUN) on one of the vSphere hosts in the cluster.
 
 For information on configuring ONTAP storage systems refer to the link:https://docs.netapp.com/us-en/ontap[ONTAP 9 Documentation] center.
 
@@ -54,6 +55,10 @@ On High-level, the steps to add an additional cluster to the management domain a
 * Ensure the hosts are commissioned and network pools are configured in vCenter.
 * LUN is provisioned on the ONTAP storage system and presented to the hosts in the additional cluster.
 * Create new SDDC Cluster creation on the Management Domain on vCenter and follow the wizard to add the additional cluster to the management domain.
+
+== Reference Video
+
+video::9c51101c-292b-41ef-8dd5-b4cf0131dd62[panopto, title="Principal Datastore with FC", width=360]
 
 == Additional information
 

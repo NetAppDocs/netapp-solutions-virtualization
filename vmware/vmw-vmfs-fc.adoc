@@ -76,3 +76,5 @@ Check `System node hardware unified-connect show`. May need to change the type t
 == Reference Video
 
 video::96311abf-aa45-4ce9-984b-b4b001005bab[panopto, title="Supplemental Datastore with FC", width=360]
+
+video::9c51101c-292b-41ef-8dd5-b4cf0131dd62[panopto, title="Principal Datastore with FC", width=360]
