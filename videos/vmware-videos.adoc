@@ -70,6 +70,8 @@ video::255640f5-4dff-438c-8d50-b01200f017d1[panopto, title="Bulk migration demon
 
 == VMware Cloud Foundation with NetApp ONTAP
 
+video::9c51101c-292b-41ef-8dd5-b4cf0131dd62[panopto, title="VCF Deployment with VMFS on FC", width=360]
+
 video::9b66ac8d-d2b1-4ac4-a33c-b16900f67df6[panopto, title="NFS datastores as principal storage for VCF Workload Domains"]
 
 video::1d0e1af1-40ae-483a-be6f-b156015507cc[panopto, title="iSCSI datastores as supplemental storage for VCF Management Domains"]
