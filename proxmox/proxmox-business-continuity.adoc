@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: proxmox/proxmox-business-continuity.html
-keywords: proxmox ve, business continuity, snapmirror active sync, stretch cluster, service provider, nfs, nas, corosync, bgp
+keywords: proxmox ve, business continuity, snapmirror active sync, metrocluster, stretch cluster, service provider, nfs, corosync, bgp
 summary: "Keep Proxmox VE VMs running through a storage or site failure with zero RPO by using ONTAP SnapMirror active sync with a Proxmox VE stretch cluster."
 ---
 = Learn about Proxmox VE business continuity with SnapMirror active sync
@@ -123,6 +123,69 @@ When cluster A returns, replication resumes. Plan the failback to cluster A duri
 
 During a site failure, both the storage system and the Proxmox VE nodes at that site go offline. ONTAP fails over the shared storage to the surviving cluster, and Proxmox VE HA restarts the VMs from the failed site on the surviving nodes, as described in the table.
 
+== Choose between SnapMirror active sync and MetroCluster
+
+NetApp MetroCluster configurations also deliver zero RPO and automatic recovery for a Proxmox VE stretch cluster. The two solutions differ in what they protect:
+
+* *MetroCluster protects all workloads.* MetroCluster combines array-based clustering with synchronous replication. It mirrors every aggregate, the nonvolatile cache, and the configuration of every SVM to the partner site, so all shared storage on the cluster is protected without per-workload setup.
+* *SnapMirror active sync protects a subset of workloads.* You choose which SVMs or volumes to protect, and you can fail over each one independently. Unprotected workloads can share the same clusters.
+
+=== MetroCluster architecture with Proxmox VE
+
+The following diagram shows a Proxmox VE stretch cluster with a four-node MetroCluster IP configuration and NFS shared storage.
+
+image:proxmox-metrocluster-nas-architecture.png["Proxmox VE stretch cluster with a four-node MetroCluster IP configuration. Each site serves its own SVM and holds a stopped mirror of the SVM at the other site. The components are described after the diagram."]
+
+MetroCluster IP clusters::
+Each site has an HA pair with mirrored aggregates. The MetroCluster IP back-end network mirrors data and the nonvolatile cache to the partner site synchronously.
+
+SVMs at both sites::
+Each site can serve its own SVMs. For each SVM, MetroCluster keeps a stopped mirror SVM with the `-mc` suffix at the partner site, with the same configuration and LIF addresses.
+
+Switchover::
+If a site fails, ONTAP Mediator or MetroCluster Tiebreaker at site C enables an automatic switchover. The mirror SVMs at the surviving site start and serve all shared storage with the same NFS addresses, and Proxmox VE HA restarts the VMs from the failed site. A single controller failure is handled by a local HA takeover, without a switchover. After you repair the failed site, you heal the aggregates and switch back.
+
+=== Feature comparison
+
+[cols="2,3,3" options="header"]
+|===
+| Consideration
+| SnapMirror active sync for NAS
+| MetroCluster IP
+
+| Protection scope
+| Selected SVMs and volumes
+| All mirrored aggregates and all SVMs in the configuration
+
+| Failover granularity
+| Each SVM independently
+| The whole site, by switchover
+
+| Unprotected workloads
+| Run on unprotected SVMs in the same clusters
+| Can use unmirrored aggregates, which go offline after a switchover until you bring them online
+
+| Cluster design
+| Two independent clusters, peered over an IP network
+| One configuration of two partner clusters, with a dedicated MetroCluster IP back-end network
+
+| Witness at site C
+| ONTAP Mediator or ONTAP Cloud Mediator
+| ONTAP Mediator or MetroCluster Tiebreaker
+
+| Recovery after a site failure
+| Fail back each SVM
+| Heal the aggregates, and then switch back the site
+|===
+
+=== Selection guidance
+
+* Choose MetroCluster when all, or nearly all, workloads on the storage need zero RPO, for example when an enterprise runs only mission-critical VMs on the cluster, or a service provider offers the same availability tier to every tenant. You get one protection domain without per-workload configuration.
+* Choose SnapMirror active sync when only a subset of workloads needs zero RPO, for example a premium tier for some tenants, or when you need to fail over or test disaster recovery for one tenant or application at a time.
+* SnapMirror active sync for NAS isn't supported on a MetroCluster configuration. Use one solution for each pair of clusters.
+* The corosync, QDevice, and HA guidance in this solution applies to both. With MetroCluster, align the QDevice tie breaker with the site that keeps serving data when the inter-site link fails, and use HA node affinity rules to keep VMs at the same site as their active SVM.
+* MetroCluster IP also supports VIP LIFs with BGP for layer 3 networks between sites.
+
 == Corosync considerations for a Proxmox VE stretch cluster
 
 Proxmox VE uses corosync for cluster membership and quorum. Corosync is more sensitive to the inter-site network than SnapMirror active sync, so plan the cluster network first.
@@ -189,6 +252,7 @@ SMP creates crash-consistent or file-consistent backups as ONTAP snapshots of th
 * Use file-consistent backups for VMs that run the QEMU guest agent, so the guest file systems are quiesced before ONTAP creates the snapshot.
 * SMP manages the storage that is active. After a SnapMirror active sync failover, run a discovery in SMP so that it maps the storage to cluster B before you run backup or restore operations.
 * For a third copy outside the two sites, or for longer retention, add a SnapMirror asynchronous fan-out relationship from the protected volumes, or use Proxmox Backup Server.
+* Tamperproof snapshots aren't supported with SnapMirror active sync, so don't enable snapshot locking in SMP for protected volumes.
 
 === VM cloning
 
@@ -250,6 +314,7 @@ Keep the following guidelines in mind:
 * link:https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/architecture-concept.html[ONTAP SnapMirror active sync architecture^]
 * link:https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/prerequisites-reference.html[Prerequisites for ONTAP SnapMirror active sync^]
 * link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/concept_considerations_for_using_virtual_ip_and_border_gateway_protocol_with_a_mcc_configuration.html[ONTAP MetroCluster considerations for virtual IP and BGP^]
+* link:https://docs.netapp.com/us-en/ontap-metrocluster/manage/concept_understanding_mcc_data_protection_and_disaster_recovery.html[MetroCluster data protection and disaster recovery^]
 * link:proxmox-smp.html[Configure and use Storage Manager for Proxmox]
 * link:https://pve.proxmox.com/pve-docs/chapter-pvecm.html[Proxmox VE cluster manager^]
 * link:https://pve.proxmox.com/pve-docs/chapter-ha-manager.html[Proxmox VE high availability^]
