@@ -83,6 +83,7 @@ If the NFS VLAN is stretched between site A and site B, skip this step. If the s
 
 .Before you begin
 * Each router must be configured to accept a BGP session from the BGP LIFs at its site, to accept /32 host routes, and not to send route updates to ONTAP.
+* Each ONTAP node and each router must have a unique private ASN, and each BGP LIF and router pair must have a /31 subnet.
 
 .Steps
 . On each cluster, change to the advanced privilege level:
@@ -91,23 +92,39 @@ If the NFS VLAN is stretched between site A and site B, skip this step. If the s
 ----
 set -privilege advanced
 ----
-. On each node of both clusters, optionally create a BGP configuration with the ONTAP ASN and the node management IP address as the router ID:
+. On each node of both clusters, create a BGP configuration with a unique ONTAP ASN for the node, a hold time of 3 seconds, and the node management IP address as the router ID:
 +
 [source,cli]
 ----
-network bgp config create -node <node_name> -asn <ontap_asn> -holdtime <hold_time> -routerid <node_mgmt_ip>
+network bgp config create -node <node_name> -asn <node_asn> -holdtime 3 -routerid <node_mgmt_ip>
 ----
-. On each node of both clusters, create a BGP LIF in the system SVM:
+. Optionally, on each node of both clusters, create a VLAN port on each of the two ports that connect to the routers:
 +
 [source,cli]
 ----
-network interface create -vserver <cluster_name> -lif <bgp_lif_name> -service-policy default-route-announce -home-node <node_name> -home-port <port> -address <bgp_lif_ip> -netmask <netmask>
+network port vlan create -node <node_name> -vlan-name <port_name>-<vlan_id>
 ----
-. On each node of both clusters, create a BGP peer group that peers with the local router and learns the default route from it:
++
+You can also use physical ports, interface groups, or VLANs on interface groups as BGP LIF home ports. The ports must belong to a broadcast domain in the IPspace.
+. On each node of both clusters, create two BGP LIFs in the system SVM, one on each port, with a /31 subnet to the router on that port:
 +
 [source,cli]
 ----
-network bgp peer-group create -peer-group <peer_group_name> -ipspace <ipspace> -bgp-lif <bgp_lif_name> -peer-address <local_router_ip> -peer-asn <router_asn> -use-peer-as-next-hop true
+network interface create -vserver <system_svm> -lif <bgp_lif_name> -service-policy default-route-announce -home-node <node_name> -home-port <vlan_or_port> -address <bgp_lif_ip> -netmask-length 31
+----
++
+For the Default IPspace, `<system_svm>` is the cluster name. For a custom IPspace, it's the IPspace name. You create the BGP LIFs once for each node, and they serve the VIP LIFs of all data SVMs in the IPspace.
+. For each BGP LIF, create a BGP peer group with its router, and learn the default route from that router:
++
+[source,cli]
+----
+network bgp peer-group create -peer-group <peer_group_name> -ipspace <ipspace> -bgp-lif <bgp_lif_name> -peer-address <router_ip> -peer-asn <router_asn> -use-peer-as-next-hop true
+----
+. Verify that each peer group is up:
++
+[source,cli]
+----
+network bgp peer-group show -ipspace <ipspace>
 ----
 . On each cluster, enable multipath routing:
 +

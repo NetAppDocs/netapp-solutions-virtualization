@@ -47,7 +47,7 @@ The solution combines a Proxmox VE stretch cluster with SnapMirror active sync o
 
 The following diagram shows the solution architecture with NFS shared storage.
 
-image:proxmox-active-sync-nas-architecture.png["Architecture of a Proxmox VE stretch cluster with SnapMirror active sync for NAS. The components are described after the diagram."]
+image:proxmox-business-continuity-001.png["Architecture of a Proxmox VE stretch cluster with SnapMirror active sync for NAS. The components are described after the diagram."]
 
 Site A and site B::
 Each site has an AFF two-node cluster and half of the Proxmox VE nodes. The primary cluster at site A serves the shared storage to all Proxmox VE nodes. Nodes at site B reach the primary cluster across the inter-site network. With NFS storage, the secondary SVM at site B stays dormant until a failover occurs.
@@ -111,7 +111,7 @@ ONTAP and Proxmox VE make independent quorum decisions. The design aligns them s
 
 A storage system failure is the case that host-level HA alone can't handle, and the case where SnapMirror active sync adds the most value for service providers. The following diagram shows the state after AFF cluster A fails while every Proxmox VE node stays online, using NFS shared storage.
 
-image:proxmox-active-sync-nas-storage-failover.png["State after AFF cluster A fails. All Proxmox VE nodes keep running and access the NFS shared storage on the secondary SVM at site B. The numbered items are described after the diagram."]
+image:proxmox-business-continuity-002.png["State after AFF cluster A fails. All Proxmox VE nodes keep running and access the NFS shared storage on the secondary SVM at site B. The numbered items are described after the diagram."]
 
 . AFF cluster A becomes unavailable. The Proxmox VE nodes at site A keep running, so the cluster doesn't lose quorum and HA doesn't fence any node.
 . ONTAP Mediator confirms that cluster A is unreachable, and ONTAP activates the secondary SVM on cluster B with the same NFS LIF address, volumes, and export policies.
@@ -134,7 +134,7 @@ NetApp MetroCluster configurations also deliver zero RPO and automatic recovery 
 
 The following diagram shows a Proxmox VE stretch cluster with a four-node MetroCluster IP configuration and NFS shared storage.
 
-image:proxmox-metrocluster-nas-architecture.png["Proxmox VE stretch cluster with a four-node MetroCluster IP configuration. Each site serves its own SVM and holds a stopped mirror of the SVM at the other site. The components are described after the diagram."]
+image:proxmox-business-continuity-003.png["Proxmox VE stretch cluster with a four-node MetroCluster IP configuration. Each site serves its own SVM and holds a stopped mirror of the SVM at the other site. The components are described after the diagram."]
 
 MetroCluster IP clusters::
 Each site has an HA pair with mirrored aggregates. The MetroCluster IP back-end network mirrors data and the nonvolatile cache to the partner site synchronously.
@@ -294,20 +294,33 @@ SnapMirror active sync for NAS requires the same IP address on the primary and s
 
 ONTAP virtual IP (VIP) LIFs solve this problem. A VIP LIF doesn't belong to any subnet. ONTAP advertises the VIP address to the peer routers as a /32 host route by using Border Gateway Protocol (BGP), so the address can move between sites without a stretched VLAN.
 
-image:proxmox-active-sync-nas-vip-bgp.png["VIP LIF for NFS shared storage advertised through BGP from the active site in a layer 3 network. The numbered items are described after the diagram."]
+image:proxmox-business-continuity-004.png["VIP LIF for NFS shared storage advertised through BGP from the active site in a layer 3 network. The numbered items are described after the diagram."]
 
-. Each node at both sites has a BGP LIF in the system SVM that peers with the router at its site. BGP LIFs are node specific and aren't replicated, so you configure them on both clusters.
+. Each node at both sites has BGP LIFs in the system SVM that peer with the routers at its site. BGP LIFs are node specific and aren't replicated, so you configure them on both clusters.
 . The primary SVM hosts the NFS VIP LIF. Cluster A advertises the /32 host route, and the Proxmox VE nodes at both sites reach the storage through the routed network.
 . After a SnapMirror active sync failover, the VIP LIF comes up on the secondary SVM, cluster B advertises the host route, and the routers converge on site B.
 
+When you plan BGP in ONTAP for the first time, it helps to know which SVM owns each LIF. BGP LIFs belong to the system SVM of the IPspace, not to the data SVMs. One set of BGP LIFs on each cluster serves the VIP LIFs of every data SVM in that IPspace, so you don't create BGP LIFs for each tenant. The following diagram shows the LIF and port layout on one cluster, with BGP LIFs on VLAN ports.
+
+image:proxmox-business-continuity-005.png["BGP LIFs in the system SVM of an IPspace, homed on VLAN ports, serve the VIP LIFs of all data SVMs in the IPspace. The numbered items are described after the diagram."]
+
+. Each node has two ports for BGP, in this example the VLAN ports `e0c-100` and `e0d-200`. Each port connects directly to a different router.
+. Each node has two BGP LIFs in the system SVM, one on each port, with a /31 subnet and a BGP peer group to one router. For the Default IPspace, the system SVM is the cluster SVM. For a custom IPspace, it's the SVM with the same name as the IPspace.
+. Data SVMs in the same IPspace host VIP LIFs and don't need BGP LIFs of their own. The BGP peer groups advertise the VIP routes for all SVMs in the IPspace.
+. ONTAP creates a VIP port, for example `v0a`, on each node when you create the first BGP peer group. VIP LIFs are hosted on the VIP port and are reachable through every port on the node that hosts a BGP LIF in the IPspace.
+
+The home port of a BGP LIF can be a physical port, a VLAN port, an interface group, or a VLAN on an interface group. An interface group isn't required. NetApp Technical Report TR-4949 recommends two BGP LIFs on two separate ports for each IPspace, each directly connected to a different first-hop router.
+
 Keep the following guidelines in mind:
 
-* Use external BGP (eBGP), with different autonomous system numbers (ASNs) for ONTAP and the routers.
+* BGP LIFs don't fail over. Redundancy comes from two BGP LIFs per node, each peering with a different router. If a node loses all its BGP sessions for an SVM, ONTAP moves the VIP LIF to another node that has an active BGP session for that SVM.
+* Use external BGP (eBGP) with a unique private autonomous system number (ASN) for each ONTAP node and each router.
+* Use a /31 subnet (netmask 255.255.255.254) for each BGP LIF and its router. Assign the odd-numbered address to the BGP LIF and the even-numbered address to the router.
 * ONTAP doesn't process routes from the routers. Configure the routers to accept /32 host routes from ONTAP and not to send route updates to the cluster.
 * Proxmox VE nodes must not share a subnet with the VIP address. A redundant layer 3 router, for example with VRRP or HSRP, must be in the path between the nodes and the storage.
-* Configure BGP peer groups with `-use-peer-as-next-hop true` so that each cluster learns its default route from its local router. Routes that point to a site A gateway aren't valid at site B after a failover.
+* Configure BGP peer groups with `-use-peer-as-next-hop true` so that each cluster learns its default route from its local routers. Routes that point to a site A gateway aren't valid at site B after a failover.
 * Enable multipath routing so that outgoing VIP traffic uses all available BGP LIF ports.
-* Review the BGP hold time. A router withdraws the route from a failed cluster only when the hold timer expires. During a storage system failure, the router at site A stays online, so a lower hold time shortens convergence to site B.
+* Lower the BGP hold time from the default of 180 seconds. TR-4949 recommends a hold time of 3 seconds. A router withdraws the route from a failed cluster only when the hold timer expires, and during a storage system failure the router at site A stays online.
 
 == Related information
 
@@ -316,5 +329,6 @@ Keep the following guidelines in mind:
 * link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/concept_considerations_for_using_virtual_ip_and_border_gateway_protocol_with_a_mcc_configuration.html[ONTAP MetroCluster considerations for virtual IP and BGP^]
 * link:https://docs.netapp.com/us-en/ontap-metrocluster/manage/concept_understanding_mcc_data_protection_and_disaster_recovery.html[MetroCluster data protection and disaster recovery^]
 * link:proxmox-smp.html[Configure and use Storage Manager for Proxmox]
+* link:https://www.netapp.com/media/79703-TR-4949.pdf[TR-4949: BGP/VIP with ONTAP in the Datacenter^]
 * link:https://pve.proxmox.com/pve-docs/chapter-pvecm.html[Proxmox VE cluster manager^]
 * link:https://pve.proxmox.com/pve-docs/chapter-ha-manager.html[Proxmox VE high availability^]
