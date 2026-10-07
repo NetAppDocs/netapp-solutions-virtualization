@@ -1,0 +1,26 @@
+---
+sidebar: sidebar
+permalink: vmware/vmw-vvol-nfs-migration-integ-tools.html
+keywords: netapp, vmware, nfs, ontap, tools, integration, vaai, snapcenter, sra, disaster recovery
+summary: "Learn about the ONTAP integration tools for managing and protecting NFS datastores in VMware environments, including ONTAP tools for VMware vSphere, the NFS VAAI plug-in, and SnapCenter Plug-in for VMware vSphere."
+---
+= ONTAP integration tools for NFS datastores in VMware environments
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Learn about the ONTAP integration tools for managing, monitoring, and protecting NFS datastores in VMware environments, including ONTAP tools for VMware vSphere, the NFS VAAI plug-in, and SnapCenter Plug-in for VMware vSphere.
+
+NetApp provides the following tools to manage and protect NFS datastores in VMware environments:
+
+* *link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/index.html[ONTAP tools for VMware vSphere^]*: Integrates ONTAP management into the vSphere Client for provisioning, monitoring, and managing NFS datastores, and applies the recommended ESXi host settings.
+* *link:https://docs.netapp.com/us-en/nfs-plugin-vmware-vaai/index.html[NetApp NFS Plug-in for VMware VAAI^]*: Offloads storage operations such as cloning to ONTAP, improving performance and reducing load on ESXi hosts.
+* *link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/protect/enable-storage-replication-adapter.html[Storage Replication Adapter (SRA)^]*: Integrates with VMware Live Site Recovery (previously VMware Site Recovery Manager) to orchestrate disaster recovery by using ONTAP SnapMirror replication.
+* *link:vmw-dr-gs.html[NetApp Disaster Recovery]*: Orchestrates disaster recovery of VMs on NFS datastores from the NetApp Console.
+* *link:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/index.html[SnapCenter Plug-in for VMware vSphere^]*: Provides crash-consistent and VM-consistent backup and restore for VMs on NFS datastores.
+* *link:https://docs.netapp.com/us-en/data-infrastructure-insights/index.html[NetApp Data Infrastructure Insights^]*: Provides visibility into the performance and health of ONTAP storage and VMware infrastructure.
+
+These tools streamline operations, enhance performance, and provide data protection for NFS datastores in VMware environments.
