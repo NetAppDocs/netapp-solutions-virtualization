@@ -279,6 +279,13 @@ Beginning with ONTAP 9.19.1, SnapMirror active sync protects NAS workloads. The 
 
 Use NFSv3 or NFSv4.1 for the NFS storage. Keep the default hard mount behavior, and don't add the `soft` mount option, so that NFS I/O retries instead of failing during a failover.
 
+Use multiple TCP connections to the storage for better performance and fault tolerance. Use either nConnect or session trunking, not both:
+
+* *nConnect.* Opens multiple TCP connections to a single NFS LIF address, for example `nconnect=4`. nConnect works with NFSv3 and NFSv4.1 and with a single VIP LIF address, so it's the recommended option for SnapMirror active sync for NAS, including layer 3 networks.
+* *Session trunking.* Groups multiple data LIFs into one NFSv4.1 session, for example `vers=4.1,trunkdiscovery,max_connect=16`. Session trunking requires NFSv4.1 or later. Use it only when the protected SVM has multiple data LIFs that clients can reach at both sites, such as in a stretched layer 2 network. For details, see link:https://docs.netapp.com/us-en/ontap/nfs-trunking/index.html[NFS trunking^].
+
+For the mount option commands and verification steps, see link:proxmox-ontap-nfs.html[Configure NFS storage for Proxmox VE].
+
 === NFS storage provisioning with SMP
 
 SMP provisions an ONTAP volume, creates or selects an export policy, and mounts the volume as NFS shared storage on the Proxmox VE nodes that you select. For storage in a protected SVM:

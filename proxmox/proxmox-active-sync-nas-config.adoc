@@ -228,7 +228,7 @@ Use the Proxmox VE CLI to add a volume that already exists in the primary SVM as
 +
 [source,cli]
 ----
-pvesm add nfs <storage_id> --server <nfs_lif_or_vip_address> --export <export_path> --content images,rootdir --options vers=<nfs_version>
+pvesm add nfs <storage_id> --server <nfs_lif_or_vip_address> --export <export_path> --content images,rootdir --options vers=<nfs_version>,nconnect=4
 ----
 +
 Use `3` or `4.1` for `<nfs_version>`. Don't add the `soft` mount option.
@@ -240,6 +240,34 @@ pvesm status --storage <storage_id>
 ----
 --
 ====
+
+=== Set the NFS mount options
+
+Use nConnect to open multiple TCP connections to the NFS LIF or VIP address for better performance and fault tolerance. If the protected SVM has multiple data LIFs that clients can reach at both sites, you can use NFSv4.1 session trunking instead. Use either nConnect or session trunking, not both. For details, see link:proxmox-ontap-nfs.html[Configure NFS storage for Proxmox VE].
+
+.Steps
+. If you provisioned the storage with SMP, or without nConnect, set the mount options on one Proxmox VE node:
++
+[source,cli]
+----
+pvesm set <storage_id> --options vers=<nfs_version>,nconnect=4
+----
++
+To use session trunking instead, set:
++
+[source,cli]
+----
+pvesm set <storage_id> --options vers=4.1,trunkdiscovery,max_connect=16
+----
++
+Proxmox VE applies new mount options the next time the storage is mounted. Remount the storage on each node during a maintenance window, after you migrate the VMs off that node.
+. Verify the options in `/etc/pve/storage.cfg`.
+. On each Proxmox VE node, verify that there are multiple connections to the NFS server address:
++
+[source,cli]
+----
+ss -an | grep :2049
+----
 
 == Step 5: Configure HA and VM backups
 
