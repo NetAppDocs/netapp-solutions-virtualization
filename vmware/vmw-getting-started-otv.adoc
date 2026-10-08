@@ -13,7 +13,7 @@ summary:
 :imagesdir: ../media/
 
 [.lead]
-ONTAP tools for VMware vSphere streamlines lifecycle management for VMs using NetApp storage. Administrators can manage storage directly from the vCenter Server, simplifying operations and enhancing scalability. Key components like the Virtual Storage Console (VSC), VASA Provider, and Storage Replication Adapter (SRA) optimize provisioning, performance monitoring, and disaster recovery. 
+ONTAP tools for VMware vSphere streamlines lifecycle management for VMs using NetApp storage. Administrators can manage storage directly from the vCenter Server, simplifying operations and enhancing scalability. Key components like the vSphere Client plug-in, VASA Provider, and Storage Replication Adapter (SRA) optimize provisioning, performance monitoring, and disaster recovery.
 
 == Introduction
 
@@ -21,12 +21,15 @@ It enables  administrators to manage the storage within the vCenter Server direc
  
 == ONTAP Tools Components
 
-* *Virtual Storage Console (VSC)* The VSC includes the interface integrated with the vSphere client where you can add storage controllers, provision datastores, monitor performance of datastores, and view and update ESXi host settings.
+* *vSphere Client plug-in* The plug-in includes the interface integrated with the vSphere client where you can add storage controllers, provision datastores, monitor performance of datastores, and view and update ESXi host settings. In ONTAP tools 9.x, this component is called the Virtual Storage Console (VSC).
 
 * *VASA Provider* The VMware vSphere APIs for Storage Awareness (VASA) Provider for ONTAP send information about storage used by VMware vSphere to the vCenter Server, enabling provisioning of VMware Virtual Volumes (vVols) datastores, creation and use of storage capability profiles, compliance verification, and performance monitoring.
 
 * *Storage Replication Adapter (SRA)* When enabled and used with VMware Site Recovery Manager (SRM), SRA facilitates the recovery of vCenter Server datastores and virtual machines in the event of a failure, allowing configuration of protected sites and recovery sites for disaster recovery.
 
-For more information on NetApp ONTAP tools for VMware see https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere/index.html[ONTAP tools for VMware vSphere Documentation].
+For more information, see the ONTAP tools for VMware vSphere documentation for your version:
+
+* link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/index.html[ONTAP tools for VMware vSphere 10.x documentation^] (latest release)
+* link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere/index.html[ONTAP tools for VMware vSphere 9.x documentation^]
 
 // NetApp Solutions restructuring (jul 2025) - renamed from vmware/vmw-getting-started-ontap-tools-for-vmware.adoc
