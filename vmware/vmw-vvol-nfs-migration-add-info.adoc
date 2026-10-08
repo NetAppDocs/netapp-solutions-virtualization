@@ -1,0 +1,36 @@
+---
+sidebar: sidebar
+permalink: vmware/vmw-vvol-nfs-migration-add-info.html
+keywords: netapp, vmware, vvol, vvols, ONTAP tools, nfs, flexgroup, resources
+summary: "Find additional resources with more information about migrating from vVols datastores to NFS datastores in VMware vSphere environments with ONTAP."
+---
+= Additional resources for migrating from vVols to NFS datastores
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Find additional resources with more information about migrating from vVols datastores to NFS datastores in VMware vSphere environments with ONTAP.
+
+== NetApp documentation
+
+* link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vsphere-overview.html[VMware vSphere with ONTAP best practices guide^]
+* link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vsphere-datastores-nfs.html[NFS datastores^]
+* link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vvols-overview.html[vVols with ONTAP^]
+* link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vsphere-settings.html[Recommended ESXi host and other ONTAP settings^]
+* link:vmw-nfs-otv10.html[Configure NFS datastores for vSphere 8 using ONTAP tools for VMware vSphere]
+* link:vmw-vsphere8-nfs-nconnect.html[Use nConnect on NFS v3 datastores to improve datastore performance]
+* link:migrate-vms-to-ontap-datastore.html[Migrate VMs from VMware vSphere to ONTAP datastores]
+* link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/index.html[ONTAP tools for VMware vSphere documentation^]
+* link:https://docs.netapp.com/us-en/nfs-plugin-vmware-vaai/index.html[NetApp NFS Plug-in for VMware VAAI documentation^]
+* link:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/index.html[SnapCenter Plug-in for VMware vSphere documentation^]
+* link:https://docs.netapp.com/us-en/ontap/flexgroup/index.html[ONTAP FlexGroup volumes documentation^]
+* link:https://docs.netapp.com/us-en/ontap/nfs-admin/index.html[ONTAP NFS documentation^]
+
+== VMware documentation
+
+* link:https://knowledge.broadcom.com/external/article?articleId=401070[Deprecation of VMware vSphere Virtual Volumes (vVols) in VCF 9.0 and VVF 9.0^]
+* link:https://knowledge.broadcom.com/external/article/313464/support-for-nconnect-feature-added-in-es.html[Support for nConnect Feature in NFS Client - ESXi^]
+* link:https://configmax.broadcom.com[VMware Configuration Maximums^]

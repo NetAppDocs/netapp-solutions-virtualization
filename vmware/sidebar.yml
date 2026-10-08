@@ -154,6 +154,23 @@ entries:
 
       - title: "Migrate VMs from vSphere"
         url: /vmware/migrate-vms-to-ontap-datastore.html
+
+      - title: "Migrate VMs from vVols to NFS"
+        entries:
+          - title: "Learn about migrating from vVols to NFS"
+            url: /vmware/vmw-vvol-nfs-migration.html
+          - title: "Deployment best practices"
+            url: /vmware/vmw-vvol-nfs-migration-best-practices.html
+          - title: "Storage options"
+            url: /vmware/vmw-vvol-nfs-migration-storage-options.html
+          - title: "Sizing guidelines"
+            url: /vmware/vmw-vvol-nfs-migration-sizing.html
+          - title: "ONTAP integration tools"
+            url: /vmware/vmw-vvol-nfs-migration-integ-tools.html
+          - title: "Migration options"
+            url: /vmware/vmw-vvol-nfs-migration-options.html
+          - title: "Additional resources"
+            url: /vmware/vmw-vvol-nfs-migration-add-info.html
 #
       - title: "Protect and recover data against ransomware"
         url: /vmware/vmw-nfs-arp.html

@@ -126,7 +126,7 @@ image:vmfs-deploy-014.png["Figure showing input/output dialog or representing wr
 +
 image:vmfs-deploy-015.png["Figure showing input/output dialog or representing written content"]
 
-Refer to these links for vVol, FC, NVMe/TCP datastore provisioning.
+To provision vVols datastores, or VMFS datastores using FC or NVMe/TCP, refer to link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/create-datastore.html[Create a datastore in ONTAP tools^]. That page also lists the ESXi host configuration required for NVMe/TCP.
 
 == VAAI Offloading
 
