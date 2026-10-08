@@ -24,7 +24,8 @@ Before you start, review the link:proxmox-business-continuity.html[solution arch
 * An SVM at site A must serve NFS to the Proxmox VE nodes. The SVM must contain only FlexVol volumes for NAS, with no LUNs, and its export policy must allow all Proxmox VE nodes.
 * An even number of Proxmox VE 9.0 or later nodes must be installed, split evenly between site A and site B, with a corosync latency under 5 ms between all nodes.
 * A Linux host at site C must be available for the corosync QDevice daemon, reachable from all Proxmox VE nodes on TCP port 5403.
-* For layer 3 networks, a BGP-capable router must be available at each site.
+* The NFS VLAN must be stretched between site A and site B. For a routed layer 3 network, a BGP-capable router must be available at each site, and you must confirm with NetApp that VIP LIFs with BGP are supported with SnapMirror active sync for NAS.
+* Your ONTAP and Proxmox VE versions must be listed together in the link:https://mysupport.netapp.com/matrix/[NetApp Interoperability Matrix Tool (IMT)^].
 * To provision shared storage and back up VMs, Storage Manager for Proxmox must be installed with network access to the Proxmox VE nodes and to both ONTAP clusters.
 
 == Step 1: Protect the NFS SVM with SnapMirror active sync
@@ -78,6 +79,8 @@ volume modify -vserver <primary_svm> -volume <volume_name> -smas-protection unpr
 ----
 
 == Step 2: Configure a VIP LIF with BGP for layer 3 networks
+
+CAUTION: At the time of publication, NetApp hasn't documented VIP LIFs with BGP as a qualified configuration for SnapMirror active sync for NAS. Confirm current support with NetApp before you complete this step. Otherwise, stretch the NFS VLAN between the sites and skip this step.
 
 If the NFS VLAN is stretched between site A and site B, skip this step. If the sites are connected by a routed network, create BGP LIFs on every node of both clusters, and then host the NFS address on a VIP LIF in the primary SVM. The VIP address must not belong to the subnet of the Proxmox VE nodes.
 

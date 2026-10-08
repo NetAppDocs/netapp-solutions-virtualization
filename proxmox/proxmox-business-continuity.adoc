@@ -19,9 +19,9 @@ Building storage and site resilience for Proxmox VE with native tools alone is d
 
 * *Data loss after a site failure.* Proxmox VE storage replication and Proxmox Backup Server are asynchronous. Changes made since the last replication or backup are lost when the primary site fails.
 * *Manual, slow recovery.* Recovering at a secondary site usually means promoting replicas, mounting storage under a different address, updating `/etc/pve/storage.cfg`, and restarting VMs. Each manual step adds downtime and the risk of error during an outage.
-* *Complex stretched storage.* Software-defined stretched storage keeps extra replicas of every object at both sites, consumes compute and network resources on every node, and needs its own tie-breaker design.
-* *Split-brain risk.* A two-site cluster with an even number of nodes loses quorum, or splits, when the inter-site link fails, unless a third-site witness decides which site survives.
-* *Routed networks between sites.* Many data centers don't stretch layer 2 VLANs between sites, so a storage IP address from one site isn't reachable at the other site after a failover.
+* *Stretched storage that competes with VMs for host resources.* Hyperconverged stretched storage, such as Ceph in stretch mode, runs on the Proxmox VE nodes and keeps two replicas of every object at each site. Replication, recovery, and rebalancing traffic consume CPU, memory, and network resources on the same nodes that run VMs.
+* *Two quorum decisions that must agree.* Any two-site design needs a witness in a third failure domain, for the Proxmox VE cluster and for the storage. If the cluster and the storage choose different surviving sites after an inter-site link failure, VMs restart on nodes that can't reach the active storage.
+* *A storage address that must work at both sites.* After a storage failover, Proxmox VE nodes must reach the shared storage at the same address. That address must be reachable at both sites, which usually means a layer 2 VLAN stretched between the sites.
 
 === Service provider challenges
 
@@ -44,6 +44,31 @@ The solution combines a Proxmox VE stretch cluster with SnapMirror active sync o
 * *Automatic failover.* ONTAP Mediator, or ONTAP Cloud Mediator, acts as a witness in a third failure domain. When the primary storage or site fails, ONTAP fails over to site B without manual intervention.
 * *Granular control.* You choose which workloads to protect, and you can fail over workloads individually, for example to move one tenant or application for site maintenance.
 * *Use of the secondary copy.* You can clone the secondary copy for development, testing, or disaster recovery testing without affecting replication.
+
+=== How the solution addresses the challenges
+
+[cols="2,4,3" options="header"]
+|===
+| Challenge
+| How the solution helps
+| What you still plan for
+
+| Data loss and manual recovery
+| Synchronous replication gives zero RPO. ONTAP fails over automatically, and the secondary SVM presents the same NFS address, so `/etc/pve/storage.cfg` stays valid.
+| Proxmox VE HA still restarts VMs from a failed site.
+
+| Stretched storage on the hosts
+| Replication runs on the AFF controllers, not on the Proxmox VE nodes, so host CPU, memory, and network stay available for VMs. ONTAP keeps one copy at each site, and storage efficiency applies to both copies.
+| Like any synchronous replication, the solution needs a full second copy at site B, and replication adds load to both AFF clusters. Size both clusters for the replication workload.
+
+| Two quorum decisions
+| ONTAP Mediator, or ONTAP Cloud Mediator as a service, is a lightweight witness outside the data path. This solution shows how to align the corosync QDevice with the primary cluster so that both choose the same site.
+| A third failure domain is still required, for ONTAP Mediator (unless you use ONTAP Cloud Mediator) and for the QDevice.
+
+| A storage address at both sites
+| The secondary SVM takes over the same NFS LIF address, so no remount or storage reconfiguration is needed.
+| The NFS subnet must be reachable at both sites, typically with a stretched layer 2 VLAN. See <<Layer 3 networks with VIP LIFs and BGP>> for the qualification status of VIP LIFs.
+|===
 
 The following diagram shows the solution architecture with NFS shared storage.
 
@@ -90,6 +115,10 @@ ONTAP and Proxmox VE make independent quorum decisions. The design aligns them s
 | ONTAP Mediator confirms that cluster A is unreachable, and ONTAP automatically fails over the shared storage to cluster B.
 | No quorum change and no VM restart. VMs on all nodes resume I/O on the same shared storage after the storage failover, with site A nodes reaching cluster B across the inter-site network.
 
+| One AFF controller at site A fails
+| The partner controller takes over in a local HA takeover. No SnapMirror active sync failover occurs.
+| No impact. VMs pause I/O briefly during the takeover.
+
 | Site B fails
 | Cluster A continues to serve data. Replication resumes when site B returns.
 | Site A nodes and the QDevice keep quorum. HA restarts the site B VMs on site A nodes.
@@ -127,23 +156,71 @@ During a site failure, both the storage system and the Proxmox VE nodes at that 
 
 NetApp MetroCluster configurations also deliver zero RPO and automatic recovery for a Proxmox VE stretch cluster. The two solutions differ in what they protect:
 
-* *MetroCluster protects all workloads.* MetroCluster combines array-based clustering with synchronous replication. It mirrors every aggregate, the nonvolatile cache, and the configuration of every SVM to the partner site, so all shared storage on the cluster is protected without per-workload setup.
+* *MetroCluster protects all workloads.* MetroCluster combines array-based clustering with synchronous replication. It mirrors the data in every mirrored aggregate, the nonvolatile memory (NVRAM), and the configuration of every SVM to the partner site, so all shared storage on the cluster is protected without per-workload setup.
 * *SnapMirror active sync protects a subset of workloads.* You choose which SVMs or volumes to protect, and you can fail over each one independently. Unprotected workloads can share the same clusters.
+
+Both solutions keep a full copy of the protected data at each site, need a witness in a third failure domain, and add replication load to the storage controllers. They differ in protection scope, failover granularity, and cluster design.
+
+NOTE: Before you deploy either solution, verify that your ONTAP version, MetroCluster or SnapMirror active sync configuration, and Proxmox VE version are listed together in the link:https://mysupport.netapp.com/matrix/[NetApp Interoperability Matrix Tool (IMT)^].
 
 === MetroCluster architecture with Proxmox VE
 
 The following diagram shows a Proxmox VE stretch cluster with a four-node MetroCluster IP configuration and NFS shared storage.
 
-image:proxmox-business-continuity-003.png["Proxmox VE stretch cluster with a four-node MetroCluster IP configuration. Each site serves its own SVM and holds a stopped mirror of the SVM at the other site. The components are described after the diagram."]
+image:proxmox-business-continuity-003.png["Proxmox VE stretch cluster with a four-node MetroCluster IP configuration. Every Proxmox VE node mounts the active SVM at each site. Each site holds a stopped mirror of the SVM at the other site. The components are described after the diagram."]
 
 MetroCluster IP clusters::
-Each site has an HA pair with mirrored aggregates. The MetroCluster IP back-end network mirrors data and the nonvolatile cache to the partner site synchronously.
+Each site has an HA pair with mirrored aggregates. The MetroCluster IP back-end network mirrors data (SyncMirror) and NVRAM to the partner site synchronously.
 
 SVMs at both sites::
 Each site can serve its own SVMs. For each SVM, MetroCluster keeps a stopped mirror SVM with the `-mc` suffix at the partner site, with the same configuration and LIF addresses.
 
+NFS access from all nodes::
+Every Proxmox VE node mounts the shared storage of both active SVMs, SVM A1 and SVM B1, so that HA can restart any VM on any node. Nodes at site B reach SVM A1, and nodes at site A reach SVM B1, across the inter-site network. This is the same access model as SnapMirror active sync.
+
 Switchover::
 If a site fails, ONTAP Mediator or MetroCluster Tiebreaker at site C enables an automatic switchover. The mirror SVMs at the surviving site start and serve all shared storage with the same NFS addresses, and Proxmox VE HA restarts the VMs from the failed site. A single controller failure is handled by a local HA takeover, without a switchover. After you repair the failed site, you heal the aggregates and switch back.
+
+=== How MetroCluster responds to failures
+
+The following table shows how a MetroCluster IP configuration and the Proxmox VE stretch cluster respond to the same failures as in <<How the solution responds to failures>>. In this example, SVM A1 is active at site A and SVM B1 is active at site B.
+
+[cols="2,3,3" options="header"]
+|===
+| Event
+| ONTAP behavior
+| Proxmox VE behavior
+
+| Site A fails
+| ONTAP Mediator or MetroCluster Tiebreaker confirms the failure, and ONTAP switches over site A. SVM A1-mc starts at site B with the same NFS LIF address. SVM B1 keeps serving data.
+| Site B nodes and the QDevice keep quorum. HA fences the site A nodes and restarts their VMs on site B nodes. VMs that already ran on site B nodes keep running, and those on SVM A1 resume I/O after the switchover.
+
+| MetroCluster IP cluster A fails, Proxmox VE nodes at site A keep running
+| ONTAP Mediator or MetroCluster Tiebreaker confirms that cluster A is unreachable, and ONTAP switches over site A. SVM A1-mc starts at site B with the same NFS LIF address.
+| No quorum change and no VM restart. VMs on SVM A1 resume I/O after the switchover, with site A nodes reaching site B across the inter-site network.
+
+| One controller at site A fails
+| The HA partner at site A takes over in a local HA takeover. No switchover occurs.
+| No impact. VMs pause I/O briefly during the takeover.
+
+| Site B fails
+| ONTAP switches over site B. SVM B1-mc starts at site A with the same NFS LIF address. SVM A1 keeps serving data.
+| Site A nodes and the QDevice keep quorum. HA restarts the site B VMs on site A nodes, where they access SVM B1 at site A.
+
+| Inter-site link fails
+| No switchover occurs, because both clusters are still running. Each site keeps serving its own SVMs, and mirroring to the partner site is suspended until the link returns.
+| The QDevice gives its vote to the site A partition when the tie breaker is aligned with site A. Site B nodes lose quorum and self-fence. HA restarts VMs on SVM A1 on site A nodes. VMs on SVM B1 can't restart until the link returns, because site A nodes can't reach SVM B1.
+
+| Site C fails
+| Mirroring continues with zero data loss, but automatic switchover isn't possible until the witness is available. You can still switch over manually.
+| The cluster keeps quorum with the votes of the four nodes. No VMs are affected.
+
+| One Proxmox VE node fails
+| No impact.
+| HA restarts the VMs from that node on other nodes, preferring nodes at the same site.
+|===
+
+The inter-site link failure is the main difference from a design with one primary site. Whenever both sites host active SVMs, with MetroCluster or with two SnapMirror active sync SVMs in opposite directions, the corosync tie breaker can favor only one site. VMs whose active SVM is at the other site stay down until the link returns. To limit the impact, use redundant inter-site links on separate physical paths, and place the most critical VMs on the SVM at the site that the tie breaker favors.
 
 === Feature comparison
 
@@ -172,6 +249,18 @@ If a site fails, ONTAP Mediator or MetroCluster Tiebreaker at site C enables an 
 | Witness at site C
 | ONTAP Mediator or ONTAP Cloud Mediator
 | ONTAP Mediator or MetroCluster Tiebreaker
+
+| Copies of protected data
+| One at each site
+| One at each site, in mirrored aggregates
+
+| Replication path
+| SnapMirror synchronous over intercluster LIFs
+| SyncMirror and NVRAM mirroring over the MetroCluster IP back-end network
+
+| NFS address at both sites
+| Stretched layer 2 VLAN. VIP LIFs with BGP pending qualification
+| Stretched layer 2 VLAN, or VIP LIFs with BGP
 
 | Recovery after a site failure
 | Fail back each SVM
@@ -299,7 +388,9 @@ SMP provisions an ONTAP volume, creates or selects an export policy, and mounts 
 
 SnapMirror active sync for NAS requires the same IP address on the primary and secondary SVMs. When the NFS VLAN is stretched between sites, the LIF IP address moves with the SVM. When the sites are connected by a routed layer 3 network, the subnet of a site A LIF doesn't exist at site B.
 
-ONTAP virtual IP (VIP) LIFs solve this problem. A VIP LIF doesn't belong to any subnet. ONTAP advertises the VIP address to the peer routers as a /32 host route by using Border Gateway Protocol (BGP), so the address can move between sites without a stretched VLAN.
+CAUTION: At the time of publication, NetApp hasn't documented VIP LIFs with BGP as a qualified configuration for SnapMirror active sync for NAS. Before you plan a layer 3 design, confirm current support with NetApp. Otherwise, stretch the NFS VLAN between the sites. MetroCluster IP configurations support VIP LIFs with BGP.
+
+ONTAP virtual IP (VIP) LIFs address this problem. A VIP LIF doesn't belong to any subnet. ONTAP advertises the VIP address to the peer routers as a /32 host route by using Border Gateway Protocol (BGP), so the address can move between sites without a stretched VLAN.
 
 image:proxmox-business-continuity-004.png["VIP LIF for NFS shared storage advertised through BGP from the active site in a layer 3 network. The numbered items are described after the diagram."]
 
