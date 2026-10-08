@@ -59,7 +59,8 @@ Integrates with ONTAP's replication features to provide robust disaster recovery
 For complete details on Trident Protect, refer to NetApp Trident Protect link:https://docs.netapp.com/us-en/trident/trident-protect/learn-about-trident-protect.html[documentation here].
 
 == Trident support for orchestrators and storage backends
-For a complete list of supported Kubernetes distributions (orchestrators) and storage backends (on-premises and cloud), refer to the link:https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html[Trident documentation].
+For supported Kubernetes distributions and storage backends, refer to the link:https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html[Trident requirements]. 
+NOTE: Trident also supports NetApp link:https://docs.netapp.com/us-en/ontap-afx/get-started/ontap-afx-storage.html#typical-application-workloads[AFX]. For AFX support requirements, refer to the link:https://docs.netapp.com/us-en/trident/trident-use/ontap-nas-prep.html[ONTAP NAS preparation documentation].
 
 == Trident drivers for ONTAP storage
 Trident includes the following CSI drivers, each capable of provisioning a volume in the backend storage 
