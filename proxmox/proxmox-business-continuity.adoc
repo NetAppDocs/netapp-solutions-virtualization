@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: proxmox/proxmox-business-continuity.html
-keywords: proxmox ve, business continuity, snapmirror active sync, metrocluster, stretch cluster, service provider, nfs, corosync, bgp
+keywords: proxmox ve, business continuity, snapmirror active sync, metrocluster, stretch cluster, service provider, nfs, corosync, bgp, ontap mediator, ontap cloud mediator, netapp console
 summary: "Keep Proxmox VE VMs running through a storage or site failure with zero RPO by using ONTAP SnapMirror active sync with a Proxmox VE stretch cluster."
 ---
 = Learn about Proxmox VE business continuity with SnapMirror active sync
@@ -41,7 +41,7 @@ The solution combines a Proxmox VE stretch cluster with SnapMirror active sync o
 
 * *Zero RPO.* ONTAP replicates every write to the shared storage synchronously from the primary cluster at site A to the secondary cluster at site B.
 * *Same shared storage at both sites.* After a failover, the secondary cluster presents the same storage to Proxmox VE, so the storage definitions in `/etc/pve/storage.cfg` stay valid.
-* *Automatic failover.* ONTAP Mediator, or ONTAP Cloud Mediator, acts as a witness in a third failure domain. When the primary storage or site fails, ONTAP fails over to site B without manual intervention.
+* *Automatic failover.* A mediator acts as a witness outside the two sites. You can install ONTAP Mediator at a third site, or use ONTAP Cloud Mediator, a service hosted in the NetApp Console. When the primary storage or site fails, ONTAP fails over to site B without manual intervention.
 * *Granular control.* You choose which workloads to protect, and you can fail over workloads individually, for example to move one tenant or application for site maintenance.
 * *Use of the secondary copy.* You can clone the secondary copy for development, testing, or disaster recovery testing without affecting replication.
 
@@ -62,8 +62,8 @@ The solution combines a Proxmox VE stretch cluster with SnapMirror active sync o
 | Like any synchronous replication, the solution needs a full second copy at site B, and replication adds load to both AFF clusters. Size both clusters for the replication workload.
 
 | Two quorum decisions
-| ONTAP Mediator, or ONTAP Cloud Mediator as a service, is a lightweight witness outside the data path. This solution shows how to align the corosync QDevice with the primary cluster so that both choose the same site.
-| A third failure domain is still required, for ONTAP Mediator (unless you use ONTAP Cloud Mediator) and for the QDevice.
+| ONTAP Mediator, or ONTAP Cloud Mediator as a service in the NetApp Console, is a lightweight witness outside the data path. This solution shows how to align the corosync QDevice with the primary cluster so that both choose the same site.
+| A third location is still required for the QDevice. It's also required for ONTAP Mediator, but not for ONTAP Cloud Mediator. See <<Mediator options>>.
 
 | A storage address at both sites
 | The secondary SVM takes over the same NFS LIF address, so no remount or storage reconfiguration is needed.
@@ -72,16 +72,65 @@ The solution combines a Proxmox VE stretch cluster with SnapMirror active sync o
 
 The following diagram shows the solution architecture with NFS shared storage.
 
-image:proxmox-business-continuity-001.png["Architecture of a Proxmox VE stretch cluster with SnapMirror active sync for NAS. The components are described after the diagram."]
+image:proxmox-business-continuity-001.png["Architecture of a Proxmox VE stretch cluster with SnapMirror active sync for NAS. ONTAP Mediator at site C and ONTAP Cloud Mediator in the NetApp Console are shown as alternative witness options. The components are described after the diagram."]
 
 Site A and site B::
 Each site has an AFF two-node cluster and half of the Proxmox VE nodes. The primary cluster at site A serves the shared storage to all Proxmox VE nodes. Nodes at site B reach the primary cluster across the inter-site network. With NFS storage, the secondary SVM at site B stays dormant until a failover occurs.
 
 Site C::
-A third failure domain hosts ONTAP Mediator and the corosync QDevice daemon (`corosync-qnetd`). ONTAP Mediator helps ONTAP decide which cluster serves data. The QDevice provides an extra vote so that the Proxmox VE cluster keeps quorum when one site fails. You can use ONTAP Cloud Mediator in the NetApp Console instead of an on-premises ONTAP Mediator.
+A third failure domain hosts the corosync QDevice daemon (`corosync-qnetd`) and, if you choose option 1, ONTAP Mediator. The QDevice provides an extra vote so that the Proxmox VE cluster keeps quorum when one site fails.
+
+NetApp Console::
+If you choose option 2, ONTAP Cloud Mediator runs as a service in the NetApp Console, which NetApp hosts and manages. Both AFF clusters connect to it over HTTPS, so you don't install or maintain a mediator host.
+
+Mediator::
+ONTAP Mediator or ONTAP Cloud Mediator helps ONTAP decide which cluster serves data. Use one of them, not both. For a comparison, see <<Mediator options>>.
 
 Proxmox VE stretch cluster::
 All Proxmox VE nodes belong to one cluster and share the same storage definitions. Proxmox VE HA restarts VMs from a failed site on the surviving nodes. Storage Manager for Proxmox (SMP) runs as an HA VM on the cluster to provision shared storage and to back up, restore, and clone VMs.
+
+=== Mediator options
+
+SnapMirror active sync uses a mediator as a passive witness. During a network partition or the failure of one cluster, ONTAP uses the mediator to decide which copy continues to serve I/O. The mediator isn't in the data path and doesn't start failovers itself. You can use one of the following options, but not both at the same time.
+
+[cols="2,3,3" options="header"]
+|===
+| Consideration
+| Option 1: ONTAP Mediator
+| Option 2: ONTAP Cloud Mediator
+
+| Where it runs
+| A Linux host that you install and manage in a third failure domain, such as site C, with independent power and network infrastructure.
+| A cloud service in the NetApp Console. NetApp hosts and manages it, so you don't need a mediator host at a third site.
+
+| ONTAP version
+| ONTAP 9.19.1 or later for SnapMirror active sync for NAS.
+| ONTAP Cloud Mediator is available beginning with ONTAP 9.17.1. SnapMirror active sync for NAS needs ONTAP 9.19.1 or later.
+
+| Cluster connectivity
+| Both clusters connect to the mediator host. The default service port is 31784.
+| Both clusters connect outbound over HTTPS to the NetApp Console, directly or through an HTTP proxy. The recommended ping latency to the NetApp Console is under 200 ms.
+
+| Setup
+| Install the package on the Linux host, and then add it to the clusters with the host address and a mediator user.
+| Create a NetApp Console service account with the *ONTAP Mediator Setup Role*, and then add the mediator to the clusters with the organization ID, client ID, and client secret.
+
+| Operations
+| You patch and upgrade the host, and you keep it available.
+| No host to patch or upgrade. You depend on internet access from both sites and on the availability of the NetApp Console service.
+
+| Best fit
+| Environments that have a third site, or that don't allow the storage clusters to reach the internet.
+| Environments without a third site for a mediator, or that want to avoid operating one.
+|===
+
+Keep the following in mind when you choose:
+
+* *The QDevice still needs a third location.* ONTAP Cloud Mediator removes the mediator host, not the corosync QDevice host. The QDevice needs a small Linux host that all Proxmox VE nodes can reach on TCP port 5403, and it doesn't have the low-latency requirement of corosync.
+* *Both clusters need access to the NetApp Console.* If the clusters use a proxy, install the proxy's root CA certificate on both clusters. NetApp recommends a different proxy server for each cluster.
+* *Plan for the same failure behavior with either option.* When the mediator is unavailable, replication continues without data loss, but automatic and planned failovers aren't possible until the mediator is available again. With ONTAP Cloud Mediator, this includes a loss of connectivity from the clusters to the NetApp Console.
+
+NOTE: The mediator options in this section apply to SnapMirror active sync. For MetroCluster, this solution uses ONTAP Mediator or MetroCluster Tiebreaker. Before you deploy, verify that your ONTAP version, mediator option, and Proxmox VE version are listed together in the link:https://mysupport.netapp.com/matrix/[NetApp Interoperability Matrix Tool (IMT)^].
 
 === Benefits for service providers
 
@@ -108,11 +157,11 @@ ONTAP and Proxmox VE make independent quorum decisions. The design aligns them s
 | Proxmox VE behavior
 
 | Site A fails
-| ONTAP Mediator confirms the failure, and ONTAP automatically fails over the shared storage to cluster B.
+| The mediator confirms the failure, and ONTAP automatically fails over the shared storage to cluster B.
 | Site B nodes and the QDevice keep quorum. HA fences the site A nodes and restarts their VMs on site B nodes. VMs already on site B resume I/O after the storage failover.
 
 | AFF cluster A fails, Proxmox VE nodes at site A keep running
-| ONTAP Mediator confirms that cluster A is unreachable, and ONTAP automatically fails over the shared storage to cluster B.
+| The mediator confirms that cluster A is unreachable, and ONTAP automatically fails over the shared storage to cluster B.
 | No quorum change and no VM restart. VMs on all nodes resume I/O on the same shared storage after the storage failover, with site A nodes reaching cluster B across the inter-site network.
 
 | One AFF controller at site A fails
@@ -127,8 +176,8 @@ ONTAP and Proxmox VE make independent quorum decisions. The design aligns them s
 | Cluster A continues to serve data. No failover occurs.
 | The QDevice gives its vote to the site A partition when the tie breaker is aligned with the primary cluster. Site B nodes lose quorum and self-fence, and HA restarts their VMs on site A.
 
-| Site C fails
-| Replication continues with zero data loss, but automatic and planned failovers aren't possible until the mediator is available.
+| Site C fails, or the clusters lose access to the NetApp Console
+| Replication continues with zero data loss, but automatic and planned failovers aren't possible until the mediator is available. With ONTAP Cloud Mediator, a site C failure affects only the QDevice.
 | The cluster keeps quorum with the votes of the four nodes. No VMs are affected.
 
 | One Proxmox VE node fails
@@ -143,7 +192,7 @@ A storage system failure is the case that host-level HA alone can't handle, and 
 image:proxmox-business-continuity-002.png["State after AFF cluster A fails. All Proxmox VE nodes keep running and access the NFS shared storage on the secondary SVM at site B. The numbered items are described after the diagram."]
 
 . AFF cluster A becomes unavailable. The Proxmox VE nodes at site A keep running, so the cluster doesn't lose quorum and HA doesn't fence any node.
-. ONTAP Mediator confirms that cluster A is unreachable, and ONTAP activates the secondary SVM on cluster B with the same NFS LIF address, volumes, and export policies.
+. The mediator, ONTAP Mediator at site C or ONTAP Cloud Mediator in the NetApp Console, confirms that cluster A is unreachable, and ONTAP activates the secondary SVM on cluster B with the same NFS LIF address, volumes, and export policies.
 . All Proxmox VE nodes resume I/O on the same shared storage. Site B nodes reach cluster B locally, and site A nodes reach it across the inter-site network. VMs pause I/O during the failover and keep running without a restart.
 
 When cluster A returns, replication resumes. Plan the failback to cluster A during a maintenance window so that site A VMs access local storage again.
@@ -287,7 +336,7 @@ Proxmox VE uses corosync for cluster membership and quorum. Corosync is more sen
 
 === Quorum with a QDevice at a third site
 
-Split the Proxmox VE nodes evenly between site A and site B, and add a QDevice at site C. With four nodes and a QDevice, the cluster has five votes and needs three for quorum, so either site can fail without losing quorum. The QDevice connects to the cluster over TCP port 5403 and doesn't have the low-latency requirement of corosync, so it can share site C with ONTAP Mediator.
+Split the Proxmox VE nodes evenly between site A and site B, and add a QDevice at site C. With four nodes and a QDevice, the cluster has five votes and needs three for quorum, so either site can fail without losing quorum. The QDevice connects to the cluster over TCP port 5403 and doesn't have the low-latency requirement of corosync, so it can share site C with ONTAP Mediator. If you use ONTAP Cloud Mediator, you still need a third location for the QDevice, but it can be a small Linux host that doesn't also host a mediator.
 
 === Tie breaker alignment with the primary cluster
 
@@ -424,6 +473,8 @@ Keep the following guidelines in mind:
 
 * link:https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/architecture-concept.html[ONTAP SnapMirror active sync architecture^]
 * link:https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/prerequisites-reference.html[Prerequisites for ONTAP SnapMirror active sync^]
+* link:https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/cloud-mediator-requirements-concept.html[Prepare to configure ONTAP Cloud Mediator^]
+* link:https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/cloud-mediator-config-task.html[Configure the ONTAP Cloud Mediator for SnapMirror active sync^]
 * link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/concept_considerations_for_using_virtual_ip_and_border_gateway_protocol_with_a_mcc_configuration.html[ONTAP MetroCluster considerations for virtual IP and BGP^]
 * link:https://docs.netapp.com/us-en/ontap-metrocluster/manage/concept_understanding_mcc_data_protection_and_disaster_recovery.html[MetroCluster data protection and disaster recovery^]
 * link:proxmox-smp.html[Configure and use Storage Manager for Proxmox]
