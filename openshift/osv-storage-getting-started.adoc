@@ -58,30 +58,15 @@ Integrates with ONTAP's replication features to provide robust disaster recovery
 
 For complete details on Trident Protect, refer to NetApp Trident Protect link:https://docs.netapp.com/us-en/trident/trident-protect/learn-about-trident-protect.html[documentation here].
 
-== NetApp ONTAP hardware models and Protocols supported
-NetApp ONTAP software runs on a variety of hardware models, each designed to cater to different performance and capacity requirements. Trident extends its robust capabilities to support various NetApp ONTAP systems, including All Flash FAS (AFF), All SAN Array (ASA), and ASA R2 systems. This support ensures that organizations can leverage the full potential of their high-performance storage solutions in containerized environments.
+== Trident support for orchestrators and storage backends
+For supported Kubernetes distributions and storage backends, refer to the link:https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html[Trident requirements].
 
-**All Flash FAS (AFF) Systems**
-AFF systems deliver exceptional performance and low latency, making them ideal for high-demand applications. 
-
-**All SAN Array (ASA) Systems**
-ASA systems are designed for dedicated SAN environments, offering robust performance and reliability. 
-
-**ASA R2 Systems**
-ASA R2 systems provide enhanced features and capabilities for SAN environments. 
-
-**AFX**
-NetApp AFX is a purpose-built, disaggregated, all-flash storage architecture designed for enterprise AI workloads. It offers high-performance NAS, allowing independent scaling of compute and capacity. NetApp AFX storage systems differ from other ONTAP-based systems (ASA, AFF, and FAS) in the implementation of their storage layer. AFX uses a distributed file system that allows for high performance and scalability, while other ONTAP-based systems use a traditional storage architecture.
-
-.   Protocols supported for AFF: NFS, CIFS/SMB, iSCSI, FC, NVMe/TCP
-.   Protocols supported for ASA: iSCSI, FC, NVMe/TCP
-.   Protocols supported for ASA R2: iSCSI, FC, NVMe/TCP
-.   Protocols supported for AFX: Starting with Trident 25.10, only NFS protocol is supported; SMB protocol is not supported.
+NOTE: Trident also supports NetApp link:https://docs.netapp.com/us-en/ontap-afx/get-started/ontap-afx-storage.html#typical-application-workloads[AFX]. For AFX support requirements, refer to the link:https://docs.netapp.com/us-en/trident/trident-use/ontap-nas-prep.html[ONTAP NAS preparation documentation].
 
 == Trident drivers for ONTAP storage
 Trident includes the following CSI drivers, each capable of provisioning a volume in the backend storage 
 
-=== For NAS protocols on supported hardware models
+=== For NAS protocols 
 
 1.	ontap-nas: One pvc maps to 1 pv which is a dedicated flexvolume
 
@@ -92,7 +77,7 @@ NOTE: You can place all the disks of the VMs as qtrees in a single volume. Howev
 
 3.  ontap-nas-flexgroup: Each PV provisioned is a full ONTAP FlexGroup, and all aggregates assigned to a SVM are used.
 
-=== For SAN protocols on supported hardware models
+=== For SAN protocols
 
 1.	ontap-san: One pvc maps to 1 pv which is a LUN on dedicated flexvolume
 
