@@ -26,7 +26,7 @@ Access additional resources that offer more information on supporting deployment
 
 * https://access.redhat.com/documentation/en-us/openshift_container_platform/4.7/[Red Hat OpenShift documentation^]
 
-* https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.1/[Red Hat OpenStack Platform documentation^]
+* https://docs.redhat.com/en/documentation/red_hat_openstack_platform/16.1[Red Hat OpenStack Platform documentation^]
 
 * https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.4/[Red Hat Virtualization documentation^]
 
