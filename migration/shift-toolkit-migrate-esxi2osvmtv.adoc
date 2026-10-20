@@ -42,9 +42,9 @@ NOTE: When VMDKs are placed within a qtree, Shift Toolkit utilizes the ONTAP-NAS
 * The operating system of each VM is certified and supported as a guest operating system for conversions
 * IP addresses, VLANs, and other network configuration settings must not be changed before or during migration. The MAC addresses of the virtual machines are preserved during migration.
 
-== Create migration plans using Migration Toolkit for Virtualization
+== Step 1: Create migration plans
 
-To leverage the lighting fast conversion of VMs, the first step is to create a migration plan for the VMs using MTV via link:https://docs.redhat.com/en/documentation/migration_toolkit_for_virtualization/2.3/html/installing_and_using_the_migration_toolkit_for_virtualization/migrating-vms-web-console[web console] or the link:https://docs.redhat.com/en/documentation/migration_toolkit_for_virtualization/2.0/html/installing_and_using_the_migration_toolkit_for_virtualization/migrating-virtual-machines-to-virt_mtv#migrating-virtual-machines-cli_mtv[command line].
+To leverage the lighting fast conversion of VMs, the first step is to create a migration plan for the VMs using MTV using the link:https://docs.redhat.com/en/documentation/migration_toolkit_for_virtualization/2.3/html/installing_and_using_the_migration_toolkit_for_virtualization/migrating-vms-web-console[web console] or the link:https://docs.redhat.com/en/documentation/migration_toolkit_for_virtualization/2.0/html/installing_and_using_the_migration_toolkit_for_virtualization/migrating-virtual-machines-to-virt_mtv#migrating-virtual-machines-cli_mtv[command line].
 
 NOTE: The plan should be created beforehand to ensure the preserve IP settings are configured by MTV.
 
@@ -118,7 +118,13 @@ image::shift-toolkit-406.png["Additional Setup"]
 image::shift-toolkit-407.png["Review and Create"]
 ====
 
-. Once the migration plan is created, copy the name of the migration plan and head over to the Shift toolkit UI.
+== Step 2: Create a blueprint in Shift toolkit
+
+After you create the migration plan in MTV, add the source and destination sites and create a blueprint from the plan in the Shift toolkit UI.
+
+.Steps
+
+. Copy the name of the migration plan and go to the Shift toolkit UI.
 . Add the source and destination hypervisors. Follow this link 
 link:https://docs.netapp.com/us-en/netapp-solutions-virtualization/migration/shift-toolkit-migrate-esxi2osv.html#step-1-add-the-destination-site-openshift[to create sites].
 +
@@ -168,7 +174,14 @@ NOTE: Volumes can also be imported directly without creating a clone.
 image::shift-toolkit-412.png["VM details"]
 ====
 
-. Once done, create the blueprint.
+. Review the blueprint settings, then select **Create blueprint** to save it.
+
+== Step 3: Run the migration
+
+After you create the blueprint, trigger the migration from Shift toolkit and monitor it until MTV reports that the plan is complete.
+
+.Steps
+
 . Trigger the migration by clicking on migration against the blueprint.
 +
 NOTE: The VMs should be powered OFF before triggering the migration. MTV will bring up the VM based on the VM target power state attribute.
@@ -220,7 +233,7 @@ NOTE: This shows Shift toolkit along with MTV simplifying the migration at light
 
 == What’s happening behind the scenes
 
-The following sections describe the steps triggered by Shift Toolkit APIs and MTV to convert VMDK files and create virtual machines on the OpenShift platform. This workflow remains consistent whether initiated through the Shift Toolkit UI or via scripts provided within Shift Toolkit Script Blocks.
+The following sections describe the steps triggered by Shift Toolkit APIs and MTV to convert VMDK files and create virtual machines on the OpenShift platform. This workflow remains consistent whether initiated through the Shift Toolkit UI or by using scripts provided within Shift Toolkit Script Blocks.
 
 === Convert VMDK
 
