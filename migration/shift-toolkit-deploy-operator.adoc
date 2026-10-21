@@ -270,7 +270,9 @@ image::shift_migration_completed.png[Migration plan completed successfully]
 *Migration plan completed successfully* — 5 virtual machines and approximately 5 TB of data migrated in approximately 6 minutes.
 
 .What's next
-After the migration is complete, each clone volume must be detached. The detachment method depends on the ONTAP version: use clone split for ONTAP 9.17.1 and later, or vol move for earlier versions. 
+After the migration is complete, each clone volume must be detached. The detachment method depends on the ONTAP version: use clone split for ONTAP 9.17.1 and later, or vol move for earlier versions.
+
+For faster PVC split operations after migration, keep the source NFS datastore at 5 TB or less. Larger volumes can be used, but when creating 200–300 clones for VM migrations, smaller volumes are ideal for completing splits more quickly.
 
 Both clone split and vol move are background operations and do not impact production workloads while they are running. A script to initiate the detach process is available in the *Post Migrate Detach* widget within the NetApp Console Automation Catalog.
 
