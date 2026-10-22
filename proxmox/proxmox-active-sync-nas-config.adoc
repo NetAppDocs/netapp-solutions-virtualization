@@ -1,0 +1,405 @@
+---
+sidebar: sidebar
+permalink: proxmox/proxmox-active-sync-nas-config.html
+keywords: proxmox ve, snapmirror active sync, configure, stretch cluster, qdevice, nfs shared storage, vip lif, bgp, ontap mediator, ontap cloud mediator, netapp console
+summary: "Configure SnapMirror active sync for NAS, optional VIP LIFs with BGP, and a Proxmox VE stretch cluster with a QDevice to protect VMs from site failures."
+---
+= Configure Proxmox VE business continuity with NAS storage
+:hardbreaks:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Protect Proxmox Virtual Environment (VE) VMs from a site failure by combining ONTAP SnapMirror active sync for NAS with a Proxmox VE stretch cluster. You configure a mediator, either ONTAP Mediator or ONTAP Cloud Mediator in the NetApp Console, protect the NFS storage VM (SVM), optionally make its NFS address portable across a routed network with a virtual IP (VIP) LIF and Border Gateway Protocol (BGP), build the stretch cluster with a QDevice, and then provision the shared storage and configure high availability (HA) and VM backups with Storage Manager for Proxmox. The result is zero data loss and automatic recovery of VMs at the surviving site.
+
+.About this workflow
+Before you start, review the link:proxmox-business-continuity.html[solution architecture, failure behavior, and corosync design considerations]. Replace the values in angle brackets, such as `<primary_svm>`, with the values for your environment.
+
+.Before you begin
+* Two AFF A-Series or C-Series two-node clusters must run ONTAP 9.19.1 or later, one at site A and one at site B.
+* SnapMirror and SnapMirror synchronous licenses, included in ONTAP One, must be installed on both clusters.
+* The clusters must be peered in the default IPspace, with an inter-cluster round-trip time (RTT) under 10 ms.
+* You must choose one mediator option. For a comparison, see link:proxmox-business-continuity.html#mediator-options[Mediator options].
+** For ONTAP Mediator, a Linux host must be installed at site C, or at another third failure domain, and reachable from the cluster and node management LIFs of both clusters.
+** For ONTAP Cloud Mediator, both clusters must have outbound HTTPS access to the NetApp Console, directly or through a proxy, with a ping latency under 200 ms. You also need a NetApp Console organization and permission to create a service account.
+* An SVM at site A must serve NFS to the Proxmox VE nodes. The SVM must contain only FlexVol volumes for NAS, with no LUNs, and its export policy must allow all Proxmox VE nodes.
+* An even number of Proxmox VE 9.0 or later nodes must be installed, split evenly between site A and site B, with a corosync latency under 5 ms between all nodes.
+* A Linux host at site C, or at another third location, must be available for the corosync QDevice daemon, reachable from all Proxmox VE nodes on TCP port 5403. You need this host with either mediator option.
+* The NFS VLAN must be stretched between site A and site B. For a routed layer 3 network, a BGP-capable router must be available at each site, and you must confirm with NetApp that VIP LIFs with BGP are supported with SnapMirror active sync for NAS.
+* Your ONTAP and Proxmox VE versions must be listed together in the link:https://mysupport.netapp.com/matrix/[NetApp Interoperability Matrix Tool (IMT)^].
+* To provision shared storage and back up VMs, Storage Manager for Proxmox must be installed with network access to the Proxmox VE nodes and to both ONTAP clusters.
+
+== Step 1: Configure the mediator
+
+Add a mediator to the cluster peer relationship before you initialize the SnapMirror active sync relationship. ONTAP needs the mediator to perform planned and automatic failovers. You can add the mediator from either cluster, and ONTAP adds it on the other cluster automatically. Use one mediator option, not both.
+
+Choose one of the following options.
+
+[role="tabbed-block"]
+====
+.ONTAP Mediator
+--
+Use this option if you install the mediator on a Linux host at site C. For installation, see link:https://docs.netapp.com/us-en/ontap/mediator/index.html[Install or upgrade ONTAP Mediator^].
+
+.Steps
+. On either cluster, add the mediator:
++
+[source,cli]
+----
+snapmirror mediator add -peer-cluster <peer_cluster> -type on-prem -mediator-address <mediator_ip> -username <mediator_user>
+----
++
+Enter the mediator password when prompted.
+. Verify that the mediator is connected and that the quorum status is `true`:
++
+[source,cli]
+----
+snapmirror mediator show
+----
+--
+.ONTAP Cloud Mediator
+--
+Use this option to host the mediator as a service in the NetApp Console, so that you don't need a mediator host at a third site.
+
+.Before you begin
+* The firewalls at both sites must allow HTTPS traffic from both clusters to the NetApp Console API endpoint. For the current endpoint hostname, see link:https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/cloud-mediator-requirements-concept.html[Prepare to configure ONTAP Cloud Mediator^].
+* If the clusters use proxy servers, have the proxy IP address, port, and credentials available. Use a different proxy server for each cluster. The proxy's root CA certificate must be installed in ONTAP.
+* ONTAP includes well-known root CA certificates, so you usually don't need to install the NetApp Console certificate. To check, run `security certificate show -common-name Sectigo*|USERTrust*|AAA*`.
+
+.Steps
+. In the NetApp Console, copy your organization ID.
+. In the NetApp Console, create a member service account:
+.. Set the organization to the one where you use ONTAP Cloud Mediator.
+.. Set the category to *Application*.
+.. Set the role to *ONTAP Mediator Setup Role*.
+.. Save the client ID and client secret when you create the account.
+. On either cluster, add the mediator:
++
+[source,cli]
+----
+snapmirror mediator add -peer-cluster <peer_cluster> -type cloud -org-id <console_org_id> -service-account-client-id <client_id> -use-http-proxy-local <true|false> -use-http-proxy-remote <true|false>
+----
++
+Enter the client secret when prompted.
++
+You can also use System Manager. Select *Protection* > *Overview* > *Mediator* > *Add*, select *Cloud* as the mediator type, and enter the organization ID, client ID, and client secret.
+. Verify that the mediator type is `cloud`, the connection status is `connected`, and the quorum status is `true`:
++
+[source,cli]
+----
+snapmirror mediator show
+----
+--
+====
+
+== Step 2: Protect the NFS SVM with SnapMirror active sync
+
+Create a dormant destination SVM on the site B cluster and replicate the site A SVM to it. ONTAP replicates the data synchronously and replicates the SVM configuration, including the NFS LIF addresses and export policies. You can also complete this step in System Manager by selecting *Protect* for the SVM and choosing the `AutomatedFailOver` policy.
+
+.Steps
+. On the site B cluster, create the destination SVM:
++
+[source,cli]
+----
+vserver create -vserver <secondary_svm> -sub-type dp-destination
+----
+. On the site B cluster, create an SVM peer relationship with the primary SVM:
++
+[source,cli]
+----
+vserver peer create -vserver <secondary_svm> -peer-vserver <primary_svm> -peer-cluster <site_a_cluster> -applications snapmirror
+----
+. On the site A cluster, accept the SVM peer request:
++
+[source,cli]
+----
+vserver peer accept -vserver <primary_svm> -peer-vserver <secondary_svm>
+----
+. On the site B cluster, create the SnapMirror active sync relationship:
++
+[source,cli]
+----
+snapmirror create -source-path <primary_svm>: -destination-path <secondary_svm>: -policy AutomatedFailOver
+----
+. Initialize the relationship:
++
+[source,cli]
+----
+snapmirror initialize -destination-path <secondary_svm>:
+----
+. Verify that the relationship is in sync:
++
+[source,cli]
+----
+snapmirror show -destination-path <secondary_svm>:
+----
++
+The `Mirror State` is `Snapmirrored`, and the `Relationship Status` is `InSync`.
+. Optionally, exclude volumes that don't need protection, such as scratch or test volumes:
++
+[source,cli]
+----
+volume modify -vserver <primary_svm> -volume <volume_name> -smas-protection unprotected
+----
+
+== Step 3: Configure a VIP LIF with BGP for layer 3 networks
+
+CAUTION: At the time of publication, NetApp hasn't documented VIP LIFs with BGP as a qualified configuration for SnapMirror active sync for NAS. Confirm current support with NetApp before you complete this step. Otherwise, stretch the NFS VLAN between the sites and skip this step.
+
+If the NFS VLAN is stretched between site A and site B, skip this step. If the sites are connected by a routed network, create BGP LIFs on every node of both clusters, and then host the NFS address on a VIP LIF in the primary SVM. The VIP address must not belong to the subnet of the Proxmox VE nodes.
+
+.Before you begin
+* Each router must be configured to accept a BGP session from the BGP LIFs at its site, to accept /32 host routes, and not to send route updates to ONTAP.
+* Each ONTAP node and each router must have a unique private ASN, and each BGP LIF and router pair must have a /31 subnet.
+
+.Steps
+. On each cluster, change to the advanced privilege level:
++
+[source,cli]
+----
+set -privilege advanced
+----
+. On each node of both clusters, create a BGP configuration with a unique ONTAP ASN for the node, a hold time of 3 seconds, and the node management IP address as the router ID:
++
+[source,cli]
+----
+network bgp config create -node <node_name> -asn <node_asn> -holdtime 3 -routerid <node_mgmt_ip>
+----
+. Optionally, on each node of both clusters, create a VLAN port on each of the two ports that connect to the routers:
++
+[source,cli]
+----
+network port vlan create -node <node_name> -vlan-name <port_name>-<vlan_id>
+----
++
+You can also use physical ports, interface groups, or VLANs on interface groups as BGP LIF home ports. The ports must belong to a broadcast domain in the IPspace.
+. On each node of both clusters, create two BGP LIFs in the system SVM, one on each port, with a /31 subnet to the router on that port:
++
+[source,cli]
+----
+network interface create -vserver <system_svm> -lif <bgp_lif_name> -service-policy default-route-announce -home-node <node_name> -home-port <vlan_or_port> -address <bgp_lif_ip> -netmask-length 31
+----
++
+For the Default IPspace, `<system_svm>` is the cluster name. For a custom IPspace, it's the IPspace name. You create the BGP LIFs once for each node, and they serve the VIP LIFs of all data SVMs in the IPspace.
+. For each BGP LIF, create a BGP peer group with its router, and learn the default route from that router:
++
+[source,cli]
+----
+network bgp peer-group create -peer-group <peer_group_name> -ipspace <ipspace> -bgp-lif <bgp_lif_name> -peer-address <router_ip> -peer-asn <router_asn> -use-peer-as-next-hop true
+----
+. Verify that each peer group is up:
++
+[source,cli]
+----
+network bgp peer-group show -ipspace <ipspace>
+----
+. On each cluster, enable multipath routing:
++
+[source,cli]
+----
+network options multipath-routing modify -is-enabled true
+----
+. On the site A cluster, create the NFS VIP LIF in the primary SVM:
++
+[source,cli]
+----
+network interface create -vserver <primary_svm> -lif <vip_lif_name> -role data -data-protocol nfs -home-node <node_name> -address <vip_address> -is-vip true -failover-policy broadcast-domain-wide
+----
+. On the site A cluster, verify that the BGP status is `up` for the primary SVM on every node:
++
+[source,cli]
+----
+network bgp vserver-status show
+----
+. On both routers, verify that the /32 route for the VIP address is learned from cluster A.
+
+== Step 4: Create the Proxmox VE stretch cluster with a QDevice
+
+Create the cluster from a site A node so that site A nodes receive the lowest node IDs, and add a QDevice at site C. The QDevice gives the vote to site A when the inter-site link fails, which matches the SVM that ONTAP keeps active.
+
+.Steps
+. On the first site A node, create the cluster with two corosync links on separate networks:
++
+[source,cli]
+----
+pvecm create <cluster_name> --link0 <node_link0_ip> --link1 <node_link1_ip>
+----
+. On each remaining site A node, and then on each site B node, join the cluster:
++
+[source,cli]
+----
+pvecm add <first_node_ip> --link0 <node_link0_ip> --link1 <node_link1_ip>
+----
+. Verify that the site A nodes have the lowest node IDs:
++
+[source,cli]
+----
+pvecm nodes
+----
+. On the QDevice host at site C or another third location, install the QDevice daemon:
++
+[source,cli]
+----
+apt install corosync-qnetd
+----
+. On every Proxmox VE node, install the QDevice client:
++
+[source,cli]
+----
+apt install corosync-qdevice
+----
+. On one Proxmox VE node, add the QDevice to the cluster:
++
+[source,cli]
+----
+pvecm qdevice setup <qdevice_ip>
+----
+. Verify that the cluster is quorate with the QDevice vote:
++
+[source,cli]
+----
+pvecm status
+----
++
+For a four-node cluster, `Expected votes` is `5`, `Quorum` is `3`, and the `Flags` include `Quorate Qdevice`.
+
+== Step 5: Provision protected NFS shared storage
+
+Provision the NFS storage in the primary SVM and mount it on all Proxmox VE nodes at both sites, using the NFS LIF or VIP address that both SVMs share. Storage Manager for Proxmox (SMP) creates the ONTAP volume, the export policy, and the Proxmox VE storage definition in one workflow. If you don't use SMP, create the volume in ONTAP and add it as NFS storage with the Proxmox VE CLI.
+
+Choose one of the following methods to provision the storage.
+
+[role="tabbed-block"]
+====
+.Storage Manager for Proxmox
+--
+Use SMP to provision the storage. SMP must be installed, with the Proxmox VE cluster and both ONTAP clusters added as plans. For details, see link:proxmox-smp.html[Configure and use Storage Manager for Proxmox].
+
+. In SMP, select *Provision* > *Add Volume*, and then select *NFS*.
+. In *ONTAP Details*, select the primary SVM, enter the volume name and size, and select the NFS LIF or VIP LIF as the preferred LIF.
+. Select an export policy that allows the Proxmox VE nodes at both sites, or create one.
+. In *Proxmox Details*, select the cluster and all nodes at both sites, select NFS v3 or NFS v4.1, and select the content types.
+. Make sure *Mount the datastore* is selected, and then select *Provision*.
+. On the site A cluster, verify that the volume is included in SnapMirror active sync protection:
++
+[source,cli]
+----
+volume show -vserver <primary_svm> -volume <volume_name> -fields smas-protection
+----
+--
+.CLI
+--
+Use the Proxmox VE CLI to add a volume that already exists in the primary SVM as NFS storage.
+
+. On one Proxmox VE node, add the NFS storage:
++
+[source,cli]
+----
+pvesm add nfs <storage_id> --server <nfs_lif_or_vip_address> --export <export_path> --content images,rootdir --options vers=<nfs_version>,nconnect=4
+----
++
+Use `3` or `4.1` for `<nfs_version>`. Don't add the `soft` mount option.
+. Verify that the storage is active on every node:
++
+[source,cli]
+----
+pvesm status --storage <storage_id>
+----
+--
+====
+
+=== Set the NFS mount options
+
+Use nConnect to open multiple TCP connections to the NFS LIF or VIP address for better performance and fault tolerance. If the protected SVM has multiple data LIFs that clients can reach at both sites, you can use NFSv4.1 session trunking instead. Use either nConnect or session trunking, not both. For details, see link:proxmox-ontap-nfs.html[Configure NFS storage for Proxmox VE].
+
+.Steps
+. If you provisioned the storage with SMP, or without nConnect, set the mount options on one Proxmox VE node:
++
+[source,cli]
+----
+pvesm set <storage_id> --options vers=<nfs_version>,nconnect=4
+----
++
+To use session trunking instead, set:
++
+[source,cli]
+----
+pvesm set <storage_id> --options vers=4.1,trunkdiscovery,max_connect=16
+----
++
+Proxmox VE applies new mount options the next time the storage is mounted. Remount the storage on each node during a maintenance window, after you migrate the VMs off that node.
+. Verify the options in `/etc/pve/storage.cfg`.
+. On each Proxmox VE node, verify that there are multiple connections to the NFS server address:
++
+[source,cli]
+----
+ss -an | grep :2049
+----
+
+== Step 6: Configure HA and VM backups
+
+Add the VMs to HA with node affinity rules that prefer site A, where the primary SVM serves data. Then protect the VMs from logical failures, such as accidental deletion or ransomware, with SMP backup policies. SnapMirror active sync replicates those failures synchronously, so it doesn't replace point-in-time backups.
+
+.Steps
+. Add each protected VM to HA:
++
+[source,cli]
+----
+ha-manager add vm:<vm_id> --state started
+----
+. Create a node affinity rule that prefers site A nodes and allows failover to site B nodes:
++
+[source,cli]
+----
+ha-manager rules add node-affinity <rule_name> --resources vm:<vm_id>,vm:<vm_id> --nodes "<site_a_node1>:2,<site_a_node2>:2,<site_b_node1>:1,<site_b_node2>:1"
+----
+. Optionally, increase the disk timeout in each guest operating system so that it's longer than the expected storage failover time.
+. In SMP, select *Protect* > *Backup* > *Resource Group*, and create a resource group for the VMs or storage of each tenant or application.
+. Select *Protect* > *Backup* > *Policies* > *Add*, and create a policy with the backup frequency and retention for the resource group.
++
+Select *VM Consistency* in *Advanced Options* for VMs that run the QEMU guest agent.
+. Run an on-demand backup, and then restore a test VM from it to verify the policy.
+
+== Step 7: Test planned failover
+
+Validate the design before you put production VMs on the shared storage. A planned failover moves the active SVM to site B without data loss, so you can test it during a maintenance window and fail back afterward.
+
+.Steps
+. Live-migrate the test VMs to site B nodes.
+. Before the failover, prevent HA from moving the VMs back to site A nodes:
++
+[source,cli]
+----
+ha-manager set vm:<vm_id> --failback 0
+----
+. On the site B cluster, start a planned failover:
++
+[source,cli]
+----
+snapmirror failover start -destination-path <secondary_svm>:
+----
+. Monitor the failover until it completes:
++
+[source,cli]
+----
+snapmirror failover show
+----
+. Verify that VM I/O continues and that the storage stays active on all Proxmox VE nodes.
+. If you use a VIP LIF, verify that both routers learn the /32 route from cluster B.
+. In SMP, run a discovery for the ONTAP plans, and then run an on-demand backup to verify that SMP protects the VMs from the SVM at site B.
+. Fail back to site A when the test is complete, and then set `failback` back to `1` for the test VMs.
+
+.Result
+The Proxmox VE VMs keep running on the same NFS shared storage while the active SVM moves between sites, and the cluster recovers automatically from an unplanned site failure.
+
+== Related information
+
+* link:https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/protect-nas-task.html[Protect with ONTAP SnapMirror active sync for NAS^]
+* link:https://docs.netapp.com/us-en/ontap/networking/configure_virtual_ip_vip_lifs.html[Configure ONTAP VIP LIFs^]
+* link:https://docs.netapp.com/us-en/ontap/mediator/index.html[Prepare to install ONTAP Mediator^]
+* link:https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/cloud-mediator-requirements-concept.html[Prepare to configure ONTAP Cloud Mediator^]
+* link:https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/cloud-mediator-config-task.html[Configure the ONTAP Cloud Mediator for SnapMirror active sync^]
+* link:https://docs.netapp.com/us-en/ontap-cli/snapmirror-mediator-add.html[snapmirror mediator add^]
+* link:proxmox-ontap-nfs.html[Configure NFS storage for Proxmox VE]
+* link:https://pve.proxmox.com/pve-docs/chapter-pvecm.html#_corosync_external_vote_support[Proxmox VE corosync external vote support^]
