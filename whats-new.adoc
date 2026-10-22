@@ -11,6 +11,10 @@ summary: Log of recent changes to the NetApp virtualization solutions collateral
 [.lead]
 Learn what's new in virtualization solutions.
 
+== 22 October 2026
+* Added the recommended ONTAP OS type for NVMe namespaces, NVMe subsystems, LUNs, and igroups used with Proxmox VE.
+** link:proxmox/proxmox-ontap.html[Provision ONTAP storage for Proxmox Virtual Environment]
+
 == 21 August 2026
 * Updated VCF documentation to reflect VCF 9.1 release and ONTAP 9.19.1 features.
 
