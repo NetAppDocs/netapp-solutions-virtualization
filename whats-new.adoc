@@ -14,6 +14,14 @@ Learn what's new in virtualization solutions.
 == 22 October 2026
 * Added the recommended ONTAP OS type for NVMe namespaces, NVMe subsystems, LUNs, and igroups used with Proxmox VE.
 ** link:proxmox/proxmox-ontap.html[Provision ONTAP storage for Proxmox Virtual Environment]
+== 14 October 2026
+* Added business continuity solution for Proxmox VE with ONTAP SnapMirror active sync.
+** link:proxmox/proxmox-business-continuity.html[Learn about Proxmox VE business continuity with SnapMirror active sync]
++
+Learn how a Proxmox VE stretch cluster with SnapMirror active sync for NAS keeps VMs running through a storage or site failure with zero RPO. Includes corosync and QDevice design considerations, ONTAP Mediator and ONTAP Cloud Mediator options, VIP LIFs with BGP for layer 3 networks, and a comparison with MetroCluster.
+** link:proxmox/proxmox-active-sync-nas-config.html[Configure Proxmox VE business continuity with NAS storage]
++
+Configure the mediator, protect the NFS SVM, build the stretch cluster with a QDevice, provision NFS shared storage, and set up HA and VM backups with Storage Manager for Proxmox.
 
 == 21 August 2026
 * Updated VCF documentation to reflect VCF 9.1 release and ONTAP 9.19.1 features.
