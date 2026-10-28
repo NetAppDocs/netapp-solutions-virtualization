@@ -1,0 +1,28 @@
+section: nutanix
+title: "Nutanix virtualization"
+url: /nutanix/index.html
+entries:
+  - title: "About Nutanix with ONTAP storage"
+    url: /nutanix/nutanix-overview.html
+#
+  - title: "Deploy Nutanix with ONTAP storage"
+    pdf-filename: "Deploy Nutanix Cloud Platform with NetApp ONTAP"
+    entries:
+      - title: "Prepare to deploy"
+        url: /nutanix/nutanix-connectivity.html
+      - title: "Deploy a Nutanix compute cluster"
+        url: /nutanix/nutanix-deploy-cluster.html
+      - title: "Configure ONTAP volumes and permissions"
+        url: /nutanix/nutanix-ontap-storage.html
+      - title: "Attach ONTAP NFS storage"
+        url: /nutanix/nutanix-attach-storage.html
+      - title: "Summary"
+        url: /nutanix/nutanix-conclusion.html
+#
+  - title: "Data protection, DR, and limitations"
+    pdf-filename: "Data protection, disaster recovery, and limitations for Nutanix with ONTAP"
+    url: /nutanix/nutanix-data-protection.html
+#
+  - title: "Size ONTAP storage for AHV migrations"
+    pdf-filename: "Size ONTAP storage for Nutanix AHV migrations"
+    url: /nutanix/nutanix-sizing.html
