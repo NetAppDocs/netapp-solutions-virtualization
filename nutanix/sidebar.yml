@@ -14,8 +14,9 @@ entries:
         url: /nutanix/nutanix-deploy-cluster.html
       - title: "Configure ONTAP volumes and permissions"
         url: /nutanix/nutanix-ontap-storage.html
-      - title: "Attach ONTAP NFS storage"
-        url: /nutanix/nutanix-attach-storage.html
+#
+  - title: "Attach ONTAP NFS storage"
+    url: /nutanix/nutanix-attach-storage.html
 #
   - title: "Data protection, DR, and limitations"
     pdf-filename: "Data protection, disaster recovery, and limitations for Nutanix with ONTAP"
