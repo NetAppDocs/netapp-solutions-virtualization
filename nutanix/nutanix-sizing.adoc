@@ -33,6 +33,8 @@ Calculate CPU and memory node requirements separately. The larger estimate deter
 
 == Size ONTAP storage performance
 
+Use the following steps to determine the IOPS, throughput, latency, and controller requirements for your workloads.
+
 . *Calculate aggregate workload IOPS.*
 +
 Aggregate read and write IOPS across VMs over common time intervals to identify actual concurrent peaks. Use observed aggregate demand rather than assuming every VM reaches its individual peak simultaneously. Use the link:https://docs.netapp.com/us-en/netapp-solutions-virtualization/vmware/vmw-getting-started-vmdc.html[NetApp Virtual Machine Data Collector (VMDC)^], Live Optics, or any monitoring tool to collect the VM disk-level statistics.

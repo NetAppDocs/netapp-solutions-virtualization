@@ -16,8 +16,6 @@ entries:
         url: /nutanix/nutanix-ontap-storage.html
       - title: "Attach ONTAP NFS storage"
         url: /nutanix/nutanix-attach-storage.html
-      - title: "Summary"
-        url: /nutanix/nutanix-conclusion.html
 #
   - title: "Data protection, DR, and limitations"
     pdf-filename: "Data protection, disaster recovery, and limitations for Nutanix with ONTAP"

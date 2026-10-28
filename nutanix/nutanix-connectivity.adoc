@@ -96,6 +96,8 @@ The following table describes each network component, its configuration, and its
 
 == High-level deployment steps
 
+Complete the following high-level steps to prepare ONTAP, configure storage networking, and connect the Nutanix hosts to ONTAP storage.
+
 . Deploy and configure ONTAP.
 .. See link:https://docs.netapp.com/us-en/ontap/quick-start.html[Quick start for ONTAP^].
 .. Create interface groups whenever possible. See link:https://docs.netapp.com/us-en/ontap/networking/combine_physical_ports_to_create_interface_groups.html[Combine physical ports to create ONTAP interface groups^].
