@@ -1,0 +1,82 @@
+---
+sidebar: sidebar
+permalink: nutanix/nutanix-sizing.html
+keywords: nutanix, ahv, ontap, sizing, migration, vmware, iops, capacity, vmdc
+summary: "Size Nutanix AHV compute and NetApp ONTAP storage independently when you migrate VMware workloads to Nutanix AHV with ONTAP external storage."
+---
+= Size ONTAP storage for Nutanix AHV migrations
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+When you migrate VMware workloads to Nutanix AHV with NetApp ONTAP external storage, size compute and storage independently. Nutanix compute sizing determines the required AHV node count and configuration, including the resources used by the Controller VM (CVM) on every node. ONTAP sizing addresses storage capacity, performance, and availability.
+
+== Discover VMware workload requirements
+
+Collect 30 to 90 days of VM-level performance data from VMware vCenter, including:
+
+* *Compute*: vCPU, CPU utilization, memory allocation, and peak memory demand.
+* *Storage capacity*: Provisioned and consumed disk space.
+* *Storage performance*: Read/write IOPS, read/write throughput, average I/O size, and latency.
+* *Workload patterns*: Peak periods, concurrent workloads, and read/write distribution.
+
+Use the measured average I/O size for the workloads being sized. There is no single block size such as 8 KiB or 16 KiB that should be assumed for every Nutanix workload.
+
+== Size Nutanix compute
+
+Calculate link:https://sizer.nutanix.com/[AHV node requirements^] from aggregate VM CPU and memory demand. Include the CPU and memory reserved for the CVM on each node, as well as CPU overcommit, high-availability requirements, and expected growth. Apply the Nutanix-recommended CVM resource reservations so that they are accounted for in each node's available capacity.
+
+Calculate CPU and memory node requirements separately. The larger estimate determines the initial cluster requirement. Validate the resulting configuration against Nutanix sizing guidance and HA requirements.
+
+== Size ONTAP storage performance
+
+Use the following steps to determine the IOPS, throughput, latency, and controller requirements for your workloads.
+
+. *Calculate aggregate workload IOPS.*
++
+Aggregate read and write IOPS across VMs over common time intervals to identify actual concurrent peaks. Use observed aggregate demand rather than assuming every VM reaches its individual peak simultaneously. Use the link:https://docs.netapp.com/us-en/netapp-solutions-virtualization/vmware/vmw-getting-started-vmdc.html[NetApp Virtual Machine Data Collector (VMDC)^], Live Optics, or any monitoring tool to collect the VM disk-level statistics.
++
+Example workload profile:
++
+* Number of VMs: 500
+* Average IOPS per VM: 100
+* Aggregate average IOPS: 50,000
+* Observed peak IOPS: 100,000
+* Read/write ratio: 70% / 30%
+* Average I/O size: Measured from workload data
+
+. *Calculate throughput.*
++
+Use measured read/write throughput where available. Otherwise, estimate it using the measured I/O size:
++
+`Throughput = IOPS × Average I/O Size`
++
+Calculate read and write throughput separately if their I/O sizes differ.
+
+. *Set latency requirements.*
++
+Base targets on historical VMware performance and application requirements. Illustrative targets might be 5 ms or lower for general-purpose VMs, 2 ms or lower for performance-sensitive applications, and sub-millisecond for some critical databases. These are service targets, not guaranteed ONTAP performance levels. Final requirements should reflect application SLAs.
+
+. *Apply workload growth.*
++
+Include expected growth and assess performance variability, background operations, and snapshot activity. For example, 30% growth on a 100,000 IOPS baseline gives a projected requirement of 130,000 IOPS.
+
+. *Select ONTAP controllers.*
++
+Choose an AFF platform based on required read/write IOPS at target latency, throughput and network bandwidth, I/O characteristics, storage efficiency, background processing, failover performance, and expected growth. Validate the configuration using NetApp-supported sizing tools and platform performance data. IOPS alone is not sufficient to determine controller selection.
+
+== Size ONTAP capacity
+
+Estimate capacity from consumed VMware disk space, projected growth, snapshot retention, and expected storage efficiency. A 2:1 storage-efficiency ratio can be used as a planning assumption, but actual results vary by workload and configuration. Calculate snapshot and protection capacity based on the intended retention and workload change rates rather than applying an arbitrary allowance.
+
+Example capacity calculation:
+
+* 500 VMs × 100 GiB consumed: 48.8 TiB logical
+* After 30% workload growth: 63.5 TiB logical
+* Estimated physical data at 2:1 efficiency: 31.7 TiB
+* Estimated installed usable capacity at 80% utilization: 39.7 TiB
+
+The 80% utilization figure reserves capacity. It is not an additional 20% operational overhead. Validate data-reduction assumptions, usable capacity, and platform overhead with a NetApp solution architect or designated NetApp partner. They can size the ONTAP system using NetApp Fusion and confirm capacity, performance, and availability requirements.
