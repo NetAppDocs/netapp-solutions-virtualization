@@ -126,13 +126,17 @@ As an alternative to the standalone installer, you can install Proxmox VE Storag
 +
 For example: `https://10.61.187.117:4001`
 
-. Open a web browser and access the SMP UI by entering `http://<IP address specified during installation>:4001`
+. Open a web browser and access the SMP UI by entering `https://<IP address specified during installation>:4001`
 +
 .View SMP login screen
 [%collapsible]
 ====
 image::proxmox-smp-image4.png[SMP login screen]
 ====
+
+. Log in to SMP with the default username `admin` and password `admin`.
++
+When prompted, change the default password. The same default credentials apply when you install SMP using Shift toolkit.
 +
 .View SMP home screen
 [%collapsible]

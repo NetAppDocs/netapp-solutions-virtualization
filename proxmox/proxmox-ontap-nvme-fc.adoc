@@ -40,7 +40,14 @@ If you are new to ONTAP, use System Manager for a better experience.
 
 . Ensure the SVM is available with NVMe protocol enabled. Refer to link:https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html[NVMe tasks on ONTAP 9 documentation].
 
-. Create the NVMe namespace.
+. Create the NVMe namespace with the OS type set to `linux`.
++
+Proxmox VE is based on Debian Linux, so use the `linux` OS type for namespaces that Proxmox VE hosts access. In System Manager, select *Linux* as the host operating system. If you use the ONTAP CLI, specify `-ostype linux`.
++
+[source,cli]
+----
+vserver nvme namespace create -vserver <svm_name> -path /vol/<volume_name>/<namespace_name> -size <size> -ostype linux
+----
 +
 .Show example
 [%collapsible]
@@ -48,7 +55,16 @@ If you are new to ONTAP, use System Manager for a better experience.
 image:proxmox-ontap-nvme-fc-001.png[nvme namespace creation]
 ====
 
-. Create the subsystem and assign host NQNs (if using CLI). Follow the reference link above.
+. Create the subsystem with the host OS type set to `linux`, assign the host NQNs, and map the namespace to the subsystem.
++
+System Manager creates the subsystem when you create the namespace and select *Linux* as the host operating system. If you use the ONTAP CLI, run the following commands.
++
+[source,cli]
+----
+vserver nvme subsystem create -vserver <svm_name> -subsystem <subsystem_name> -ostype linux
+vserver nvme subsystem host add -vserver <svm_name> -subsystem <subsystem_name> -host-nqn <host_nqn>
+vserver nvme subsystem map add -vserver <svm_name> -subsystem <subsystem_name> -path /vol/<volume_name>/<namespace_name>
+----
 
 . Ensure Anti-Ransomware protection is enabled on the security tab.
 +

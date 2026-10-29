@@ -1,0 +1,49 @@
+---
+sidebar: sidebar
+permalink: nutanix/nutanix-data-protection.html
+keywords: nutanix, ontap, data protection, disaster recovery, snapshot, snapmirror, migration, nutanix move, limitations, ga
+summary: "Learn how data protection, disaster recovery, and VM migration work for Nutanix with ONTAP external storage, and which features are not supported at general availability."
+---
+= Data protection, disaster recovery, migration, and limitations for Nutanix with ONTAP
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+Understand how data protection, disaster recovery, and VM migration work when you use ONTAP as external storage for a Nutanix compute cluster, and review the features that are not supported at general availability (GA).
+
+== Data protection
+
+Prism-managed VM snapshots use ONTAP file-level clones of the VM disks rather than ONTAP volume snapshots. Prism manages the snapshot lifecycle, while ONTAP provides the underlying file-cloning capability.
+
+A file clone is a writable copy in the active file system. On its own, it can't be locked against deletion, isn't an ARP recovery point, and isn't retained or vaulted independently through SnapMirror or SnapVault. Each disk is cloned separately, so recovery points across disks aren't captured at a single shared point in time unless that's coordinated. ONTAP volume snapshots provide these protections natively. Customers who need immutable, ransomware-resilient, long-term retained recovery points should consider waiting for ONTAP snapshot integration.
+
+NOTE: The GA limitation on ONTAP snapshot support is planned to be addressed in a future release.
+
+== Disaster recovery
+
+Nutanix asynchronous DR is the only supported replication method during the GA release. ONTAP SnapMirror is not available.
+
+SnapMirror is the established choice for replicating ONTAP data between sites. It replicates only changed blocks, keeps deduplication and compression savings in transit and at the destination, and can keep several recovery points on the secondary system. Because the replication runs on the storage system, the hosts don't have to copy the data. For customers using ONTAP as external storage, this means DR uses the same replication, retention, and recovery processes as the rest of their ONTAP environment.
+
+NOTE: SnapMirror integration is planned for a future release. Customers who want to standardize DR on ONTAP replication should consider waiting for SnapMirror integration.
+
+== VM migrations
+
+In this release, VM migration uses Nutanix Move. The NetApp Shift toolkit is not supported. Shift toolkit integration with Nutanix Move is planned for a future release. It will use ONTAP cloning and allocated block mapping to avoid full data copies and speed up migrations.
+
+== Features not supported at GA
+
+The following configurations, features, and integrations are not supported at GA for the NetApp and Nutanix integration:
+
+* Configurations using multiple NetApp arrays, multiple storage virtual machines (SVMs) per Nutanix cluster, or multiple logical interfaces (LIFs)
+* NetApp MetroCluster
+* ONTAP snapshots and features that depend on them
+* SnapMirror active sync
+* ONTAP Select
+* NetApp Trident for Nutanix Kubernetes Platform (NKP)
+* NFSv4.1
+* FlexGroup volumes
+* NetApp Shift toolkit

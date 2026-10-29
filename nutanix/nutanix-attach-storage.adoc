@@ -1,0 +1,64 @@
+---
+sidebar: sidebar
+permalink: nutanix/nutanix-attach-storage.html
+keywords: nutanix, prism element, prism central, external storage, ontap, nfs, storage container, attach
+summary: "Attach ONTAP NFS volumes as storage containers to a Nutanix compute cluster by using Prism Element."
+---
+= Attach ONTAP NFS storage to a Nutanix compute cluster
+:hardbreaks:
+:nofooter:
+:icons: font
+:linkattrs:
+:imagesdir: ../media/
+
+[.lead]
+After you provision the ONTAP volumes and configure connectivity, use Prism Element or Prism Central to attach the ONTAP NFS volumes as storage containers to the Nutanix compute cluster.
+
+.Before you begin
+Ensure that the following prerequisites are met:
+
+* The ONTAP cluster or SVM is reachable from the Nutanix cluster.
+* A valid ONTAP management LIF (IP address or FQDN) is available.
+* Appropriate ONTAP credentials are available.
+* The required FlexVol, qtree, or folder export paths have been created and configured for NFS access.
+
+.Steps
+. Log in to the Prism Element web console.
+. From the main menu, select *Storage*, and then click *+ Attach External Storage*.
+. On the *Initial Setup* page, review the available information and click *Next*.
++
+image:nutanix-attach-001.png["Attach External Storage wizard, Initial Setup page"]
+. On the *Connection Details* page, select *NetApp ONTAP* as the external storage vendor, and then enter the following values:
++
+* *IP Address (IPv4) or FQDN*: Enter the ONTAP cluster or SVM management LIF address or FQDN.
+* *Username*: Enter the ONTAP service account username.
+* *Password*: Enter the service account password.
++
+Click *Next*.
++
+image:nutanix-attach-002.png["Attach External Storage wizard, Connection Details page"]
+. On the *Storage Details* page, specify a unique name for the ONTAP storage system in *External Storage Name*, enter one or more storage export paths for *Export Path*, and then click *Add*.
++
+NOTE: Supported export paths include FlexVol and qtree export paths.
++
+image:nutanix-attach-003.png["Attach External Storage wizard, Storage Details page showing the service volume export path selection"]
+. Click *Attach*.
++
+The system attaches the ONTAP storage to the Nutanix cluster. You can monitor progress and status information from *Tasks* in Prism Element.
++
+image:nutanix-attach-004.png["Attach External Storage wizard, Storage Details page showing the selected export paths and their capacity"]
++
+NOTE: The `nconnect` option is used in the mount options.
+
+[NOTE]
+====
+* The first export path added during configuration is automatically designated as the default storage container and is tagged as the *Default Container*.
+* NetApp recommends using multiple FlexVol volumes as storage containers to distribute VM workloads and balance capacity utilization.
+* Use a dedicated volume for metadata services (management).
+* You can remove export paths unless they are assigned to the cluster services (metadata) volume or the default storage container.
+* External storage cannot be removed while it is attached to a Nutanix compute cluster.
+* Only one ONTAP external storage system can be attached to a Nutanix compute cluster.
+* Nutanix recommends up to 128 VMs per node, up to 32 nodes, and up to 4,800 AOS replicated vDisks between DR clusters (combined asynchronous and synchronous replications).
+====
+
+After you attach the storage, deploy Prism Central on the Nutanix Cloud Infrastructure (NCI) platform to perform cluster management and configuration tasks. You can also attach ONTAP storage through Prism Central.

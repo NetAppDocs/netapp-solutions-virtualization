@@ -51,9 +51,24 @@ If you are new to ONTAP, use System Manager for a better experience.
 +
 image:proxmox-ontap-fc-001.png[FC interface details]
 
-. Create an igroup and populate the host FC initiators.
+. Create an igroup with the OS type set to `linux` and add the host FC initiators.
++
+Proxmox VE is based on Debian Linux, so use the `linux` OS type for igroups that contain Proxmox VE host initiators. In System Manager, select *Linux* as the host operating system. If you use the ONTAP CLI, run the following command.
++
+[source,cli]
+----
+lun igroup create -vserver <svm_name> -igroup <igroup_name> -protocol fcp -ostype linux -initiator <wwpn_1>,<wwpn_2>
+----
 
-. Create the LUN with the desired size on the SVM and present it to the igroup created in the previous step. Ensure Anti-Ransomware protection is enabled on the security tab for ASA systems and on the volume security tab for AFF/FAS systems.
+. Create the LUN with the OS type set to `linux` and the desired size on the SVM, and present it to the igroup created in the previous step. Ensure Anti-Ransomware protection is enabled on the security tab for ASA systems and on the volume security tab for AFF/FAS systems.
++
+In System Manager, select *Linux* as the host operating system. If you use the ONTAP CLI, run the following commands.
++
+[source,cli]
+----
+lun create -vserver <svm_name> -path /vol/<volume_name>/<lun_name> -size <size> -ostype linux
+lun mapping create -vserver <svm_name> -path /vol/<volume_name>/<lun_name> -igroup <igroup_name>
+----
 +
 image:proxmox-ontap-fc-002.png[lun details]
 
