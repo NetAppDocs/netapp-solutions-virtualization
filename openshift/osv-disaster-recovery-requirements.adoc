@@ -29,7 +29,7 @@ This section provides information about the prerequisites for using NetApp Tride
 
 7. An admin workstation with `tridentctl` and `oc` tools installed and added to the $PATH environment variable to interact with the OpenShift cluster and Trident.
 
-8. Adequate hardware resources on the OpenShift cluster to support the OpenShift Virtualization operator and the VMs that will be provisioned. For more details on resource requirements, see the link:https://docs.openshift.com/container-platform/4.7/virt/install/preparing-cluster-for-virt.html#virt-cluster-resource-requirements_preparing-cluster-for-virt[documentation here].
+8. Adequate hardware resources on the OpenShift cluster to support the OpenShift Virtualization operator and the VMs that will be provisioned. For more details on resource requirements, see the link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.7/html/openshift_virtualization/installing-openshift-virtualization#preparing-cluster-for-virt[documentation here].
 
 9. Optionally, configure node placement rules for OpenShift Virtualization to specify a subset of cluster nodes to host the OpenShift Virtualization operators, controllers, and VMs. For instructions on how to configure node placement rules, see the link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/virtualization/installing[documentation here].
 
