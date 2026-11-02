@@ -22,7 +22,7 @@ To restore from a backup, let us assume that the namespace where the virtual mac
 [%collapsible%open]
 
 ====
-To restore from the backup that we just created, we need to create a Restore Custom Resource (CR). We need to provide it a name, provide the name of the backup that we want to restore from and set the restorePVs to true. Additional parameters can be set as shown in the link:https://docs.openshift.com/container-platform/4.14/backup_and_restore/application_backup_and_restore/backing_up_and_restoring/restoring-applications.html[documentation]. Click on Create button.
+To restore from the backup that we just created, we need to create a Restore Custom Resource (CR). We need to provide it a name, provide the name of the backup that we want to restore from and set the restorePVs to true. Additional parameters can be set as shown in the link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.14/html/backup_and_restore/oadp-application-backup-and-restore#oadp-backing-up[documentation]. Click on Create button.
 
 image:redhat-openshift-oadp-restore-001.png[Create Restore CR]
 
