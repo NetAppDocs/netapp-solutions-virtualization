@@ -42,7 +42,7 @@ Typically block access mode is preferred compared to file systems while provisio
 To customize the virtual machine creation after you have selected the OS template, click on Customize VirtualMachine instead of Quick create.
 
 .   If the selected operating system has boot source configured, you can click on *Customize VirtualMachine parameters*.
-.	If the selected operating system has no boot source configured, you must configure it. You can see details about the procedures shown in the link:https://docs.openshift.com/container-platform/4.14/virt/virtual_machines/creating_vms_custom/virt-creating-vms-from-custom-images-overview.html[documentation].
+.	If the selected operating system has no boot source configured, you must configure it. You can see details about the procedures shown in the link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.14/html/virtualization/virtual-machines#virt-creating-vms-from-custom-images-overview[documentation].
 .   After Configuring the boot disk, you can click on *Customize  VirtualMachine parameters*.
 .   You can customize the VM from the tabs on this page. For eg. click on the *Disks* tab and then click on *Add disk* to add another disk to the VM. 
 .	Click Create Virtual Machine to create the virtual machine; this spins up a corresponding pod in the background.

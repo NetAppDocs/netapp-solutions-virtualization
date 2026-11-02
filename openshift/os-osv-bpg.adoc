@@ -28,7 +28,7 @@ See the Storage Configuration section below for more details.
 
 == High Availability of VM workloads
 OpenShift Virtualization supports Live migrations of a VM. Live migration allows a running Virtual Machine Instance (VMI) to move to another node without interrupting the workload. Migration can be helpful for a smooth transition during cluster upgrades or any time a node needs to be drained for maintenance or configuration changes.
-Live migration requires the use of a shared storage solution that provides ReadWriteMany (RWX) access mode. The VM disks should be backed by storage option that provides RWX access mode. OpenShift Virtualization will check that a VMI is **live migratable** and if so the **evictionStrategy** will be set to **LiveMigrate**. See link:https://docs.openshift.com/container-platform/latest/virt/live_migration/virt-about-live-migration.html[About live migration section in Red Hat documentation] for details.
+Live migration requires the use of a shared storage solution that provides ReadWriteMany (RWX) access mode. The VM disks should be backed by storage option that provides RWX access mode. OpenShift Virtualization will check that a VMI is **live migratable** and if so the **evictionStrategy** will be set to **LiveMigrate**. See link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/virtualization/live-migration#virt-about-live-migration[About live migration section in Red Hat documentation] for details.
 
 It is important that you use a driver that supports **RWX** access mode. 
 See the Storage Configuration section below for more details about what ONTAP drivers support RWX access mode. 
