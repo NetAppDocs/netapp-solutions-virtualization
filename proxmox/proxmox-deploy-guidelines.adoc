@@ -33,6 +33,7 @@ Follow these best practices to optimize storage performance and scalability:
 * Use FlexGroup volumes for large capacity requirements to leverage the full potential of ONTAP scalability.
 * In geographically distributed environments, use FlexCache to distribute images and templates closer to the Proxmox VE nodes for faster deployment times and central management.
 * When using FlexGroup with NFS, use the combination of nConnect or session trunking, and pNFS to optimize performance and availability.
+* Keep NFS v4.2 sparse file operations (`-v4.2-sparsefile-ops`) disabled on SVMs that provide NFS storage to Proxmox VE. ONTAP supports the DEALLOCATE operation only for entire files, and partial-file deallocation requests can cause I/O errors and data corruption in guest VMs. For more information, see link:proxmox-ontap-nfs.html[Configure NFS storage for Proxmox VE].
 * For block protocols, ensure proper zoning and LUN masking to restrict access to authorized Proxmox VE nodes only.
 * Allocate sufficient storage capacity to accommodate VM growth and data needs.
 * Implement storage tiering to optimize performance and cost efficiency.

@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar
 permalink: proxmox/proxmox-ontap-nfs.html
-keywords: netapp, proxmox, proxmox ve, nfs, ontap, storage, nconnect, session trunking
-summary: "Configure NFS storage for Proxmox Virtual Environment using ONTAP. This procedure includes SVM enablement, LIF creation, export policy configuration, volume creation, and nConnect or session trunking setup for fault tolerance and performance."
+keywords: netapp, proxmox, proxmox ve, nfs, ontap, storage, nconnect, session trunking, sparse file operations
+summary: "Configure NFS storage for Proxmox VE using ONTAP, including SVM, LIF, export policy, volume, and nConnect or session trunking setup."
 ---
 = Configure NFS storage for Proxmox VE
 :hardbreaks:
@@ -18,6 +18,8 @@ ONTAP supports all NFS versions supported by Proxmox VE. Use link:https://docs.n
 
 If you are new to ONTAP, use System Manager Interface to complete these tasks.
 
+CAUTION: Do not enable NFS v4.2 sparse file operations (`-v4.2-sparsefile-ops`, available in ONTAP 9.12.1 and later) on SVMs that provide NFS storage to Proxmox VE. ONTAP supports the NFS v4.2 DEALLOCATE operation only for an entire file. When Proxmox VE requests deallocation of part of a file, for example when a guest OS issues discard or TRIM commands to a thin-provisioned disk, ONTAP returns an NFS4ERR_IO error. The I/O error passes through QEMU to the guest OS and can cause data corruption. This option is disabled by default. Keep it disabled. For more information, see the link:https://kb.netapp.com/on-prem/ontap/da/NAS/NAS-KBs/Does_this_v4.2-sparsefile-ops_perform_ALLOCATE_DEALLOCATE%3F[NetApp Knowledge Base article on NFS v4.2 sparse file operations^].
+
 video::f6c9aba3-b070-45d6-8048-b22e001acfd4[panopto, title="NFS nconnect option with ONTAP", width=360]
 
 == Storage administrator tasks
@@ -25,6 +27,20 @@ video::f6c9aba3-b070-45d6-8048-b22e001acfd4[panopto, title="NFS nconnect option 
 Complete these tasks to provision NFS storage on ONTAP for use with Proxmox VE.
 
 . Enable the SVM for NFS. Refer to link:https://docs.netapp.com/us-en/ontap/nfs-config/verify-protocol-enabled-svm-task.html[ONTAP 9 documentation].
+
+. Verify that NFS v4.2 sparse file operations are disabled on the SVM. Run the following command and confirm that the value is `disabled`:
++
+[source,cli]
+----
+vserver nfs show -vserver <svm_name> -fields v4.2-sparsefile-ops
+----
++
+If the value is `enabled`, run the following command to disable it:
++
+[source,cli]
+----
+vserver nfs modify -vserver <svm_name> -v4.2-sparsefile-ops disabled
+----
 
 . Create at least two LIFs per controller. Follow the steps from the documentation. For reference, here is a screenshot of LIFs used in the lab.
 +
