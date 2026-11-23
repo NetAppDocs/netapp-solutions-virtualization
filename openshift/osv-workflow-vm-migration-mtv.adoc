@@ -71,7 +71,7 @@ The following installations were completed before installing MTV:
 
 
 === Install MTV
-Now you can install the Migration Toolkit for Virtualization (MTV). Refer to the instructions provided link:https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/installing-the-operator[here] for help with the installation.
+Now you can install the Migration Toolkit for Virtualization (MTV). Refer to the instructions provided link:https://docs.redhat.com/en/documentation/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/migrating-vms-web-console#mtv-ui_mtv[here] for help with the installation.
 
 The Migration Toolkit for Virtualization (MTV) user interface is integrated into the OpenShift web console.
 You can refer to link:https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/migrating-vms-web-console#mtv-ui_mtv[here] to start using the user interface for various tasks.
@@ -94,7 +94,7 @@ image:rh-os-n-use-case-vm-migration-source-provider.png["Figure showing input/ou
 NOTE: The Migration Toolkit for Virtualization (MTV) uses the VMware Virtual Disk Development Kit (VDDK) SDK to accelerate transferring virtual disks from VMware vSphere. Therefore, creating a VDDK image, although optional, is highly recommended.
 To make use of this feature, you download the VMware Virtual Disk Development Kit (VDDK), build a VDDK image, and push the VDDK image to your image registry.
 
-Follow the instructions provided link:https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/prerequisites#creating-vddk-image_mtv[here] to create and push the VDDK image to a registry accessible from the OpenShift Cluster.
+Follow the instructions provided link:https://docs.redhat.com/en/documentation/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/prerequisites#creating-vddk-image_mtv[here] to create and push the VDDK image to a registry accessible from the OpenShift Cluster.
 
 ==== Create destination provider
 
@@ -102,7 +102,7 @@ The host cluster is automatically added as the destination provider.
 
 ==== Create migration plan
 
-Follow the instructions provided link:https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/migrating-vms-web-console#creating-migration-plan_mtv[here] to create a migration plan. 
+Follow the instructions provided link:https://docs.redhat.com/en/documentation/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/migrating-vms-web-console#creating-migration-plan_mtv[here] to create a migration plan
 
 While creating a plan, you need to create the following if not already created:
 
